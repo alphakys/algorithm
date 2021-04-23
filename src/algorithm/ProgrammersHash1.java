@@ -1,38 +1,43 @@
 package algorithm;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 public class ProgrammersHash1 {
 
 	public static void main(String[] args) {
 		
-		String[] par = {"mislav", "stanko", "mislav", "ana"};
-		String[] com = {"stanko", "ana", "mislav"};
 		
-		ArrayList<String> pArr = new ArrayList<>();
-		ArrayList<String> cArr = new ArrayList<>();
+		  String[] par = {"mislav", "stanko", "mislav", "ana"}; 
+		  String[] com = {"stanko", "ana", "mislav"};
+		  
+		  HashMap<String, String> pMap = new HashMap<>();
+		  HashMap<String, Object> cMap = new HashMap<>();
+		  
+			/*
+			 * for(pMap.entrySet()) {
+			 * 
+			 * pMap.put("participant", par[i]); //System.out.println(pMap);
+			 * 
+			 * }
+			 * 
+			 * Iterator itr = pMap.entrySet().iterator()
+			 * 
+			 * 
+			 * 
+			 * for(int i=0; i<com.length; i++) {
+			 * 
+			 * cMap.put("completion", com[i]); }
+			 */
+		  
+		  
+		 
+		 
 		
 		
-		for(String str : com) {
-			cArr.add(str);
-		}
+			
 		
-		for(String str1 : par) {
-			pArr.add(str1);
-		}
 		
-		for(int i=0; i<cArr.size(); i++) {
-			if(pArr.contains(cArr.get(i))) {
-				pArr.remove(cArr.get(i));
-			}
-		}
-		
-		Iterator<String> itr = pArr.listIterator();
-		
-		while(itr.hasNext()) {
-			System.out.println(itr.next());
-		}
 		
 		
 		

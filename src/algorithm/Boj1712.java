@@ -12,21 +12,23 @@ public class Boj1712 {
 		
 		String[] str = br.readLine().split(" ");
 		
-		int fCost = Integer.parseInt(str[0]);
+		int[] cost = new int[3];
 		
-		int vCost = Integer.parseInt(str[1]);
+		for(int i=0;i<3;i++) {
+			cost[i] = Integer.parseInt(str[i]);
+		}
 		
-		int price = Integer.parseInt(str[2]);
+		if((cost[2]-cost[1])<1) {
+			System.out.println(-1);
+		}else {
+			int answer = (cost[0]/(cost[2]-cost[1]))+1;
+			System.out.println(answer);
+		}
 		
-			//판매량
 		
-			//fCost/(price-vCost);
-						
-			
-			
+		
 
-		
-		
+
 	}
 
 }

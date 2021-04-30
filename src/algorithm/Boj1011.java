@@ -11,39 +11,56 @@ public class Boj1011 {
 	public static void main(String[] args)throws IOException {
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		
 		int T = Integer.parseInt(br.readLine());
 		
 		for(int i=0; i<T; i++) {
+			
 			String[] str = br.readLine().split(" ");
 			
 			long x = Long.parseLong(str[0]);
 			long y = Long.parseLong(str[1]);
+				
+			long half = ((y-x-1)/2) + ((y-x-1)%2);
 			
-			long distance = y-x-1;
+			long plus;
+			long go;
 			
-			
-			for(long k=1;;k++) {
-				
-				long go = x +(k*(k+1))/2;
-				
-				if(go>=y-1) {
-					long answer = k+1;
-					System.out.println(answer);
-					//bw.write(String.valueOf(answer));
-					break;
-				}
-				
-				
+			if((y-x)==2) {
+				System.out.println(2);
+				continue;
 			}
 			
-			bw.flush();
+			for(long j=1;; j++) {
+				
+				go = (j*(j-1))/2;
+				
+				if(go>half) {
+					
+					plus = j-2;
+					go = ((j-1)*(j-2))/2;
+					break;
+				}
+			}
+			System.out.println("반:"+half);
+			System.out.println("간거리:"+go);
+			System.out.println("횟수:"+plus);
 			
+			long remainder = ((y-x-1)) - go;
+			
+			System.out.println("남은거리:"+remainder);
+			System.out.println("간거리-남은거리:"+(go-remainder));
+			System.out.println("횟수-(간거리-남은거리):"+(plus-(go-remainder)));
+			
+			if(remainder<=0) {
+				System.out.println(((plus*2)+1));
+			}
+			else {
+				System.out.println(((plus*2)+1));
+			}
+			
+			//41707 2147483647  2147483645 2147483647  2147483643 2147483647
 		}
-		
-		br.close();
-		bw.close();
 		
 	}
 

@@ -8,6 +8,9 @@ public class Boj1193 {
 
 	public static void main(String[] args)throws IOException {
 		
+		
+		
+		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
 		int N = Integer.parseInt(br.readLine());
@@ -53,7 +56,7 @@ public class Boj1193 {
 				
 			}
 		}
-	
+		
 	}
 
 }

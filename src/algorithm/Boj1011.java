@@ -21,7 +21,7 @@ public class Boj1011 {
 			long x = Long.parseLong(str[0]);
 			long y = Long.parseLong(str[1]);
 				
-			long half = ((y-x-1)/2) + ((y-x-1)%2);
+			long half = ((y-x-1)/2);
 			
 			long plus;
 			long go;
@@ -42,6 +42,7 @@ public class Boj1011 {
 					break;
 				}
 			}
+			
 			System.out.println("반:"+half);
 			System.out.println("간거리:"+go);
 			System.out.println("횟수:"+plus);

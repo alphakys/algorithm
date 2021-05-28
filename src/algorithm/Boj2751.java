@@ -8,8 +8,39 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class Boj2751 {
-
+	
 	public static void main(String[] args)throws IOException {
+		
+		int[] tmp;
+		int[] arr = {38, 27, 43, 3, 9, 82, 10};
+		
+		int size = arr.length;
+		
+		int start = arr[0];
+		int end = arr[size];
+		
+		if(start>)
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/*
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
 		int N = Integer.parseInt(br.readLine());
@@ -27,6 +58,7 @@ public class Boj2751 {
 		for(int i=0;i<n;i++) {
 			System.out.println(arr.get(i));
 		}
+		*/
 	}
 
 }

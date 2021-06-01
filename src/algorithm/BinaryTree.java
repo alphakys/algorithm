@@ -25,31 +25,41 @@ public class BinaryTree {
 		
 		if(rootNode ==null) {
 			rootNode = new Node(data);
-		}else {
 			
-			Node head;
-			Node current;
-			
-			while(true) {
-				
-				if(rootNode.data> data) {
-				
-					if(rootNode.left==null) {
-						rootNode.left = new Node(data);
-					}else {
-						if(rootNode.left>data) {
-							
-						}
-					}
-				
-				
-				
-				
-				}
-
-			}
-	
 		}
+			
+		Node parent = rootNode;
+		Node current;
+			
+		while(true) {
+			
+			current = parent;
+			
+			if(parent.data> data) {
+				
+				parent = parent.left;
+				
+				if(parent ==null) {
+					current.left = new Node(data);
+					break;
+				}
+		
+			}else {
+				
+				parent = parent.right;
+				
+				if(parent ==null) {
+					current.right = new Node(data);
+					break;
+				}
+				
+			}
+			
+			
+
+		}
+	
+		
 		
 		
 	}	

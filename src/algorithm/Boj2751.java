@@ -19,7 +19,7 @@ public class Boj2751 {
 		int start = arr[0];
 		int end = arr[size];
 		
-		if(start>)
+		//if(start>)
 		
 		
 		

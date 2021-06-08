@@ -67,7 +67,7 @@ public class BinaryTree {
 	public void inOrder(Node node) {
 	
 		if(node!=null) {
-			
+			System.out.println(node.data);
 			if(node.left!=null) System.out.println("l");inOrder(node.left);
 			System.out.println(node.data);
 			if(node.right !=null) System.out.println("r");inOrder(node.right);

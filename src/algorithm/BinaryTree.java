@@ -1,5 +1,7 @@
 package algorithm;
 
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class BinaryTree {
 	//필드
@@ -91,14 +93,15 @@ public class BinaryTree {
 	}
 	
 	public void levelOrder(Node node) {
-		System.out.println(node.data);
-		if(node.left !=null)
-			
-			
+		
+		Queue<Node> q = new LinkedList<Node>();
+		q.add(node);
+		
+		
+		
 			
 	}
-	
-	
+		
 	public void inOrderNotRecursive(Node node) {
 		
 	}
@@ -117,7 +120,15 @@ public class BinaryTree {
 		bt.add(8);
 		bt.add(11);
 		bt.add(13);
-		bt.postOrder(bt.rootNode);
+		//bt.postOrder(bt.rootNode);
+		Queue<Integer> q = new LinkedList<Integer>();
+		q.add(1);
+		q.add(2);
+		q.add(3);
+		q.add(4);
+		q.add(5);
+		
+	
 	}
 
 }

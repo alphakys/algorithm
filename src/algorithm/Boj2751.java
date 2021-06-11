@@ -7,7 +7,13 @@ import java.util.Stack;
 
 public class Boj2751 {
 	
+	public void arrSort(int[] arr) {
+			
+			
+	}
+	
 	public static void main(String[] args)throws IOException {
+		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int N = Integer.parseInt(br.readLine());
 		

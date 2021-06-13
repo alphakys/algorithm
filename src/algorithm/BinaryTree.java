@@ -97,7 +97,14 @@ public class BinaryTree {
 		Queue<Node> q = new LinkedList<Node>();
 		q.add(node);
 		
-		
+		while(!q.isEmpty()) {
+			
+			if(q.peek().left !=null) q.add(q.peek().left);
+			//System.out.println("left:"+q.element().left.data);
+			if(q.peek().right !=null) q.add(q.peek().right);
+			//System.out.println("right:"+q.element().right.data);
+			System.out.println(q.poll().data);
+		}
 		
 			
 	}
@@ -121,12 +128,7 @@ public class BinaryTree {
 		bt.add(11);
 		bt.add(13);
 		//bt.postOrder(bt.rootNode);
-		Queue<Integer> q = new LinkedList<Integer>();
-		q.add(1);
-		q.add(2);
-		q.add(3);
-		q.add(4);
-		q.add(5);
+		bt.levelOrder(bt.rootNode);
 		
 	
 	}

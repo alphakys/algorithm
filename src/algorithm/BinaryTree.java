@@ -2,6 +2,7 @@ package algorithm;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 public class BinaryTree {
 	//필드
@@ -62,16 +63,6 @@ public class BinaryTree {
 		}	
 	}	
 	
-	public void inOrder(Node node) {
-	
-		if(node!=null) {
-			if(node.left!=null) inOrder(node.left);
-			System.out.println(node.data);
-			if(node.right !=null) inOrder(node.right);
-			
-		}
-	
-	}
 	
 	public void preOrder(Node node) {
 		
@@ -108,14 +99,63 @@ public class BinaryTree {
 		
 			
 	}
+	
+	public void inOrder(Node node) {
 		
+		if(node!=null) {
+			if(node.left!=null) inOrder(node.left);
+			System.out.println(node.data);
+			if(node.right !=null) inOrder(node.right);
+			
+		}
+	
+	}
+	
 	public void inOrderNotRecursive(Node node) {
+		
+		Stack<Node> st = new Stack();
+		Node root = node;
+		st.add(node);
+		
+		if(node.right !=null) {
+			node = node.right;
+			if(node.right!=null) st.add(node.right);
+			st.add(node);
+			
+			while(node.left!=null) {
+				node = node.left;
+				if(node.right!=null) st.add(node.right);
+				st.add(node);
+			
+			}
+		}
+		
+		if(root.left!=null) {
+			
+			while(root.left!=null) {
+				node = root.left;
+				if(node.right!=null) st.add(node.right);
+				st.add(node);
+			
+			}
+		}
+		
+		//		    10
+		//		7		12
+		//	  6  8	  11  13
+		//  5 
+		
+		while(!st.empty()) {
+			Node Node = st.pop();
+			System.out.println(Node.data);
+
+		}
 		
 	}
 	
 	//			10
-	//		7		11
-	//	 6	  8			13
+	//		7		12
+	//	  6  8	  11  13
 	// 5   
 	public static void main(String[] args) {
 		
@@ -125,11 +165,13 @@ public class BinaryTree {
 		bt.add(6);
 		bt.add(5);
 		bt.add(8);
-		bt.add(11);
+		bt.add(12);
 		bt.add(13);
+		bt.add(11);
 		//bt.postOrder(bt.rootNode);
-		bt.levelOrder(bt.rootNode);
-		
+		bt.inOrderNotRecursive(bt.rootNode);
+		//bt.levelOrder(bt.rootNode);
+		//bt.inOrder(bt.rootNode);
 	
 	}
 

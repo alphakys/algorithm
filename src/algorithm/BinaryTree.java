@@ -115,7 +115,7 @@ public class BinaryTree {
 		
 		Stack<Node> st = new Stack();
 		Node root = node;
-		st.add(node);
+		
 		
 		if(node.right !=null) {
 			node = node.right;
@@ -130,13 +130,16 @@ public class BinaryTree {
 			}
 		}
 		
+		st.add(root);
+		
 		if(root.left!=null) {
-			
-			while(root.left!=null) {
-				node = root.left;
+			node = root;
+			while(node.left!=null) {
+				node = node.left;
+				
 				if(node.right!=null) st.add(node.right);
 				st.add(node);
-			
+				
 			}
 		}
 		
@@ -169,9 +172,9 @@ public class BinaryTree {
 		bt.add(13);
 		bt.add(11);
 		//bt.postOrder(bt.rootNode);
-		bt.inOrderNotRecursive(bt.rootNode);
+		//bt.inOrderNotRecursive(bt.rootNode);
 		//bt.levelOrder(bt.rootNode);
-		//bt.inOrder(bt.rootNode);
+		bt.inOrder(bt.rootNode);
 	
 	}
 

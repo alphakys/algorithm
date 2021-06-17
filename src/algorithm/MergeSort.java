@@ -18,7 +18,7 @@ public class MergeSort {
 
 		while(f<3 || p<3) {
 			
-			if(f<ar.length && p<ar.length) {
+			if(f<ar.length-1 && p<ar.length-1) {
 				if(ar[f] > ar1[p]) {
 					
 					System.out.println("p--"+p);
@@ -35,16 +35,16 @@ public class MergeSort {
 			}else {
 				if(ar[f] > ar1[p]) {
 					
-					System.out.println("p--"+p);
+					System.out.println("2p--"+p);
 					sort[i] = ar1[p];
 					System.out.println("p:"+sort[i]);
-					i++;p++; 
+					i++; 
 				}
 				else{
-					System.out.println("f--"+f);
+					System.out.println("2f--"+f);
 					sort[i] = ar[f];
 					System.out.println("f:"+sort[i]);
-					i++;f++;
+					i++;
 				}
 			}
 				

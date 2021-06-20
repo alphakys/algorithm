@@ -2,27 +2,26 @@ package algorithm;
 
 public class MergeSort {
 	
-	int[] arr;
-	int[] tmp;
 	
+	int[] sorted;
 	
-	public void sorting(int start, int end) {
+	public void sorting(int[] array, int start, int end) {
 		
 		start = 1;
-		end = arr.length;
+		end = array.length;
 		int mid = end/2;
-		
-		arr= new int[mid];
-		tmp = new int[end-mid];
-		
-		if(arr.length==1) {
-			break;
-		}else {
-			sorting(start, end);
-		}	
+		 	
+		while(true) {
 			
-	}
+			if(arr.length==1) {
+				break;
+			}else {
+				sorting(start, end);
+			}	
+			
+		}
 	
+	}
 	
 	public static void main(String[] args) {
 		
@@ -106,5 +105,3 @@ public class MergeSort {
 		
 		
 	}
-
-}

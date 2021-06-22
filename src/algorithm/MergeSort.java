@@ -46,7 +46,7 @@ public class MergeSort {
 		
 		
 		
-		/*
+		
 		
 		while(i<8) {
 			
@@ -99,7 +99,7 @@ public class MergeSort {
 			}
 				
 			
-		*/
+		
 		}
 			
 		

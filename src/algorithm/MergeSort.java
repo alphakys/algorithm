@@ -3,21 +3,18 @@ package algorithm;
 public class MergeSort {
 	
 	
-	int[] sorted;
+	int[] tmp;
 	
 	public void sorting(int[] array, int start, int end) {
 		
 		start = 1;
 		end = array.length;
 		int mid = end/2;
-		 	
+		 
+		tmp.length = end;
 		while(true) {
 			
-			if(arr.length==1) {
-				break;
-			}else {
-				sorting(start, end);
-			}	
+		
 			
 		}
 	

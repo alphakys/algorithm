@@ -2,54 +2,47 @@ package algorithm;
 
 public class MergeSort {
 	
-	
-	int[] tmp;
-	
-	public void sorting(int[] array, int start, int end) {
-		
-		start = 1;
-		end = array.length;
-		int mid = end/2;
-		 
-		tmp.length = end;
-		while(true) {
-			
-		
-			
-		}
-	
-	}
+	public static int[] array;
+	public static int[] tmp;
 	
 	public static void main(String[] args) {
 		
-		//두 배열을 비교해서 정렬하는 코드
-		int ar[] = {2,4,6,8};
-		int ar1[] = {3,5,7,9};
+		array = new int[]{1, 9, 8, 5, 4, 2, 3, 7, 6, 10}; 
+		tmp = new int[array.length];
 		
-		int sort[] = new int[8];
-		
-		int size = ar.length-1;
-		int size1 = ar1.length-1;
-		
-		int f = 0;
-		int p = 0;
-		int i = 0;
+		//index(start, end)
+		mergeSort(0, array.length-1);
+		// 		 (0, 7)
+
 		
 		
+	}
+// 9/2 --> 4 0~4;
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		while(i<8) {
+	public static void mergeSort(int start, int end) {
+	
+		if(start<end) {
 			
-			//한 배열이 먼저 배열의 끝에 도달했다면 그 다음엔 어떻게 처리해줘야 하나?
-			if(f==size && p<size1) {
+			int mid = (start+end)/2;
+								   // 1			2		  		3							4
+			mergeSort(start, mid); //(0, 4) --> (0,2),(3,4) --> (0,1)(2,2),,(3,3)(4,4) --> (0,0),(1,1)
+			mergeSort(mid+1, end); //(5, 9) --> (5,7)(8,9) --> (5,6)(7,7),,(8,8)(9,9) --> (5,5),(6,6)
+			
+			int p = start;
+			int q = end;
+			int idx = 1;
+			
+			while(true) {
 				
+				if(array[p]== array[q]) {
+					tmp[p] = array[p];
+					
+				}else {
+					
+					if(array[p]>array[q])
+						tmp[q] = array[p];
+						tmp[p] = array[q];
+				}
 			}
 			
 			
@@ -57,12 +50,25 @@ public class MergeSort {
 			
 			
 			
+		}
+	 
+
+
+	}	
+		
+		
+		
+}	
+		
+		/*
+		while(i<8) {
 			
+			//한 배열이 먼저 배열의 끝에 도달했다면 그 다음엔 어떻게 처리해줘야 하나?
+			if(f==size && p<size1) {
+				
+			}
 			
-			
-			
-			
-			
+
 			if(f<ar.length-1 && p<ar.length-1) {
 				if(ar[f] > ar1[p]) {
 					
@@ -98,7 +104,4 @@ public class MergeSort {
 			
 		
 		}
-			
-		
-		
-	}
+		*/	

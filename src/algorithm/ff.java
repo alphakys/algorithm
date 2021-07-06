@@ -3,43 +3,12 @@ package algorithm;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-
 
 public class ff {
 	
-	public static ArrayList<Integer> Revert(ArrayList<Integer> ar) {
-		
-		int last = ar.size();
-		ArrayList<Integer> a = new ArrayList<>();
-		
-		for(int i=last-1; i>=0; i--) {
-			a.add(ar.get(i));
-		}
-		
-		return a;
-	}
-	
-	public static void Delete(ArrayList<Integer> ar, int where, int flag) {
-		int size = ar.size();
-		
-		if(size==0) {
-			flag=0;
-		
-		}else {
-			if(where==0) {
-				ar.remove(0);
-			}else {
-				ar.remove(ar.size()-1);
-			}
-		}
-		
-		
-	}
-
-	
 	public static void main(String[] args)throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb = new StringBuilder();
 		
 		int T = Integer.parseInt(br.readLine());
 		
@@ -53,30 +22,32 @@ public class ff {
 			//배열 String --> 숫자 영역
 			String str = br.readLine();
 			
-			String[] strArr = str.substring(1, str.length()-1).split(",");
+			int length=0;
+			String[] strArr = null;
 			
-			int length = strArr.length;
+			int rear = 0;
 			
-			ArrayList<Integer> ar = new ArrayList<>();
+			int front = 0;
 			
-			for(int j=0; j<length;j++) {
-				
-				if("".equals(strArr[j])) {
-					return;
-				}else {
-					ar.add(Integer.parseInt(strArr[j]));
-				}
-				
+			if(n>1) {
+				strArr = (str.substring(1, str.length()-1)).split(",");
+				length= strArr.length;
+				rear = length-1;
 			}
-		
+			
+			
 			//함수 R,D 수행 영역
-			int size = fnc.length;
+		
 			int where =0;
+			
+			
+			
 			int count=0;
 			int flag =1;
 			
+			int size = fnc.length;
 			for(int k=0;k<size;k++) {
-
+				
 				if("R".equals(fnc[k])) {
 					if(where==0) {
 						where =1;
@@ -85,17 +56,47 @@ public class ff {
 					}
 					count++;
 				}else {
-					ff.Delete(ar, where, flag);
-				
+					
+					if(rear ==front) {
+						flag = 0;
+					}else {
+						if(where==0) {
+							front++;
+						
+						}else {
+							rear--;
+						}
+					}
+					
 				}
 			}
-			System.out.println(flag);
-			if((count%2)!=0 && flag==1) {
 			
-				System.out.println(ff.Revert(ar));
+			if((count%2)!=0 && flag==1) {
+				//거꾸로
+				System.out.print("[");
+				for(int k=rear; front<=k; k--) {
+					
+					if(k!=front) {
+						System.out.print(strArr[k]+",");
+					}else {
+						System.out.print(strArr[k]);
+					}
+					
+				}
+				System.out.println("]");
 			}else if((count%2)==0 && flag==1){
 				
-				System.out.println(ar);
+				System.out.print("[");
+				
+				for(int k=front; k<=rear; k++) {
+					if(k!=rear) {
+						System.out.print(strArr[k]+",");
+					}else {
+						System.out.print(strArr[k]);
+					}
+				}
+				
+				System.out.println("]");
 			}else {
 				System.out.println("error");
 			}

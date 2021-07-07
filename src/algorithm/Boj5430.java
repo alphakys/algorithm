@@ -3,104 +3,128 @@ package algorithm;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Stack;
 
 public class Boj5430 {
-
+	
 	public static void main(String[] args)throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb = new StringBuilder();
 		
 		int T = Integer.parseInt(br.readLine());
 		
 		for(int i=0; i<T;i++) {
+			//함수 영역
 			String[] fnc = br.readLine().split("");
 			
+			//배열 개수 영역
 			int n = Integer.parseInt(br.readLine());
+			
+			//배열 String --> 숫자 영역
 			String str = br.readLine();
-			if(n==0) {
-				System.out.println("error");
-				continue;
-			}else {
-				
-				String[] strArr = str.substring(1, str.length()-1).split(",");
 			
-				int length = strArr.length;
-				
-				int[] a = new int[length];
+			int length=0;
+			String[] strArr = (str.substring(1, str.length()-1)).split(",");
 			
-				for(int j=0; j<length;j++) {
-					a[j] = Integer.parseInt(strArr[j]);
-					
-				}
+			int rear = 0;
+			
+			int front = 0;
+			
+			if(n>1) {
 				
-				int size = fnc.length;
-				for(int k=0;k<size;k++) {
-					//null 값 안나오게 처리
-					if("R".equals(fnc[k])) {
-						Boj5430.Revert(a);
-					}else {
-						
-						int[] b = null;
-						
-						if(a.length==0) {
-							System.out.println("error");
-							break;
-						}else {
-							int leng = a.length;
-							
-							b = new int[leng-1];
-							
-							for(int j=0;j<leng-1 ;j++) {
-								b[j] = a[j+1];
-							}
-							a = new int[leng-1];
-							
-							for(int z=0;z<leng-1 ;z++) {
-								a[z] = b[z];
-								
-							}
-						}
-					}
-				}
-				
-				if(a.length!=0) {
-					System.out.print("[");
-					for(int x=0;x<a.length ;x++) {
-						
-						if(x!=a.length-1) {
-							System.out.print(a[x]+",");
-						}else {
-							System.out.print(a[x]);
-						}
-						
-					}
-					System.out.print("]");
-					System.out.println();
-				}
-				
-				
-				
+				length= strArr.length;
+				rear = length-1;
 			}
 			
+
+			//함수 R,D 수행 영역
+		
+			int where =0;
+		
+			int count=0;
+			int flag =1;
+			
+			int size = fnc.length;
+			for(int k=0;k<size;k++) {
+				
+				if("R".equals(fnc[k])) {
+					if(where==0) {
+						where =1;
+					}else {
+						where =0;
+					}
+					count++;
+				}else {
+					
+					if(n==0) {
+						flag=0;
+						break;
+					}else if(n==1) {
+						
+						if(front==1) {
+							flag=0;
+							break;
+						}else {
+							front++;
+						
+						}
+					}else {
+						if(rear <front) {
+							flag = 0;
+							break;
+						}else {
+							if(where==0) {
+								front++;
+							
+							}else {
+								rear--;
+							}
+						}
+					}
+						
+				}
+			}
+		
+			if((count%2)!=0 && flag==1) {
+				//거꾸로
+				
+				sb.append("[");
+				for(int k=rear; front<=k; k--) {
+					
+					if(k!=front) {
+						
+						sb.append(strArr[k]+",");
+					}else {
+						
+						sb.append(strArr[k]);
+					}
+					
+				}
+				sb.append("]"+"\n");
+			}else if((count%2)==0 && flag==1){
+				
+				
+				sb.append("[");
+				for(int k=front; k<=rear; k++) {
+					if(k!=rear) {
+					
+						sb.append(strArr[k]+",");
+					}else {
+						
+						sb.append(strArr[k]);
+					}
+				}
+				
+			
+				sb.append("]"+"\n");
+			}else {
+				sb.append("error"+"\n");
+			}
+			
+			
+		
+			}
+			System.out.println(sb.toString());
 		}
 	
-	}
-	
-	public static int[] Revert(int[] a) {
-		Stack<Integer> st = new Stack<>();
-		
-		int length = a.length;
-		
-		for(int i=0;i<length ;i++) {
-			st.push(a[i]);	
-		}
-		
-		for(int i=0;i<length ;i++) {
-			a[i] = st.pop();
-		}
-		
-		return a;
-	}
-	
+
 }

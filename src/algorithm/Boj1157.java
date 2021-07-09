@@ -79,6 +79,16 @@ public class Boj1157 {
 	}
 	
 	public static void main(String[] args)throws IOException {
+		int[] arr = new int[26];
+		for(int i=0; i<26; i++) {
+			if(i<10) {
+				arr[i]++;
+			}
+			
+			System.out.println(arr[i]);
+		}
+		
+		/*
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		
@@ -94,7 +104,7 @@ public class Boj1157 {
 		}
 		bw.write((bo.search(bo.root).value));
 		bw.flush();
-		
+		*/
 		
 	}
 

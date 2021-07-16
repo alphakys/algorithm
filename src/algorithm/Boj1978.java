@@ -3,6 +3,7 @@ package algorithm;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Boj1978 {
 
@@ -11,31 +12,29 @@ public class Boj1978 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
 		int N = Integer.parseInt(br.readLine());
+
+		StringTokenizer st = new StringTokenizer(br.readLine()," ");
 		
-		String[] str = br.readLine().split(" ");
-		
-		int count=0;
-		for(int i=0;i<N;i++) {
+		int notPrime=0;
+		while(st.hasMoreTokens()) {
 			
-			int n = Integer.parseInt(str[i]);
-			
-			if(n==1) {
-				count++;
-			}else {
-				for(int j=2;j<n; j++) {
+			int n = Integer.parseInt(st.nextToken());
 				
-					if((n%j)==0) {
-						count++;
+				if(n==1) {
+					notPrime++;
+				}
+				for(int j=2; j<n; j++) {
+				
+					if(n%j ==0) {
+						notPrime++;
 						break;
 					}
 				}
 				
-			}
-			
-
 		}
+		System.out.println(N-notPrime);
 		
-		System.out.println(N-count);
+		
 		
 	}
 

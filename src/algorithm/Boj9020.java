@@ -13,11 +13,18 @@ public class Boj9020 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));	
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		
-		int[] arr = new int[];
-		for(int i=2;i<=20;i++) {
-			
-		}
+		int[] arr = new int[10];
 		
+		for(int i=0;i<10;i++) {
+			int num = i+1;
+			if(num==1) {
+				num=0;
+			}else {
+				//num
+			}
+			arr[i] = num;
+			System.out.println(arr[i]);
+		}
 		
 		
 		

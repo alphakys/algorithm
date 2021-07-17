@@ -28,12 +28,13 @@ public class Boj1978 {
 					if(n%j ==0) {
 						notPrime++;
 						break;
+					}else {
+						
 					}
 				}
 				
 		}
 		System.out.println(N-notPrime);
-		
 		
 		
 	}

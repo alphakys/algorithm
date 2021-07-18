@@ -14,15 +14,71 @@ public class Boj2581 {
 		int M = Integer.parseInt(br.readLine());
 		int N = Integer.parseInt(br.readLine());
 		
-		boolean[] isPrime = new boolean[N-M+1];
+		boolean[] isPrime = new boolean[N+1];
 		Arrays.fill(isPrime, true);
+		isPrime[1]=false;
+		
+		for(int i=2; i<N; i++) {
+			
+			if(isPrime[i]) {
+				
+				for(int j=2; (j*i)<=N; j++) {
+					
+					if(isPrime[j*i]) {
+						isPrime[j*i] =false;
+					}
+						
+				}
+			}	
+		}
+	
+		int sum=0;
 		int min=0;
+		
+		for(int i=M; i<=N; i++) {
+			
+			if(isPrime[i]) {
+				
+				if(min==0) {
+					min = i;
+				}
+				sum+=i;
+			}
+		}
+		
+		if(sum==0) {
+			System.out.println(-1);
+		}else {
+			System.out.println(sum);
+			System.out.println(min);
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/*
 		for(int i=M; i<=N; i++) {
 			
 			if(i==1) {
 				isPrime[0]=false;
 			}else if(i==2) {	 
-				min=2;
+	
 				if((N/2)>=2) {
 					for(int a=2;a<=(N/2);a++) {
 						
@@ -41,9 +97,7 @@ public class Boj2581 {
 								count++;
 								
 								if(count==(i-2)) {
-									
-									min = i;
-									
+
 									if((N/i)>=2) {
 										
 										for(int a=2;a<=(N/i);a++) {
@@ -66,15 +120,18 @@ public class Boj2581 {
 		}
 		int sum=0;
 		int len = isPrime.length;
+		int[] arr = new int[1];
 		
 		for(int z=0;z<len;z++) {
-			
-			if(isPrime[z]==true) {
-				//System.out.println("소수:"+(z+M));
-				if(min>(z+M)) {
-					min = (z+M);
-				}
+	
+			if(isPrime[z]==true) {	
 				sum +=(z+M);
+				if(arr[0]==0) {
+					arr[0] = (z+M);
+				}else {
+					continue;
+				}
+				
 			}
 		}
 		
@@ -84,9 +141,9 @@ public class Boj2581 {
 			System.out.println(-1);
 		}else {
 			System.out.println(sum);
-			System.out.println(min);
+			System.out.println(arr[0]);
 		}
-			
+		*/	
 	}	
 		
 }

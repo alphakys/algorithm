@@ -3,34 +3,35 @@ package algorithm;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 
 public class Boj11653 {
 
 	public static void main(String[] args)throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringBuilder sb = new StringBuilder();
-		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int N = Integer.parseInt(br.readLine());
-		int part = N;
-		int i=2;
 		
-		while(i<=N) {
+		if(N==1) {
+			return;
+		}else {
 			
-			if((part%i)==0) {
-				sb.append(i).append("\n");
-				part = part/i;
-				if(part==1) {
-					break;
+			for(int i=2; i<=Math.sqrt(N); i++) {
+				
+				while(N%i==0) {
+					
+					sb.append(i).append("\n");
+					
+					N = N/i;
 				}
-				i=2;
-			}else {
-				i++;
+				
 			}
-			//System.out.println(part);
+			if(N!=1) {
+				sb.append(N);
+			}
 		}
-		
 		System.out.println(sb);
-
+		
 	}
 
 }

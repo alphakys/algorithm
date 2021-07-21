@@ -38,21 +38,63 @@ public class Boj9020 {
 			
 			int left = n/2;
 			int right = n/2;
-			//System.out.println("left::"+left+","+"right::"+right);
+			
+			while(true) {
+				
+				if(isPrime[left] && isPrime[right]) {
+					
+					System.out.println(left +" "+ right);
+					break;
+				}
+				
+				left--;
+				right++;
+				
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			/*
+			int left = n/2;
+			int right = n/2;
+			
 			
 			while(true) {
 				int sum = left + right;
 				
-				first:if(isPrime[left]) {
-					System.out.println("left::"+left);
-					second:if(isPrime[right]) {
-						System.out.println("right"+right);
+				if(isPrime[left]) {
+					//System.out.println("left::"+left);
+					if(isPrime[right]) {
+						//System.out.println("right:::"+right);
 							
 							if(sum==n) {
 								System.out.println("left:"+left+","+"right:"+right);
 								break;
+							}else if(sum>n){
+								left--;
+								continue;
 							}else {
 								right++;
+								continue;
 							}
 						
 							
@@ -66,34 +108,9 @@ public class Boj9020 {
 					left--;
 				}
 			}
+			*/
 		}
 		
-		
-		/*
-		for(int i=1; i<=10; i++) {
-			arr[i] = i;
-		}
-		
-		int what=10;
-		
-		int left=what/2;
-		int right=what/2;
-		
-		while(true) {
-			int sum = arr[left] + arr[right];
-			
-			if(sum>what) {
-				System.out.println("end요::"+right);
-				right--;
-			}else if(sum==what) {
-				System.out.println("st:"+left+", end: "+right);
-				break;
-			}else {
-				System.out.println("st요::"+left);
-				left++;
-			}
-		}
-	*/
 	}
 
 }

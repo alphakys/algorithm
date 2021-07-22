@@ -9,31 +9,34 @@ public class Boj4948 {
 	public static void main(String[] args)throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
-		int n;
+		int n = Integer.parseInt(br.readLine());
 		
-		while((n = Integer.parseInt(br.readLine()))!=0) {
+		boolean[] isPrime = new boolean[(123456*2)+1];
+		isPrime[1] = true;
+		
+		for(int i=2; i<=(123456*2); i++) {
 			
-			int count = 0;
+			if(isPrime[i]) continue;
 			
-			for(int j=n+1; j<=2*n; j++) {
-				
-				
-				for(int i=2; i<=Math.sqrt(j); i++) {
-					
-					if(j%i==0) {
-						//System.out.println("j:"+j);
-						//System.out.println("i:"+i);
-						count++;
-						//System.out.println("count:"+count);
-						break;
-					}
+			for(int j=2; i*j<=123456*2; j++) {
+				if(!isPrime[i*j]) {
+					isPrime[i*j] = true;
 				}
-			
 				
 			}
-			System.out.println(((2*n)-n)-count);
-			continue;
 		}
+		
+		while(n!=0) {
+			int count=0;
+			for(int i=n+1; i<=(2*n); i++) {
+				if(!isPrime[i]) {
+					count++;
+				}
+			}
+			System.out.println(count);
+			n = Integer.parseInt(br.readLine());
+		}
+		
 	}
 
 }

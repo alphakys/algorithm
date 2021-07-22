@@ -25,7 +25,7 @@ public class Boj1929 {
 			}
 			
 			if(i>=M) sb.append(i).append("\n");
-			
+		
 			for(int j=2; i*j<=N; j++) {
 				isPrime[i*j]=true;
 			}

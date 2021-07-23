@@ -25,14 +25,37 @@ public class Boj4948 {
 				
 			}
 		}
-		
 		while(n!=0) {
 			int count=0;
-			for(int i=n+1; i<=(2*n); i++) {
-				if(!isPrime[i]) {
+			int mid = ((3*n)+1)/2;
+			
+			if(n%2==0) {
+				for(int i=n+1, j=2*n; i<=mid; i++,j--) {
+					
+					if(!isPrime[i] || !isPrime[j]) {
+						count++;
+					}
+				}
+			}else {
+				
+				for(int i=n+1, j=2*n; i<=mid-1; i++,j--) {
+					
+					if(!isPrime[i]) {
+						count++;
+						
+					}
+					if(!isPrime[j]) {
+						count++;
+						
+					}
+				}
+				
+				if(!isPrime[mid]) {
 					count++;
 				}
 			}
+				
+			
 			System.out.println(count);
 			n = Integer.parseInt(br.readLine());
 		}

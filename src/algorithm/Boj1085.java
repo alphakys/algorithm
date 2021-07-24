@@ -9,31 +9,26 @@ public class Boj1085 {
 	public static void main(String[] args)throws IOException {
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String[] arr = br.readLine().split(" ");
+		
+		int x = Integer.parseInt(arr[0]);
+		int y = Integer.parseInt(arr[1]);
+		int w = Integer.parseInt(arr[2]);
+		int h = Integer.parseInt(arr[3]);
+		
+		int[] nums = {x, w-x, y, h-y};
 	
-		String str[] = br.readLine().split(" ");
-		
-		int[] arr = new int[4];
-		
-		for(int i=0;i<arr.length;i++) {
-			arr[i] = Integer.parseInt(str[i]);
-		}
-		int[] distance = new int[4];
-		
-		distance[0] = arr[2]-arr[0];
-		distance[1] = arr[0];
-		distance[2] = arr[3]-arr[1];
-		distance[3] = arr[1];
-		
-		int min = distance[0];
-		
-		for(int j=1; j<4;j++) {
+		int min = nums[0];
+
+		for(int i=1; i<4; i++) {
 			
-			if(min>distance[j]) {
-				min = distance[j];
+			if(min>nums[i]) {
+				min = nums[i];
 			}
 		}
 		
 		System.out.println(min);
+		
 	}
 
 }

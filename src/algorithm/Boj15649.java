@@ -28,12 +28,16 @@ import java.io.InputStreamReader;
 				permutation(start+1, end, count);
 			}else {
 				
-				Node parentNode = rootNode;
-				Node currNode = parentNode.nextNode; 
-				if(parentNode.value!=start &&start<=end) {
+				Node currNode = rootNode;
+				
+				while(true){
 					
-					currNode = new Node(start);
+					if(currNode==null) {
+						currNode = new Node(start);
+						break;
+					}
 					
+					currNode = rootNode.nextNode;
 				}
 				
 				

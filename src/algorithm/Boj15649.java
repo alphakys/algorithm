@@ -3,50 +3,89 @@ package algorithm;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
-  class Node {
-	
-		Node nextNode;
-		int value;
-		
-		Node(int v){
-			this.value = v;
-		}
-		
-	}
+import java.util.LinkedList;
+import java.util.Queue;
 
   class BackTracking{
 		
-		Node rootNode;
+	class Node {
+	
+		Node childNode[];
+		int value;
+		int level;
 		
-		void permutation(int start, int end, int count) {
+		Node(int v, int level){
+			this.value = v;
+			this.level = level;
+			this.childNode = new Node[2];
+		}
+	
+	}
+		
+	Node rootNode = null;
+	
+	public void permutation(Node n, int level) {
+
+		if(rootNode==null) {
+			 
+			rootNode = new Node(100, level);
+			permutation(rootNode, level+1);
 			
+		}else {
 			
-			if(rootNode==null) {
-				
-				rootNode = new Node(start);
-				permutation(start+1, end, count);
-			}else {
-				
-				Node currNode = rootNode;
-				
-				while(true){
+			Node currentNode = n;
+			
+			while(true) {
+				//System.out.println(n.level+","+n.value);
+				if(currentNode.childNode==null && level<4) {
 					
-					if(currNode==null) {
-						currNode = new Node(start);
-						break;
-					}
+					Node trueNode = new Node(1,level);
+					Node falseNode = new Node(0,level);
+					System.out.println(trueNode.value+","+trueNode.level);
+					System.out.println(falseNode.value+","+falseNode.level);
+					currentNode.childNode[0] = trueNode;
+					currentNode.childNode[1] = falseNode;
 					
-					currNode = rootNode.nextNode;
+					permutation(trueNode, level+1);
+					permutation(falseNode, level+1);
+				}else {
+					break;
 				}
-				
-				
 				
 			}
 		}
 		
 		
+		
+		
 	}
+	
+	public void levelTraverse(Node node) {
+		Queue<Node> q = new LinkedList<>();
+
+		while(true) {
+			Node currentNode = node;
+			
+			if(currentNode.childNode[0]==null) {
+				System.out.println("sdfas");
+				q.add(currentNode.childNode[0]);
+				q.add(currentNode.childNode[1]);
+				levelTraverse(currentNode.childNode[0]);
+				levelTraverse(currentNode.childNode[1]);
+			}else {
+				break;
+			}
+			
+			
+		}
+		
+		while(!q.isEmpty()) {
+			System.out.println(q.poll());
+		}
+		
+	}	
+		
+  }
 
 
 public class Boj15649 {
@@ -60,11 +99,9 @@ public class Boj15649 {
 		int M = Integer.parseInt(strArr[1]);
 		
 		BackTracking bt = new BackTracking();
-		bt.rootNode = new Node(1);
-		bt.permutation(1, 4, M);
 	
-	
-	
+		bt.permutation(bt.rootNode, 0);
+		//bt.levelTraverse(bt.rootNode);
 	
 	
 	

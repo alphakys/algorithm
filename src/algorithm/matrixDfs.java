@@ -2,7 +2,7 @@ package algorithm;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.List;
 
 class ListGraph{
 	
@@ -55,17 +55,140 @@ class ListGraph{
 		
 }
 
+class matrixGraph{
+	
+	private int[][] graph;
+	
+	
+	public matrixGraph(int size){
+		
+		this.graph = new int[size+1][size+1];
+		
+	}
+
+
+	public int[][] getGraph() {
+		
+		return this.graph;
+	}
+
+	public boolean isEmpty() {
+		return graph ==null;
+	}
+
+	public void addSingle(int x, int y) {
+		graph[x][y] = 1;
+	}
+
+	public void addComplete(int x, int y) {
+		graph[x][y] = graph[y][x] = 1;
+	}
+
+	public void deleteSingle(int x, int y) {
+		graph[x][y] = 0;
+	}
+
+	public void deleteComplete(int x, int y) {
+		graph[x][y] = graph[y][x] = 0;
+	}
+
+	public void print() {
+		for(int i=1; i<graph.length; i++) {
+			
+			for(int j=1; j<graph[i].length; j++) {
+				System.out.print(graph[i][j] + " ");
+			}
+			System.out.println();
+		}
+		
+	}
+	
+}
+
+
+
+public class matrixDfs{
+	
+	matrixGraph graph;
+	private boolean[] visited;
+	
+	public matrixDfs(int initSize) {
+		graph = new matrixGraph(initSize);
+		visited = new boolean[initSize+1];
+	}
+	
+	public void putSingle(int x, int y) {
+		graph.addSingle(x, y);
+	}
+	
+	public void putComplete(int x, int y) {
+		graph.addComplete(x, y);
+	}
+	
+	public void deleteSingle(int x, int y) {
+		graph.deleteSingle(x, y);
+	}
+	
+	public void deleteComplete(int x, int y) {
+		graph.deleteComplete(x, y);
+	}
+	
+	public void printAll() {
+		graph.print();
+	}
+	
+	public void search(int node) {
+		int[][] matrix = graph.getGraph();
+		
+		visited[node] = true;
+		System.out.print(node+"-->");
+		
+		for(int i=1; i<matrix.length; i++) {
+			
+			if(matrix[node][i]==1 && visited[i]==false) {
+				search(i);
+				//System.out.println(i);
+			}
+				
+		}
+	}
+	
+	
+	
+	public static void main(String[] args)throws IOException {
+		
+		int initSize = 8;
+		matrixDfs dfsGraph = new matrixDfs(initSize);     
+		
+		dfsGraph.putComplete(1, 2);
+        dfsGraph.putComplete(1, 3);
+        dfsGraph.putComplete(2, 4);
+        dfsGraph.putComplete(2, 5);
+        dfsGraph.putComplete(3, 6);
+        dfsGraph.putComplete(3, 7);
+        dfsGraph.putComplete(4, 8);
+        dfsGraph.putComplete(5, 8);
+        dfsGraph.putComplete(6, 8);
+        dfsGraph.putComplete(7, 8);
+        
+        dfsGraph.search(2);
+
+		
+        
+		
+	}
+}
+
+/*
 public class DFS {
 
 	boolean visited[];
 	ListGraph graph;
-	int arr[];
-	
 	
 	public DFS(int initSize) {
 		visited = new boolean[initSize];
 		graph = new ListGraph(initSize);
-		arr = new int[initSize];
+		
 	}
 	
 	public void addComplete(int x, int y) {
@@ -83,35 +206,20 @@ public class DFS {
 	}
 	
 	
-	public void search(int index, int arrIndex) {
+	public void search(int index) {
 		visited[index] = true;
-		arr[++arrIndex] = index;
-		
+		System.out.println(index);
 		ArrayList<Integer> list = graph.getList(index);
-
+	
 		for(int i=0; i<list.size(); i++) {
 			
 			if(!visited[list.get(i)]) {
 				
-				search(list.get(i), arrIndex);
+				search(list.get(i));
 			}
 				
 		}
-		System.out.println(index);
 		
-		if(arrIndex<visited.length-1) {
-			System.out.println("arr"+ arrIndex+",,"+(visited.length-1));
-			search(arr[arrIndex-1], arrIndex);
-		}else {
-			return;
-		}
-		
-		
-		/*
-		for(int i=0;i<arr.length; i++) {
-			System.out.println(arr[i]);
-		}
-		*/
 	}
 	
 	
@@ -129,17 +237,18 @@ public class DFS {
 		dfs.addComplete(1, 2);
 		dfs.addComplete(2, 3);
 		dfs.addComplete(2, 4);
+		dfs.addComplete(2, 5);
 		dfs.addComplete(3, 4);
-		dfs.addComplete(3, 5);
+		
 		//dfs.printAll();
-		dfs.search(0, -1);
+		dfs.search(2);
         
 		
 	}
 
 }		
 		
-		
+*/		
 		
 		
 	

@@ -6,16 +6,43 @@ import java.io.InputStreamReader;
 
 public class Boj10870 {
 	
-	public static int fibonacci(int N) {
+	static class fiboData{
+		int zero;
+		int one;
 		
-		if(N==0) {
-			System.out.println(0);
-			return 0;
-		}else if(N==1) {
-			System.out.println(1);
-			return 1;
-		}else {
-			return fibonacci(N-1) + fibonacci(N-2);
+		public fiboData(int x, int y) {
+			x = this.zero;
+			y = this.one;
+		}
+		
+		@Override
+		public String toString() {
+			return "fiboData [zero=" + zero + ", one=" + one + "]";
+		}
+		
+		
+	}
+	
+	static fiboData[] fibo = new fiboData[40];
+	
+	public static void add(int num, int num1) {
+		
+		int zero = fibo[num].zero + fibo[num1].zero;
+		int one = fibo[num].one + fibo[num1].one;
+		
+		fibo[num+num1] = new fiboData(zero, one);
+
+	}
+	
+	public static void fibonacci() {
+		
+		fibo[0] = new fiboData(1,0);
+		
+		fibo[1] = new fiboData(0,1);
+
+		System.out.println(fibo[0].zero);
+		for(int i=2; i<=40; i++) {
+			add(i-1, i-2);
 		}
 		
 	}
@@ -25,7 +52,19 @@ public class Boj10870 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int N = Integer.parseInt(br.readLine());
 		
-		int[][] arr = new int[41][41];
+		fibonacci();
+		for(fiboData f : fibo ) {
+			System.out.println(f);
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		//System.out.println(fibonacci(N));
 		

@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Boj10870 {
-	
+	/*
 	static class fiboData{
 		int zero;
 		int one;
@@ -22,28 +22,25 @@ public class Boj10870 {
 		
 		
 	}
-	
-	static fiboData[] fibo = new fiboData[40];
+	*/
+	//static fiboData[] fibo = new fiboData[40];
+	static int[] zero = new int[40];
+	static int[] one = new int[40];
 	
 	public static void add(int num, int num1) {
-		
-		int zero = fibo[num].zero + fibo[num1].zero;
-		int one = fibo[num].one + fibo[num1].one;
-		
-		fibo[num+num1] = new fiboData(zero, one);
+
+		//zero[num+num1]
 
 	}
 	
-	public static void fibonacci() {
+	public static void fibonacci(int n) {
 		
-		fibo[0] = new fiboData(1,0);
+		zero[n] = zero[n-1] + zero[n-2];
+		one[n] = one[n-1] + one[n-2];
 		
-		fibo[1] = new fiboData(0,1);
-
-		System.out.println(fibo[0].zero);
-		for(int i=2; i<=40; i++) {
-			add(i-1, i-2);
-		}
+		//for(int i=2; i<=40; i++) {
+		//	add(i-1, i-2);
+		//}
 		
 	}
 	
@@ -52,12 +49,18 @@ public class Boj10870 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int N = Integer.parseInt(br.readLine());
 		
-		fibonacci();
-		for(fiboData f : fibo ) {
-			System.out.println(f);
+		zero[0] = 1;
+		zero[1] = 0;
+		one[0] = 0;
+		one[1] = 1;
+		
+		for(int i=2; i<40; i++) {
+			fibonacci(i);
 		}
 		
-		
+		for(int i=0; i<40; i++) {
+			System.out.println("zero : "+ zero[i] + " one : "+one[i]);
+		}
 		
 		
 		

@@ -11,11 +11,14 @@ void change(int* arr, int left, int right){
 void divide(int* arr, int left, int right){
     
     int mid = (right - left + 1) / 2;
-   
+    
     if (mid > 1)
     {
+        mid = left + mid;
+        //printf("left : %d, right : %d mid : %d\n", left, right, mid);
+        //return 0;
         divide(arr, left, mid - 1); // 0,3
-        //divide(arr, mid, right);   // 4,7
+        divide(arr, mid, right);   // 4,7 --> mid=2 ==> (4,1)(2,7)
     }
 
     if(arr[left] >arr[right]){
@@ -23,15 +26,15 @@ void divide(int* arr, int left, int right){
         change(arr, left, right);
 
         for (int i = 0; i < 8; i++){
-            printf("%d ", arr[i]);
+            //printf("%d ", arr[i]);
         }
     }
 
 }
 
 //       (0,7)
-//  (0,3)       (4,7)
-//(0,1)(2,3)
+//  (0,3)        (4,7)
+//(0,1)(2,3)   (4,5)(6,7)
 
 
 

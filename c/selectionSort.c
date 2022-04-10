@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 void change(int* arr, int* selection, int* min){
 
@@ -10,17 +11,24 @@ void change(int* arr, int* selection, int* min){
 
 int main(){
 
-    int arr[10] = { 23,11,54,654,645,34523,78,76, 954, 345 };
-
-    //int min = arr[0];
+    int N;
+    scanf("%d", &N);
+   
+    // int arr[N];
+    int* arr = malloc(sizeof(int)*N);
     
 
-    for (int selection = 0; selection < 10; selection++)
+    for (int i = 0; i < N; i++){
+        scanf("%d", &arr[i]);
+    }
+
+
+    for (int selection = 0; selection < N; selection++)
     {
 
         int* min = &arr[selection];
 
-        for (int i = selection; i < 10; i++)
+        for (int i = selection; i < N; i++)
         {
             if(*min> arr[i]){
                 min = &arr[i];
@@ -31,7 +39,7 @@ int main(){
 
     }
 
-    for (int i = 0; i < 10; i++){
+    for (int i = 0; i < N; i++){
         printf("%d\n", arr[i]);
     }
 

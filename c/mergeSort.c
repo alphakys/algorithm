@@ -22,20 +22,23 @@ void divide(int* arr, int left, int right, int* sorted){
         divide(arr, mid, right, sorted);   // 4,7 --> mid=2 ==> (4,1)(2,7)
         
     }
-mergeArr(arr, sorted, left, right, mid);
+        //mergeArr(arr, sorted, left, right, mid);
     int pointer = left;
 
     int leftPos = left; 
     int rightPos = right; 
     int midPos = left + ((right - left + 1) / 2);
 
-printf("left : %d, midPos : %d, right : %d, mid : %d\n", leftPos, midPos, rightPos, mid);
+    int m = left + ((right - left + 1) / 2);
+    
+
+    printf("left : %d, midPos : %d, right : %d, mid : %d\n", leftPos, midPos, rightPos, mid);
 
     for(int i=0; i<right-left+1; i++)
     {
-        
-        if(left>=midPos){
-            sorted[pointer++] = arr[rightPos++];
+        printf("left : %d, midPos : %d, right : %d, m : %d\n", leftPos, midPos, rightPos, m);
+        if(leftPos>=m){
+            sorted[pointer++] = arr[midPos++];
         }else if(midPos>rightPos){
             sorted[pointer++] = arr[leftPos++];
         }else{

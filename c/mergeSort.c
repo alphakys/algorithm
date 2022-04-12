@@ -11,15 +11,6 @@ void printArray(int *arr, int n) {
     printf("\n");
 }
 
-//    (0,8) mid=4
-//(0,3)  
-
-//     (4,8)  mid=2
-//  (4,5)    (6,8) mid=1
-//          (6,6)(7,8)
-
-
-
 void divide(int* arr, int left, int right, int* sorted){
     
     int mid = (right - left + 1) / 2;

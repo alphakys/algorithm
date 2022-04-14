@@ -3,31 +3,18 @@
 
 #define MAX_SIZE 10001
 
-void change(int* arr, int* i, int* insert){
-
-    int change = arr[*i];
-    arr[*i] = arr[*insert];
-    arr[*insert] = change;
-}
-
-
 int main(){
 
     int N;
     scanf("%d", &N);
-   
-    short* arr = malloc(sizeof(short)*N);
 
-    for (int i = 0; i < N; i++){
-        scanf("%d", &arr[i]);
-    }
 
-    short* sort = malloc(sizeof(short)*N);
-    short* count= malloc(sizeof(short)*N);
+    short* sort = malloc(sizeof(short)*MAX_SIZE);
+    short* count= malloc(sizeof(short)*MAX_SIZE);
 
     for (int i = 0; i < N; i++){
         
-        //sort[i] = 0;
+        sort[i] = 0;
         count[i] = 1; 
     }
 

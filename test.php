@@ -1,5 +1,11 @@
 <?php
     
+
+
+//echo hexdec('49057962');
+echo dechex('49057962');
+
+    return;
 //strive server connection fields
 header('Content-Type: text/html; charset=utf-8');
 $server = "211.253.30.245:11001";
@@ -76,8 +82,7 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }else{
             $is_supervisor = 0;
         }
-        
-        $userid = 'nnnn';
+    
 
         //check whether user is existing or user is not existing
         $sql_chk = "select userid from users where userid = '$userid'";
@@ -90,18 +95,20 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 //            echo "existing user"."<br>";
             
-            //$password= '4227';
-
+            $password= '4227';
+            $user_name = 'Paul Walker';
+            //4227
             //This code is for updating user information because if perfect gym app data is changed, there is
             //no way to know that so we check always when user login
-            $update_sql = "call test_update('$userid', '$user_name', '$rfid', '$email', 
-                                                '$phone', '$birthday', '$gender', $clubs_id, '$photoUrl', '$password')";
+            $update_sql = "call update_at_login('$userid', '$user_name', '$rfid', '$email', 
+                                            '$phone', '$birthday', '$gender', $clubs_id, '$photoUrl', '$password')";
 
             $stmt_up = $pdo->prepare($update_sql);
             $stmt_up->execute();
             $is_success = $stmt_up->rowCount();
-
+            $result = $stmt_up->fetchAll(PDO::FETCH_ASSOC);
             $stmt_up-> closeCursor();
+
             if($is_success){
 //                echo "updated"."<br>";
             }

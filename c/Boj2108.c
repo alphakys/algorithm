@@ -6,13 +6,6 @@
 #define MAX_SIZE 4001
 
 
-void change(int* arr, int* i, int* insert){
-
-    int change = arr[*i];
-    arr[*i] = arr[*insert];
-    arr[*insert] = change;
-}
-
 void printArray(int *arr, int n) {
     int i;
     for (i = 0; i < n; i++) {
@@ -50,33 +43,31 @@ int main(){
 //////////////////////////////////////////////
 
     int count = 0;
-    int arrPointer = 0;
-    int arr[8001] = {-0};
-
-    printArray(arr, 10);
-    return 0;
-    ///////////////////////////////////////////
+    int arr[8001];
+    memset(arr, 0, sizeof(int)*8001);
+ 
+///////////////////////////////////////////
 
     int maxPosition = 0;
-    int maxPositiveCount = 1;
-    int maxNegativeCount = 1;
-
     int maxArr[8001];
     //memset(maxArr, -1, sizeof(int)*MAX_SIZE);
     int maxCount = 0;
 
-    for (int i = -5; i < 6; i++)
+    for (int i = -10; i < 10; i++)
     {   
         if(i<0){
             
             if(negative[abs(i)]>0){
-                count++;
-                arr[arrPointer++] = i;
+                
+                arr[count++] = i;
+               printf("up"); printArray(arr,10);
                 
                 if(maxCount < negative[abs(i)]){
                     
-                    memset(maxArr, -1, sizeof(int) * MAX_SIZE);
-
+                    for(int k=0; k<8002; k++){
+                        maxArr[k] = 4001;
+                    }
+                    maxCount = negative[abs(i)];
                     maxPosition = 0;
                     maxArr[maxPosition++] = i;
 
@@ -86,32 +77,56 @@ int main(){
             }   
         }else{
             if(positive[i]>0){
-                count++;
-                arr[arrPointer++] = i;
+                printf("arr  %d  ", i);
+                arr[count++] = i;
+                printf("down"); printArray(arr,10);
+                if(maxCount < positive[i]){
+                    
+                    for(int k=0; k<8002; k++){
+                        maxArr[k] = 4001;
+                    }
+
+                    maxCount = positive[i];
+                    maxPosition = 0;
+                    maxArr[maxPosition++] = i;
+
+                }else if(maxCount == positive[i]){
+                    maxArr[maxPosition++] = i;
+                }
+
             }
         }
-
+printf("ahdi");printArray(arr,10);printf("i : %d\n", i);
     }
 
 
-
-
-for(int i=0; i<20; i++){
-        if(maxArr[i]==-1){
-            printf("max : %d\n",maxArr[i-2]);
-            break;
-        }
-    }
-
-    printArray(arr, 10);
-
+    printf("--------------------\n");
+    
     printf("%d\n", (int)(round((double)round(sum/N))));
+    
     printf("%d\n", arr[(count / 2)]);
 
+     for(int i=0; i<20; i++){
 
+        if(maxArr[i]==4001){
+
+            if(i<2){
+                printf("max : %d\n", maxArr[i-1], i);
+                    break;
+            }else{
+                printf("max : %d\n",maxArr[1], i);
+                    break;
+            }
+
+            
+        }
+
+    }
     printf("%d\n", arr[count-1] - arr[0]);
-   
-
+    
+    
+    printArray(arr,10);
+    printArray(positive,10);
     
     return 0;
 

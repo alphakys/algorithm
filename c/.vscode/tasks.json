@@ -38,12 +38,13 @@
         },
         //C 컴파일
         {
+            "type": "shell",
             "label": "save and compile for C",
             "command": "gcc",
             "args": [
                 "${file}",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "${fileDirname}/${fileBasenameNoExtension} -lm"
             ],
             "group": "build",
 

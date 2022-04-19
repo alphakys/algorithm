@@ -11,7 +11,7 @@ void printArray(int *arr, int n) {
     printf("\n");
 }
 
-void divide(int* arr, int left, int right, int* sorted){
+void mergeSort(int* arr, int left, int right, int* sorted){
     
     int mid = (right - left + 1) / 2;
     
@@ -19,8 +19,8 @@ void divide(int* arr, int left, int right, int* sorted){
     {
         mid = left + mid;
        
-        divide(arr, left, mid - 1, sorted);
-        divide(arr, mid, right, sorted);  
+        mergeSort(arr, left, mid - 1, sorted);
+        mergeSort(arr, mid, right, sorted);  
         
     }
         
@@ -54,7 +54,6 @@ void divide(int* arr, int left, int right, int* sorted){
 
         }
         
-       // printf("sorted : ");printArray(sorted, 8);
     }
     
     for(int i=left; i<=right; i++){
@@ -77,7 +76,7 @@ int main(){
 
     int* sorted = malloc(sizeof(int)*(N));
 
-    divide(arr, 0, N-1, sorted);
+    mergeSort(arr, 0, N-1, sorted);
     
     for (int i = 0; i < N; i++){
         printf("%d\n", arr[i]);

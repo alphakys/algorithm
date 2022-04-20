@@ -1,15 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define MAX_SIZE 1000000
+#include <string.h>
 
-void printArray(int *arr, int n) {
-    int i;
-    for (i = 0; i < n; i++) {
-
-        printf("%d ", arr[i]);
-    }
-    printf("\n");
-}
 
 void mergeSort(int* arr, int left, int right, int* sorted){
     
@@ -65,26 +57,27 @@ void mergeSort(int* arr, int left, int right, int* sorted){
 
 int main(){
 
-    int N;
-    scanf("%d", &N);
+    //int N[100000000];
+    int arr[11] = {-1};
+    char b[11];
 
-    int* arr = malloc(sizeof(int)*N);
+    scanf("%s", &b);
+    //printf("%d",strlen(b));
 
-    for (int i = 0; i < N; i++){
-        scanf("%d", &arr[i]);
+    for (int i = 0; i < strlen(b); i++){
+        
+        arr[i] = (int)b[i];
     }
 
-    int* sorted = malloc(sizeof(int)*(N));
+    int* sorted = malloc(sizeof(int)*(strlen(b)));
 
-    mergeSort(arr, 0, N-1, sorted);
-    
-    for (int i = N-1; i >= 0; i--){
-        printf("%d", arr[i]);
+    mergeSort(arr, 0, strlen(b)-1, sorted);
+
+    for (int i = strlen(b)-1; i >= 0; i--){
+        printf("%c", arr[i]);
     }
 
     free(sorted);
-    free(arr);
-
+        
     return 0;
 }
-

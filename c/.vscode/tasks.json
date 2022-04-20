@@ -44,7 +44,7 @@
             "args": [
                 "${file}",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension} -lm"
+                "${fileDirname}/${fileBasenameNoExtension}"
             ],
             "group": "build",
 

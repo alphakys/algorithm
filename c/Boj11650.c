@@ -4,7 +4,7 @@
 int main(){
 
     int N;
-    char *str;
+    //char *str;
 
     scanf("%d", &N);
 

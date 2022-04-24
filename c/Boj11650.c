@@ -1,19 +1,48 @@
 #include <stdlib.h>
-#include <readline/readline.h>
+#include <stdio.h>
 
 int main(){
 
     int N;
-    //char *str;
+
+    char str[15];
 
     scanf("%d", &N);
 
-    for (int i = 0; i < N; i++){
-        str = readLine();
+    //fflush(stdin);
+    getchar();
+    // int x[10001];
+    // int y[10001];
+
+    int* x = malloc(4*N);//[10001];
+    int* y = malloc(4*N);//[10001];
+
+    for (int i = 0; i < N; i++)
+    {
+        
+        fgets(str, 15, stdin);
+
+        
+            //x[i] = str[0];
+        //y[i] = str[2];
     }
 
-    if(str){
-        printf("%s", str);
+        for (int k = 0; k < 15; k++){
+
+            if((int)str[k] ==32){
+                break;
+            }
+            printf("%c", str[k]);
+            
+        }
+
+        free(x);
+        free(y);
+        return 0;
+
+        for (int j = 0; j < N; j++)
+        {
+            printf("x: %s y: %s", x[j], y[j]);
     }
 
     /*

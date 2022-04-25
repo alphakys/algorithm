@@ -32,8 +32,6 @@ int main(){
                 break;
             }
 
-
-            //printf("%c", str[k]);
             digit++;
         }
 
@@ -45,18 +43,20 @@ int main(){
         int sum=0;
 
         //digit = digit-1;
+        int poww = digit-1;
 
-        for(int j=0; j<digit; j++){
-            
-            double n = (double)str[j]-(double)48;
-            double powNum = pow((double)10,(double)((digit-1)--));
+        for (int j = 0; j < digit; j++)
+        {
+            double n = (double)str[j] - (double)48;
+            double powNum = pow((double)10,(double)(poww));
 
             sum += (int)(n*powNum);
-            printf("%lf  %lf  %d  \n", n, powNum, sum);
+            poww--;
+            printf("%lf  %lf  %d  %d\n", n, powNum, sum, j, poww);
             //break;
         }
 
-        //printf("%d\n", sum);
+        printf("sum : %d\n", sum);
 
         //printf("%d", digit);
         free(x);

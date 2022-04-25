@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
 int main(){
 
@@ -11,8 +12,6 @@ int main(){
 
     //fflush(stdin);
     getchar();
-    // int x[10001];
-    // int y[10001];
 
     int* x = malloc(4*N);//[10001];
     int* y = malloc(4*N);//[10001];
@@ -22,20 +21,44 @@ int main(){
         
         fgets(str, 15, stdin);
 
-        
-            //x[i] = str[0];
-        //y[i] = str[2];
     }
+
+        int digit = 0;
+        int num = 0;
 
         for (int k = 0; k < 15; k++){
 
             if((int)str[k] ==32){
                 break;
             }
-            printf("%c", str[k]);
-            
+
+
+            //printf("%c", str[k]);
+            digit++;
         }
 
+        double n = (double)str[0]-(double)48;
+        double powNum = pow((double)10,(double)(digit-1));
+        
+        //printf( "%lf  %lf  %d ", n, powNum, (int)(n*powNum));
+
+        int sum=0;
+
+        //digit = digit-1;
+
+        for(int j=0; j<digit; j++){
+            
+            double n = (double)str[j]-(double)48;
+            double powNum = pow((double)10,(double)((digit-1)--));
+
+            sum += (int)(n*powNum);
+            printf("%lf  %lf  %d  \n", n, powNum, sum);
+            //break;
+        }
+
+        //printf("%d\n", sum);
+
+        //printf("%d", digit);
         free(x);
         free(y);
         return 0;

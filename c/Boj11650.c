@@ -117,8 +117,20 @@ int main(){
 
     int* x = malloc(4*N);//[10001];
     int* y = malloc(4*N);//[10001];
+    
+    //printf("%d", xy[0][0]);
+    /*
+        for (int i = 0; i < 10; i++){
 
-    int positive[100001]= {0};
+            for (int j = 0; j < 10; j++){
+                printf("xy[%d][%d]  addr %d", i,j, &xy[i][j]);
+            }
+
+        }
+    */
+    return 0;
+
+    int positive[100001] = {0};
     int negative[100001]= {0};
 
     for (int i = 0; i < N; i++)

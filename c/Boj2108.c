@@ -66,14 +66,6 @@ void mergeSort(int* arr, int left, int right, int* sorted){
 
 }
 
-
-
-
-
-
-
-
-
 int main(){
 
     int N;

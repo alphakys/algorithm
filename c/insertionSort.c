@@ -8,6 +8,24 @@ void change(int* arr, int* i, int* insert){
     arr[*insert] = change;
 }
 
+void insertionSort( int* arr, int start, int end ){
+    
+
+    for (int insert = start-1; insert < end; insert++)
+    {
+
+        for (int i = insert-1; i >=0; i--)
+        {
+            if(arr[i]> arr[insert]){
+                
+                change(arr, &i, &insert);
+                insert--;
+                
+            }
+        }
+        
+    }
+}
 
 int main(){
 

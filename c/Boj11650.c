@@ -3,55 +3,6 @@
 #include <math.h>
 #include <string.h>
 
-void mergeSort(int* arr, int left, int right, int* sorted){
-    
-    int mid = (right - left + 1) / 2;
-    
-    if (mid >= 1)
-    {
-        mid = left + mid;
-       
-        mergeSort(arr, left, mid - 1, sorted);
-        mergeSort(arr, mid, right, sorted);  
-        
-    }
-        
-    int pointer = left;
-
-    int leftPos = left; 
-    int rightPos = right; 
-    int midPos = left + ((right - left + 1) / 2);
-
-    int m = left + ((right - left + 1) / 2);
-    
-    for(int i=0; i<right-left+1; i++)
-    {
-       
-        if(leftPos>=m){
-            sorted[pointer++] = arr[midPos++];
-        }else if(midPos>rightPos){
-            sorted[pointer++] = arr[leftPos++];
-        }else{
-  
-            if(arr[leftPos] > arr[midPos]){
-                sorted[pointer++] = arr[midPos++];
-                
-            }else{
-                sorted[pointer++] = arr[leftPos++];
-            
-            }
-
-        }
-        
-    }
-    
-    for(int i=left; i<=right; i++){
-        arr[i] = sorted[i];
-    }
-
-}
-
-
 void printArray(int *arr, int n) {
     
     int i;
@@ -97,11 +48,76 @@ int strToint(int start, int digit, char* str){
         }
     }
 
+    return sum;
+}
+
+typedef struct Node
+{
+    int x;
+    int y;
+
+} Node;
+
+void mergeSort(Node* arr, int left, int right, Node* sorted, int method){
+    
+    int mid = (right - left + 1) / 2;
+    
+    if (mid >= 1)
+    {
+        mid = left + mid;
+       
+        mergeSort(arr, left, mid - 1, sorted, method);
+        mergeSort(arr, mid, right, sorted, method);  
+        
+    }
+        
+    int pointer = left;
+
+    int leftPos = left; 
+    int rightPos = right; 
+    int midPos = left + ((right - left + 1) / 2);
+
+    int m = left + ((right - left + 1) / 2);
     
 
-    return sum;
-    //printf("sum : %d\n", sum);
+    for(int i=0; i<right-left+1; i++)
+    {
+       
+        if(leftPos>=m){
+            sorted[pointer++] = arr[midPos++];
+        }else if(midPos>rightPos){
+            sorted[pointer++] = arr[leftPos++];
+        }else{
+            
+            if(method==1){
+                if(arr[leftPos].x > arr[midPos].x){
+                    sorted[pointer++] = arr[midPos++];
+                
+                }else{
+                    sorted[pointer++] = arr[leftPos++];
+                
+                }
+            }else{
+                if(arr[leftPos].y > arr[midPos].y){
+                    sorted[pointer++] = arr[midPos++];
+                
+                }else{
+                    sorted[pointer++] = arr[leftPos++];
+                
+                }
+            }
+            
+
+        }
+        
+    }
+    
+    for(int i=left; i<=right; i++){
+        arr[i] = sorted[i];
+    }
+        
 }
+
 
 
 int main(){
@@ -112,26 +128,12 @@ int main(){
 
     scanf("%d", &N);
 
-    //fflush(stdin);
     getchar();
 
-    int* x = malloc(4*N);//[10001];
-    int* y = malloc(4*N);//[10001];
-    
-    //printf("%d", xy[0][0]);
-    /*
-        for (int i = 0; i < 10; i++){
-
-            for (int j = 0; j < 10; j++){
-                printf("xy[%d][%d]  addr %d", i,j, &xy[i][j]);
-            }
-
-        }
-    */
-    return 0;
+    Node* node = (Node *)malloc(sizeof(Node)*N);
 
     int positive[100001] = {0};
-    int negative[100001]= {0};
+    int negative[100001] = {0};
 
     for (int i = 0; i < N; i++)
     {
@@ -142,7 +144,7 @@ int main(){
         for (int k = 0; k < 15; k++){
                
             if((int)str[k] ==32){
-                x[i] = strToint(start, k, str);
+                node[i].x = strToint(start, k, str);
                 
                 if(strToint(start, k, str)>=0){
                     positive[strToint(start, k, str)]++;
@@ -152,7 +154,7 @@ int main(){
 
                 start = k+1;
             }else if((int)str[k] ==10){
-                y[i] = strToint(start, k, str);
+                node[i].y = strToint(start, k, str);
                 
                 break;
             }
@@ -161,28 +163,49 @@ int main(){
 
 
     }
-    
-    int* sorted = malloc(sizeof(int)*(N));
-    //printArray(negative, 10);
-    //printArray(positive, 10);
+   
+    Node* sorted = (Node *)malloc(sizeof(Node)*N);
 
-    mergeSort(x, 0, N, sorted);
+    mergeSort(node, 0, N, sorted, 1);
 
+    for (int j = -100000; j < 100000; j++)
+    {   
+        //printf("%d %d\n", positive[j], negative[j]);
+        if(j<0 && negative[j*-1]>1){
+            
+            for(int i=0; i<N; i++){
+                
+                if(node[i].x == j){
+                    memset(sorted,0,sizeof(Node)*negative[j*-1]);
+                    mergeSort(node, i, i+negative[j*-1]-1, sorted, 2);
+                    break;
+                }
+            }
 
+        }else if(j>=0 && positive[j]>1){
+            
+            for(int i=0; i<N; i++){
+                
+                if(node[i].x == j){
+                    //printf("%d", positive[j]);
+                    //sizeof(Node)*positive[j]
+                    memset(sorted,0,sizeof(Node)*positive[j]);
+                    mergeSort(node, i, i+positive[j]-1, sorted, 2);
+                    break;
+                }
+            }
 
+        }
+    }
 
-
-    memset(sorted, 0, sizeof(int)*(N));
-    mergeSort(y, 0, N, sorted);
-    
     for (int j = 0; j < N; j++)
     {
-        printf("%d %d\n", x[j], y[j]);
+        printf("%d %d\n", node[j].x, node[j].y);
     }
-    
+
     free(sorted);
-    free(x);
-    free(y);
-    
+    free(node);
+    //free(y);
+
     return 0;
 }

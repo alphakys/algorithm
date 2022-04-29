@@ -181,7 +181,7 @@ int main(){
 
     Node* sorted = (Node *)malloc(sizeof(Node)*N);
 
-    mergeSort(node, 0, N-1, sorted, 1);
+    mergeSort(node, 0, N-1, sorted, 2);
 
 /*
     for (int j = 0; j < N; j++)
@@ -199,7 +199,7 @@ int main(){
                 
                 if(node[i].x == j){
                     memset(sorted,0,sizeof(Node)*negative[j*-1]);
-                    mergeSort(node, i, i+negative[j*-1]-1, sorted, 2);
+                    mergeSort(node, i, i+negative[j*-1]-1, sorted, 1);
                     break;
                 }
             }
@@ -212,7 +212,7 @@ int main(){
                     //printf("%d", positive[j]);
                     //sizeof(Node)*positive[j]
                     memset(sorted,0,sizeof(Node)*positive[j]);
-                    mergeSort(node, i, i+positive[j]-1, sorted, 2);
+                    mergeSort(node, i, i+positive[j]-1, sorted, 1);
                     break;
                 }
             }

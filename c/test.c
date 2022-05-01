@@ -9,25 +9,37 @@ typedef struct
 
 } Node;
 
-void func(Node* node){
-    printf("%d %d", node->x, node->y);
+int strcmpare(char* str1, char* str2){
+/*
+    if(0 == str1){
+        printf("%p", str1);
+        return 0;
+    }
+
+    int i = 0;
+
+    if(strlen(str1)!=strlen(str2)){
+        printf("not same");
+    }
+
+    while ((int)str1[i] == (int)str2[i])
+    {
+        printf("%c", str1[i]);
+        i++;
+    }
+*/
+    return 0;
 }
 
 void main(){
 
-    //printf("%p", main);
-    int n = 1;
 
-    Node node;
+    char *character[3];
+printf("%p\n", character);
 
-    node.x = 1;
-    node.y = 2;
+scanf("%s", character);
 
-    func(&node);
-    //printf("%d\n", sizeof(Node));
-
-    //printf("node : %d %d %d %d", &node, &node.x[0], &node.x[1], &node.y);
-
+printf("%p", character);
 
 
 }

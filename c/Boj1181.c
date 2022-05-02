@@ -53,14 +53,6 @@ int strToint(int start, int digit, char* str){
 }
 */
 
-typedef struct string
-{
-    char character[51];
-    char length;
-
-} string;
-
-
 int len(const char* ch){
 
     //int c = (int)ch;
@@ -102,11 +94,23 @@ int strcompare(char* str1, char* str2){
 
 typedef struct arrayList{
 
-    short length = 0;
-    char *address = NULL;
+    short length;
+    char *address;
 
 } arrayList;
 
+typedef struct string
+{
+    char *character;
+    char *allocSize;
+    //char length;
+
+} string;
+
+char *allocSize(int length){
+    string str = (string *)malloc((length+1)*20000);
+    //string* str1 = (string *)malloc(sizeof(string)*20000);
+}
 
 
 
@@ -116,7 +120,6 @@ typedef struct arrayList{
 
 int main(){
 
-
 //alphabet 26
 
     int N;
@@ -124,26 +127,28 @@ int main(){
 
     char character[51];
 
-    arrayList list[200001];
+    string str[20000];
+    string* str1 = (string *)malloc(sizeof(string)*20000);
+
+    arrayList *list[51];
 
     for(int i=0; i<N; i++){
         
         scanf("%s", character);
         int len = strlen(character);
 
-        if(arrayList[len])
-
-        //char *characArr = malloc((len+1)*20000));
-
-        if(!arrayList[len]){
-            arrayList[len] = characArr;
+        if(!list[len]){
+            list[len]->address = character;
+            list[len]->length++;
             //printf("string %s", arrayList[len]);
         }else{
-            arrayList[len]
-            for (int i = 0; i<)
+            int length = list[len]->length;
+            
+            for (int i = 0; i<length; i++)
             {
+                printf("%d", strcompare(list[len]->address, character));
             }
-            strcompare(char* str1, char* str2)
+            
         }
 
     }

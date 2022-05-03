@@ -1,13 +1,15 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <string.h>
 
-
-typedef struct 
+typedef struct string
 {
-    int y;
-    int x;
-    
+    char character[2];
+    //char *allocSize;
+    //char length;
 
-} Node;
+} string;
 
 int strcmpare(char* str1, char* str2){
 /*
@@ -34,12 +36,26 @@ int strcmpare(char* str1, char* str2){
 void main(){
 
 
-    char *character[3];
-printf("%p\n", character);
+string arr[5][5];
 
-scanf("%s", character);
 
-printf("%p", character);
+
+
+        for(int j=0; j<5; j++){
+
+            memset(arr[j],NULL,sizeof(string)*5);
+
+            for(int i=0; i<5; i++){
+                printf("j : %d, i : %d, p : %d\n",j, i, arr[j][i]);
+            }
+            /*
+            if(!arr[1][j].character){
+                printf("%d %d", j,arr[1][j]);
+                break;
+            }
+        */
+        }
+
 
 
 }

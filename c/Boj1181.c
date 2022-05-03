@@ -101,8 +101,8 @@ typedef struct arrayList{
 
 typedef struct string
 {
-    char *character;
-    char *allocSize;
+    char character[51];
+    //char *allocSize;
     //char length;
 
 } string;
@@ -127,6 +127,9 @@ int main(){
 
     char character[51];
 
+    string arr[51][20000] = NULL;
+
+
     string str[20000];
     string* str1 = (string *)malloc(sizeof(string)*20000);
 
@@ -136,6 +139,29 @@ int main(){
         
         scanf("%s", character);
         int len = strlen(character);
+
+        for(int j=0; j<20000; j++){
+            if(!arr[len][j].character){
+                break;
+            }
+            printf("%d", strcompare(arr[len][j], character));
+        }
+
+
+        if(!arr[len][0]){
+            list[len]->address = character;
+            list[len]->length++;
+            //printf("string %s", arrayList[len]);
+        }else{
+            int length = list[len]->length;
+            
+            for (int i = 0; i<length; i++)
+            {
+                printf("%d", strcompare(list[len]->address, character));
+            }
+            
+        }
+
 
         if(!list[len]){
             list[len]->address = character;

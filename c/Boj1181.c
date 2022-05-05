@@ -8,50 +8,10 @@ void printArray(int *arr, int n) {
     int i;
     for (i = 0; i < n; i++) {
 
-        printf("%d ", arr[i]);
+        printf("%c ", arr[i]);
     }
     printf("\n");
 }
-
-/*
-int strToint(int start, int digit, char* str){
-
-    int sum=0;
-
-    int poww = (digit-start)-1;
-
-    if((int)str[start] ==45){
-        poww = poww-1;
-        
-        for (int j = start+1; j < digit; j++)
-        {
-        
-            double n = (double)str[j] - (double)48;
-            double powNum = pow((double)10,(double)(poww));
-
-            sum += (int)(n*powNum);
-            poww--;
-        
-        }
-        sum = sum*-1;
-                
-    }else{
-
-        for (int j = start; j < digit; j++)
-        {
-        
-            double n = (double)str[j] - (double)48;
-            double powNum = pow((double)10,(double)(poww));
-
-            sum += (int)(n*powNum);
-            poww--;
-        
-        }
-    }
-
-    return sum;
-}
-*/
 
 int len(const char* ch){
 
@@ -72,21 +32,26 @@ int strcompare(char* str1, char* str2){
 
     int i = 0;
     int fal = 0;
-
+/*
     if (strlen(str1) != strlen(str2))
     {
         fal++;
         return fal;
     }
+*/
 
     while (str1[i])
     {
-        if (str1[i] != str2[i])
+        if (str1[i] > str2[i])
         {
             fal++;
             break;
+        }else if(str1[i] == str2[i]){
+            i++;
+        }else{
+            fal--;
+            break;
         }
-        i++;
     }
 
     return fal;
@@ -102,21 +67,15 @@ typedef struct arrayList{
 typedef struct string
 {
     char character[51];
-    //char *allocSize;
-    //char length;
 
 } string;
 
-char *allocSize(int length){
-    string str = (string *)malloc((length+1)*20000);
-    //string* str1 = (string *)malloc(sizeof(string)*20000);
+void change(int* arr, int* next, int* pointer){
+
+    int change = arr[*next];
+    arr[*next] = arr[*pointer];
+    arr[*pointer] = change;
 }
-
-
-
-
-
-
 
 int main(){
 
@@ -127,90 +86,19 @@ int main(){
 
     char character[51];
 
-    string arr[51][20000] = NULL;
+    char arr[20000];
 
-
-    string str[20000];
-    string* str1 = (string *)malloc(sizeof(string)*20000);
-
-    arrayList *list[51];
-
-    for(int i=0; i<N; i++){
-        
-        scanf("%s", character);
-        int len = strlen(character);
-
-        for(int j=0; j<20000; j++){
-            if(!arr[len][j].character){
-                break;
-            }
-            printf("%d", strcompare(arr[len][j], character));
-        }
-
-
-        if(!arr[len][0]){
-            list[len]->address = character;
-            list[len]->length++;
-            //printf("string %s", arrayList[len]);
-        }else{
-            int length = list[len]->length;
-            
-            for (int i = 0; i<length; i++)
-            {
-                printf("%d", strcompare(list[len]->address, character));
-            }
-            
-        }
-
-
-        if(!list[len]){
-            list[len]->address = character;
-            list[len]->length++;
-            //printf("string %s", arrayList[len]);
-        }else{
-            int length = list[len]->length;
-            
-            for (int i = 0; i<length; i++)
-            {
-                printf("%d", strcompare(list[len]->address, character));
-            }
-            
-        }
-
-    }
-
-    //int retu = strcompare(str[0].character,str[1].character);
-
-    //printf("%d", retu);
-    
-
-
-
-
-
-
-    
-    // if()
-
-    /*
-    
-    
-
-    for(int i=0; i<N; i++){
-        
-        printf("%d\n", strlen(str[i].character));
-    }
-    
-    
-    getchar();
-
-    for (int j = 0; j < N; j++)
+    for (int i = 0; i < N; i++)
     {
-        printf("%d %d\n", node[j].x, node[j].y);
-    }
-*/
-    //free(sorted);
-    //free(node);
 
+        scanf("%s", character);
+
+        printf("%s", character);
+    }
+
+    for (int i = 0; i < 5; i++){
+        printf("%s", arr[i]);
+    }
+    
     return 0;
 }

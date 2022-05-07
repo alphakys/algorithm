@@ -6,6 +6,7 @@
 void printArray(int *arr, int n) {
     
     int i;
+    
     for (i = 0; i < n; i++) {
 
         printf("%c ", arr[i]);
@@ -32,13 +33,6 @@ int strcompare(char* str1, char* str2){
 
     int i = 0;
     int fal = 0;
-/*
-    if (strlen(str1) != strlen(str2))
-    {
-        fal++;
-        return fal;
-    }
-*/
 
     while (str1[i])
     {
@@ -57,25 +51,6 @@ int strcompare(char* str1, char* str2){
     return fal;
 }
 
-typedef struct arrayList{
-
-    short length;
-    char *address;
-
-} arrayList;
-
-typedef struct string
-{
-    char character[51];
-
-} string;
-
-void change(int* arr, int* next, int* pointer){
-
-    int change = arr[*next];
-    arr[*next] = arr[*pointer];
-    arr[*pointer] = change;
-}
 
 int main(){
 
@@ -84,20 +59,32 @@ int main(){
     int N;
     scanf("%d", &N);
 
-    char character[51];
+    char str[51];
 
     char arr[20000];
 
     for (int i = 0; i < N; i++)
     {
 
-        scanf("%s", character);
+        scanf("%s", str);
 
-        printf("%s", character);
+        arr[i] = str[0];
+
+        //printf("%s", character);
     }
 
     for (int i = 0; i < 5; i++){
-        printf("%s", arr[i]);
+
+        char ch = arr[0];
+        char *ptr = (&arr[0])++;
+
+        printf("%p %c %d\n", ch, ch, ch);
+        printf("%p %c %d\n", ptr, *ptr, ptr);
+        
+        /*
+        int fal = strcompare(&arr[i], &arr[i+1]);
+        printf("%c", fal);
+        */
     }
     
     return 0;

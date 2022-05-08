@@ -24,16 +24,16 @@ int strcompare(char* str1, char* str2){
     int fal = 0;
 
     if(strlen(str1) > strlen(str2)){
-        return ++fal;
-    }else if(strlen(str1) < strlen(str2)){
         return --fal;
+    }else if(strlen(str1) < strlen(str2)){
+        return ++fal;
     }else{
         
         while (str1[i] || str2[i])
         {
             if (str1[i] > str2[i])
             {
-                fal++;
+                fal--;
                 break;
             }else if(str1[i] == str2[i]){
                 i++;
@@ -41,7 +41,7 @@ int strcompare(char* str1, char* str2){
             }
             else
             {
-                fal--;
+                fal++;
                 break;
             }
         }
@@ -52,16 +52,16 @@ int strcompare(char* str1, char* str2){
     
 }
 
-void mergeSort(char arr[][51], int left, int right, char* sorted){
+void mergeSort(char arr[][51], int left, int right, char* sorted, int* order){
     
     int mid = (right - left + 1) / 2;
-    
+
     if (mid >= 1)
     {
         mid = left + mid;
        
-        mergeSort(arr, left, mid - 1, sorted);
-        mergeSort(arr, mid, right, sorted);  
+        mergeSort(arr, left, mid - 1, sorted, order);
+        mergeSort(arr, mid, right, sorted, order);  
         
     }
         
@@ -72,27 +72,28 @@ void mergeSort(char arr[][51], int left, int right, char* sorted){
     int midPos = left + ((right - left + 1) / 2);
 
     int m = left + ((right - left + 1) / 2);
-    
-
-    
 
     for(int i=0; i<right-left+1; i++)
     {
        
         if(leftPos>=m){
-            sorted[pointer++] = arr[midPos++][0];
+            sorted[pointer] = arr[midPos][0];
+            order[pointer++] = midPos++;
         }else if(midPos>rightPos){
-            sorted[pointer++] = arr[leftPos++][0];
+            sorted[pointer] = arr[leftPos][0];
+            order[pointer++] = leftPos++;
         }else{
 
             int flag = strcompare(&arr[leftPos][0], &arr[midPos][0]);
-            printf("%c, %c, %d\n", arr[leftPos][0], arr[midPos][0], flag);
+        
             if (flag > 0)
             {
-                sorted[pointer++] = arr[leftPos++][0];
+                sorted[pointer] = arr[leftPos][0];
+                order[pointer++] = leftPos++;
             }
             else{
-                sorted[pointer++] = arr[midPos++][0];
+                sorted[pointer] = arr[midPos][0];
+                order[pointer++] = midPos++;
             }
         }
         
@@ -100,8 +101,9 @@ void mergeSort(char arr[][51], int left, int right, char* sorted){
     
     for(int i=left; i<=right; i++){
         arr[i][0] = sorted[i];
+        //sortPtr = &sorted[i];
+        //printf("sort : %p  %c\n", sortPtr, *sortPtr);
     }
-
 }
 
 int main(){
@@ -130,29 +132,47 @@ int main(){
     
     char* sorted = malloc(sizeof(char)*(N));
 
-    mergeSort(arr, 0, N-1, sorted);
+    int order[20000];
+
+    mergeSort(arr, 0, N - 1, sorted, order);
 
     printf("----------------------------\n");
 
     for (int i = 0; i < N; i++)
     {
-        for (int j = 0; j < 50; j++)
+        printf("order : %d\n", order[i]);
+        for (int j = 0; j < 5; j++)
         {
-            printf("%c", arr[i][j]);
+            
+            printf("%c %d   ", arr[order[i]][j], arr[order[i]][j]);
+            
         }
         printf("\n");
     }
 
+    int i = 0;
+    while (i<N)
+    {
+        
+        printf("2nd : %d\n", order[i]);
+        i++;
+    }
 
-for (int i = 0; i < 5; i++){
+/* 스트링 출력
+
+
+
+    //char *p = sortPtr;
+    
+    
+
+
+    for (int i = 0; i < 5; i++){
 
         int fal = strcompare(&arr[i][0], &arr[i+1][0]);
         printf("asdfsfds%d", fal);
         break;
     }
-/* 스트링 출력
-
-
     
     
 */

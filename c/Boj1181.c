@@ -52,7 +52,7 @@ int strcompare(char* str1, char* str2){
     
 }
 
-void mergeSort(char arr[][51], int left, int right, char* sorted, int* order){
+void mergeSort(char* arr, int left, int right, char* sorted){
     
     int mid = (right - left + 1) / 2;
 
@@ -60,8 +60,8 @@ void mergeSort(char arr[][51], int left, int right, char* sorted, int* order){
     {
         mid = left + mid;
        
-        mergeSort(arr, left, mid - 1, sorted, order);
-        mergeSort(arr, mid, right, sorted, order);  
+        mergeSort(arr, left, mid - 1, sorted);
+        mergeSort(arr, mid, right, sorted);  
         
     }
         
@@ -77,33 +77,33 @@ void mergeSort(char arr[][51], int left, int right, char* sorted, int* order){
     {
        
         if(leftPos>=m){
-            sorted[pointer] = arr[midPos][0];
-            order[pointer++] = midPos++;
+            sorted[pointer] = arr[midPos];
+            
         }else if(midPos>rightPos){
-            sorted[pointer] = arr[leftPos][0];
-            order[pointer++] = leftPos++;
+            sorted[pointer] = arr[leftPos];
+            
         }else{
 
-            int flag = strcompare(&arr[leftPos][0], &arr[midPos][0]);
+            int flag = strcompare(&arr[leftPos], &arr[midPos]);
         
             if (flag > 0)
             {
-                sorted[pointer] = arr[leftPos][0];
-                order[pointer++] = leftPos++;
+                sorted[pointer] = arr[leftPos];
+                
             }
             else{
-                sorted[pointer] = arr[midPos][0];
-                order[pointer++] = midPos++;
+                sorted[pointer] = arr[midPos];
+                
             }
         }
         
     }
     
     for(int i=left; i<=right; i++){
-        arr[i][0] = sorted[i];
-        //sortPtr = &sorted[i];
-        //printf("sort : %p  %c\n", sortPtr, *sortPtr);
+        arr[i] = sorted[i];
+        
     }
+    
 }
 
 int main(){
@@ -116,47 +116,49 @@ int main(){
     char str[51];
 
     char arr[20000][51];
-
+    char* dest[20000];
+    
     for (int i = 0; i < N; i++)
     {
 
         scanf("%s", str);
         int j = 0;
         char *ptr = str;
+        
         while (*ptr)
-        {
+        {   
             arr[i][j++] = *(ptr++);
         }
-
+        dest[i] = &arr[i][0];
     }
     
     char* sorted = malloc(sizeof(char)*(N));
 
-    int order[20000];
-
-    mergeSort(arr, 0, N - 1, sorted, order);
+    mergeSort(*dest, 0, N-1, sorted);
 
     printf("----------------------------\n");
 
     for (int i = 0; i < N; i++)
     {
-        printf("order : %d\n", order[i]);
-        for (int j = 0; j < 5; j++)
+
+        for (int j = 0; dest[i][j] >0; j++)
         {
-            
-            printf("%c %d   ", arr[order[i]][j], arr[order[i]][j]);
-            
+            printf("%c", dest[i][j]);
         }
         printf("\n");
     }
 
+
+/*
     int i = 0;
     while (i<N)
     {
-        
-        printf("2nd : %d\n", order[i]);
+        printf("order : %d  sorted : %d\n", order[i], sorted[i]);
         i++;
     }
+*/
+    free(sorted);
+
 
 /* 스트링 출력
 

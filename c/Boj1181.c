@@ -77,10 +77,10 @@ void mergeSort(char* arr, int left, int right, char* sorted){
     {
        
         if(leftPos>=m){
-            sorted[pointer] = arr[midPos];
+            sorted[pointer++] = arr[midPos++];
             
         }else if(midPos>rightPos){
-            sorted[pointer] = arr[leftPos];
+            sorted[pointer++] = arr[leftPos++];
             
         }else{
 
@@ -88,12 +88,12 @@ void mergeSort(char* arr, int left, int right, char* sorted){
         
             if (flag > 0)
             {
-                sorted[pointer] = arr[leftPos];
-                
+                sorted[pointer++] = arr[leftPos++];
+                printf("up %p\n", arr[leftPos++] );
             }
             else{
-                sorted[pointer] = arr[midPos];
-                
+                sorted[pointer++] = arr[midPos++];
+                printf("down %p\n", arr[leftPos++] );
             }
         }
         
@@ -124,12 +124,13 @@ int main(){
         scanf("%s", str);
         int j = 0;
         char *ptr = str;
-        
+
         while (*ptr)
         {   
             arr[i][j++] = *(ptr++);
         }
         dest[i] = &arr[i][0];
+        
     }
     
     char* sorted = malloc(sizeof(char)*(N));
@@ -141,7 +142,7 @@ int main(){
     for (int i = 0; i < N; i++)
     {
 
-        for (int j = 0; dest[i][j] >0; j++)
+        for (int j = 0; dest[i][j] > 0; j++)
         {
             printf("%c", dest[i][j]);
         }

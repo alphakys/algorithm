@@ -22,7 +22,7 @@ int strcompare(char* str1, char* str2){
 
     int i = 0;
     int fal = 0;
-    printf("%c, %c", *str1, *str2);
+
     if(strlen(str1) > strlen(str2)){
         return --fal;
     }else if(strlen(str1) < strlen(str2)){
@@ -53,7 +53,7 @@ int strcompare(char* str1, char* str2){
 }
 
 void mergeSort(char** arr, int left, int right, char** sorted){
-printf("asdf");
+
     int mid = (right - left + 1) / 2;
 
     if (mid >= 1)
@@ -83,19 +83,20 @@ printf("asdf");
             sorted[pointer++] = arr[leftPos++];
             
         }else{
-            
-            printf("%d, %d", *arr[leftPos], *arr[leftPos]);
-            int flag = strcompare(arr[leftPos], arr[leftPos]);
+        
+            int flag = strcompare(arr[leftPos], arr[midPos]);
         
             if (flag > 0)
             {   
-                //printf("1 %c\n", arr[leftPos] );
                 sorted[pointer++] = arr[leftPos++];
             }
-            else{
-                //printf("2 %c\n", arr[midPos] );
+            else if(flag <0)
+            {
                 sorted[pointer++] = arr[midPos++];
-               
+            }
+            else
+            {
+
             }
         }
         
@@ -119,11 +120,7 @@ int main(){
 
     char arr[20000][51];
 
-    char** dest = malloc(sizeof(char)*(N));
-
-    for(int i=0; i<100; i++){
-        printf("%d\n", arr[i]);
-    }
+    char** dest = (char **)malloc(sizeof(char*)*N);
 
     for (int i = 0; i < N; i++)
     {
@@ -137,68 +134,29 @@ int main(){
             arr[i][j++] = *(ptr++);
         }
         dest[i] = &arr[i][0];
-        
+
     }
     
-    char** sorted = malloc(sizeof(char)*(N));
+    char** sorted = (char **)malloc(sizeof(char*)*N);
 
-    mergeSort(dest, 0, N, sorted);
+    mergeSort(dest, 0, N-1, sorted);
 
     printf("----------------------------\n");
 
     for (int i = 0; i < N; i++)
     {
-        printf("check : %c", *dest[i]);
-        /*
-        for (int j = 0; dest[i][j] > 0; j++)
-        {
-            //printf("%c", dest[i][j]);
+        char *p = dest[i];
+
+        while(*p){
+            printf("%c", *p);
+            p++;
         }
-        */
+
         printf("\n");
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-    int i = 0;
-    while (i<N)
-    {
-        printf("order : %d  sorted : %d\n", order[i], sorted[i]);
-        i++;
-    }
-*/
+    free(dest);
     free(sorted);
-free(dest);
-
-/* 스트링 출력
-
-
-
-    //char *p = sortPtr;
-    
-    
-
-
-    for (int i = 0; i < 5; i++){
-
-        int fal = strcompare(&arr[i][0], &arr[i+1][0]);
-        printf("asdfsfds%d", fal);
-        break;
-    }
-    
-    
-*/
-     
+  
     return 0;
 }

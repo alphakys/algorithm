@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+</head>
+
+    <!--
+    <style>
+        rect{
+                fill: rgb(0,0,255);
+                stroke-width: 3px;
+                stroke: rgb(0,0,0);
+            }
+    </style>
+    -->
+
+<body>
+
+    <svg width="500" height="500"></svg>
+    
+    <script>
+        const data = [5,10,15,20,25,30];
+
+        const svg = d3.select('svg');
+
+        data.forEach((d, i) => {
+            svg.append('rect').attr('height', d).attr('width', 40).attr('x',50 * i).attr('y', 100 - d)
+        });
+    </script>
+
+
+</body>
+</html>

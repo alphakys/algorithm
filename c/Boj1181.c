@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <math.h>
 #include <string.h>
 
 int len(const char* ch){
@@ -21,19 +20,19 @@ int len(const char* ch){
 int strcompare(char* str1, char* str2){
 
     int i = 0;
-    int fal = 0;
+    int flag = 0;
 
     if(strlen(str1) > strlen(str2)){
-        return --fal;
+        return --flag;
     }else if(strlen(str1) < strlen(str2)){
-        return ++fal;
+        return ++flag;
     }else{
         
         while (str1[i] || str2[i])
         {
             if (str1[i] > str2[i])
             {
-                fal--;
+                flag--;
                 break;
             }else if(str1[i] == str2[i]){
                 i++;
@@ -41,12 +40,14 @@ int strcompare(char* str1, char* str2){
             }
             else
             {
-                fal++;
+                flag++;
                 break;
             }
         }
-
-        return fal;
+        if(flag==0){
+            str2[0] = '0';
+        }
+        return flag;
     }
 
     
@@ -75,7 +76,6 @@ void mergeSort(char** arr, int left, int right, char** sorted){
 
     for(int i=0; i<right-left+1; i++)
     {
-       
         if(leftPos>=m){
             sorted[pointer++] = arr[midPos++];
             
@@ -90,13 +90,9 @@ void mergeSort(char** arr, int left, int right, char** sorted){
             {   
                 sorted[pointer++] = arr[leftPos++];
             }
-            else if(flag <0)
-            {
-                sorted[pointer++] = arr[midPos++];
-            }
             else
             {
-
+                sorted[pointer++] = arr[midPos++];
             }
         }
         
@@ -104,14 +100,12 @@ void mergeSort(char** arr, int left, int right, char** sorted){
     
     for(int i=left; i<=right; i++){
         arr[i] = sorted[i];
-        //printf("check : %c\n", sorted[i]);
+
     }
     
 }
 
 int main(){
-
-//alphabet 26
 
     int N;
     scanf("%d", &N);
@@ -126,6 +120,7 @@ int main(){
     {
 
         scanf("%s", str);
+
         int j = 0;
         char *ptr = str;
 
@@ -141,18 +136,22 @@ int main(){
 
     mergeSort(dest, 0, N-1, sorted);
 
-    printf("----------------------------\n");
+    //printf("----------------------------\n");
 
     for (int i = 0; i < N; i++)
     {
         char *p = dest[i];
 
+        if(*p =='0'){
+            continue;
+        }
         while(*p){
+            
             printf("%c", *p);
             p++;
         }
-
         printf("\n");
+        
     }
 
     free(dest);

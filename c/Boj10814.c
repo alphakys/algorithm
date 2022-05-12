@@ -18,6 +18,13 @@ int strToint(int start, char* str){
     int sum=0;
 
     int poww = (digit-start)-1;
+    //printf("sss%d  %d", str[start], start);
+    str = &str[0];
+
+    for(int i=0; i<4; i++){
+        printf("%c", str[i]);
+    }
+
 
     if((int)str[start] ==45){
         poww = poww-1;

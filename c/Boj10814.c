@@ -6,62 +6,60 @@
 int strToint(int start, char* str){
 
     int digit=0;
-    
-    while(!(*str ==32)){
-        
-        str++;
+    char* digit_flag = str;
+
+    while(!(*digit_flag ==32)){
+
+        digit_flag++;
         digit++;
+ 
     }
-   
-    //printf("digit %d\n", digit);
-    
+
     int sum=0;
 
     int poww = (digit-start)-1;
-    //printf("sss%d  %d", str[start], start);
-    str = &str[0];
 
-    for(int i=0; i<4; i++){
-        printf("%c", str[i]);
+    for (int j = start; j < digit; j++)
+    {
+    
+        double n = (double)str[j] - (double)48;
+        double powNum = pow((double)10,(double)(poww));
+
+        sum += (int)(n*powNum);
+        poww--;
+    
     }
-
-
-    if((int)str[start] ==45){
-        poww = poww-1;
-        
-        for (int j = start+1; j < digit; j++)
-        {
-        
-            double n = (double)str[j] - (double)48;
-            double powNum = pow((double)10,(double)(poww));
-
-            sum += (int)(n*powNum);
-            poww--;
-        
-        }
-        sum = sum*-1;
-                
-    }else{
-
-        for (int j = start; j < digit; j++)
-        {
-        
-            double n = (double)str[j] - (double)48;
-            double powNum = pow((double)10,(double)(poww));
-
-            sum += (int)(n*powNum);
-            poww--;
-        
-        }
-    }
-    printf("%d", sum);
+    
     return sum;
 }
 
+typedef struct string{
+    char s[105];
+    int index;
+} string;
 
+int compare(const string *a, const string *b){
+    int n1 = strToint(0, (char *)(a->s));
+    
+    int n2 = strToint(0, (char *)(b->s));
 
-int compare(char* str1, char* str2){
+    //printf("return %d : %d    %d : %d \n", n1, n2, a->index, b-> index);
 
+    if(n1 > n2){
+        return 1;
+    }else if(n1 < n2){
+        return -1;
+    }else{
+        
+        if( a->index >  b->index){
+            //printf("return %d : \n", 1);
+            return 1;
+        }else{
+            //printf("return %d : \n", -1);
+            return -1;
+        }
+    }
+    
 }
 
 
@@ -69,61 +67,73 @@ int main(){
 
     int N;
     scanf("%d", &N);
+    getchar();
 
-    char str[105];
-
-    char** list = (char **)malloc(sizeof(char*)*100000);
-
-    for(int i=0; i<100000; i++){
-        list[i] = (char *)malloc(105);
+    string* list = (string *)malloc(sizeof(string)*100001);
+/*
+    for(int i=1; i<100001; i++){
+        list[i] = (string *)malloc(sizeof(string));
+        memset(list[i],0,sizeof(string));
     }
+*/
+    string str;
 
-    for(int i=0; i<N; i++){
-        scanf("%s", str);
+    for(int i=1; i<=N; i++){
+        //scanf("%s", str);
+        fgets(str.s, 105, stdin);
 
-        char* ch = str;
+        char* ch = str.s;
 
         int k=0;
+
         while((*ch)){
-            list[i][k] = *ch;
-            //printf("%c", list[i][k]);
+            if((*ch)==10 || (*ch)==30){
+                break;
+            }
+            
+            list[i].s[k] = *ch;
             k++;
             ch++;
         }
+        list[i].index = i;
+        
     }
 
-    //qsort(list[][105],N, sizeof(list[0]),compare);
-
-char s[9] = "1 qw";
-//int z = 10 + strToint(0, s);
-  printf("%d\n", strToint(0, s));
-
-
-
- /*
- for(int i=0; i<10; i++){
-        
-       
-}
-*/
-//printf("%d", z);
 /*
-    for(int i=0; i<10; i++){
-        for(int j=0; j<10; j++){
-            printf("%c", list[i][j]);
+    for(int i=1; i<=N; i++){
+        int len = strlen(list[i].s);
+        printf("index : %d\n", list[i].index);
+        for(int j=0; j <len; j++){
+            
+            printf("%c", list[i].s[j]);
         }
+        printf("\n");
+    }
+    */
+
+
+   /*
+    for(int i=1; i<=N; i++){
+        printf("%d %d", &list[i].s[i], list[i].index);
+        
         printf("\n");
     }
 */
 
+    qsort(&list[1], N, sizeof(list[1]), compare);
 
-    //char** sorted = (char **)malloc(sizeof(char*)*N);
+    for(int i=1; i<=N; i++){
+        int len = strlen(list[i].s);
+        
+        for(int j=0; j <len; j++){
+            
+            printf("%c", list[i].s[j]);
+        }
+        printf("\n");
+    }
 
-    //mergeSort(dest, 0, N-1, sorted);
 
-    //printf("----------------------------\n");
+    free(list);
 
-
-  
     return 0;
 }

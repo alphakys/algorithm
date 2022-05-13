@@ -1,41 +1,70 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #include <string.h>
 
-typedef struct string
+typedef struct list
 {
-    char character[2];
-    //char *allocSize;
-    //char length;
+    int i;
+    int index;
 
-} string;
+} list;
 
-int strcmpare(char* str1, char* str2){
-/*
-    if(0 == str1){
-        printf("%p", str1);
-        return 0;
+
+
+
+int compare(const list *a, const list *b){
+
+    if((int *)(a->i) > (int *)(b->i)){
+        return 1;
+    }else if((int *)(a->i) < (int *)(b->i)){
+        return -1;
+    }else{
+        
+        if( a->index >  b->index){
+            //printf("return %d : \n", 1);
+            return 1;
+        }else{
+            //printf("return %d : \n", -1);
+            return -1;
+        }
+        
     }
-
-    int i = 0;
-
-    if(strlen(str1)!=strlen(str2)){
-        printf("not same");
-    }
-
-    while ((int)str1[i] == (int)str2[i])
-    {
-        printf("%c", str1[i]);
-        i++;
-    }
-*/
-    return 0;
+    
 }
+
+
+
 
 void main(){
 
+    int a;
+    char name[4];
+    
+    scanf("%d %s", &a, &name);
 
+    printf("%d %s", a, name);
+/*
+    list l[30000];
+    
+    for(int i=0; i<30000; i++){
+                
+        l[i].index = i;
+        l[i].i = 1;
+        //printf("%d\n", l[i].i);
+                
+    }
+
+    qsort(l, 30000, sizeof(l[0]), compare);
+
+    for(int i=0; i<30000; i++){
+                
+        printf("%d\n", l[i].index);
+                
+    }
+*/    
+    
+
+/*
 string arr[5][5];
 
 
@@ -53,9 +82,9 @@ string arr[5][5];
                 printf("%d %d", j,arr[1][j]);
                 break;
             }
-        */
+        
         }
 
-
+*/
 
 }

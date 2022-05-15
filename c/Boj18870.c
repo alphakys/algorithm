@@ -111,36 +111,25 @@ int main()
     memcpy(dest, arr, 1000000);
 
     qsort(dest, N, sizeof(dest[0]), compare);
-    //qsort(&list[0], N, sizeof(list[0]), compare);
     
     for (int i = 0; i < N; i++)
     {
-        printf("num : %d val : %d\n", dest[i], i);
+        //printf("%d ", dest[i]);
+        
+        for (int j = 0; j < N; j++){
+
+            if(dest[j] == 1000000001){
+                break;
+            }
+            if( arr[i] == dest[j] ){
+                printf("%d", j);
+            }
+        }
+        if(i!=N-1){
+            printf(" ");
+        }
+        
     }
  
-    //printf(" %d\n", cnt);
-    // printf("%c %d", arr[i].s[0], arr[i].length);
-    /*
-int len = strlen(arr[i].s);
-    arr[i].length = len;
-    qsort(arr,N,sizeof(arr[0]), compare);
-
-    for (int i = 0; i < N; i++)
-    {
-        char *p = (arr[i].s);
-
-        if(*p =='0'){
-            continue;
-        }
-
-        while(*p){
-
-            printf("%c", *p);
-            p++;
-        }
-        printf("\n");
-
-    }
-   */
     return 0;
 }

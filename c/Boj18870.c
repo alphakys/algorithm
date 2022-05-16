@@ -92,9 +92,11 @@ int compare(const void *a, const void *b){
 
 int arr[1000000];
 int dest[1000000];
+char str[12000001];
+
 int main()
 {
-    
+
     int N;
     scanf("%d", &N);
 
@@ -102,9 +104,21 @@ int main()
 
     int space = N + 1;
     int size =(N * MAX_SIZE)+space;
-        
-    char* str = malloc(size);
+    memset(str, 0, 12000001); 
 
+    /*
+    char* str = (char *)malloc(size);
+    
+    char str1[13] = " -1000000000";
+    
+    strcpy(str,"-1000000000");
+    
+    for(int i=0; i<N; i++){
+        strcat(str, str1);
+    }
+    */
+
+    //printf("%s", str); //free(str); return 0; 
     fgets(str, size, stdin);
 
     strToint(str, arr);
@@ -114,7 +128,7 @@ int main()
     
     for (int i = 0; i < N; i++)
     {
-        //printf("%d ", dest[i]);
+        //printf("%d\n", dest[i]);
         
         for (int j = 0; j < N; j++){
 
@@ -130,6 +144,6 @@ int main()
         }
         
     }
- 
+    //free(str);
     return 0;
 }

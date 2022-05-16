@@ -36,7 +36,7 @@ int compare(const list *a, const list *b){
 
 #include <stdio.h>
 #include <fcntl.h>
-#include <linux/input.h>
+
 //#include <sstream>
 #include <unistd.h>
 

@@ -26,6 +26,11 @@
     <svg width="500" height="500"></svg>
     
     <script>
+
+        fetch('http://211.253.30.245/php/smartGym/test.php?user_id=100002027&workouttype_code=LOWCODE001',
+        ).then((response) => console.log(response));
+
+
         const data = [5,10,15,20,25,30];
 
         const svg = d3.select('svg');

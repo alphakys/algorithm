@@ -41,49 +41,41 @@ int main(){
     scanf("%d", &N);
 
     char str[101];
-    char checked[26];
 
-    //printf("%d", strcmp('a', 'a'));
-    for(int i=0; i<N; i++){
-        scanf("%s", str);
+    int minus = 0;
+// printf("%d", strcmp('a', 'a'));
+    
+    for (int i = 0; i < N; i++)
+    {
+        two:scanf("%s", str);
         
         int len = strlen(str);
-        int checkNum=0;
 
-        for(int j=0; j<N; j++){
-            
+         for(int j=0; j<len; j++){
+            //printf("j : %d \n", j);
             for(int k=j+1; k<len; k++){
-                if(str[j] - str[k] !=0){
-                    //printf("%d", str[]);
-                    if(check(checked, &str[j])>0){
-                        printf("true");
-                    }else{
-                        checked[checkNum++] = str[j];
-                        j = k;
-                        break; 
-                    }
-                    
-                }
                 
-                //printf("%d",str[j] - str[k]);
-                //printf( "j : %d -> %d ,,, %d  %d\n", j, strcmp(&str[j], &str[k]), str[j], str[k] );  
+                if(str[j] - str[k] !=0){
+                    
+                    int flag = len - 1;
+                    while (flag > k)
+                    {
+                        if(str[j] == str[flag--]){
+                            //printf("true\n");
+                            minus++;
+                            break;
+                        }
+                    }
+                    j = k;
+                    goto two;
+                }
             }
-
-        }
-        /*
-        for(int j=0; j<len-1; j++){
             
-            for(int k=j+1; k<len; k++){
-                printf( "j : %d -> %d ,,, %d  %d\n", j, strcmp(&str[j], &str[k]), str[j], str[k] );  
-            }
-
         }
-        */
     }
     
-    
+    //charArray(checked, 5);
+    printf("%d", N-minus);
 
-
-    
     return 0;
 }

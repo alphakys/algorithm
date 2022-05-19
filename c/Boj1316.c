@@ -77,8 +77,14 @@ int main(){
         }
     }
     
-    charArray(check, 5);
-    //printf("%d", N-minus);
-
+    //charArray(check, 5);
+    int answer = N;
+    for (int i = 0; i < N; i++)
+    {   
+        if(check[i]>0){
+            answer--;
+        }
+    }
+    printf("%d",answer);
     return 0;
 }

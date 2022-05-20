@@ -72,7 +72,7 @@
                  "label": "execute",
                  "command": "${fileDirname}/${fileBasenameNoExtension}",
                  "group": "test"
-             }
+            }
     ]
 }//ctrl + alt + c compile
  //ctrl + alt + r execute

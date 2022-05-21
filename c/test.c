@@ -40,8 +40,41 @@ int compare(const list *a, const list *b){
 //#include <sstream>
 #include <unistd.h>
 
+void print(char* str){
+
+    for (int i = 0; i < 4; i++)
+    {
+        printf("%c", str[i]);
+    }
+}
+
+void star(char* s, int N){
+
+    if(N<4){
+        star(s, N + 1);
+    }
+
+    for (int j = 0; j < N-1; j++)
+    {
+        print(s);
+    }
+    printf("\n");
+    
+}
 
 void main(){
 
-   
+    char s[5] = "____";
+
+    star(s, 1);
+    /*
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < i; j++)
+        {
+            print(s);
+        }
+        printf("\n");
+    }
+    */
 }

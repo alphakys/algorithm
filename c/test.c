@@ -70,11 +70,12 @@ void star(int N){
 
 void starRecurssion(int N){
 
+    
     for (int i = 0; i < N; i++)
     {
         for (int j = 0; j < N; j++){
             
-            if(i==1 && j==1){
+            if(i==(N/3) && j==(N/3)){
                 printf(" ");
             }else{
                 printf("*");

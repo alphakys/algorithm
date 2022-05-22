@@ -1,24 +1,9 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
+int main(){
 
-/*
-2 5 8
-
-0*********
-1* ** ** *
-2*********
-3***   ***
-4* *   * *
-5***   ***
-6*********
-7* ** ** *
-8*********
-*/
-
-void star(int N){
-
+    int N;
+    scanf("%d", &N);
 
     for (int i = 0; i < N; i++)
     {
@@ -51,46 +36,6 @@ void star(int N){
         printf("\n");
            
     }
-}
-/*
-2 5 8
 
-*********
-* ** ** *
-*********
-***   ***
-* *   * *
-***   ***
-*********
-* ** ** *
-*********
-
-*/
-
-
-void starRecurssion(int N){
-
-    for (int i = 0; i < N; i++)
-    {
-        for (int j = 0; j < N; j++){
-            
-            if(i==1 && j==1){
-                printf(" ");
-            }else{
-                printf("*");
-            }
-            
-        }
-
-        printf("\n");
-           
-    }
-    
-}
-void main(){
-
-    int N;
-    scanf("%d", &N);
-    //star(N);
-    starRecurssion(N);
+    return 0;
 }

@@ -57,12 +57,8 @@
         },
         {
             "label": "execute",
-            "command": "cmd",
             "group": "test",
-            "args": [
-                "/C",
-                "${fileDirname}\\${fileBasenameNoExtension}"
-            ]
+            "command": "${fileDirname}/${fileBasenameNoExtension}",     
         },
         {
             "type": "cppbuild",

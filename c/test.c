@@ -33,33 +33,38 @@
 
 */
 
-void star(int N){
-    int length = (N+1)*(N+1);
+char* star(int N){
 
-    char* str = malloc(length);
+    char* str = malloc(N+1);
 
-    char blank = "";
-    char star = "*";
-    char enter = "\n";
+    for (int i = 0; i < N + 1; i++)
+    {
+        str[i] = malloc(N + 1);
+    }
+
+    char blank[2] = " ";
+    char s[2] = "*";
+    char enter[2] = "\n";
 
     for (int i = 0; i < N; i++)
     {
         for (int j = 0; j < N; j++){
             
             if(i==(N/3) && j==(N/3)){
-                strconcat(str, blank);
+                strcat(str, blank);
                 //printf(" ");
             }else{
-                strconcat(str, star);
+                strcat(str, s);
                 //printf("*");
             }
             
         }
-        strconcat(str, enter);
+        strcat(str, enter);
         //printf("\n");
            
     }
-    
+
+    return str;
 }
 /*
 
@@ -96,7 +101,9 @@ void main(){
 
     int N;
     scanf("%d", &N);
-    star(N);
+
+    char *str[100];
+    printf("%s", strcat(str,star(N)));
     //starRecurssion(N);
     //starRecurssion(N);
 }

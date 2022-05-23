@@ -90,14 +90,29 @@ int main(){
     char str[(N*2) +2];
     fgets(str, N*2, stdin);
 
-    for (int i = 0; i < 10; i++)
-    {
-        printf("s : %d\n", str[i]);
-    }
     int arr[N];
     strToint(str, arr);
 
-    printArray(arr, N);
-
+    int max = 0;
+    for (int i = 0; i < N; i++)
+    {
+        for (int j = i + 1; j < N; j++)
+        {
+            int k = N - 1;
+            while (j<k)
+            {
+                int sum = arr[i] + arr[j] + arr[k];
+                if (sum <= M)
+                {
+                    if(max<sum){
+                        max = sum;
+                    }
+                }
+                k--;
+            }
+            
+        }
+    }
+    printf("%d", max);
     return 0;
 }

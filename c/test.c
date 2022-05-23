@@ -17,41 +17,7 @@
 8*********
 */
 
-void star(int N){
 
-
-    for (int i = 0; i < N; i++)
-    {
-        for (int j = 0; j < N; j++){
-            
-            if((i%3)==1)
-            {
-                if( ( i >= (N/3) && i < ((N*2)/3) ) && ( j >= (N/3) && j < ((N*2)/3) ) ){
-                    printf(" ");
-                }else{
-                    
-                    if(j%3 ==1){
-                        printf(" ");
-                    }else{
-                        printf("*");
-                    }
-                    
-                }
-
-            }else{
-                if(( i >= (N/3) && i < ((N*2)/3) ) && ( j >= (N/3) && j < ((N*2)/3) ) ){
-                    printf(" ");
-                }else{
-                    printf("*");
-                }
-            }
-            
-        }
-
-        printf("\n");
-           
-    }
-}
 /*
 2 5 8
 
@@ -67,24 +33,62 @@ void star(int N){
 
 */
 
+void star(int N){
+    int length = (N+1)*(N+1);
 
-void starRecurssion(int N){
+    char* str = malloc(length);
 
-    
+    char blank = "";
+    char star = "*";
+    char enter = "\n";
+
     for (int i = 0; i < N; i++)
     {
         for (int j = 0; j < N; j++){
             
             if(i==(N/3) && j==(N/3)){
+                strconcat(str, blank);
+                //printf(" ");
+            }else{
+                strconcat(str, star);
+                //printf("*");
+            }
+            
+        }
+        strconcat(str, enter);
+        //printf("\n");
+           
+    }
+    
+}
+/*
+
+*********
+* ** ** *
+*********
+***   ***
+* *   * *
+***   ***
+*********
+* ** ** *
+*********
+
+*/
+void starRecurssion(int N){
+
+    
+    for (int i = 0; i < N/3; i++)
+    {
+        for (int j = 0; j < N/3; j++){
+            
+            if(i==(N/3) && j==(N/3)){
                 printf(" ");
             }else{
-                printf("*");
+                star(N/3);
             }
             
         }
 
-        printf("\n");
-           
     }
     
 }
@@ -92,6 +96,7 @@ void main(){
 
     int N;
     scanf("%d", &N);
-    //star(N);
-    starRecurssion(N);
+    star(N);
+    //starRecurssion(N);
+    //starRecurssion(N);
 }

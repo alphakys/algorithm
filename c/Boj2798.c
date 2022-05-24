@@ -24,7 +24,7 @@ void strToint(char* str, int* arr){
     while (index <= len)
     {
 
-        if (str[index] == 32 || str[index] == 0)
+        if (str[index] == 32 || str[index] == 10)
         {
             int digit = index-start;
             int poww = digit- 1;
@@ -87,8 +87,8 @@ int main(){
     scanf("%d %d", &N, &M);
     getchar();
 
-    char str[(N*2) +2];
-    fgets(str, N*2, stdin);
+    char str[700];
+    fgets(str, 700, stdin);
 
     int arr[N];
     strToint(str, arr);
@@ -102,6 +102,7 @@ int main(){
             while (j<k)
             {
                 int sum = arr[i] + arr[j] + arr[k];
+                //printf("arr[%d] : %d, arr[%d] : %d, arr[%d] : %d, sum : %d\n", i, arr[i], j, arr[j], k, arr[k], sum);
                 if (sum <= M)
                 {
                     if(max<sum){

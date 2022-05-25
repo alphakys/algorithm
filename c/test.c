@@ -9,14 +9,32 @@ void main(){
 
     scanf("%d %d", &N, &M);
     char s;
-    char str[4];
+    char str[N+1][M+1];
 
     int i = 0;
-    while ((s = getchar()) != '\n')
+
+    for (int j = 0; j < N; j++)
     {
-        str[i++] = s;
+        while ( (s = getchar()) != '\n' )
+        {
+            str[j][i++] = s;
+        }
+        i = 0;
+
     }
-printf("%s", str);
+    
+     for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            
+            printf("%c", str[i][j]);
+        }
+        printf("\n");
+    }
+
+
+    //printf("%s", str[0]);
 
     //s = getchar();
     

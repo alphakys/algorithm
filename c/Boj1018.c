@@ -3,6 +3,8 @@
 #include <string.h>
 #include <math.h>
 
+
+
 void printArray(int *arr, int n) {
     int i;
     for (i = 0; i < n; i++) {
@@ -19,24 +21,46 @@ int main(){
     //scanf("%d %d", &N, &M);
     //getchar();
 
-    char str[8][8];
+    char** strWhite[8];
+    char** strBlack[8];
 
-    //printf("%d", sizeof(char**));
+    char w[9] = "WBWBWBWB";
+    char b[9] = "BWBWBWBW";
+    //strWhite[0] = w;
+    //printf("%s",strWhite[0]);
+    for (int i = 0; i < 8; i++)
+    {
+        char *p1 = w;
+        char *p2 = b;
+        if (i % 2 == 0)
+        {
+            strWhite[i] = p1;
+            strBlack[i] = p2;
+        }
+        else if (i % 2 == 1)
+        {
+            strWhite[i] = p2;
+            strBlack[i] = p1;
+        }
+    }
+
+    //strcat(str[0], str1);
+    //printf("%s", );
 
     for (int i = 0; i < 8; i++)
     {
-        for (int j = 0; j < 8; j++)
-        {
-            str[i][j] = 'w';
-        }
+        
+       // printf("%s\n", strWhite[i]);
+        
     }
 
     for (int i = 0; i < 8; i++)
     {
+        char *s = strBlack[i];
         for (int j = 0; j < 8; j++)
         {
             
-            printf("%c", str[i][j]);
+            printf("%d ", s[j]);
         }
         printf("\n");
     }

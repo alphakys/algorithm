@@ -1,0 +1,14 @@
+{
+  "name": "@gys1120/workout",
+  "main": "1689babc6e5f2bd4@116.js",
+  "version": "116.0.0",
+  "homepage": "https://observablehq.com/@gys1120/workout",
+  "author": {
+    "name": "dev_apha",
+    "url": "https://observablehq.com/@gys1120"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "@observablehq/runtime": "4"
+  }
+}

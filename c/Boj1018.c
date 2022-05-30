@@ -3,8 +3,6 @@
 #include <string.h>
 #include <math.h>
 
-
-
 void printArray(int *arr, int n) {
     int i;
     for (i = 0; i < n; i++) {
@@ -14,27 +12,16 @@ void printArray(int *arr, int n) {
     printf("\n");
 }
 
-
-
-    /*
-     for (int i = 0; i < 8; i++)
-    {
-        for (int j = 0; j < 8; j++)
-        {
-            
-            printf("%c", str[i][j]);
-        }
-        printf("\n");
-    }
-*/
 int black_flag = 0;
 int white_flag = 0;
+
 
 int main(){
 
     int N;
     int M;
-    //scanf("%d %d", &N, &M);
+    scanf("%d %d", &N, &M);
+    getchar();
     char s;
     char str[N+1][M+1];
 
@@ -49,12 +36,14 @@ int main(){
         n = 0;
     }
     
+    
 
     char** strWhite[8];
     char** strBlack[8];
 
     char w[9] = "WBWBWBWB";
     char b[9] = "BWBWBWBW";
+
 
     for (int i = 0; i < 8; i++)
     {
@@ -71,82 +60,81 @@ int main(){
             strBlack[i] = p1;
         }
     }
+/*
 
-    for (int i = 0; i < 8; i++)
+    for (int j = 0; j < N; j++)
     {
-        char *s = strBlack[i];
-        for (int j = 0; j < 8; j++)
+        for (int i = 0; i < M; i++)
         {
-            
-            printf("%d ", s[j]);
+            printf("%c", str[j][i]);
         }
         printf("\n");
     }
-
- 
-
-    int itr = 0;
+*/
     for (int i = 0; i < M - 7; i++)
     {
         for (int j = 0; j < N - 7; j++)
         {
-            while(){
-                char *s = strBlack[i];
-                if( (str[i][j] - s[j] ) != 0){
-                    black_flag++;
+            int iPoint = i;
+            int jPoint = j;
+            for (int l = 0; l < 8; l++)
+            {
+                char *sb = strBlack[l];
+                char *sw = strWhite[l];
+                for (int k = 0; k < 8; k++)
+                {
+                    //printf("%c, %c,,, %d, %d\n", str[iPoint][jPoint], sw[k], iPoint, jPoint);
+                    if ((str[iPoint][jPoint] - sb[k]) != 0)
+                    {
+                        black_flag++;
+                    }
+
+                    if ((str[iPoint][jPoint] - sw[k]) != 0)
+                    {
+                        white_flag++;
+                    }
+                    jPoint++;
                 }
+                iPoint++;
+                jPoint = j;
             }
+            printf("%d %d\n", white_flag, black_flag);
+            white_flag = 0;
+            black_flag = 0;
         }
     }
 
 
 
-
-/*
-    int max = 0;
-    for (int i = 0; i < N; i++)
-    {
-        for (int j = i + 1; j < N; j++)
-        {
-            int k = N - 1;
-            while (j<k)
+        
+        /*
+            for (int i = 0; i < 8; i++)
             {
-                int sum = arr[i] + arr[j] + arr[k];
-                //printf("arr[%d] : %d, arr[%d] : %d, arr[%d] : %d, sum : %d\n", i, arr[i], j, arr[j], k, arr[k], sum);
-                if (sum <= M)
+                char *s = strBlack[i];
+                for (int j = 0; j < 8; j++)
                 {
-                    if(max<sum){
-                        max = sum;
+
+                    printf("%d ", s[j]);
+                }
+                printf("\n");
+            }
+        */
+
+        /*
+            int itr = 0;
+            for (int i = 0; i < M - 7; i++)
+            {
+                for (int j = 0; j < N - 7; j++)
+                {
+                    while(){
+                        char *s = strBlack[i];
+                        if( (str[i][j] - s[j] ) != 0){
+                            black_flag++;
+                        }
                     }
                 }
-                k--;
             }
-            
-        }
-    }
-    printf("%d", max);
-    */
-    return 0;
+        */
+
+        return 0;
 }
-
-void check(char** strBlack, char** strWhite, char* str[]){
-
-        for (int i = 0; i < 8; i++)
-        {
-            char *sb = strBlack[i];
-            char *sw = strWhite[i];
-            for (int j = 0; j < 8; j++)
-            {
-                if( (str[i][j] - sb[j] ) != 0){
-                    black_flag++;
-                }
-
-                if((str[i][j] - sw[j] ) != 0){
-                    white_flag++;
-                }
-            }
-            
-            
-        }
-
-    }

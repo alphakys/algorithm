@@ -36,7 +36,18 @@ int main(){
         n = 0;
     }
     
-    
+    /*
+    for (int j = 0; j < N; j++)
+    {
+        for (int i = 0; i < M; i++)
+        {
+            printf("%c", str[j][i]);
+        }
+
+        printf("\n");
+    }
+    return 0;
+    */
 
     char** strWhite[8];
     char** strBlack[8];
@@ -63,9 +74,9 @@ int main(){
 
     int min = -1;
 
-    for (int i = 0; i < M - 7; i++)
+    for (int i = 0; i < N - 7; i++)
     {
-        for (int j = 0; j < N - 7; j++)
+        for (int j = 0; j < M - 7; j++)
         {
             int iPoint = i;
             int jPoint = j;
@@ -75,7 +86,7 @@ int main(){
                 char *sw = strWhite[l];
                 for (int k = 0; k < 8; k++)
                 {
-                    //printf("%c, %c,,, %d, %d\n", str[iPoint][jPoint], sw[k], iPoint, jPoint);
+                    //printf("%c, %c,,, %d, %d\n", str[iPoint][jPoint], sb[k], iPoint, jPoint);
                     if ((str[iPoint][jPoint] - sb[k]) != 0)
                     {
                         black_flag++;
@@ -107,13 +118,18 @@ int main(){
                     min = white_flag;
                 }
             }
-            printf("%d %d\n", white_flag, black_flag);
+            //printf("%d %d\n", white_flag, black_flag);
             white_flag = 0;
             black_flag = 0;
+            
         }
     }
     
     printf("%d", min);
 
-        return 0;
+    return 0;
 }
+
+
+
+

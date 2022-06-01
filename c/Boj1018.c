@@ -60,17 +60,9 @@ int main(){
             strBlack[i] = p1;
         }
     }
-/*
 
-    for (int j = 0; j < N; j++)
-    {
-        for (int i = 0; i < M; i++)
-        {
-            printf("%c", str[j][i]);
-        }
-        printf("\n");
-    }
-*/
+    int min = -1;
+
     for (int i = 0; i < M - 7; i++)
     {
         for (int j = 0; j < N - 7; j++)
@@ -98,43 +90,30 @@ int main(){
                 iPoint++;
                 jPoint = j;
             }
+
+            if(white_flag >= black_flag){
+                if(min==-1){
+                    min = black_flag;
+
+                }else if(min > black_flag){
+                    min = black_flag;
+                }
+                
+            }else{
+                if(min==-1){
+                    min = white_flag;
+
+                }else if(min > white_flag){
+                    min = white_flag;
+                }
+            }
             printf("%d %d\n", white_flag, black_flag);
             white_flag = 0;
             black_flag = 0;
         }
     }
-
-
-
-        
-        /*
-            for (int i = 0; i < 8; i++)
-            {
-                char *s = strBlack[i];
-                for (int j = 0; j < 8; j++)
-                {
-
-                    printf("%d ", s[j]);
-                }
-                printf("\n");
-            }
-        */
-
-        /*
-            int itr = 0;
-            for (int i = 0; i < M - 7; i++)
-            {
-                for (int j = 0; j < N - 7; j++)
-                {
-                    while(){
-                        char *s = strBlack[i];
-                        if( (str[i][j] - s[j] ) != 0){
-                            black_flag++;
-                        }
-                    }
-                }
-            }
-        */
+    
+    printf("%d", min);
 
         return 0;
 }

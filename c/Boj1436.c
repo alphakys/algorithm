@@ -19,7 +19,7 @@ int main(){
     
     scanf("%d", &N);
 
-    char str[5] = "0666";
+    char str[10] = "000000666";
 
     int n = 0;
     while (n++<N)

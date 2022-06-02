@@ -36,18 +36,6 @@ int main(){
         n = 0;
     }
     
-    /*
-    for (int j = 0; j < N; j++)
-    {
-        for (int i = 0; i < M; i++)
-        {
-            printf("%c", str[j][i]);
-        }
-
-        printf("\n");
-    }
-    return 0;
-    */
 
     char** strWhite[8];
     char** strBlack[8];

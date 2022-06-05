@@ -65,6 +65,21 @@ void strToint(char* str, int* arr){
 }
 
 
+int strToint(char* str){
+    int start = 0;
+
+    int sum = 0;
+
+    for (int i = 0; str[i] != '0'; i++)
+    {
+        printf("%c", str[i]);
+    }
+
+    return sum;
+}
+
+
+
 
 // str --> int
 int strToint(char* str){

@@ -4,10 +4,27 @@
 #include <math.h>
 char rbuf[1 << 20];
 
+
+int strToint(char* str){
+    int start = 0;
+
+    int sum = 0;
+
+    for (int i = 0; str[i] != '\0'; ++i)
+    {
+        printf("%c", str[i]);
+        //sum = (str[i]-48)*(10);
+    }
+
+    //printf("%d", sum);
+    return sum;
+}
+
+
 void main(){
 
-    //printf("%d", 1 << 20);
-    fread(rbuf,1, 5, stdin);
-
-    printf("%s", rbuf);
+    char c[6] = "1123";
+    char a = 127;
+    //printf("%d", a);
+    strToint(c);
 }

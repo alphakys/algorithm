@@ -15,22 +15,46 @@ int compare(const void *a, const void *b){
     };
 }
 
+
+void strToint(char* str, int* arr, char delim){
+
+    int start = 0;
+    int end = 0;
+    int index = 0;
+    while (str[index] != 0)
+    {
+        if (str[index] == delim )
+        {
+            end = index - 1;
+            if ((int)str[start] == 45)
+            {
+            }
+
+        else
+        {
+            index++;
+        }
+
+    }
+}
+
 void main(){
 
-    char s[11] = "Acbok";
+    char s[100] = "Acbok Ceedrill Buslill";
     char s1[11] = "Ceedrill";
     char s2[11] = "Buslill";
 
-    char *arr[3];
-    arr[0] = s;
-    arr[1] = s1;
-    arr[2] = s2;
+    printf("%s", strtok(s, " "));
+    char *ptr = strtok(s, " ");
 
-    qsort(arr, 3, sizeof(arr[0]), compare);
-    
+    while(ptr !=NULL){
+        printf("%s", ptr);
+        ptr = strtok(NULL, " ");
+        
+    }
     for (int i = 0; i < 3; i++)
     {
-        printf("%s\n", arr[i]);
+    //    printf("%s\n", arr[i]);
     }
     
     

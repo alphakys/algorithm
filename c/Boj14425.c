@@ -23,7 +23,6 @@ void charArray(char *arr, int n) {
 
 int compare(const void *a, const void *b){
 
-    //printf("str : %s %s ", a, b);
     char* s1 = (char *)a;
     char* s2 = (char *)b;
 
@@ -34,28 +33,66 @@ int compare(const void *a, const void *b){
     
 }
 
+char strN[10000][501];
+char strM[10000][501];
+int cnt = 0;
+
+void binarySearch(int N, char strN[][501], char *target){
+
+    int start = 0;
+    int end = N-1;
+
+    while (start <= end)
+    {
+        int pivot = (start+end) / 2;
+        //printf("root pivot : %d\n", strN[pivot]);
+        int flag = strcmp(strN[pivot], target);
+        if (flag==0)
+        {
+            //printf("find : %d\n", strN[pivot]);
+            cnt++;
+            break;
+        }
+        else if(flag >0)
+        {
+            end = pivot-1;
+        }else
+        {
+            start = pivot+1;
+        }
+        //printf("start : %d , pivot : %d , end : %d\n", start, pivot, end);
+
+    }
+
+}
+
+
 int main()
 {
 
     int N,M;
     
     scanf("%d %d", &N, &M);
-
-    char strN[10000][501];
-
+    
     for (int i = 0; i < N; i++)
     {   
         scanf("%s", strN[i]);
     }
 
-    qsort(strN, N, sizeof(strN[0]), compare);
-        
-    for (int i = 0; i < N; i++)
-    {
-        printf("%s\n", strN[i]);
+    for (int i = 0; i < M; i++)
+    {   
+        scanf("%s", strM[i]);
     }
-    // charArray(strN, 5);
-    // printf("%d", strcmp(s, z));
 
+    qsort(strN, N, sizeof(strN[0]), compare);
+
+    for (int i = 0; i < M; i++)
+    {
+        //printf("sorted : %s\n", strN[i]);
+        //printf("%d\n", strcmp(strN[i], strM[i]));
+        binarySearch(N, strN, strM[i]);
+    }
+
+    printf("%d", cnt);
     return 0;
 }

@@ -24,68 +24,37 @@ void printArray(int *arr, int n) {
     printf("\n");
 }
 
-void strToint(char* str, int* arr, char delim){
-    
-    int arr_ptr = 0;
-    int index = 0;
-    int s_flag = 0;
-    char s[10];
 
-    while (str[index] != '\0')
-    {
-        if ( str[index] == delim )
-        {
-            arr[arr_ptr++] = atoi(s);
-            s_flag = 0;
-            
-            memset(s,0,10);
-            index++;
-        }
-        else
-        {   
-            printf("%c\n", str[index]);
-            s[s_flag++] = str[index++];
-            
-        }
+void charArray(char *arr, int n) {
+    int i;
+    for (i = 0; i < n; i++) {
 
-       
+        printf("%d ", arr[i]);
     }
-    arr[arr_ptr++] = atoi(s);
-    
+    printf("\n");
 }
 
+//#pragma GCC optimize("03");
 
-void countNumber(char* str, int* positive, int* negative, char delim){
+void main()
+{
+
+    int N;
     
-    int index = 0;
-    int s_flag = 0;
-    char s[10];
+    scanf("%d", &N);
+    getchar();
 
-    while (str[index] != '\0')
+    //char str[N*9+(N+1)];
+    char str[N];
+
+    for (int i = 0; i < N; i++)
     {
-        if ( str[index] == delim )
-        {
-            if(atoi(s)>=0){
-                positive[atoi(s)]++;
-            }else{
-                negative[atoi(s)*-1]++;
-            }
-            
-            s_flag = 0;
-            
-            memset(s,0,10);
-            index++;
-        }
-        
-        s[s_flag++] = str[index++];
-        
+        fread(str,1,1,stdin);
+        printf("%s\n", str);
     }
-    positive[atoi(s)]++;
-    
-}
 
-
-void main(){
+    charArray(str,10);
+    /*
     char s[100] = "-1 -2 -4 -8 9 1 1 2 3 3 4 4";
     int arr[10];
     int positive[40] = {0,};
@@ -103,12 +72,12 @@ void main(){
     //int i = 0;
     //int len = strlen(s)-1;
 
-/*
+
     while (s1[i] != 0)
     {
         strcpy(s3,&s1[i++]);
     }
-*/
-    //printf("%s\n", s3);
 
+    //printf("%s\n", s3);
+    */
 }

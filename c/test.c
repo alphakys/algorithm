@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-char rbuf[1 << 20];
+//char rbuf[1 << 20];
 
 int compare(const void *a, const void *b){
 
@@ -51,15 +51,51 @@ void strToint(char* str, int* arr, char delim){
        
     }
     arr[arr_ptr++] = atoi(s);
+    
 }
 
-void main(){
-    char s[100] = "11 23 45 4 8 9 75";
-    int arr[10];
 
-    //char delim = '';
-    strToint(s, arr, ' ');
-    printArray(arr, 10);
+void countNumber(char* str, int* positive, int* negative, char delim){
+    
+    int index = 0;
+    int s_flag = 0;
+    char s[10];
+
+    while (str[index] != '\0')
+    {
+        if ( str[index] == delim )
+        {
+            if(atoi(s)>=0){
+                positive[atoi(s)]++;
+            }else{
+                negative[atoi(s)*-1]++;
+            }
+            
+            s_flag = 0;
+            
+            memset(s,0,10);
+            index++;
+        }
+        
+        s[s_flag++] = str[index++];
+        
+    }
+    positive[atoi(s)]++;
+    
+}
+
+
+void main(){
+    char s[100] = "-1 -2 -4 -8 9 1 1 2 3 3 4 4";
+    int arr[10];
+    int positive[40] = {0,};
+    int negative[40] = {0,};
+    // int* arr = strToint(s, arr, ' ');
+
+    countNumber(s, positive, negative, ' ');
+
+    printArray(positive, 10);
+    printArray(negative, 10);
 
     char s1[11] = " Ceedrilb";
     char s2[11] = "Buslill";

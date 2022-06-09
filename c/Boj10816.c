@@ -21,9 +21,78 @@ void charArray(char *arr, int n) {
     printf("\n");
 }
 
+void countNumber(char* str, int* positive, int* negative, char delim){
+    
+    int index = 0;
+    int s_flag = 0;
+    char s[10];
 
-int positive[10000001];
-int negative[10000001];
+    while (str[index] != '\0')
+    {
+        if ( str[index] == delim )
+        {
+            if(atoi(s)>=0){
+                positive[atoi(s)]++;
+            }else{
+                negative[atoi(s)*-1]++;
+            }
+            
+            s_flag = 0;
+            
+            memset(s,0,10);
+            index++;
+        }
+        
+        s[s_flag++] = str[index++];
+        
+    }
+    if(atoi(s)>=0){
+        positive[atoi(s)]++;
+    }else{
+        negative[atoi(s)*-1]++;
+    }
+    
+}
+
+
+void printNumber(char* str, int* positive, int* negative, char delim){
+    
+    int index = 0;
+    int s_flag = 0;
+    char s[10];
+
+    while (str[index] != '\0')
+    {
+        if ( str[index] == delim )
+        {
+            if(atoi(s)>=0){
+                printf("%d ", positive[atoi(s)]);
+                
+            }else{
+                printf("%d ", negative[atoi(s)*-1]);
+            }
+            
+            s_flag = 0;
+            
+            memset(s,0,10);
+            index++;
+        }
+        
+        s[s_flag++] = str[index++];
+        
+    }
+
+    if(atoi(s)>=0){
+        printf("%d", positive[atoi(s)]);
+        
+    }else{
+        printf("%d", negative[atoi(s)*-1]);
+    }
+    
+}
+
+int positive[10000001] ;
+int negative[10000001] ;
 
 int main()
 {
@@ -39,23 +108,14 @@ int main()
     while ((s = getchar()) != '\n')
     {
         str[str_i++] = s;
-        
     }
     
     str[str_i] = '\0';
 
-    int i = 0;
-    char* ptr = strtok(str," ");
-
+    countNumber(str, positive, negative, ' ');
     
-    while (str[i] != '\0')
-    {
-        if(str[i]==' '){
-            atoi(str);
-        }
-    }
-
-    strToint(str, positive, negative, 0);
+    //printArray(positive, 10);
+    //printArray(negative, 11);
 
     int M;
 
@@ -72,12 +132,9 @@ int main()
         
     }
     
-    str1[str_i] = '\n';
-              
-    strToint(str1, positive, negative, 1);
-
-    //printArray(positive, 10);
-    //printArray(negative, 10);
+    str1[str_i] = '\0';
+    
+    printNumber(str1, positive, negative, ' ');
 
     return 0;
 }

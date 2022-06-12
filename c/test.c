@@ -25,6 +25,7 @@ void printArray(int *arr, int n) {
 }
 
 
+
 void charArray(char *arr, int n) {
     int i;
     for (i = 0; i < n; i++) {
@@ -34,50 +35,70 @@ void charArray(char *arr, int n) {
     printf("\n");
 }
 
-//#pragma GCC optimize("03");
+//node* printInfo();
+
+typedef struct _Node{
+    struct Node *this;
+
+    int value_;
+    void (*printValue)(struct Node *this);
+
+    int (*getValue)(struct Node *this);
+    void (*setValue)(struct Node *this, int value);
+
+
+} Node;
+
+void delNode(Node *ptr);
+
+int getValue_(const Node *this){
+    return this->value_;
+};
+
+void setValue_(const Node *this, int value){
+   // this->value_ = value;
+};
+
+void printValue_(const Node *this){
+    printf("%d", this->value_);
+};
+
+Node * newNode(int val){
+    Node *node = (Node *)malloc(sizeof(Node));
+    node->value_ = val;
+
+    node->this = node;
+    node->printValue = printValue_;
+    node->getValue = getValue_;
+    node->setValue = setValue_;
+
+    return node;
+};
+
+
 
 void main()
 {
-
-    int N;
     
-    scanf("%d", &N);
-    getchar();
+    Node *n = newNode(12);
+    printf("%d\n", n);
+    
+    printf("%d\n", n->printValue);
+    // n.this = &n;
+    // n.value = 11;
+    //   n.this = &n;
+    //   printf("%d\n", sizeof(n.printInfo));
+    // printf("%d\n", n.value);
+    // printf("%d\n", n.this->value);
+    // n.printInfo = printInfo;
 
-    //char str[N*9+(N+1)];
-    char str[N];
-
-    for (int i = 0; i < N; i++)
-    {
-        fread(str,1,1,stdin);
-        printf("%s\n", str);
-    }
-
-    charArray(str,10);
-    /*
-    char s[100] = "-1 -2 -4 -8 9 1 1 2 3 3 4 4";
-    int arr[10];
-    int positive[40] = {0,};
-    int negative[40] = {0,};
-    // int* arr = strToint(s, arr, ' ');
-
-    countNumber(s, positive, negative, ' ');
-
-    printArray(positive, 10);
-    printArray(negative, 10);
-
-    char s1[11] = " Ceedrilb";
-    char s2[11] = "Buslill";
-
-    //int i = 0;
-    //int len = strlen(s)-1;
-
-
-    while (s1[i] != 0)
-    {
-        strcpy(s3,&s1[i++]);
-    }
-
-    //printf("%s\n", s3);
-    */
+    //printf("%d\n", n.printInfo);
+    
+    // printf("%p\n", n.printValue);
+    // n.printInfo;
+    // n.printInfo = printInfo;
+    // n.printInfo();
+    //  printf("%d\n", n.this);
+    //  n = malloc(sizeof(node));
+    //  printf("%p\n", n);
 }

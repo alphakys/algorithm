@@ -25,24 +25,46 @@ void charArray(char *arr, int n) {
 int positive[10000001] ;
 int negative[10000001] ;
 
-typedef struct node{
-    int value;
-    int ptr = 0;
 
-    //struct node *nextNode;
-    //struct node *rightNode;
+
+typedef struct node{
+    int value=1;
+    struct node *this;
+    // int ptr = 0;
+
+    struct node (*leftNode)(int);
+    struct node *rightNode;
 
 
 } node;
 
+node* constructor(int n){
+    node *Node = malloc(sizeof(node));
+    Node->value = n;
+    return Node;
+}
+
 int main()
 {
 
+    
+    /*
+    printf("%p\n", constructor);
+    printf("%p\n", constructor(11));
+    
+    node test;
+    test.leftNode = constructor;
+    printf("%p", test.leftNode(11));
+    printf("%d", test.leftNode.value);
+*/
     node* rootNode = malloc(sizeof(node));
+    
+    rootNode->leftNode = malloc(sizeof(node));
+    rootNode->rightNode = malloc(sizeof(node));
 
     int N;
 
-    scanf("%d", &N);
+    //scanf("%d", &N);
 
     int n;
     for (int i = 0; i < N; i++)
@@ -52,17 +74,26 @@ int main()
 
         }else{
             
-            if(rootNode->num==0){
-                rootNode->num = n;
+            if(rootNode->value==0){
+                rootNode->value = n;
+            }
+            node* parentNode = rootNode;
+
+            int val = parentNode->value;
+            if (val<=n)
+            {
+                parentNode->value = n;
+                node* r_Node = malloc(sizeof(node));
+                r_Node->value = parentNode->value;
+                parentNode->rightNode = r_Node;
+                
             }else{
 
-                rootNode->num = (rootNode->num) > n ? rootNode->num : n;
-                
             }
         }
     }
 
-    printf("%d", rootNode->num);
+    printf("%d", rootNode->value);
 
     free(rootNode);
     /*
@@ -71,3 +102,4 @@ int main()
     */
     return 0;
 }
+

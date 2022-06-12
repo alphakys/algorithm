@@ -27,25 +27,61 @@ int negative[10000001] ;
 
 
 
-typedef struct node{
-    int value=1;
-    struct node *this;
-    // int ptr = 0;
-
-    struct node (*leftNode)(int);
+typedef struct Node{
+    int value;
+    
+    struct node *parentNode;
     struct node *rightNode;
+    struct node *leftNode;
 
+} Node;
 
-} node;
-
+/*
 node* constructor(int n){
     node *Node = malloc(sizeof(node));
     Node->value = n;
     return Node;
 }
+*/
+void swap(int index_a, int index_b){
+    int temp = index_a;
+    index_a = index_b;
+    index_b = temp;
+}
 
 int main()
 {
+
+    int N;
+
+    scanf("%d", &N);
+
+    int n;
+
+    Node heapArr[10];
+    int index = 0;
+    
+    for (int i = 0; i < N; i++)
+    {
+        scanf("%d", &n);
+        if(n==0){
+
+        }else{
+            
+            if(heapArr[0].value == 0){
+                heapArr[0].value = n;
+                index++;
+            }
+
+            if (heapArr[index].value<=n)
+            {
+                
+            }else{
+
+            }
+
+        }
+    }
 
     
     /*
@@ -56,7 +92,7 @@ int main()
     test.leftNode = constructor;
     printf("%p", test.leftNode(11));
     printf("%d", test.leftNode.value);
-*/
+
     node* rootNode = malloc(sizeof(node));
     
     rootNode->leftNode = malloc(sizeof(node));
@@ -96,6 +132,7 @@ int main()
     printf("%d", rootNode->value);
 
     free(rootNode);
+    */
     /*
     long long a = 1 << 31;
     printf("%lld", a);

@@ -22,33 +22,6 @@ void charArray(char *arr, int n) {
 }
 
 
-int positive[10000001] ;
-int negative[10000001] ;
-
-
-
-typedef struct Node{
-    int value;
-    
-    struct node *parentNode;
-    struct node *rightNode;
-    struct node *leftNode;
-
-} Node;
-
-/*
-node* constructor(int n){
-    node *Node = malloc(sizeof(node));
-    Node->value = n;
-    return Node;
-}
-*/
-void swap(int index_a, int index_b){
-    int temp = index_a;
-    index_a = index_b;
-    index_b = temp;
-}
-
 int main()
 {
 
@@ -58,88 +31,39 @@ int main()
 
     int n;
 
-    int heapArr[10];
-    int index = 0;
+    int heapArr[10] = {0,};
+    int index = 1;
     
     for (int i = 0; i < N; i++)
     {
         scanf("%d", &n);
         if(n==0){
-
-        }else{
-            
-            if(heapArr[1] == 0){
-                heapArr[1] = n;
+            printf("%d\n", heapArr[1]);
+        }
+        else
+        {
+            /*
+            if(heapArr[0] == 0){
+                heapArr[0] = n;
                 index++;
             }
+            */
+            heapArr[index] = n;
+            int tmp_index = index;
 
-            if (heapArr[index]==0)
+            while (heapArr[index / 2] <= n && index > 0)
             {
-                heapArr[index] = n;
-            }else if(heapArr[index]<n){
-                
-                if(heapArr[index/2] <n){
-                    heapArr[index/2] = n;
-                }
+                int tmp = heapArr[index / 2];
+                heapArr[index / 2]= heapArr[index];
+                heapArr[index] = tmp;
+                index = index / 2;
             }
-
+            index = ++tmp_index;
         }
+        //printf("%d %d\n", index, heapArr[index-1]);
     }
 
-    
-    /*
-    printf("%p\n", constructor);
-    printf("%p\n", constructor(11));
-    
-    node test;
-    test.leftNode = constructor;
-    printf("%p", test.leftNode(11));
-    printf("%d", test.leftNode.value);
-
-    node* rootNode = malloc(sizeof(node));
-    
-    rootNode->leftNode = malloc(sizeof(node));
-    rootNode->rightNode = malloc(sizeof(node));
-
-    int N;
-
-    //scanf("%d", &N);
-
-    int n;
-    for (int i = 0; i < N; i++)
-    {
-        scanf("%d", &n);
-        if(n==0){
-
-        }else{
-            
-            if(rootNode->value==0){
-                rootNode->value = n;
-            }
-            node* parentNode = rootNode;
-
-            int val = parentNode->value;
-            if (val<=n)
-            {
-                parentNode->value = n;
-                node* r_Node = malloc(sizeof(node));
-                r_Node->value = parentNode->value;
-                parentNode->rightNode = r_Node;
-                
-            }else{
-
-            }
-        }
-    }
-
-    printf("%d", rootNode->value);
-
-    free(rootNode);
-    */
-    /*
-    long long a = 1 << 31;
-    printf("%lld", a);
-    */
+    printArray(heapArr, 10);
     return 0;
 }
 

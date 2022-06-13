@@ -58,7 +58,7 @@ int main()
 
     int n;
 
-    Node heapArr[10];
+    int heapArr[10];
     int index = 0;
     
     for (int i = 0; i < N; i++)
@@ -68,16 +68,19 @@ int main()
 
         }else{
             
-            if(heapArr[0].value == 0){
-                heapArr[0].value = n;
+            if(heapArr[1] == 0){
+                heapArr[1] = n;
                 index++;
             }
 
-            if (heapArr[index].value<=n)
+            if (heapArr[index]==0)
             {
+                heapArr[index] = n;
+            }else if(heapArr[index]<n){
                 
-            }else{
-
+                if(heapArr[index/2] <n){
+                    heapArr[index/2] = n;
+                }
             }
 
         }

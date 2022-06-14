@@ -12,17 +12,15 @@ void printArray(int *arr, int n) {
 }
 
 
-unsigned int heapArr[100001] = {0,};
+unsigned int heapArr[10] = {0,};
 int main()
 {
-
     int N;
 
     scanf("%d", &N);
 
     unsigned int n;
-
-    
+   
     int index = 1;
     
     for (int i = 0; i < N; i++)
@@ -30,29 +28,40 @@ int main()
         scanf("%d", &n);
         if(n==0){
 
-            printf("answer : %d\n", heapArr[1]);
-            //index = index - 1;
+            printf("%d\n", heapArr[1]);
+            
             heapArr[1] = heapArr[index];
 
             int del_idx = 1;
             
             while (heapArr[del_idx * 2] >= heapArr[del_idx] || heapArr[(del_idx*2) +1] >= heapArr[del_idx])
             {
-                printf("del idx : %d", del_idx);
+
+                printf("del idx : %d %d\n", del_idx, index);
                 if (heapArr[del_idx * 2] >= heapArr[(del_idx * 2) + 1])
                 {
                     int tmp = heapArr[del_idx];
                     heapArr[del_idx]= heapArr[del_idx * 2];
                     heapArr[del_idx * 2] = tmp;
-                    del_idx = del_idx * 2;
+                    if(del_idx * 2 >index){
+                        break;
+                    }else{
+                        del_idx = del_idx * 2;
+                    }
+                    
                 }
                 else
                 {
                     int tmp = heapArr[del_idx];
                     heapArr[del_idx]= heapArr[(del_idx * 2) +1];
                     heapArr[(del_idx * 2) +1] = tmp;
-                    del_idx = (del_idx * 2)+1;
+                    if((del_idx * 2) +1 > index){
+                        break;
+                    }else{
+                        del_idx = (del_idx * 2)+1;
+                    }
                 }
+                
                 
             }
 
@@ -75,7 +84,7 @@ int main()
         //printf("%d %d\n", index, heapArr[index-1]);
     }
 
-    printArray(heapArr, 10);
+    //printArray(heapArr, 10);
     return 0;
 }
 

@@ -12,7 +12,7 @@ void printArray(int *arr, int n) {
 }
 
 
-unsigned int heapArr[10] = {0,};
+unsigned int heapArr[200001] = {0,};
 int main()
 {
     int N;
@@ -37,13 +37,13 @@ int main()
             while (heapArr[del_idx * 2] >= heapArr[del_idx] || heapArr[(del_idx*2) +1] >= heapArr[del_idx])
             {
 
-                printf("del idx : %d %d\n", del_idx, index);
+                //printf("del idx : %d %d\n", del_idx, index);
                 if (heapArr[del_idx * 2] >= heapArr[(del_idx * 2) + 1])
                 {
                     int tmp = heapArr[del_idx];
                     heapArr[del_idx]= heapArr[del_idx * 2];
                     heapArr[del_idx * 2] = tmp;
-                    if(del_idx * 2 >index){
+                    if(del_idx * 2 >index-1){
                         break;
                     }else{
                         del_idx = del_idx * 2;
@@ -55,7 +55,7 @@ int main()
                     int tmp = heapArr[del_idx];
                     heapArr[del_idx]= heapArr[(del_idx * 2) +1];
                     heapArr[(del_idx * 2) +1] = tmp;
-                    if((del_idx * 2) +1 > index){
+                    if((del_idx * 2) +1 > index-1){
                         break;
                     }else{
                         del_idx = (del_idx * 2)+1;
@@ -84,7 +84,7 @@ int main()
         //printf("%d %d\n", index, heapArr[index-1]);
     }
 
-    //printArray(heapArr, 10);
+    printArray(heapArr, 10);
     return 0;
 }
 

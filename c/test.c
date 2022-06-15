@@ -8,6 +8,7 @@ int buff_size = 5;
 
 void main()
 {
+    printf("%c", 11&&2);
     char buff[buff_size], *p = buff;
     //printf("%p %p", p, buff);
     read(0, p=buff, buff_size);

@@ -4,17 +4,18 @@
 #include <math.h>
 #include <unistd.h>
 
-int buff_size = 5;
+int buff_size = 10000;
 
 void main()
 {
-    printf("%c", 11&&2);
+    //printf("%c", 11&&2);
     char buff[buff_size], *p = buff;
     //printf("%p %p", p, buff);
-    read(0, p=buff, buff_size);
+    //
     //fread(buff, sizeof(char), buff_size, stdin);
-
-    printf("%p %p %s", p, buff, buff);
+    read(0, buff, buff_size);
+    int i = 0;
+    printf("%s", buff);
     /*
     int i = 0;
     while (i<2)

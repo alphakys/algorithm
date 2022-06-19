@@ -1,7 +1,6 @@
 {
     "files.associations": {
         "stdio.h": "c",
-        "fcntl.h": "c",
         "input.h": "c",
         "stdlib.h": "c",
         "math.h": "c",

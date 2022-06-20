@@ -53,6 +53,7 @@ void intTobit(int a){
            printf(" ");
        }
     }
+    printf("\n");
 }
 
 int readInt(){
@@ -79,35 +80,65 @@ void printArray(int *arr, int n) {
 }
 
 
+int sz = 1 << 14;
 
+char* readChar(){
+
+}
 
 int main()
 {
-    
-    
-/*
-    char c[5] = "111";
-    
-    char *cp = c;
-    //printf("%d\n", p);
-    for (; *++cp;){
-        printf("%d %d ", *cp, cp);
 
+    char str[10];
+
+    //scanf("%s", str);
+    for (int i = 0; str[i] & 16; i++)
+    {
+        printf("v : %c\n", str[i]);
+        //intTobit(45 + i);
+        //printf("\n");
     }
+
+    //printf("%d", 16 & 32);
+
+    intTobit(16);
+    intTobit(32);
+    if (16 & 32)
+    {
+        printf("true");
+    }
+    else
+    {
+        printf("false");
+    }
+
+/*
+    printf("%d", 48 & 16);
+    intTobit(16);
+    printf("\n");
+    intTobit(10);
+    printf("\n");
+    intTobit(32);
 */
+    /*
+    char r[sz], *p = r; read(0, r, sz);
 
-    char r[1 << 16], *p = r; read(0, r, 1 << 16);
-    
-    //printf("%d %d\n", p, r);
-    
-    for (; *++p;);
-        //printf("%d %d ", *p, p);
+    for (char c = readChar(); c & 16;)
+        if (p == r + s)
+            read(0, p = r, s);
 
-    
+    printf("%s", r);
+    // printf("%d %d\n", p, r);
 
-    //printf("\n%d %d\n", p, r);
-    write(1, r, p - r);_exit(0);
+    for (; *++p;)
+        ;
 
+    // printf("%d %d ", *p, p);
+
+
+    // printf("\n%d %d\n", p, r);
+    write(1, r, p - r); //_exit(0);
+*/
     return 0;
 }
 

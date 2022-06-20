@@ -20,7 +20,7 @@ int main()
     scanf("%d", &N);
 
     unsigned int n;
-   
+    
     int index = 1;
     
     for (int i = 0; i < N; i++)

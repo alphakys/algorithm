@@ -56,37 +56,58 @@ void intTobit(int a){
 }
 
 int readInt(){
+char sum[6] = "91235";
 
+    //printf("%d", sum[0] - '0');
+
+
+    int res = 0;
+    
+    printf("%d", res);
     return 0;
 }
 
 //unsigned int a = 1 << 12; 11개 숫자 들어가면 됨
 
-void main()
+void printArray(int *arr, int n) {
+    int i;
+    for (i = 0; i < n; i++) {
+
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+
+
+
+int main()
 {
     
-    // intTobit(20);
-    10 << 1;
+    
+/*
+    char c[5] = "111";
+    
+    char *cp = c;
+    //printf("%d\n", p);
+    for (; *++cp;){
+        printf("%d %d ", *cp, cp);
 
-    //printf("\ntest : %d\n", 5 << 1);
-
-    for (int i = 0; i < 11; i++)
-    {
-        printf("i : %d ", i);intTobit(i);
-        printf("\n");
     }
+*/
 
-    char sum[6] = "91235";
+    char r[1 << 16], *p = r; read(0, r, 1 << 16);
+    
+    //printf("%d %d\n", p, r);
+    
+    for (; *++p;);
+        //printf("%d %d ", *p, p);
 
-    int res = 0;
-    for (int i = 0; sum[i] != '\0'; ++i)
-    {
-        res = res *
-        printf("%d", sum[i] & 15);
-    }   
     
-    
-    //printf("%d", 50 & 15);
-    
-    
+
+    //printf("\n%d %d\n", p, r);
+    write(1, r, p - r);_exit(0);
+
+    return 0;
 }
+

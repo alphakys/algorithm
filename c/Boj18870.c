@@ -72,7 +72,7 @@ void strToint(char* str, int* arr){
 }
 
 #define null 1000000001;
-
+/*
 int compare(const void *a, const void *b){
     int n1 = *(int *)a;
     int n2 = *(int *)b;
@@ -89,6 +89,28 @@ int compare(const void *a, const void *b){
         return -1;
     }
 }
+*/
+
+int compare(const void *a, const void *b){
+    int n1 = *(int *)a;
+    int n2 = *(int *)b;
+    //printf("%d %d", n1, n2);
+    if (n1 >= n2)
+    {
+        return 1;
+    }
+    else
+    {
+        return -1;
+    }
+}
+
+typedef struct link {
+    int val;
+    int original_index;
+
+}link;
+
 
 int arr[1000000];
 int dest[1000000];
@@ -102,23 +124,10 @@ int main()
 
     getchar();
 
-    int space = N + 1;
-    int size =(N * MAX_SIZE)+space;
-    memset(str, 0, 12000001); 
+    int size =(N * MAX_SIZE)+N;
+    
+    memset(str, 0, 12000001);
 
-    /*
-    char* str = (char *)malloc(size);
-    
-    char str1[13] = " -1000000000";
-    
-    strcpy(str,"-1000000000");
-    
-    for(int i=0; i<N; i++){
-        strcat(str, str1);
-    }
-    */
-
-    //printf("%s", str); //free(str); return 0; 
     fgets(str, size, stdin);
 
     strToint(str, arr);

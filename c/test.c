@@ -88,18 +88,15 @@ int main()
 
     int n[10];
 
-    for (int i = 0; str[i] !='\0'; i++)
-    {   
-        if(str[i] ==32){
-            write(1, str, i-p);
-        }
-        printf("v : %c\n", str[i]);
-        //intTobit(45 + i);
-        //printf("\n");
+    for(; ; p++){
+        if(p == str + 10) read(0, str, 10);
+        if(*p=='\n') break;
     }
 
-    //printf("%d", 16 & 32);
+    printf("%s", str);
 
+    //printf("%d", 16 & 32);
+/*
     intTobit(16);
     intTobit(32);
     intTobit(48);
@@ -115,7 +112,7 @@ int main()
     {
         printf("false");
     }
-
+*/
     return 0;
 }
 

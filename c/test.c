@@ -68,7 +68,7 @@ int readInt(char* str){
     return res;
 }
 
-int sz = 1 << 14;
+int sz = 1<<16;
 
 char* readChar(){
 
@@ -83,36 +83,63 @@ int main()
 
     //15랑 & 연산하면 아스키코드상 숫자인 친구들은 실제 숫자로 반환됨
 
+    //printf("%d", 1 << 15);
 
-    char str[10], *p = str; read(0, str, 10);
+    char str[sz], *p = str; read(0, str, sz);
+    int cnt = 0;
 
-    int n[10];
+    for (; *p == ' '; p++);
 
-    for(; ; p++){
-        if(p == str + 10) read(0, str, 10);
-        if(*p=='\n') break;
+    for (;; p++)
+    {
+        //printf("%d\n", p);
+        if (p == str + sz)
+            read(0, p = str, sz);
+
+        if (*p == '\n')
+        {
+            if(*--p==' ')
+                cnt--;
+            break;
+        }
+
+        if (*p == ' ')
+        {
+            cnt++;
+        }
+    }
+    
+    //write(1, &cnt, 4);
+    printf("%d", cnt + 1);
+    /*
+    for (;; p++)
+    {
+        if (p == str + 10)
+            read(0, str, 10);
+        if (*p == '\n')
+            break;
     }
 
     printf("%s", str);
-
-    //printf("%d", 16 & 32);
-/*
-    intTobit(16);
-    intTobit(32);
-    intTobit(48);
-    intTobit(47);
-
-    printf("%d", 16 & 32);
-
-    if (16 & 47)
-    {
-        printf("true");
-    }
-    else
-    {
-        printf("false");
-    }
 */
+    // printf("%d", 16 & 32);
+    /*
+        intTobit(16);
+        intTobit(32);
+        intTobit(48);
+        intTobit(47);
+
+        printf("%d", 16 & 32);
+
+        if (16 & 47)
+        {
+            printf("true");
+        }
+        else
+        {
+            printf("false");
+        }
+    */
     return 0;
 }
 

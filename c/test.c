@@ -5,19 +5,15 @@
 #include <unistd.h>
 
 #define buff_size 5
+void printArray(int *arr, int n) {
+    int i;
+    for (i = 0; i < n; i++) {
 
-/*
-char buff[buff_size];
-char *p = buff;
-
-char* readChar(char ch){
-
-    if(p == buff+buff_size){
-        read(0, p=buff, buff_size);
-        return *p++;
+        printf("%d ", arr[i]);
     }
+    printf("\n");
 }
-*/
+
 
 void bitToint(char* str){
 
@@ -56,29 +52,21 @@ void intTobit(int a){
     printf("\n");
 }
 
-int readInt(){
-char sum[6] = "91235";
-
-    //printf("%d", sum[0] - '0');
 
 
+
+
+int readInt(char* str){
+    
     int res = 0;
     
-    printf("%d", res);
-    return 0;
-}
+    //15랑 아스키코드상 숫자인 친구들을 (15 & 48) 연산하면 실제 숫자로 반환됨
+    for(int i=0; str[i]!='\0'; i++){
 
-//unsigned int a = 1 << 12; 11개 숫자 들어가면 됨
-
-void printArray(int *arr, int n) {
-    int i;
-    for (i = 0; i < n; i++) {
-
-        printf("%d ", arr[i]);
+        res = (res * 10) + (str[i] & 15);
     }
-    printf("\n");
+    return res;
 }
-
 
 int sz = 1 << 14;
 
@@ -89,11 +77,22 @@ char* readChar(){
 int main()
 {
 
-    char str[10];
+    //char sum[6] = "91235";
 
-    //scanf("%s", str);
-    for (int i = 0; str[i] & 16; i++)
-    {
+    //readInt(sum);
+
+    //15랑 & 연산하면 아스키코드상 숫자인 친구들은 실제 숫자로 반환됨
+
+
+    char str[10], *p = str; read(0, str, 10);
+
+    int n[10];
+
+    for (int i = 0; str[i] !='\0'; i++)
+    {   
+        if(str[i] ==32){
+            write(1, str, i-p);
+        }
         printf("v : %c\n", str[i]);
         //intTobit(45 + i);
         //printf("\n");
@@ -103,7 +102,12 @@ int main()
 
     intTobit(16);
     intTobit(32);
-    if (16 & 32)
+    intTobit(48);
+    intTobit(47);
+
+    printf("%d", 16 & 32);
+
+    if (16 & 47)
     {
         printf("true");
     }
@@ -112,33 +116,6 @@ int main()
         printf("false");
     }
 
-/*
-    printf("%d", 48 & 16);
-    intTobit(16);
-    printf("\n");
-    intTobit(10);
-    printf("\n");
-    intTobit(32);
-*/
-    /*
-    char r[sz], *p = r; read(0, r, sz);
-
-    for (char c = readChar(); c & 16;)
-        if (p == r + s)
-            read(0, p = r, s);
-
-    printf("%s", r);
-    // printf("%d %d\n", p, r);
-
-    for (; *++p;)
-        ;
-
-    // printf("%d %d ", *p, p);
-
-
-    // printf("\n%d %d\n", p, r);
-    write(1, r, p - r); //_exit(0);
-*/
     return 0;
 }
 

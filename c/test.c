@@ -68,7 +68,7 @@ int readInt(char* str){
     return res;
 }
 
-int sz = 1<<16;
+int sz = 10;
 
 char* readChar(){
 
@@ -86,60 +86,32 @@ int main()
     //printf("%d", 1 << 15);
 
     char str[sz], *p = str; read(0, str, sz);
-    int cnt = 0;
-
-    for (; *p == ' '; p++);
-
-    for (;; p++)
+    char* c = str;
+    //printf("%p\n", str);
+    for (; ; p++)
     {
         //printf("%d\n", p);
-        if (p == str + sz)
+        if (p == str + sz){
             read(0, p = str, sz);
-
+            printf("%p", p);
+        }
+            
+/*
         if (*p == '\n')
         {
-            if(*--p==' ')
-                cnt--;
-            break;
+            //printf("enter");  
+            //break;
         }
-
-        if (*p == ' ')
+*/
+        if ( ~(*p) & 16 )
         {
-            cnt++;
+            write(1, c, p-c);
+            printf("\n");
+            c = p+1;
+            //printf("%p", p);
         }
     }
     
-    //write(1, &cnt, 4);
-    printf("%d", cnt + 1);
-    /*
-    for (;; p++)
-    {
-        if (p == str + 10)
-            read(0, str, 10);
-        if (*p == '\n')
-            break;
-    }
-
-    printf("%s", str);
-*/
-    // printf("%d", 16 & 32);
-    /*
-        intTobit(16);
-        intTobit(32);
-        intTobit(48);
-        intTobit(47);
-
-        printf("%d", 16 & 32);
-
-        if (16 & 47)
-        {
-            printf("true");
-        }
-        else
-        {
-            printf("false");
-        }
-    */
     return 0;
 }
 

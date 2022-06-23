@@ -84,7 +84,7 @@ int main()
     //15랑 & 연산하면 아스키코드상 숫자인 친구들은 실제 숫자로 반환됨
 
     //printf("%d", 1 << 15);
-
+    
     char str[sz], *p = str; read(0, str, sz);
     char* c = str;
     //printf("%p\n", str);

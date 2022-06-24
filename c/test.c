@@ -4,7 +4,7 @@
 #include <math.h>
 #include <unistd.h>
 
-#define buff_size 5
+
 void printArray(int *arr, int n) {
     int i;
     for (i = 0; i < n; i++) {
@@ -53,65 +53,32 @@ void intTobit(int a){
 }
 
 
+int sz = 1 << 14;
+char str[1 << 14];
+char *p = str;
 
-
-
-int readInt(char* str){
-    
-    int res = 0;
-    
-    //15랑 아스키코드상 숫자인 친구들을 (15 & 48) 연산하면 실제 숫자로 반환됨
-    for(int i=0; str[i]!='\0'; i++){
-
-        res = (res * 10) + (str[i] & 15);
+inline char readChar()
+{
+    if(p == str+sz){
+        read(0, p = str, sz);
     }
-    return res;
+        
+    return *p++;
 }
 
-int sz = 10;
-
-char* readChar(){
-
+inline int readInt(){
+    int sum = 0;
+    for (char c = readChar(); c & 16; sum = sum*10 + (c&15), c=readChar());
+    
+    return sum;
 }
 
 int main()
 {
+    read(0, str, sz);
 
-    //char sum[6] = "91235";
-
-    //readInt(sum);
-
-    //15랑 & 연산하면 아스키코드상 숫자인 친구들은 실제 숫자로 반환됨
-
-    //printf("%d", 1 << 15);
-    
-    char str[sz], *p = str; read(0, str, sz);
-    char* c = str;
-    //printf("%p\n", str);
-    for (; ; p++)
-    {
-        //printf("%d\n", p);
-        if (p == str + sz){
-            read(0, p = str, sz);
-            printf("%p", p);
-        }
-            
-/*
-        if (*p == '\n')
-        {
-            //printf("enter");  
-            //break;
-        }
-*/
-        if ( ~(*p) & 16 )
-        {
-            write(1, c, p-c);
-            printf("\n");
-            c = p+1;
-            //printf("%p", p);
-        }
-    }
-    
+    int n = readInt();
+    printf("%d", n);
     return 0;
 }
 

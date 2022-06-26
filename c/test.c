@@ -3,7 +3,7 @@
 #include <unistd.h>
 
 
-void printArray(int *arr, int n) {
+void printArray(char *arr, int n) {
     int i;
     for (i = 0; i < n; i++) {
 
@@ -51,17 +51,19 @@ void intTobit(int a){
 }
 
 
-int sz = 10;
-char str[10];
+int sz = 5;
+char str[5];
 char *p = str;
 
 char readChar()
 {
-    if(p == str+sz){
-        fread(p = str, 1, sz, stdin);
+    printf("%d %d\n", p, *p);
+    if (p == str+sz)
+    {
+        read(0,p=str, sz);
     }
-    //printf("p : %d, %d\n", p, *p);
-    return *p++;
+
+    return *(p++);
 }
 
 int readInt()
@@ -69,28 +71,35 @@ int readInt()
     int sum = 0;
     
     for (char c = readChar(); c & 16; c = readChar()){
-        sum = sum * 10 + (c & 15);
         
+        sum = sum * 10 + (c & 15);
     }
-    //p++;
+    
     return sum;
 }
 
 int main()
 {
-    fread(str, 1, sz, stdin);
-    read();
-    // printf("size : %d\n", );
-    // printf("%d\n", str);
+    //fread(str, 1, sz, stdin);
+    //read(0, str, sz);
+    //printf("size : %d\n",
+    printf("%d %d %d\n", str, sz, str+sz);
+    read(0, str, sz);
+
+    //printArray(str, 10);
+
+    //printf("%d\n", str);
 
     int n = readInt();
 
+    int s = 0;
     for (int i = 0; i < n; i++)
     {
         int a = readInt();
+        s += a;
         printf("a : %d\n", a);
     }
-
+    printf("%d", s);
     return 0;
 }
 

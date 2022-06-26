@@ -1,7 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
+
 #include <unistd.h>
 
 
@@ -53,32 +51,46 @@ void intTobit(int a){
 }
 
 
-int sz = 1 << 14;
-char str[1 << 14];
+int sz = 10;
+char str[10];
 char *p = str;
 
-inline char readChar()
+char readChar()
 {
     if(p == str+sz){
-        read(0, p = str, sz);
+        fread(p = str, 1, sz, stdin);
     }
-        
+    //printf("p : %d, %d\n", p, *p);
     return *p++;
 }
 
-inline int readInt(){
+int readInt()
+{
     int sum = 0;
-    for (char c = readChar(); c & 16; sum = sum*10 + (c&15), c=readChar());
     
+    for (char c = readChar(); c & 16; c = readChar()){
+        sum = sum * 10 + (c & 15);
+        
+    }
+    //p++;
     return sum;
 }
 
 int main()
 {
-    read(0, str, sz);
+    fread(str, 1, sz, stdin);
+    read();
+    // printf("size : %d\n", );
+    // printf("%d\n", str);
 
     int n = readInt();
-    printf("%d", n);
+
+    for (int i = 0; i < n; i++)
+    {
+        int a = readInt();
+        printf("a : %d\n", a);
+    }
+
     return 0;
 }
 

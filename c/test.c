@@ -78,13 +78,37 @@ int readInt()
     return sum;
 }
 
+
+void binarySearch(){
+    
+}
+
+
+
 int main()
 {
-    intTobit(45);
-    intTobit(10);
-    intTobit(32);
-    intTobit(16);
-    intTobit(48);
-    printf("%d", 45 & 44);
+    int size = 10;
+    int a[10] = {1, 2, 44, 45, 77, 88, 92, 94, 97, 98};
+                // 0  1   2  3    4   5   6  7   8   9
+    int search = 97;
+
+    int start = 0;
+    int end = size;
+    int pivot = size / 2;
+    
+    if(a[pivot] <search){
+        printf("%d\n", a[pivot]);
+        start = pivot;
+        pivot = (end - start) / 2;
+        // printf("answer : %d", pivot);
+    }else if(a[pivot] ==search){
+        printf("answer : %d", pivot);
+    }
+
+
+
+
+
+    //printf("%d", 45 & 44);
     return 0;
 }

@@ -2,8 +2,8 @@
 //#include <unistd.h>
 #include <stdlib.h>
 
-int sz = 30;
-char str[30];
+int sz = 15;
+char str[15];
 char *p = str;
 
 char readChar()
@@ -43,6 +43,25 @@ typedef struct node{
     int idx;
 } node;
 
+int compare(const void *a, const void *b){
+
+    node *A = (node *)a;
+    node *B = (node *)b;
+
+    int x = A->val;
+    int y = B->val;
+
+    if(x>=y){
+        return 1;
+    }else{
+        return -1;
+    }
+}
+
+
+void binarySearch(){
+    
+}
 
 
 int main()
@@ -60,15 +79,18 @@ int main()
         no[i].val = readInt();
         no[i].idx = i;
         
-    }   
-
-/*
-    for (int i = 0; i < N; i++)
-    {
-        //int a = readInt();
-        printf("%d %d\n", no[i].val, no[i].idx);
     }
-*/    
+
+    qsort(no,N,sizeof(node),compare);
+
+
+    
+        for (int i = 0; i < N; i++)
+        {
+            //int a = readInt();
+            printf("%d %d\n", no[i].val, no[i].idx);
+        }
+    
     return 0;
 }
 //12개

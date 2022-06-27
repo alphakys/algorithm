@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
-unsigned int sz = 1021<<13;
 
+unsigned int sz = 1021<<13;
 
 int main()
 {

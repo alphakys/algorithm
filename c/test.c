@@ -51,19 +51,19 @@ void intTobit(int a){
 }
 
 
-int sz = 5;
-char str[5];
+int sz = 10;
+char str[10];
 char *p = str;
 
 char readChar()
 {
-    printf("%d %d\n", p, *p);
+    printf("p : %d %d\n", p, *p);
     if (p == str+sz)
     {
-        read(0,p=str, sz);
+        read(0, p=str, sz);
     }
 
-    return *(p++);
+    return *p++;
 }
 
 int readInt()
@@ -74,7 +74,7 @@ int readInt()
         
         sum = sum * 10 + (c & 15);
     }
-    
+    printf("s : %d", sum);
     return sum;
 }
 
@@ -83,10 +83,14 @@ int main()
     //fread(str, 1, sz, stdin);
     //read(0, str, sz);
     //printf("size : %d\n",
-    printf("%d %d %d\n", str, sz, str+sz);
-    read(0, str, sz);
-
+    //printf("%d %d %d\n", str, sz, str+sz);
     //printArray(str, 10);
+    //printf("\n");
+
+    
+    printf("s : %d\n",  fread(str, 10, sz, stdin));
+    printArray(str, 10);    
+    
 
     //printf("%d\n", str);
 
@@ -102,4 +106,8 @@ int main()
     printf("%d", s);
     return 0;
 }
+
+
+
+
 

@@ -1,40 +1,74 @@
 #include <stdio.h>
-#include <unistd.h>
+//#include <unistd.h>
+#include <stdlib.h>
 
-unsigned int sz = 1021<<13;
+int sz = 30;
+char str[30];
+char *p = str;
+
+char readChar()
+{
+    /*
+    if (p == str+sz)
+    {
+        fread(p=str, 1, sz, stdin);
+    }
+    */
+    return *p++;
+}
+
+int readInt()
+{
+    int sum = 0;
+    char c = readChar();
+
+    int minus = 1;
+
+    if (c == 45)
+    {
+        minus = -1;
+        c = *p++;
+    }
+
+    for (; c & 16; c = readChar())
+    {
+        sum = sum * 10 + (c & 15);
+    }
+
+    return sum * minus;
+}
+
+typedef struct node{
+    int val;
+    int idx;
+} node;
+
+
 
 int main()
 {
-
-    //printf("%u", 1343 << 14);
     
-    char str[sz], *p = str; read(0, str, sz);
-
-    for (; *p++!='\0'; ){
+    fread(str, 1, sz, stdin);
     
-        printf("%d ", *p);
+    node no[1000000];
+
+    int N = readInt();
+
+    for (int i = 0; i < N; i++)
+    {
+        
+        no[i].val = readInt();
+        no[i].idx = i;
+        
+    }   
+
+/*
+    for (int i = 0; i < N; i++)
+    {
+        //int a = readInt();
+        printf("%d %d\n", no[i].val, no[i].idx);
     }
-    //printf("%s", str);
-    // for (; *++p;);
-    // write(1, str, p-str);
-
-    /*
-        for (; ; p++)
-        {
-            if (p == str + sz)
-                read(0, p = str, sz);
-
-            if (*p == '\n')
-            {
-                write(1, c, p-c);
-                c = p+1;
-                //break;
-            }
-
-        }
-    */    
-    //printf("%d", 1);
-    
+*/    
     return 0;
 }
-
+//12개

@@ -60,7 +60,7 @@ char readChar()
     printf("p : %d %d\n", p, *p);
     if (p == str+sz)
     {
-        read(0, p=str, sz);
+        fread(p=str, 1, sz, stdin);
     }
 
     return *p++;
@@ -88,11 +88,9 @@ int main()
     //printf("\n");
 
     
-    printf("s : %d\n",  fread(str, 10, sz, stdin));
-    printArray(str, 10);    
+    printf("s : %d\n", fread(str, 1, sz, stdin));
+    //printArray(str, 10);    
     
-
-    //printf("%d\n", str);
 
     int n = readInt();
 

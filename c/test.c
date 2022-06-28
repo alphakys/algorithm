@@ -1,8 +1,5 @@
 #include <stdio.h>
 
-#include <unistd.h>
-
-
 void printArray(char *arr, int n) {
     int i;
     for (i = 0; i < n; i++) {
@@ -89,21 +86,32 @@ int main()
 {
     int size = 10;
     int a[10] = {1, 2, 44, 45, 77, 88, 92, 94, 97, 98};
-                // 0  1   2  3    4   5   6  7   8   9
-    int search = 97;
+              // 0  1   2  3    4   5   6  7   8   9
+    int search = 45;
 
     int start = 0;
-    int end = size;
+    int end = size-1;
     int pivot = size / 2;
     
-    if(a[pivot] <search){
-        printf("%d\n", a[pivot]);
-        start = pivot;
-        pivot = (end - start) / 2;
-        // printf("answer : %d", pivot);
-    }else if(a[pivot] ==search){
-        printf("answer : %d", pivot);
+    while(start<=end){
+        
+        pivot = (start + end) / 2;
+
+        if(a[pivot] <search){
+            printf("%d %d\n", a[pivot], pivot);
+            start = pivot+1;
+        
+        }else if(a[pivot] ==search){
+            printf("answer : %d", pivot);
+            break;    
+
+        }else{
+            printf("%d %d\n", a[pivot], pivot);
+            end = pivot-1;
+            pivot = start + ((end - start+1) / 2);
+        }
     }
+    
 
 
 

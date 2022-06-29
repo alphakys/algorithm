@@ -1,6 +1,7 @@
 #include <stdio.h>
 //#include <unistd.h>
 #include <stdlib.h>
+#include <string.h>
 
 int sz = 15;
 char str[15];
@@ -59,38 +60,56 @@ int compare(const void *a, const void *b){
 }
 
 
-void binarySearch(){
+void binarySearch(int* arr, int size, int search){
     
+    int start = 0;
+    int end = size-1;
+    int pivot;// = size / 2;
+    
+    while(start<=end){
+        
+        pivot = (start + end) / 2;
+
+        if(arr[pivot] <search){
+            
+            start = pivot+1;
+        
+        }else if(arr[pivot] ==search){
+            printf("%d ", pivot);
+            break;    
+
+        }else{
+            
+            end = pivot-1;
+        }
+    }
 }
 
+int no[1000000];
+int desc[1000000];
 
 int main()
 {
     
     fread(str, 1, sz, stdin);
     
-    node no[1000000];
-
     int N = readInt();
-
+   
     for (int i = 0; i < N; i++)
     {
         
-        no[i].val = readInt();
-        no[i].idx = i;
+        no[i] = readInt();
         
     }
+    memcpy(desc, no, N);
 
-    qsort(no,N,sizeof(node),compare);
+    qsort(desc,N,sizeof(int),compare);
 
+    for (int i = 0; i < N; i++)
+    {
+        binarySearch(desc, N, no[i]);
+        //printf("%d\n", desc[i]);
+    }
 
-    
-        for (int i = 0; i < N; i++)
-        {
-            //int a = readInt();
-            printf("%d %d\n", no[i].val, no[i].idx);
-        }
-    
     return 0;
 }
-//12개

@@ -76,46 +76,15 @@ int readInt()
 }
 
 
-void binarySearch(){
-    
-}
-
 
 
 int main()
 {
-    int size = 10;
-    int a[10] = {1, 2, 44, 45, 77, 88, 92, 94, 97, 98};
-              // 0  1   2  3    4   5   6  7   8   9
-    int search = 45;
-
-    int start = 0;
-    int end = size-1;
-    int pivot = size / 2;
     
-    while(start<=end){
-        
-        pivot = (start + end) / 2;
+    int n;
+    scanf("%d", &n);
 
-        if(a[pivot] <search){
-            printf("%d %d\n", a[pivot], pivot);
-            start = pivot+1;
-        
-        }else if(a[pivot] ==search){
-            printf("answer : %d", pivot);
-            break;    
-
-        }else{
-            printf("%d %d\n", a[pivot], pivot);
-            end = pivot-1;
-            pivot = start + ((end - start+1) / 2);
-        }
-    }
-    
-
-
-
-
+    printf("%d", n);
 
     //printf("%d", 45 & 44);
     return 0;

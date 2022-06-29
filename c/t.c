@@ -39,29 +39,25 @@ int readInt()
     return sum * minus;
 }
 
-typedef struct node{
-    int val;
-    int idx;
-} node;
 
 int compare(const void *a, const void *b){
 
-    node *A = (node *)a;
-    node *B = (node *)b;
+    int num1 = *(int *)a;
+    int num2 = *(int *)b;
 
-    int x = A->val;
-    int y = B->val;
-
-    if(x>=y){
+    if (num1 >= num2)
+    {
         return 1;
-    }else{
+    }
+    else
+    {
         return -1;
     }
 }
 
 
 void binarySearch(int* arr, int size, int search){
-    
+    //printf("s : %d\n", search);
     int start = 0;
     int end = size-1;
     int pivot;// = size / 2;
@@ -101,14 +97,19 @@ int main()
         no[i] = readInt();
         
     }
-    memcpy(desc, no, N);
+    
+     
+    for (int i = 0; i < N; i++)
+    {
+        desc[i] = no[i];
+    } 
 
     qsort(desc,N,sizeof(int),compare);
 
     for (int i = 0; i < N; i++)
     {
         binarySearch(desc, N, no[i]);
-        //printf("%d\n", desc[i]);
+        //printf("%d\n", no[i]);
     }
 
     return 0;

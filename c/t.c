@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-int sz = 15;
-char str[15];
+int sz = 30;
+char str[30];
 char *p = str;
 
 char readChar()
@@ -45,9 +45,15 @@ int compare(const void *a, const void *b){
     int num1 = *(int *)a;
     int num2 = *(int *)b;
 
-    if (num1 >= num2)
+    if (num1 > num2)
     {
         return 1;
+    }
+    else if(num1 == num2)
+    {
+       
+        a = NULL;
+        printf("p : %d\n", *(int *)a);
     }
     else
     {
@@ -97,7 +103,6 @@ int main()
         no[i] = readInt();
         
     }
-    
      
     for (int i = 0; i < N; i++)
     {
@@ -108,8 +113,8 @@ int main()
 
     for (int i = 0; i < N; i++)
     {
-        binarySearch(desc, N, no[i]);
-        //printf("%d\n", no[i]);
+        //binarySearch(desc, N, no[i]);
+        printf("%d\n", desc[i]);
     }
 
     return 0;

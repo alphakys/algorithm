@@ -72,7 +72,94 @@ function get_dateList($pdo, $user_id){
     }
     
 }
+/*
+select  #if( ((max(curr_f)/min(curr_f))-1)*100=0, null, concat(ROUND(((max(curr_f)/min(curr_f))-1)*100, 1), '%')) 'curr_percent',
+		#if( ((max(prev_f)/min(prev_f))-1)*100=0, null, concat(ROUND(((max(prev_f)/min(prev_f))-1)*100, 1), '%')) 'prev_percent',
+        
+        case when substring_index( group_concat(num order by curr_f desc) , ',', 1 ) ='001' and code in ('PULL' , 'PUSH' , 'ROT')
+			then concat( '우측 ', if( ((max(curr_f)/min(curr_f))-1)*100=0, null, concat(ROUND(((max(curr_f)/min(curr_f))-1)*100, 1), '%')) , ' 약함')
+            
+            when substring_index( group_concat(num order by curr_f desc) , ',', 1 ) ='001' and code in ('LOWCODE' , 'UPCODE')
+			then concat( '후면 ', if( ((max(curr_f)/min(curr_f))-1)*100=0, null, concat(ROUND(((max(curr_f)/min(curr_f))-1)*100, 1), '%')) , ' 약함')
+		
+            when substring_index( group_concat(num order by curr_f desc) , ',', 1 ) ='002' and code in ('PULL' , 'PUSH' , 'ROT')
+			then concat( '좌측 ', if( ((max(curr_f)/min(curr_f))-1)*100=0, null, concat(ROUND(((max(curr_f)/min(curr_f))-1)*100, 1), '%')) , ' 약함')
+			
+            when substring_index( group_concat(num order by curr_f desc) , ',', 1 ) ='002' and code in ('LOWCODE' , 'UPCODE')
+			then concat( '전면', if( ((max(curr_f)/min(curr_f))-1)*100=0, null, concat(ROUND(((max(curr_f)/min(curr_f))-1)*100, 1), '%')) , ' 약함')
+            
+       end 'curr_compare',
+       
+       case when substring_index( group_concat(num order by prev_f desc) , ',', 1 ) ='001' and code in ('PULL' , 'PUSH' , 'ROT')
+			then concat( '우측 ', if( ((max(prev_f)/min(prev_f))-1)*100=0, null, concat(ROUND(((max(prev_f)/min(prev_f))-1)*100, 1), '%')) , ' 약함')
+            
+            when substring_index( group_concat(num order by prev_f desc) , ',', 1 ) ='001' and code in ('LOWCODE' , 'UPCODE')
+			then concat( '후면 ', if( ((max(prev_f)/min(prev_f))-1)*100=0, null, concat(ROUND(((max(prev_f)/min(prev_f))-1)*100, 1), '%')) , ' 약함')
+		
+            when substring_index( group_concat(num order by prev_f desc) , ',', 1 ) ='002' and code in ('PULL' , 'PUSH' , 'ROT')
+			then concat( '좌측 ', if( ((max(prev_f)/min(prev_f))-1)*100=0, null, concat(ROUND(((max(prev_f)/min(prev_f))-1)*100, 1), '%')) , ' 약함')
+			
+            when substring_index( group_concat(num order by prev_f desc) , ',', 1 ) ='002' and code in ('LOWCODE' , 'UPCODE')
+			then concat( '전면', if( ((max(prev_f)/min(prev_f))-1)*100=0, null, concat(ROUND(((max(prev_f)/min(prev_f))-1)*100, 1), '%')) , ' 약함')
+            
+       end 'prev_compare',
+       
+        #group_concat(num order by curr_f desc) curr_num,
+		#group_concat(num order by prev_f desc) prev_num,
+        code, date, position,
+        max(curr_f) max_curr, min(curr_f) min_curr,
+        max(prev_f) max_prev, min(prev_f) min_prev
+from
+(
 
+	select  test_code, code,
+			cast( substring_index(f, ',',1) as decimal(18,5) ) curr_f,
+			cast( substring_index(f, ',',-1) as decimal(18,5) ) prev_f,
+			date, position, num
+
+	from
+	(
+	Select      test_code,
+				substring_index(group_concat(f order by workoutdate desc),',',2) f
+				, substring_index(group_concat(date_format(workoutdate, '%Y-%m-%d') order by workoutdate desc),',',2) date,
+				code, num,
+			case    when
+								substr(test_code,-3)  = '001' and (code = 'PUSH' or code = 'PULL' or code = 'ROT')
+								then 'left'
+								
+								when
+								substr(test_code,-3)  = '002' and (code = 'PUSH' or code = 'PULL' or code = 'ROT')
+								then 'right'     
+								
+								when
+								substr(test_code,-3)  = '001' and (code = 'UPCODE' or code = 'LOWCODE')
+								then 'front'
+								
+								when
+								substr(test_code,-3)  = '002' and (code = 'UPCODE' or code = 'LOWCODE')
+								then 'back'     
+						end 'position'
+			from
+			(
+				Select test_code, avg(avg_force) f, workoutdate, 
+						substring_index(test_code, substr(test_code,-3), 1) 'code',
+						substr(test_code,-3) num
+				from ronfic.miniplus_measure_test
+
+				where users_id = 100000003
+				
+				#$date_query
+				#and date_format(workoutdate, '%Y-%m-%d') <='$date'
+				
+				
+				group by workoutdate, test_code
+			)tb
+			group by test_code
+		)tb1
+)tb2
+group by code
+;
+*/
 function get_dateData($pdo, $user_id, $date){
     
     if($date==0){
@@ -82,38 +169,92 @@ function get_dateData($pdo, $user_id, $date){
     }
 
     $sql = "
-    select if( ((max(f)/min(f))-1)*100=0, null, concat(ROUND(((max(f)/min(f))-1)*100, 1), '%')) 'percent',  
-		#ifnull(concat(ROUND(((max(f)/min(f))-1)*100, 1), '%'), '0') 'percent',
-	   code,
-	   workoutdate#, max(f), min(f), max(f)/min(f)
+        select  #if( ((max(curr_f)/min(curr_f))-1)*100=0, null, concat(ROUND(((max(curr_f)/min(curr_f))-1)*100, 1), '%')) 'curr_percent',
+            #if( ((max(prev_f)/min(prev_f))-1)*100=0, null, concat(ROUND(((max(prev_f)/min(prev_f))-1)*100, 1), '%')) 'prev_percent',
+            
+            case when substring_index( group_concat(num order by curr_f desc) , ',', 1 ) ='001' and code in ('PULL' , 'PUSH' , 'ROT')
+                then concat( '우측 ', if( ((max(curr_f)/min(curr_f))-1)*100=0, null, concat(ROUND(((max(curr_f)/min(curr_f))-1)*100, 1), '%')) , ' 약함')
+                
+                when substring_index( group_concat(num order by curr_f desc) , ',', 1 ) ='001' and code in ('LOWCODE' , 'UPCODE')
+                then concat( '후면 ', if( ((max(curr_f)/min(curr_f))-1)*100=0, null, concat(ROUND(((max(curr_f)/min(curr_f))-1)*100, 1), '%')) , ' 약함')
+            
+                when substring_index( group_concat(num order by curr_f desc) , ',', 1 ) ='002' and code in ('PULL' , 'PUSH' , 'ROT')
+                then concat( '좌측 ', if( ((max(curr_f)/min(curr_f))-1)*100=0, null, concat(ROUND(((max(curr_f)/min(curr_f))-1)*100, 1), '%')) , ' 약함')
+                
+                when substring_index( group_concat(num order by curr_f desc) , ',', 1 ) ='002' and code in ('LOWCODE' , 'UPCODE')
+                then concat( '전면', if( ((max(curr_f)/min(curr_f))-1)*100=0, null, concat(ROUND(((max(curr_f)/min(curr_f))-1)*100, 1), '%')) , ' 약함')
+                
+        end 'curr_compare',
+        
+        case when substring_index( group_concat(num order by prev_f desc) , ',', 1 ) ='001' and code in ('PULL' , 'PUSH' , 'ROT')
+                then concat( '우측 ', if( ((max(prev_f)/min(prev_f))-1)*100=0, null, concat(ROUND(((max(prev_f)/min(prev_f))-1)*100, 1), '%')) , ' 약함')
+                
+                when substring_index( group_concat(num order by prev_f desc) , ',', 1 ) ='001' and code in ('LOWCODE' , 'UPCODE')
+                then concat( '후면 ', if( ((max(prev_f)/min(prev_f))-1)*100=0, null, concat(ROUND(((max(prev_f)/min(prev_f))-1)*100, 1), '%')) , ' 약함')
+            
+                when substring_index( group_concat(num order by prev_f desc) , ',', 1 ) ='002' and code in ('PULL' , 'PUSH' , 'ROT')
+                then concat( '좌측 ', if( ((max(prev_f)/min(prev_f))-1)*100=0, null, concat(ROUND(((max(prev_f)/min(prev_f))-1)*100, 1), '%')) , ' 약함')
+                
+                when substring_index( group_concat(num order by prev_f desc) , ',', 1 ) ='002' and code in ('LOWCODE' , 'UPCODE')
+                then concat( '전면', if( ((max(prev_f)/min(prev_f))-1)*100=0, null, concat(ROUND(((max(prev_f)/min(prev_f))-1)*100, 1), '%')) , ' 약함')
+                
+        end 'prev_compare',
+        
+            #group_concat(num order by curr_f desc) curr_num,
+            #group_concat(num order by prev_f desc) prev_num,
+            code, date, position,
+            max(curr_f) max_curr, min(curr_f) min_curr,
+            max(prev_f) max_prev, min(prev_f) min_prev
+    from
+    (
 
-	from
-	(
-		select tb1.test_code, avg(avg_force) f, id, workoutdate,
-			   substr(tb1.test_code,-3) num, substring_index(tb1.test_code, substr(tb1.test_code,-3),1) code
+        select  test_code, code,
+                cast( substring_index(f, ',',1) as decimal(18,5) ) curr_f,
+                cast( substring_index(f, ',',-1) as decimal(18,5) ) prev_f,
+                date, position, num
 
-		from
-		(
-		Select *
-		from ronfic.miniplus_measure_test
-		where users_id = $user_id
-		) tb1,
+        from
+        (
+        Select      test_code,
+                    substring_index(group_concat(f order by workoutdate desc),',',2) f
+                    , substring_index(group_concat(date_format(workoutdate, '%Y-%m-%d') order by workoutdate desc),',',2) date,
+                    code, num,
+                case    when
+                                    substr(test_code,-3)  = '001' and (code = 'PUSH' or code = 'PULL' or code = 'ROT')
+                                    then 'left'
+                                    
+                                    when
+                                    substr(test_code,-3)  = '002' and (code = 'PUSH' or code = 'PULL' or code = 'ROT')
+                                    then 'right'     
+                                    
+                                    when
+                                    substr(test_code,-3)  = '001' and (code = 'UPCODE' or code = 'LOWCODE')
+                                    then 'front'
+                                    
+                                    when
+                                    substr(test_code,-3)  = '002' and (code = 'UPCODE' or code = 'LOWCODE')
+                                    then 'back'     
+                            end 'position'
+                from
+                (
+                    Select test_code, avg(avg_force) f, workoutdate, 
+                            substring_index(test_code, substr(test_code,-3), 1) 'code',
+                            substr(test_code,-3) num
+                    from ronfic.miniplus_measure_test
 
-		(
-		select max(workoutdate) date, test_code
-		from miniplus_measure_test
-		where users_id = $user_id 
-        $date_query
-        group by test_code
-
-		)tb2
-
-		where tb1.workoutdate = tb2.date and tb1.test_code = tb2.test_code
-		group by test_code
-	)tb3 
-
-    group by code;
-    ";
+                    where users_id = $user_id
+                    
+                    #$date_query
+                    #and date_format(workoutdate, '%Y-%m-%d') <='$date'
+                    
+                    
+                    group by workoutdate, test_code
+                )tb
+                group by test_code
+            )tb1
+    )tb2
+    group by code
+    ;";
     
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
@@ -361,6 +502,44 @@ function percentData($pdo, $user_id){
     }
 
 }   
+
+/* get_dateData
+
+select if( ((max(f)/min(f))-1)*100=0, null, concat(ROUND(((max(f)/min(f))-1)*100, 1), '%')) 'percent',  
+		#ifnull(concat(ROUND(((max(f)/min(f))-1)*100, 1), '%'), '0') 'percent',
+	   code,
+	   workoutdate#, max(f), min(f), max(f)/min(f)
+
+	from
+	(
+		select tb1.test_code, avg(avg_force) f, id, workoutdate,
+			   substr(tb1.test_code,-3) num, substring_index(tb1.test_code, substr(tb1.test_code,-3),1) code
+
+		from
+		(
+		Select *
+		from ronfic.miniplus_measure_test
+		where users_id = $user_id
+		) tb1,
+
+		(
+		select max(workoutdate) date, test_code
+		from miniplus_measure_test
+		where users_id = $user_id 
+        $date_query
+        group by test_code
+
+		)tb2
+
+		where tb1.workoutdate = tb2.date and tb1.test_code = tb2.test_code
+		group by test_code
+	)tb3 
+
+    group by code;
+*/
+
+
+
 
 /* 	
 select code, group_concat(f order by f desc) , code, group_concat(num order by f desc),

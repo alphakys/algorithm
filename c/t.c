@@ -45,16 +45,19 @@ int compare(const void *a, const void *b){
     int num1 = *(int *)a;
     int num2 = *(int *)b;
 
-    if (num1 >= num2)
+    int identi = 0;
+
+    if (num1 > num2)
     {
         return 1;
     }
-    /* else if(num1 == num2)
+    else if(num1 == num2)
     {
-       
-        //a = NULL;
-        //printf("p : %d\n", *(int *)a);
-    } */
+        printf("%d %d\n", num1,++identi);
+        return 1;
+        //*(int *)b = 1000000001;
+        // printf("p : %d\n", *(int *)a);
+    } 
     else
     {
         return -1;
@@ -67,9 +70,12 @@ void binarySearch(int* arr, int size, int search){
     int start = 0;
     int end = size-1;
     int pivot;// = size / 2;
+
     
-    while(start<=end){
-        
+
+    while (start <= end)
+    {
+
         pivot = (start + end) / 2;
 
         if(arr[pivot] <search){
@@ -77,6 +83,7 @@ void binarySearch(int* arr, int size, int search){
             start = pivot+1;
         
         }else if(arr[pivot] ==search){
+            
             printf("%d ", pivot);
             break;    
 
@@ -113,8 +120,8 @@ int main()
 
     for (int i = 0; i < N; i++)
     {
-        //binarySearch(desc, N, no[i]);
-        printf("%d\n", desc[i]);
+        binarySearch(desc, N, no[i]);
+        //printf("%d\n", desc[i]);
     }
 
     return 0;

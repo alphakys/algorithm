@@ -53,9 +53,8 @@ int compare(const void *a, const void *b){
     }
     else if(*num1 == *num2)
     {
-        *num1 = -9;
         return 1;
-        //realloc(num1, 0);
+        
     } 
     else
     {
@@ -101,14 +100,14 @@ int main()
     fread(str, 1, sz, stdin);
     
     int N = readInt();
-   
+    
     for (int i = 0; i < N; i++)
     {
         
         no[i] = readInt();
         
     }
-     
+    
     for (int i = 0; i < N; i++)
     {
         desc[i] = no[i];
@@ -116,19 +115,32 @@ int main()
 
     qsort(desc, N, sizeof(int), compare);
 
+    int flag[N];
+
     for (int i = 0; i < N; i++)
     {
+        //flag[] = desc[i];
+        int j = 0;
+        for (; j < N; j++)
+        {
 
-        // for(int j=0; j<N; j++){
-        //     if(no[i] == desc[j]){
-        //         printf("%d ", j);
-        //         break;
-        //     }
-        // }
-        
+            if(flag[j] == desc[i]){
+                printf("break : %d %d\n", flag[j], desc[i]);
+                break;
+            }else{
+                printf("add : %d %d\n", flag[j], desc[i]);
+                flag[j++] = desc[i];
+            }
+        }
+
         //binarySearch(desc, N, no[i]);
-        printf("%d\n", desc[i]);
+        //printf("%d\n", desc[i]);
     }
 
+
+    for (int i = 0; i < N; i++)
+    {
+        printf("%d\n", flag[i]);
+    }
     return 0;
 }

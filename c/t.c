@@ -42,21 +42,20 @@ int readInt()
 
 int compare(const void *a, const void *b){
 
-    int num1 = *(int *)a;
-    int num2 = *(int *)b;
+    int* num1 = (int *)a;
+    int* num2 = (int *)b;
 
-    int identi = 0;
+    //int identi = 0;
 
-    if (num1 > num2)
+    if (*num1 > *num2)
     {
         return 1;
     }
-    else if(num1 == num2)
+    else if(*num1 == *num2)
     {
-        printf("%d %d\n", num1,++identi);
+        *num1 = -9;
         return 1;
-        //*(int *)b = 1000000001;
-        // printf("p : %d\n", *(int *)a);
+        //realloc(num1, 0);
     } 
     else
     {
@@ -70,8 +69,6 @@ void binarySearch(int* arr, int size, int search){
     int start = 0;
     int end = size-1;
     int pivot;// = size / 2;
-
-    
 
     while (start <= end)
     {
@@ -91,6 +88,7 @@ void binarySearch(int* arr, int size, int search){
             
             end = pivot-1;
         }
+
     }
 }
 
@@ -99,7 +97,7 @@ int desc[1000000];
 
 int main()
 {
-    
+
     fread(str, 1, sz, stdin);
     
     int N = readInt();
@@ -116,12 +114,20 @@ int main()
         desc[i] = no[i];
     } 
 
-    qsort(desc,N,sizeof(int),compare);
+    qsort(desc, N, sizeof(int), compare);
 
     for (int i = 0; i < N; i++)
     {
-        binarySearch(desc, N, no[i]);
-        //printf("%d\n", desc[i]);
+
+        // for(int j=0; j<N; j++){
+        //     if(no[i] == desc[j]){
+        //         printf("%d ", j);
+        //         break;
+        //     }
+        // }
+        
+        //binarySearch(desc, N, no[i]);
+        printf("%d\n", desc[i]);
     }
 
     return 0;

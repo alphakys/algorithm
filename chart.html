@@ -1,0 +1,54 @@
+<?php
+
+$server = "211.253.30.245:11000";
+$user = "ronficmaster";
+$pw = "ronfic00245";
+$db = "ronfic";
+
+    $dsn = "mysql:host={$server};dbname={$db};";
+    $pdo = new PDO($dsn, $user, $pw);
+    $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $sql = "
+    select workouttype_code, L_avr_force, R_avr_force, L_avr_force_reps, R_avr_force_reps, weight_value, reps 
+    from u_xim
+    where users_id = 100002897 and L_avr_force_reps != '' 
+    ;";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    
+    $cnt = $stmt->rowCount();
+
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    print_r($result);
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+
+
+</body>
+<script>
+console.log("asdf");
+
+</script>
+
+
+
+</html>
+
+
+

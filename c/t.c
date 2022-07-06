@@ -131,7 +131,7 @@ int main()
                 printf("add : %d %d\n", flag[j], desc[i]);
                 flag[j++] = desc[i];
             }
-        }
+        } 
 
         //binarySearch(desc, N, no[i]);
         //printf("%d\n", desc[i]);

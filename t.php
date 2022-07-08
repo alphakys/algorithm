@@ -16,9 +16,10 @@ $db = "ronfic";
 try {
     
     $sql = "  
-        select *
-        from users
-        where user_name = '강용수'
+    select id, workoutdate, test_code, avg_force, avg_speed, force_data, speed_data
+    from miniplus_measure_test  
+    
+    where users_id = 100002926;
         ";
 
     $stmt = $pdo->prepare($sql);
@@ -28,7 +29,7 @@ try {
 
     print_r($result);
     
-    fopen('file.csv', 'w+');
+    //fopen('file.csv', 'w+');
 
 
 

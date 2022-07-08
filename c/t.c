@@ -3,18 +3,18 @@
 #include <stdlib.h>
 #include <string.h>
 
-int sz = 30;
-char str[30];
+int sz = 5;
+char str[5];
 char *p = str;
 
 char readChar()
 {
-    /*
+    
     if (p == str+sz)
     {
         fread(p=str, 1, sz, stdin);
     }
-    */
+    
     return *p++;
 }
 
@@ -47,15 +47,10 @@ int compare(const void *a, const void *b){
 
     //int identi = 0;
 
-    if (*num1 > *num2)
+    if (*num1 >= *num2)
     {
         return 1;
     }
-    else if(*num1 == *num2)
-    {
-        return 1;
-        
-    } 
     else
     {
         return -1;
@@ -91,8 +86,8 @@ void binarySearch(int* arr, int size, int search){
     }
 }
 
-int no[1000000];
-int desc[1000000];
+int no[1000001];
+int desc[10000001];
 
 int main()
 {
@@ -120,34 +115,20 @@ int main()
     usort[0] = desc[0];
     int pivot = 1;
 
+    int len = 1;
     for (int i = 0; i < N; i++)
     {
-        
         for (int j = pivot-1; usort[j] != desc[i]; j++)
         {
-    
-            printf("add : %d %d j : %d\n", usort[j], desc[i], j);
             usort[pivot++] = desc[i];
-          
-        } 
-
-        //binarySearch(desc, N, no[i]);
-        //printf("%d\n", desc[i]);
+            len++;
+        }
     }
-
-
+    
     for (int i = 0; i < N; i++)
     {
-        printf("%d\n", usort[i]);
+        binarySearch(usort, len, no[i]);
     }
+
     return 0;
 }
-
-/* 
-999
-999
-999
-1000
-1000
-1000 
-*/

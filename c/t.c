@@ -115,22 +115,20 @@ int main()
 
     qsort(desc, N, sizeof(int), compare);
 
-    int flag[N];
+    int usort[N];
+
+    usort[0] = desc[0];
+    int pivot = 1;
 
     for (int i = 0; i < N; i++)
     {
-        //flag[] = desc[i];
-        int j = 0;
-        for (; j < N; j++)
+        
+        for (int j = pivot-1; usort[j] != desc[i]; j++)
         {
-
-            if(flag[j] == desc[i]){
-                printf("break : %d %d\n", flag[j], desc[i]);
-                break;
-            }else{
-                printf("add : %d %d\n", flag[j], desc[i]);
-                flag[j++] = desc[i];
-            }
+    
+            printf("add : %d %d j : %d\n", usort[j], desc[i], j);
+            usort[pivot++] = desc[i];
+          
         } 
 
         //binarySearch(desc, N, no[i]);
@@ -140,7 +138,16 @@ int main()
 
     for (int i = 0; i < N; i++)
     {
-        printf("%d\n", flag[i]);
+        printf("%d\n", usort[i]);
     }
     return 0;
 }
+
+/* 
+999
+999
+999
+1000
+1000
+1000 
+*/

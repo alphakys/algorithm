@@ -9,8 +9,8 @@ void printInt(int *arr, int n) {
     printf("\n");
 }
 
-int size =10;
-char buff[10];
+int size =1<<10;
+char buff[1<<10];
 
 char *p = buff;
 
@@ -32,14 +32,15 @@ int readInt(){
     if (c == 45)
     {
         minus = -1;
+        c = readChar();
     }
 
     for (; c & 16; c = readChar())
     {
         sum = (sum * 10) + (c & 15);
     }
-    
-    return sum*minus;
+   
+    return sum * minus;
 }
 
 void swap(int* arr, int a, int b){
@@ -53,7 +54,6 @@ int main(){
     fread(buff, 1, size, stdin);
 
     int N = readInt();
-    printf("%d", N);
 
     int arr[1000];
     for (int i = 0; i < N; i++)
@@ -79,12 +79,6 @@ int main(){
         }
         len--;
     }
-
-// 11 5 4 3 2 1
-// 5 4 3 2 1 11
-// 1 2 11 3 4 5
-
-
 
     for (int i = 0; i < N; i++)
     {

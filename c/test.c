@@ -9,6 +9,15 @@ void printArray(char *arr, int n) {
     printf("\n");
 }
 
+void printInt(int *arr, int n) {
+    int i;
+    for (i = 0; i < n; i++) {
+
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
 
 void bitToint(char* str){
 
@@ -101,17 +110,19 @@ void binarySearch(int* arr, int size, int search){
     }
 }
 
-
+void swap(int* arr, int a, int b){
+    int tmp = arr[a];
+    arr[a] = arr[b];
+    arr[b] = tmp;
+}
 
 int main()
 {
-    
-    int n;
-    //scanf("%d", &n);
 
-    int arr[5] = {2, 4, -10, 4, -9};
-    printf("%d", n);
+    int arr[3] = {0, 1, 2};
 
-    //printf("%d", 45 & 44);
+    swap(arr, &arr[0], &arr[1]);
+
+    printInt(arr, 3);
     return 0;
 }

@@ -118,11 +118,12 @@ void swap(int* arr, int a, int b){
 
 int main()
 {
+    int k = 0;
 
-    int arr[3] = {0, 1, 2};
+    for (int i = 0; i < 0; i++, k++){
+        //printf("%d", k);
+    }
 
-    swap(arr, &arr[0], &arr[1]);
-
-    printInt(arr, 3);
+    printf("%d", k);
     return 0;
 }

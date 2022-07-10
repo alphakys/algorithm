@@ -9,8 +9,8 @@ void printInt(int *arr, int n) {
     printf("\n");
 }
 
-int size =10;
-char buff[10];
+int size =1<<10;
+char buff[1<<10];
 
 char *p = buff;
 
@@ -73,13 +73,10 @@ int main(){
             if (arr[pivot] > arr[j])
             {
                 swap(arr, pivot, j);
-                pivot = j;
-                comparison_flag++;
+                
+                comparison_flag=1;
             }
-            else
-            {
-                pivot = j;
-            }
+            pivot = j;
         }
 
         if(comparison_flag==0){

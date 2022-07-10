@@ -9,8 +9,8 @@ void printInt(int *arr, int n) {
     printf("\n");
 }
 
-int size =1<<10;
-char buff[1<<10];
+int size =10;
+char buff[10];
 
 char *p = buff;
 
@@ -62,21 +62,30 @@ int main(){
     }
 
     int len = N;
-
+    
     for (int i = 0; i < N; i++)
     {
         int pivot = 0;
+        int comparison_flag = 0;
+        
         for (int j = pivot+1; j < len; j++)
         {
-            //printf("arr[%d] : %d, arr[%d] : %d\n", pivot, arr[pivot], j, arr[j]);
             if (arr[pivot] > arr[j])
             {
                 swap(arr, pivot, j);
                 pivot = j;
-            }else{
+                comparison_flag++;
+            }
+            else
+            {
                 pivot = j;
             }
         }
+
+        if(comparison_flag==0){
+            break;
+        }
+        
         len--;
     }
 

@@ -10,8 +10,8 @@ void printInt(int *arr, int n) {
     printf("\n");
 }
 
-int size =1<<10;
-char buff[1<<10];
+int size =7;
+char buff[7];
 
 char *p = buff;
 
@@ -61,20 +61,22 @@ int main(){
     {
         arr[i] = readInt();
     }
-
-    int len = N;
     
-    for (int i = 1; i < N; i++)
+    for (int i = 0; i < N-1; i++)
     {
-        int pivot = i;
-        
-        for (int j = pivot-1; j >=0 && arr[pivot] < arr[j]; j--)
-        {
-            swap(arr, pivot, j);
+        int min = arr[i];
+        int min_pos = i;
 
-            pivot = j;
-            
+        for (int j = i + 1; j < N; j++)
+        {
+            if(min>arr[j]){
+                min = arr[j];
+                min_pos = j;
+            }
+               
         }
+        //printf("i : %d min_pos : %d\n", i, min_pos);
+        swap(arr, i, min_pos);
     }
 
     for (int i = 0; i < N; i++)
@@ -84,3 +86,4 @@ int main(){
     
     return 0;
 }
+

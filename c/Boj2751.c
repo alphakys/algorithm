@@ -46,17 +46,45 @@ int readInt(){
 
 int sorted[10];
 
-void conquer(int* arr, int left, int right){
+void conquer(int* arr, int start, int mid, int end)
+{
+    int left = start;
+    int right = mid + 1;
+    
+    while (start <= end)
+    {
+        if(left==mid)
+        {
+            //printf("1\n");
+            //printf("st : %d right : %d\n", start, right);
+            sorted[start++] = arr[right++];
+        }
+        else if(right==end)
+        {
+            //printf("2\n");
+            sorted[start++] = arr[left++];
+        }
+        else
+        {
+            //printf("3\n");
+            if(arr[left]> arr[right])
+            {
+                sorted[start++] = arr[right++];
+                
+            }
+            else
+            {
+                sorted[start++] = arr[left++];
+                
+            }
+        }
+        
 
-    if(arr[left]> arr[right])
-    {
-        sorted[left] = arr[right];
-        sorted[right] = arr[left];
     }
-    else
+
+    for (int i = 0; i <= end; i++)
     {
-        sorted[right] = arr[right];
-        sorted[left] = arr[left];
+        arr[i] = sorted[i];
     }
 }
 
@@ -64,19 +92,18 @@ void divide(int* arr, int left, int right){
 
     int mid = (left+right)/2;
 
-    if(mid==right)
-    {
-        conquer(arr, left, right);
-        printf("left : %d, right : %d\n", left, right);
-        printInt(sorted, 10);
-    }
-    else
+    if(mid!=right)
     {
         divide(arr, left, mid);
         divide(arr, mid + 1, right);
     }
-
     
+    printf("left : %d, mid : %d, right : %d\n", left, mid, right);
+    conquer(arr, left, mid, right);
+    
+    
+    printInt(sorted, 10);
+
 }
 
 void mergetSort(){

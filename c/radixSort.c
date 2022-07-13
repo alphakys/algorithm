@@ -47,39 +47,15 @@ int readInt(){
 int main()
 {
 
-    fread(buff, 1, size, stdin);
+    int arr[7] = {31, 4, 159, 2, 653, 58, 979};
+    int sortArr[9] = {0,};
 
-    int N = readInt();
-
-    int counting[10001] = {0,};
-    
-    int arr[11] = {0,};
-    
-    for (int i = 0; i < N; i++)
+    for (int i = 0; i < 7; i++)
     {
-        int c = readInt();
-        arr[i] = c;
-        counting[c]++;
-    }
-    
-    printInt(counting, 10);
-    
-    int sum = 0;
-    for (int i = 1; i <= 10000; i++)
-    {
-        sum += counting[i];
-        counting[i] = sum;
+        int remainder = arr[i] % 10;
+        sortArr[remainder] = arr[i];
     }
 
-    int sorted[12] = {0,};
-    
-    for (int i = 0; i <= 10; i++)
-    {   
-        int idx = counting[arr[i]];
-        sorted[idx] = arr[i];
-        counting[arr[i]]--;
-    }
-
-    printInt(sorted, 11);
+    printInt(sortArr, 9);
     return 0;
 }

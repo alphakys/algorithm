@@ -56,6 +56,6 @@ int main()
         sortArr[remainder] = arr[i];
     }
 
-    printInt(sortArr, 9);
+    printInt(sortArr, 10);
     return 0;
 }

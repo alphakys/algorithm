@@ -14,42 +14,50 @@ void printInt(int *arr, int n) {
 int arr[MAX_SIZE];
 int rear= -1;
 int front=-1;
+int size = 0;
 
-void enqueue(int val){
-    arr[rear++] = val;
-    
-    if(front==-1){
+void enqueue(int val)
+{
+    arr[++rear] = val;
+    size++;
+    if (front == -1)
+    {
         front++;
-    }    
+    }
 }
 
 int dequeue(){
-   
-    if(front==-1){
-        printf("queue is empty");
-    }else{
+    
+    if(front==-1)
+    {
+        return -1;
+    }
+    else
+    {
         int ret = arr[front];
         arr[front++] = 0;
-        
+        size--;
         return ret;
-        
     }
-    
 }
+
 
 int isEmpty(){
    
-    if(front==-1){
+    if(front==-1)
+    {
         return 1;
-    }else{
+    }
+    else
+    {
         return 0;
     }
    
 }
 
 
-int size =50;
-char buff[50];
+int size =23;
+char buff[23];
 
 char *p = buff;
 
@@ -61,24 +69,46 @@ char readChar(){
 
     return *p++;
 }
- 
-char readString(){
+
+int readInt(){
+    
+    int sum = 0;
+    char c = readChar();
+
+    /* int minus = 1;
+    if (c == 45)
+    {
+        minus = -1;
+        c = readChar();
+    } */
+
+    for (; c & 16; c = readChar())
+    {
+        sum = (sum * 10) + (c & 15);
+    }
+   
+    return sum;
+} 
+
+void readString(){
+
     char c = readChar();
     char ret = 0;
     for (;; c = readChar())
     {
-        printf("c : %d\n", c);
+        //printf("c : %d\n", c);
         if (c == 102)
         {
             //f
-            ret = 102;
+            printf("%d\n", front);
+            //ret = 102;
             p=p+5;
             break;
         }
         else if (c == 98)
         {
             //b
-            ret = 98;
+            printf("%d\n", rear);
             p=p+4;
             break;
         }else if(c==101)
@@ -98,8 +128,11 @@ char readString(){
             //u
             if(*p==117)
             {
-                ret = 117;
+                //ret = 117;
                 p = p + 4;
+                //ret = readInt();
+                //printf("%d\n", readInt());
+                enqueue(readInt());
                 break;
             }
             else
@@ -114,28 +147,10 @@ char readString(){
 
     //for (char c = readChar(); c!=10; c = readChar());
 
-    return ret;
+    //return ret;
 }
 
-int readInt(){
-    
-    int sum = 0;
-    char c = readChar();
 
-    int minus = 1;
-    if (c == 45)
-    {
-        minus = -1;
-        c = readChar();
-    }
-
-    for (; c & 16; c = readChar())
-    {
-        sum = (sum * 10) + (c & 15);
-    }
-   
-    return sum * minus;
-}
 
 
 int main(){
@@ -147,8 +162,13 @@ int main(){
 
     for (int i = 0; i < N; i++)
     {
-        printf("str : %c\n", readString());
+        readString();
+        //printf("str : %d\n", );
     }
+
+    printInt(arr, 10);
+
+
 
     /* printf("%d\n",isEmpty());
     enqueue(3);

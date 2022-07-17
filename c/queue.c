@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define MAX_SIZE 100
+#define MAX_SIZE 2000001
 
 void printInt(int *arr, int n) {
     int i;
@@ -14,12 +14,12 @@ void printInt(int *arr, int n) {
 int arr[MAX_SIZE];
 int rear= -1;
 int front=-1;
-int size = 0;
+int length = 0;
 
 void enqueue(int val)
 {
     arr[++rear] = val;
-    size++;
+    length++;
     if (front == -1)
     {
         front++;
@@ -33,10 +33,22 @@ int dequeue(){
         return -1;
     }
     else
-    {
+    {   
+        
         int ret = arr[front];
-        arr[front++] = 0;
-        size--;
+        
+        if(front<rear)
+        {
+            arr[front++] = 0;
+            length--;
+        }else
+        {
+            arr[front] = 0;
+            front = -1;
+            rear = -1;
+            length = 0;
+        }
+
         return ret;
     }
 }
@@ -44,7 +56,7 @@ int dequeue(){
 
 int isEmpty(){
    
-    if(front==-1)
+    if(length==0)
     {
         return 1;
     }
@@ -56,14 +68,14 @@ int isEmpty(){
 }
 
 
-int size =23;
-char buff[23];
+int size =40;
+char buff[40];
 
 char *p = buff;
 
 char readChar(){
     
-    if(p==buff+size){
+    if(p>=buff+size){
         fread(p=buff, 1, size, stdin);
     }
 
@@ -89,38 +101,47 @@ int readInt(){
    
     return sum;
 } 
-
+//0 2 0 0 0
 void readString(){
 
     char c = readChar();
     char ret = 0;
     for (;; c = readChar())
     {
-        //printf("c : %d\n", c);
+        
         if (c == 102)
         {
             //f
-            printf("%d\n", front);
-            //ret = 102;
+            if(length==0){
+                printf("%d\n", -1);
+                p=p+5;
+                break;
+            }
+            printf("%d\n", arr[front]);
             p=p+5;
             break;
         }
         else if (c == 98)
         {
             //b
-            printf("%d\n", rear);
+            if(length==0){
+                printf("%d\n", -1);
+                p=p+4;
+                break;
+            }
+            printf("%d\n", arr[rear]);
             p=p+4;
             break;
         }else if(c==101)
         {
             //e
-            ret = 101;
+            printf("%d\n", isEmpty());
             p=p+5;
             break;
         }else if(c==115)
         {
             //s
-            ret = 115;
+            printf("%d\n", length);
             p=p+4;
             break;
         }else if(c==112)
@@ -138,16 +159,13 @@ void readString(){
             else
             {
                 //o
-                ret = 111;
+                printf("%d\n", dequeue());
                 p = p + 3;
                 break;
             }
         }
     }
 
-    //for (char c = readChar(); c!=10; c = readChar());
-
-    //return ret;
 }
 
 
@@ -166,22 +184,19 @@ int main(){
         //printf("str : %d\n", );
     }
 
-    printInt(arr, 10);
-
-
-
-    /* printf("%d\n",isEmpty());
-    enqueue(3);
-    enqueue(4);
-    enqueue(5);
-    printf("%d\n", dequeue());
-    printf("%d\n", dequeue());
-
-
-
-    printf("---------------\n");
-    printf("front : %d\n", front);
-    printInt(arr, 10);
- */
     return 0;
 }
+/* 
+pop -1
+pop -1
+pop -1
+push 100
+push 2
+back 2
+front 100
+pop 100
+pop 2
+front -1 
+empty 1
+
+*/

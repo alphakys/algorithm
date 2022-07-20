@@ -6,27 +6,43 @@ int main(){
     int N, K;
     cin >> N >> K;
 
-    int arr[N+1];
-    int front = 0;
-    
+    int arr[N+1] = {0,};
+    //int front = 1;
+    // 1 2 3 4 5 6 7
 
-    for (int i = 1; i < N + 1; i++)
+    for (int front = 1, cnt=1; arr[front]==0; front++, cnt++)
     {
-        front += K;
-
-        if(front>N){
+        //cout << "v : " << front << " cnt : " << cnt <<"\n";
+        if(cnt==K)
+        {
+            if(front>N)
+            {
+                front = front - N;
+            }
+            arr[front]=1;
+            cnt = 0;
+            cout << front << ' ';
+        }
+        
+        /* if (front > N)
+        {
             front = front - N;
         }
-        cout << front << ' ';
+
+        if(!arr[front])
+        {    
+            
+            arr[front] = 1;
+        }
+        else
+        {
+
+        } */
+        
+        
     }
 
-    /* for (int i = 1; i < N + 1; i++){
-        cout << arr[i];
-    } */
-        // 1 2 3 4 5 6 7
-
-        // cout << '<' << ' ' << K << '>';
-        // cout << "강한친구 대한육군";
-        return 0;
+    
+    return 0;
 
 }

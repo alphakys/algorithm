@@ -9,40 +9,35 @@ int main(){
     int arr[N+1] = {0,};
     //int front = 1;
     // 1 2 3 4 5 6 7
+    int len = N;
+    
+    cout << "<";
 
-    for (int front = 1, cnt=1; arr[front]==0; front++, cnt++)
+    for (int front = 1, cnt = 1; len > 0; front++, cnt++)
     {
         //cout << "v : " << front << " cnt : " << cnt <<"\n";
-        if(cnt==K)
+        if(arr[front]>0)
         {
-            if(front>N)
-            {
-                front = front - N;
-            }
+            cnt--;
+        }
+        
+        if(cnt==K && len>1)
+        {
             arr[front]=1;
             cnt = 0;
-            cout << front << ' ';
-        }
-        
-        /* if (front > N)
+            cout << front << ", ";
+            len--;
+        }else if(cnt==K && len==1)
         {
-            front = front - N;
+            cout << front;
+            len--;
         }
-
-        if(!arr[front])
-        {    
+        front = front+1 > N ? 0 : front;
             
-            arr[front] = 1;
-        }
-        else
-        {
-
-        } */
-        
-        
     }
 
-    
+    cout << ">";
+
     return 0;
 
 }

@@ -3,30 +3,25 @@ using namespace std;
 
 void print(const void *arr, int size, int _sizet){
 
+    
     if(_sizet>1)
-    {
-        arr = (int*)arr;
+    {   
+        int* a = (int *)arr;
+        for (int i = 0; i < size; i++)
+        {
+            cout << a[i] << " ";
+        }
     }
     else
     {
-        arr = (char*)arr;
+        char* arr = (char *)arr;
+        for (int i = 0; i < size; i++)
+        {
+            cout << arr[i] << " ";
+        }
     }
 
-    if (size == 0)
-    {
-        //array
-        for (int i = 0; i < 7; i++)
-        {
-            //cout << arr[i] << " " ;
-        }
-    }
-    else
-    {
-        for (int i = 0; i < 7; i++)
-        {
-            //cout << arr[i];
-        }
-    }
+    cout << "\n";    
 }
 
 int main(){
@@ -36,20 +31,20 @@ int main(){
     int N, K;
     cin >> N >> K;
 
-    char arr[N];
-
-    cout << sizeof(arr)/N;
-    // print(arr, 10, sizeof(arr[0]));
+    int arr[N];
 
     for (int i = 0; i < N; i++)
     {
         arr[i] = i + 1;
+        //cout << "arr : " << arr[i] << " i : " << i << endl; 
     }
 
-    for (int i = 0; i < N; i++)
-    {
-        arr[i] = i + 1;
-    }
+    // for (int i = 0; i < N; i++)
+    // {
+    //     arr[i] = i + 1;
+    // }
+
+    print(arr, N, sizeof(arr)/N);
 
     /* 풀이 1 
     int N, K;

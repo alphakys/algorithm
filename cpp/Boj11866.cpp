@@ -36,9 +36,9 @@ int main(){
     int N, K;
     cin >> N >> K;
 
-    int arr[N];
+    char arr[N];
 
-    cout << sizeof(arr);
+    cout << sizeof(arr)/N;
     // print(arr, 10, sizeof(arr[0]));
 
     for (int i = 0; i < N; i++)

@@ -8,33 +8,6 @@
     },
     "tasks": [
         {
-            "label": "save and compile for C++",
-            "command": "g++",
-            "args": [
-                "${file}",
-                "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
-            ],
-            "group": "build",
-            "problemMatcher": {
-                "fileLocation": [
-                    "relative",
-                    "${workspaceRoot}"
-                ],
-                "pattern": {
-                    // The regular expression.
-                  //Example to match: helloWorld.c:5:3: warning: implicit declaration of function 'prinft'
-                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning error):\\s+(.*)$",
-                    "file": 1,
-                    "line": 2,
-                    "column": 3,
-                    "severity": 4,
-                    "message": 5
-                }
-            }
-        },
-        //C 컴파일
-        {
             "label": "save and compile for C",
             "command": "gcc",
             "args": [
@@ -49,8 +22,30 @@
                     "${workspaceRoot}"
                 ],
                 "pattern": {
-                    // The regular expression.
-                  //Example to match: helloWorld.c:5:3: warning: implicit declaration of function 'prinft'
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            }
+        },
+        {
+            "label": "save and compile for C++",
+            "command": "g++",
+            "args": [
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "group": "build",
+            "problemMatcher": {
+                "fileLocation": [
+                    "relative",
+                    "${workspaceRoot}"
+                ],
+                "pattern": {
                     "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning error):\\s+(.*)$",
                     "file": 1,
                     "line": 2,

@@ -1,6 +1,12 @@
 #include <iostream>
 using namespace std;
 
+void pop(int *arr, int idx){
+
+    cout << arr[idx] << ", ";
+    arr[idx] = 0;
+}
+
 void print(const void *arr, int size, int _sizet){
 
     
@@ -27,7 +33,16 @@ void print(const void *arr, int size, int _sizet){
 int main(){
 
     //풀이 2 큐
+    //1 2 3 
+    //4 5 6 
+    //7 1 2 
+    //4 5 7 
+    //1 4 5
+    //1 4
     
+
+
+
     int N, K;
     cin >> N >> K;
 

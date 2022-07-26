@@ -39,9 +39,6 @@ int main(){
     //4 5 7 
     //1 4 5
     //1 4
-    
-
-
 
     int N, K;
     cin >> N >> K;
@@ -50,15 +47,19 @@ int main(){
 
     for (int i = 0; i < N; i++)
     {
-        arr[i] = i + 1;
-        //cout << "arr : " << arr[i] << " i : " << i << endl; 
+        arr[i] = i + 1;    
     }
 
-    // for (int i = 0; i < N; i++)
-    // {
-    //     arr[i] = i + 1;
-    // }
+    int front = 0;
+    front += K;
 
+    for (int i = 0; i < 3; i++)
+    {
+        pop(arr, front);
+    }
+
+
+    cout << endl;
     print(arr, N, sizeof(arr)/N);
 
     /* 풀이 1 

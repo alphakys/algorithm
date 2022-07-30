@@ -8,7 +8,6 @@ void pop(int *arr, int idx){
 }
 
 void print(const void *arr, int size, int _sizet){
-
     
     if(_sizet>1)
     {   
@@ -45,22 +44,23 @@ int main(){
 
     int arr[N];
 
-    for (int i = 0; i < N; i++)
+    for (int i = 1; i <= N; i++)
     {
-        arr[i] = i + 1;    
+        arr[i] = i;    
     }
 
     int front = 0;
-    front += K;
+    
 
     for (int i = 0; i < 3; i++)
-    {
+    {   
+        front += K;
         pop(arr, front);
     }
 
 
     cout << endl;
-    print(arr, N, sizeof(arr)/N);
+    print(arr, 10, sizeof(arr)/N);
 
     /* 풀이 1 
     int N, K;

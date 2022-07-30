@@ -1,11 +1,7 @@
 #include <iostream>
 using namespace std;
 
-void pop(int *arr, int idx){
 
-    cout << arr[idx] << ", ";
-    arr[idx] = 0;
-}
 
 void print(const void *arr, int size, int _sizet){
     
@@ -29,6 +25,15 @@ void print(const void *arr, int size, int _sizet){
     cout << "\n";    
 }
 
+int rear = 0;
+
+void pop(int *arr, int idx){
+
+    cout << arr[idx] << ", ";
+    arr[++rear] = arr[idx];
+    //arr[idx] = 0;
+}
+
 int main(){
 
     //풀이 2 큐
@@ -42,6 +47,7 @@ int main(){
     int N, K;
     cin >> N >> K;
 
+    rear = N;
     int arr[N];
 
     for (int i = 1; i <= N; i++)
@@ -50,7 +56,7 @@ int main(){
     }
 
     int front = 0;
-    
+    int rear = N;
 
     for (int i = 0; i < 3; i++)
     {   
@@ -60,7 +66,7 @@ int main(){
 
 
     cout << endl;
-    print(arr, 10, sizeof(arr)/N);
+    print(arr, 14, sizeof(arr)/N);
 
     /* 풀이 1 
     int N, K;

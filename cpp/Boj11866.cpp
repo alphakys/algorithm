@@ -1,8 +1,6 @@
 #include <iostream>
 using namespace std;
 
-
-
 void print(const void *arr, int size, int _sizet){
     
     if(_sizet>1)

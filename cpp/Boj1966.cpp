@@ -1,70 +1,61 @@
 #include <iostream>
 using namespace std;
 
-void print(const void *arr, int size, int _sizet){
-    
-    if(_sizet>1)
-    {   
-        int* a = (int *)arr;
-        for (int i = 0; i < size; i++)
-        {
-            cout << a[i] << " ";
-        }
-    }
-    else
-    {
-        char* arr = (char *)arr;
-        for (int i = 0; i < size; i++)
-        {
-            cout << arr[i] << " ";
-        }
-    }
+typedef struct Node{
+    int value;
+    int idx;
+} node;
 
-    cout << "\n";    
-}
-
-int arr[200];
-int* ptr_arr[100];
+node arr[600];
 
 int front=0;
 int rear =0;
-int size =0;
+int size_ =0;
+
+void initialize(){
+    front=0;
+    rear =0;
+    size_ =0;
+    
+}
 
 void enqueue(int idx){
 
     arr[++rear] = arr[idx];
 }
 
-void pick(int *front, int *max, int *size){
+
+int pick(int *front, int *max, int *size_, int *M){
     
-    //cout << *front << " " << *max << " " << *size << endl;
-    for(int j=*front; j<*front+*size; j++){
+    for(int j=*front; j<*front+*size_; j++){
             
-        if(arr[j]==*max)
+        if(arr[j].value==*max)
         {
-            cout << arr[j] << endl;
-            ptr_arr[M];
+            if(arr[j].idx ==*M){
+                return 1;
+            }
+
             *front = ++j;
-            (*size)--;
+            (*size_)--;
             break;
         }
         else
         {
             enqueue(j);     
-        }
-                
+        }       
     }
+    return 0;
 }
 
-int getMax(int* front, int* size){
+int getMax(int* front, int* size_){
     
     int max = 0;
 
-    for(int j=*front; j<*front+*size; j++){
+    for(int j=*front; j<*front+*size_; j++){
             
-        if(arr[j]>max)
+        if(arr[j].value > max)
         {
-            max = arr[j];
+            max = arr[j].value;
         }
     }
     return max;
@@ -76,37 +67,43 @@ int main(){
 
     cin >> T;
     
+    int a[100];
+    int len = 0;
+
     for(int i=0; i<T; i++){
         cin >> N >> M;
         cin.get();
         
         rear = N-1;
-        size = N;
+        int size_ = N;
 
         for(int j=0; j<N; j++){
-            cin >> arr[j];
-            ptr_arr[j] = &arr[j];     
+            int n;
+            cin >> n;
+            arr[j].value = n;
+            arr[j].idx = j;
+            
         }
-
-        ptr_arr[M];
 
         for(int k=0; k<N; k++){
 
-            int max = getMax(&front, &size);
-            cout << "max : " << max << "\n"; 
-            pick(&front, &max, &size);
-            //cout << front << " " << rear << " " << size << endl;
-        }
-
-        
-        print(arr, 15, 4);
-              
+            int max = getMax(&front, &size_);
+            //cout << "max : " << max << "\n"; 
+            int flag = pick(&front, &max, &size_, &M);
+            if( flag ==1)
+            {
+                a[len++] = k+1;
+                //cout << endl << k+1 << endl;
+                initialize();
+                break;
+            }
+            
+        }      
     }
 
-    
-
-
-
+    for(int i=0; i<T; i++){
+        cout << a[i] << endl;
+    }
 
     return 0;
 }

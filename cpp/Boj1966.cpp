@@ -42,16 +42,14 @@ int main(){
 
     int T, N, M;
     cin >> T;
-    
-    //1 1 2 2 3 3 3 3 1
+
+    int a[100];
+    int idx = 0;
 
     for(int i=0; i<T; i++){
         
         cin >> N >> M;
         cin.get();
-
-        int a[100];
-        int idx = 0;
 
         for(int j=0; j<N; j++){
             
@@ -70,14 +68,15 @@ int main(){
             
                 if(arr[k]==m)
                 {
+                    
                     if(k==M){
+                        
                         goto print;
                         break;
                     }else
                     {
-                        
-                        a[idx++] = arr[k];
                         arr[k] = 0;
+                        cnt++;
                         break;
 
                     }
@@ -91,14 +90,18 @@ int main(){
                 k=-1;
             }
             flag = ++k;
-            cnt++;
+            
 
         }
         
-        print: cout << cnt+1 << "\n";
+        print: a[idx++] = cnt+1;
+        
 
     }
 
+    for(int i=0; i<T; i++){
+        cout << a[i] << endl;
+    }
     return 0;
 }
 

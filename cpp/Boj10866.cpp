@@ -37,8 +37,12 @@ void push_back(int val)
     arr[--rear] = val;
     length++;
     
-    if (rear_idx == MAX_SIZE){rear_idx--;}
-    else { rear_idx++;}
+    if (rear_idx == MAX_SIZE){
+        rear_idx--;
+    }
+    else { 
+        rear_idx++;
+    }
 }
 
 int pop_front(){
@@ -53,37 +57,12 @@ int pop_back(){
     
     int ret = rear_idx == MAX_SIZE ? -1 : arr[--rear_idx];
     arr[rear_idx] = 0;
-    //cout << "ans : " << ret << endl;
+    
     return ret;
 }
 //    1       1  
 //0 1 2 3 4 5 6 7 
 
-int dequeue(){
-    
-    if(front==-1)
-    {
-        return -1;
-    }
-    else
-    {   
-        int ret = arr[front];
-        
-        if(front<rear)
-        {
-            arr[front++] = 0;
-            length--;
-        }else
-        {
-            arr[front] = 0;
-            front = -1;
-            rear = -1;
-            length = 0;
-        }
-
-        return ret;
-    }
-}
 
 int isEmpty(){
    
@@ -136,7 +115,7 @@ char* readString(){
     {   
         if(c==32)
         {   
-            if(command[6] == 'a'){ push_back(readInt()); }
+            if(command[6] == 'a'){cout << "read : " << readInt(); push_back(readInt());}
             else if(command[6] == 'r') push_front(readInt());
             
             break;

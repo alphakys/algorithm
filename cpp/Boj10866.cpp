@@ -115,8 +115,8 @@ char* readString(){
     {   
         if(c==32)
         {   
-            if(command[6] == 'a'){cout << "read : " << readInt(); push_back(readInt());}
-            else if(command[6] == 'r') push_front(readInt());
+            if(command[6] == 'a'){ push_back(readInt());}
+            else if(command[6] == 'r') { push_front(readInt()); };
             
             break;
         }else

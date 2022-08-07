@@ -23,7 +23,7 @@ int rear_idx= MAX_SIZE;
 int length = 0;
 
 void push_front(int val)
-{
+{  
     arr[++front] = val;
     length++;
     if (front_idx == -1)

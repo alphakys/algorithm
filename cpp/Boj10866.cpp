@@ -23,7 +23,7 @@ int rear_idx= MAX_SIZE;
 int length = 0;
 
 void push_front(int val)
-{  
+{
     arr[++front] = val;
     length++;
     if (front_idx == -1)
@@ -40,15 +40,14 @@ void push_back(int val)
     if (rear_idx == MAX_SIZE){
         rear_idx--;
     }
-    else { 
-        rear_idx++;
-    }
+    // else { 
+    //     rear_idx++;
+    // }
 }
 
 int pop_front(){
     
-    //front_idx ==-1 ? -1 : arr[front_idx];
-    int ret = front_idx == -1 ? -1 : arr[front_idx++];
+    int ret = front_idx == -1 ? -1 : arr[front_idx];
     arr[front_idx++] = 0;
     return ret;
 }
@@ -57,11 +56,8 @@ int pop_back(){
     
     int ret = rear_idx == MAX_SIZE ? -1 : arr[--rear_idx];
     arr[rear_idx] = 0;
-    
     return ret;
 }
-//    1       1  
-//0 1 2 3 4 5 6 7 
 
 
 int isEmpty(){
@@ -76,7 +72,6 @@ int isEmpty(){
     }
    
 }
-
 
 int size_ =30;
 char buff[30];
@@ -117,7 +112,7 @@ char* readString(){
         {   
             if(command[6] == 'a'){ push_back(readInt());}
             else if(command[6] == 'r') { push_front(readInt()); };
-            
+            command[0] = '\0';
             break;
         }else
         {
@@ -142,7 +137,7 @@ int main(){
         if (c[0] == 102)
         {
             //f
-            if(length==0){ printf("%d\n", -1);continue; }
+            //if(front_idx>front) printf("%d\n", arr[]);
             printf("%d\n", arr[front_idx]);
             continue;
         }
@@ -162,11 +157,12 @@ int main(){
         }else if(c[0]==115)
         {
             //s
-            printf("%d\n", length);
+            printf("size : %d\n", (front - front_idx+1) + (rear - rear_idx+1));
             continue;
 
         }else if(c[0]==112)
-        {   if( c[4]== 'f') { pop_front(); }
+        {   
+            if( c[4]== 'f') { pop_front(); }
             else{ pop_back(); }
         }
         printf("front_idx : %d, front : %d / rear_idx : %d, rear : %d\n", front_idx, front, rear_idx, rear);

@@ -3,7 +3,7 @@ using namespace std;
 
 int main(){
     
-    cout << (47 & 16);
+    printf("%d", '\0');
 
     return 0;
 }

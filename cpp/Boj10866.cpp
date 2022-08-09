@@ -22,6 +22,19 @@ int rear_idx= MAX_SIZE;
 
 int length = 0;
 
+int isEmpty(){
+    //int sz = (front - front_idx+1) + (rear - rear_idx+1);
+    if(length==0)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+   
+}
+
 void push_front(int val)
 {
     arr[++front] = val;
@@ -40,38 +53,42 @@ void push_back(int val)
     if (rear_idx == MAX_SIZE){
         rear_idx--;
     }
-    // else { 
-    //     rear_idx++;
-    // }
+
 }
 
-int pop_front(){
+void pop_front(){
     
-    int ret = front_idx == -1 ? -1 : arr[front_idx];
-    arr[front_idx++] = 0;
-    return ret;
-}
+    if(!isEmpty())
+    {
+        front_idx > front ? front=-1, front_idx=-1, printf("%d\n", arr[rear++]) : printf("%d\n", arr[front_idx++]);
+    }else
+    {
+        printf("empty : %d\n", -1); 
+    }
 
-int pop_back(){
+    if(length>0){
+        length--;
+    }
     
-    int ret = rear_idx == MAX_SIZE ? -1 : arr[--rear_idx];
-    arr[rear_idx] = 0;
-    return ret;
+
+}
+
+void pop_back(){
+    
+    if(!isEmpty())
+    {
+        rear_idx < rear ? rear=MAX_SIZE, rear_idx=MAX_SIZE, printf("%d\n", arr[front--]) : printf("%d\n", arr[rear_idx--]);
+    }else
+    {
+        printf("empty : %d\n", -1); 
+    }
+
+    if(length>0){
+        length--;
+    }
 }
 
 
-int isEmpty(){
-   
-    if(length==0)
-    {
-        return 1;
-    }
-    else
-    {
-        return 0;
-    }
-   
-}
 
 int size_ =30;
 char buff[30];
@@ -137,15 +154,26 @@ int main(){
         if (c[0] == 102)
         {
             //f
-            //if(front_idx>front) printf("%d\n", arr[]);
-            printf("%d\n", arr[front_idx]);
+            if(!isEmpty())
+            {
+                front_idx > front ? printf("%d\n", arr[rear]) : printf("%d\n", arr[front_idx]);
+            }
+            else 
+            {
+                printf("%d\n", isEmpty());
+            }
             continue;
         }
         else if (c[0] == 98)
         {
             //b
-            if(length==0){printf("%d\n", -1);continue;} 
-            printf("%d\n", arr[rear_idx]);
+            if(!isEmpty())
+            {
+                rear_idx < rear ? printf("%d\n", arr[front]) : printf("%d\n", arr[rear_idx]);
+            }else
+            {
+                printf("%d\n", -1); 
+            }
             continue;
 
         }else if(c[0]==101)
@@ -157,7 +185,7 @@ int main(){
         }else if(c[0]==115)
         {
             //s
-            printf("size : %d\n", (front - front_idx+1) + (rear - rear_idx+1));
+            printf("size : %d\n", length);
             continue;
 
         }else if(c[0]==112)
@@ -165,7 +193,7 @@ int main(){
             if( c[4]== 'f') { pop_front(); }
             else{ pop_back(); }
         }
-        printf("front_idx : %d, front : %d / rear_idx : %d, rear : %d\n", front_idx, front, rear_idx, rear);
+        //printf("front_idx : %d, front : %d / rear_idx : %d, rear : %d\n", front_idx, front, rear_idx, rear);
         printInt(arr, 10);
     }
 

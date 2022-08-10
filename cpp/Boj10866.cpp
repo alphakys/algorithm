@@ -11,13 +11,16 @@ void printInt(int *arr, int n) {
     printf("\n");
 }
 
+int answer[100];
+int flag = 0;
+
 #define MAX_SIZE 10//10000
 int arr[MAX_SIZE];
 
 int front=-1;
-int front_idx=-1;
+int front_idx=0;
 
-int rear= MAX_SIZE;
+int rear= MAX_SIZE-1;
 int rear_idx= MAX_SIZE;
 
 int length = 0;
@@ -39,15 +42,12 @@ void push_front(int val)
 {
     arr[++front] = val;
     length++;
-    if (front_idx == -1)
-    {
-        front_idx++;
-    }
+    
 }
 
 void push_back(int val)
 {
-    arr[--rear] = val;
+    arr[rear--] = val;
     length++;
     
     if (rear_idx == MAX_SIZE){
@@ -60,10 +60,11 @@ void pop_front(){
     
     if(!isEmpty())
     {
-        front_idx > front ? front=-1, front_idx=-1, printf("%d\n", arr[rear++]) : printf("%d\n", arr[front_idx++]);
+        front_idx > front ? front=-1, front_idx=0, answer[flag++] =arr[rear++] : answer[flag++] =arr[front_idx++];
     }else
     {
-        printf("%d\n", -1); 
+        answer[flag++] = -1;
+        //printf("%d\n", -1); 
     }
 
     if(length>0){
@@ -73,15 +74,16 @@ void pop_front(){
 
 }
 
-
 void pop_back(){
     
     if(!isEmpty())
     {
-        rear_idx < rear ? rear=MAX_SIZE, rear_idx=MAX_SIZE, printf("%d\n", arr[front--]) : printf("%d\n", arr[rear_idx--]);
+        printf("front_idx : %d, front : %d / rear_idx : %d, rear : %d\n", front_idx, front, rear_idx, rear);
+        rear_idx > rear ? rear=MAX_SIZE-1, rear_idx=MAX_SIZE, answer[flag++] =arr[front--] : answer[flag++] = arr[rear_idx--];
     }else
     {
-        printf("-1\n"); 
+        answer[flag++] =-1;
+        //printf("-1\n"); 
     }
 
     if(length>0){
@@ -156,11 +158,11 @@ int main(){
             //f
             if(!isEmpty())
             {
-                front_idx > front ? printf("%d\n", arr[rear]) : printf("%d\n", arr[front_idx]);
+                front_idx > front ? answer[flag++] =arr[rear] : answer[flag++] = arr[front_idx];
             }
             else 
             {
-                printf("-1\n");
+                answer[flag++] =-1;//printf("-1\n");
             }
             continue;
         }
@@ -169,23 +171,24 @@ int main(){
             //b
             if(!isEmpty())
             {
-                rear_idx < rear ? printf("%d\n", arr[front]) : printf("%d\n", arr[rear_idx]);
+                rear_idx < rear ? answer[flag++] = arr[front] : answer[flag++] =arr[rear_idx];
             }else
             {
-                printf("-1\n"); 
+                answer[flag++] =-1;
+                //printf("-1\n"); 
             }
             continue;
 
         }else if(c[0]==101)
         {
             //e
-            printf("%d\n", isEmpty());
+            answer[flag++] =isEmpty();
             continue;
 
         }else if(c[0]==115)
         {
             //s
-            printf("%d\n", length);
+            answer[flag++] =length;
             continue;
 
         }else if(c[0]==112)
@@ -197,5 +200,8 @@ int main(){
         //printInt(arr, 10);
     }
 
+    for(int i=0; i< flag; i++){
+        printf("%d\n", answer[i]);
+    }
     return 0;
 }

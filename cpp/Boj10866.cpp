@@ -63,7 +63,7 @@ void pop_front(){
         front_idx > front ? front=-1, front_idx=-1, printf("%d\n", arr[rear++]) : printf("%d\n", arr[front_idx++]);
     }else
     {
-        printf("empty : %d\n", -1); 
+        printf("%d\n", -1); 
     }
 
     if(length>0){
@@ -72,6 +72,7 @@ void pop_front(){
     
 
 }
+
 
 void pop_back(){
     
@@ -80,14 +81,13 @@ void pop_back(){
         rear_idx < rear ? rear=MAX_SIZE, rear_idx=MAX_SIZE, printf("%d\n", arr[front--]) : printf("%d\n", arr[rear_idx--]);
     }else
     {
-        printf("empty : %d\n", -1); 
+        printf("-1\n"); 
     }
 
     if(length>0){
         length--;
     }
 }
-
 
 
 int size_ =30;
@@ -127,7 +127,7 @@ char* readString(){
     {   
         if(c==32)
         {   
-            if(command[6] == 'a'){ push_back(readInt());}
+            if(command[6] == 'a'){ push_back(readInt()); }
             else if(command[6] == 'r') { push_front(readInt()); };
             command[0] = '\0';
             break;
@@ -160,7 +160,7 @@ int main(){
             }
             else 
             {
-                printf("%d\n", isEmpty());
+                printf("-1\n");
             }
             continue;
         }
@@ -172,7 +172,7 @@ int main(){
                 rear_idx < rear ? printf("%d\n", arr[front]) : printf("%d\n", arr[rear_idx]);
             }else
             {
-                printf("%d\n", -1); 
+                printf("-1\n"); 
             }
             continue;
 
@@ -185,7 +185,7 @@ int main(){
         }else if(c[0]==115)
         {
             //s
-            printf("size : %d\n", length);
+            printf("%d\n", length);
             continue;
 
         }else if(c[0]==112)
@@ -194,7 +194,7 @@ int main(){
             else{ pop_back(); }
         }
         //printf("front_idx : %d, front : %d / rear_idx : %d, rear : %d\n", front_idx, front, rear_idx, rear);
-        printInt(arr, 10);
+        //printInt(arr, 10);
     }
 
     return 0;

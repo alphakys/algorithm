@@ -20,8 +20,8 @@ int arr[MAX_SIZE];
 int front=-1;
 int front_idx=0;
 
-int rear= MAX_SIZE-1;
-int rear_idx= MAX_SIZE;
+int rear= MAX_SIZE;
+int rear_idx= MAX_SIZE-1;
 
 int length = 0;
 
@@ -47,10 +47,10 @@ void push_front(int val)
 
 void push_back(int val)
 {
-    arr[rear--] = val;
+    arr[--rear] = val;
     length++;
     
-    if (rear_idx == MAX_SIZE){
+    if (rear_idx == MAX_SIZE-1){
         rear_idx--;
     }
 

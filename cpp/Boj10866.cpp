@@ -11,19 +11,25 @@ void printInt(int *arr, int n) {
     printf("\n");
 }
 
+typedef struct Node {
+    Node* head;
+    Node* tail;
+    int value;
+} Node;
+
 int answer[100];
 int flag = 0;
 
-#define MAX_SIZE 10//10000
-#define START -1
+#define MAX_SIZE 9//10000
+#define START 0
 
-int arr[MAX_SIZE];
+Node list[10];
 
 int front_pivot=MAX_SIZE;
-int start =MAX_SIZE-1;  
+//int start =MAX_SIZE-1;  
 
 int rear_pivot= START;
-int _end = 0;
+//int _end = 0;
 
 int length = 0;
 
@@ -42,7 +48,8 @@ int isEmpty(){
 
 void push_front(int val)
 {
-    arr[--front_pivot] = val;
+    //arr[--front_pivot] = val;
+    list[]
     length++;
     //printInt(arr, 10);
 }
@@ -139,6 +146,8 @@ char* readString(){
 
 int main(){
     
+
+
     int N;
     fread(buff, 1, size_, stdin);
 

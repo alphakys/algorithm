@@ -25,12 +25,10 @@ int flag = 0;
 
 Node list[10];
 
-int front_pivot=MAX_SIZE;
-//int start =MAX_SIZE-1;  
+Node* front_pivot=NULL;
+Node* rear_pivot= NULL;
 
-int rear_pivot= START;
-//int _end = 0;
-
+int index = 0;
 int length = 0;
 
 int isEmpty(){
@@ -49,14 +47,45 @@ int isEmpty(){
 void push_front(int val)
 {
     //arr[--front_pivot] = val;
-    list[]
+    if(index>0)
+    {
+        list[index].value = val;
+        front_pivot.head = &list[index];
+        list[index].tail = front_pivot;
+        front_pivot = list[index];
+        
+    }
+    else
+    {
+        list[index].value = val;
+        front_pivot = &list[index];
+        rear_pivot = &list[index];
+    }
+
+    index++;
     length++;
-    //printInt(arr, 10);
+
 }
 
 void push_back(int val)
 {
-    arr[++rear_pivot] = val;
+   if(index>0)
+    {
+        list[index].value = val;
+        rear_pivot.tail = &list[index];
+        list[index].head = rear_pivot;
+        rear_pivot = list[index];
+        
+    }
+    else
+    {
+        list[index].value = val;
+        front_pivot = &list[index];
+        rear_pivot = &list[index];
+        
+    }
+
+    index++;
     length++;
     //printInt(arr, 10);
 }
@@ -146,8 +175,6 @@ char* readString(){
 
 int main(){
     
-
-
     int N;
     fread(buff, 1, size_, stdin);
 

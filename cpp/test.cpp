@@ -1,5 +1,15 @@
+#include <stdio.h>
 #include <iostream>
 using namespace std;
+
+void printInt(int *arr, int n) {
+    int i;
+    for (i = 0; i < n; i++) {
+
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
 
 typedef struct Node {
     Node* head;
@@ -7,39 +17,228 @@ typedef struct Node {
     int value;
 } Node;
 
-Node n[10];
-int idx=0;
+int answer[100];
+int flag = 0;
 
-void push(int* val){
+#define MAX_SIZE 9//10000
+#define START 0
 
-    if(idx>0){
-        n[idx].value = *val;
-        n[idx-1].tail = &n[idx];
-        n[idx].head = &n[idx-1];
+Node list[10];
+
+Node* front_pivot=nullptr;
+Node* rear_pivot= nullptr;
+
+int _index = 0;
+int length = 0;
+
+int isEmpty(){
+    
+    if(length==0)
+    {
+        return 1;
     }
     else
     {
-        n[idx].value = *val;
+        return 0;
+    }
+   
+}
+//포인터이면 -> 접근해야 한다.
+void push_front(int val)
+{
+    //arr[--front_pivot] = val;
+    if(_index>0)
+    {
+        list[_index].value = val;
+        front_pivot->head = list[_index];
+        list[_index].tail = front_pivot;
+        front_pivot = list[_index];
+        
+    }
+    else
+    {
+        list[_index].value = val;
+        front_pivot = &list[_index];
+        rear_pivot = &list[_index];
+    }
+
+    _index++;
+    length++;
+
+    for (int i = 0; i < 10; i++)
+    {
+        cout << ' ' << list[i].value << ' ';
     }
     
-    idx++;
+}
+
+void push_back(int val)
+{
+   if(_index>0)
+    {
+        list[_index].value = val;
+        rear_pivot.tail = &list[_index];
+        list[_index].head = rear_pivot;
+        rear_pivot = list[_index];
+        
+    }
+    else
+    {
+        list[_index].value = val;
+        front_pivot = &list[_index];
+        rear_pivot = &list[_index];
+        
+    }
+
+    _index++;
+    length++;
+    //printInt(arr, 10);
+}
+
+void pop_front(){
+    
+    // if(!isEmpty())
+    // {
+    //     start < front_pivot ? front_pivot=MAX_SIZE, start =MAX_SIZE-1, answer[flag++] = arr[_end++] : answer[flag++] =arr[front_pivot++];
+    //     printf("start : %d, front_pivot : %d / _end : %d, rear_pivot : %d\n", start, front_pivot, _end, rear_pivot);
+    // }else
+    // {
+    //     answer[flag++] = -1;
+    // }
+    
+    // if(length>0){
+    //     length--;
+    // }
+}
+
+void pop_back(){
+    
+//     if(!isEmpty())
+//     {
+//         _end > rear_pivot ? rear_pivot=-1, _end=0, answer[flag++] =arr[start--] : answer[flag++] = arr[rear_pivot--];
+//         printf("start : %d, front_pivot : %d / _end : %d, rear_pivot : %d\n", start, front_pivot, _end, rear_pivot);
+//     }else
+//     {
+//         answer[flag++] =-1;
+//     }
+    
+//     if(length>0){
+//         length--;
+//     }
+}
+
+int size_ =30;
+char buff[30];
+
+char *p = buff;
+
+char readChar(){
+    
+    if(p>=buff+size_){
+        
+        fread(p=buff, 1, size_, stdin);
+    }
+
+    return *p++;
+}
+
+int readInt(){
+    
+    int sum = 0;
+    char c = readChar();
+
+    for (; c & 16; c = readChar())
+    {
+        sum = (sum * 10) + (c & 15);
+    }
+    
+    return sum;
+} 
+
+char command[6];
+
+char* readString(){
+
+    int idx = 0;
+    for (char c = readChar(); c!= 10; c = readChar())
+    {   
+        if(c==32)
+        {   
+            if(command[6] == 'a'){ push_back(readInt()); }
+            else if(command[6] == 'r') { push_front(readInt()); };
+            command[0] = '\0';
+            break;
+        }else
+        {
+            command[idx++] = c;
+        }
+        
+    }
+    command[idx] = '\0';
+    return command;
 }
 
 int main(){
+    
+    int N;
+    fread(buff, 1, size_, stdin);
 
-    int a=10, b=11, c=12;
-    
-    push(&a);
-    push(&b);
-    push(&c);
-    
-    for(int i=0; i< 10; i++){
+    N= readInt();
+
+    for (int i = 0; i < N; i++)
+    {
+        char* c = readString();
+        if (c[0] == 102)
+        {
+            //f
+            if(!isEmpty())
+            {
+                
+                //start < front_pivot ? answer[flag++] = arr[_end] : answer[flag++] =arr[front_pivot];
+            }
+            else 
+            {
+                answer[flag++] =-1;
+            }
+            continue;
+        }
+        else if (c[0] == 98)
+        {
+            //b
+            if(!isEmpty())
+            {
+                
+                
+            }else
+            {
+                answer[flag++] =-1;
+                
+            }
+            continue;
+
+        }else if(c[0]==101)
+        {
+            //e
+            answer[flag++] =isEmpty();
+            continue;
+
+        }else if(c[0]==115)
+        {
+            //s
+            answer[flag++] =length;
+            continue;
+
+        }else if(c[0]==112)
+        {   
+            if( c[4]== 'f') {  pop_front(); }
+            else{  pop_back(); }
+        }
         
-        printf("head : %p , tail : %p, value : %d\n", n[i].head, n[i].tail, n[i].value);
-
     }
 
-    printf("0: %p, 1: %p, 2: %p", &n[0], &n[1], &n[2]);
-
+    for(int i=0; i< flag; i++){
+        printf("%d\n", answer[i]);
+    }
+    
     return 0;
 }

@@ -5,7 +5,6 @@ using namespace std;
 void printInt(int *arr, int n) {
     int i;
     for (i = 0; i < n; i++) {
-
         printf("%d ", arr[i]);
     }
     printf("\n");
@@ -50,9 +49,9 @@ void push_front(int val)
     if(_index>0)
     {
         list[_index].value = val;
-        front_pivot->head = list[_index];
+        front_pivot->head = &list[_index];
         list[_index].tail = front_pivot;
-        front_pivot = list[_index];
+        front_pivot = &list[_index];
         
     } 
     else
@@ -69,17 +68,17 @@ void push_front(int val)
     {
         cout << ' ' << list[i].value << ' ';
     }
-    
+    cout << endl;
 }
 
 void push_back(int val)
 {
-   if(_index>0)
+    if(_index>0)
     {
         list[_index].value = val;
-        rear_pivot.tail = &list[_index];
+        rear_pivot->tail = &list[_index];
         list[_index].head = rear_pivot;
-        rear_pivot = list[_index];
+        rear_pivot = &list[_index];
         
     }
     else
@@ -92,39 +91,47 @@ void push_back(int val)
 
     _index++;
     length++;
+
+    for (int i = 0; i < 10; i++)
+    {
+        cout << ' ' << list[i].value << ' ';
+    }
+    cout << endl;
     //printInt(arr, 10);
 }
 
 void pop_front(){
     
-    // if(!isEmpty())
-    // {
-    //     start < front_pivot ? front_pivot=MAX_SIZE, start =MAX_SIZE-1, answer[flag++] = arr[_end++] : answer[flag++] =arr[front_pivot++];
-    //     printf("start : %d, front_pivot : %d / _end : %d, rear_pivot : %d\n", start, front_pivot, _end, rear_pivot);
-    // }else
-    // {
-    //     answer[flag++] = -1;
-    // }
+    if(!isEmpty())
+    {
+        answer[flag++] = front_pivot->value;
+        front_pivot = front_pivot->tail;
+    }else
+    {
+        answer[flag++] = -1;
+    }
     
-    // if(length>0){
-    //     length--;
-    // }
+    if(length>0){
+        length--;
+    }
 }
 
 void pop_back(){
+   
+    if(!isEmpty())
+    {
+        answer[flag++] = rear_pivot->value;
+        rear_pivot = rear_pivot->tail;
+
+        cout <<"test : "<< rear_pivot->value << endl;
+    }else
+    {
+        answer[flag++] =-1;
+    }
     
-//     if(!isEmpty())
-//     {
-//         _end > rear_pivot ? rear_pivot=-1, _end=0, answer[flag++] =arr[start--] : answer[flag++] = arr[rear_pivot--];
-//         printf("start : %d, front_pivot : %d / _end : %d, rear_pivot : %d\n", start, front_pivot, _end, rear_pivot);
-//     }else
-//     {
-//         answer[flag++] =-1;
-//     }
-    
-//     if(length>0){
-//         length--;
-//     }
+    if(length>0){
+        length--;
+    }
 }
 
 int size_ =30;
@@ -151,7 +158,6 @@ int readInt(){
     {
         sum = (sum * 10) + (c & 15);
     }
-    
     return sum;
 } 
 
@@ -164,8 +170,8 @@ char* readString(){
     {   
         if(c==32)
         {   
-            if(command[6] == 'a'){ push_back(readInt()); }
-            else if(command[6] == 'r') { push_front(readInt()); };
+            if(command[6] == 'a') { push_back(readInt()); }
+            else if(command[6] == 'r') { push_front(readInt()); }
             command[0] = '\0';
             break;
         }else
@@ -188,13 +194,13 @@ int main(){
     for (int i = 0; i < N; i++)
     {
         char* c = readString();
+        cout << readString() << endl;
         if (c[0] == 102)
         {
             //f
             if(!isEmpty())
             {
-                
-                //start < front_pivot ? answer[flag++] = arr[_end] : answer[flag++] =arr[front_pivot];
+                answer[flag++] = front_pivot->value;
             }
             else 
             {
@@ -207,12 +213,11 @@ int main(){
             //b
             if(!isEmpty())
             {
-                
-                
-            }else
+                answer[flag++] =rear_pivot->value;
+            }
+            else
             {
                 answer[flag++] =-1;
-                
             }
             continue;
 
@@ -230,8 +235,9 @@ int main(){
 
         }else if(c[0]==112)
         {   
-            if( c[4]== 'f') {  pop_front(); }
-            else{  pop_back(); }
+            cout << c[4];
+            if( c[4]== 'f') { pop_front(); }
+            else{ cout << "sdaf"; pop_back(); }
         }
         
     }

@@ -54,7 +54,7 @@ void push_front(int val)
         list[_index].tail = front_pivot;
         front_pivot = list[_index];
         
-    }
+    } 
     else
     {
         list[_index].value = val;

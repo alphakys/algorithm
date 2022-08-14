@@ -19,13 +19,9 @@ typedef struct Node {
 int answer[100];
 int flag = 0;
 
-#define MAX_SIZE 9//10000
-#define START 0
-
 Node list[10];
-
-Node* front_pivot=nullptr;
-Node* rear_pivot= nullptr;
+Node* front_pivot=&list[0];
+Node* rear_pivot= &list[0];
 
 int _index = 0;
 int length = 0;
@@ -45,7 +41,7 @@ int isEmpty(){
 //포인터이면 -> 접근해야 한다.
 void push_front(int val)
 {
-    //arr[--front_pivot] = val;
+    
     if(_index>0)
     {
         list[_index].value = val;
@@ -56,19 +52,12 @@ void push_front(int val)
     } 
     else
     {
-        list[_index].value = val;
-        front_pivot = &list[_index];
-        rear_pivot = &list[_index];
+        front_pivot->value = val;
     }
 
     _index++;
     length++;
 
-    for (int i = 0; i < 10; i++)
-    {
-        cout << ' ' << list[i].value << ' ';
-    }
-    cout << endl;
 }
 
 void push_back(int val)
@@ -79,25 +68,14 @@ void push_back(int val)
         rear_pivot->tail = &list[_index];
         list[_index].head = rear_pivot;
         rear_pivot = &list[_index];
-        
     }
     else
     {
-        list[_index].value = val;
-        front_pivot = &list[_index];
-        rear_pivot = &list[_index];
-        
+        rear_pivot->value = val;
     }
 
     _index++;
     length++;
-
-    for (int i = 0; i < 10; i++)
-    {
-        cout << ' ' << list[i].value << ' ';
-    }
-    cout << endl;
-    //printInt(arr, 10);
 }
 
 void pop_front(){
@@ -105,32 +83,54 @@ void pop_front(){
     if(!isEmpty())
     {
         answer[flag++] = front_pivot->value;
-        front_pivot = front_pivot->tail;
+        if(front_pivot->tail ==nullptr)
+        {
+            front_pivot = &list[0];
+            _index = 0;
+        }
+        else
+        {
+            front_pivot = front_pivot->tail;
+        }       
+        
     }else
     {
         answer[flag++] = -1;
     }
     
-    if(length>0){
-        length--;
+    if(length>0){ length--; }
+    
+    if(length==0){
+        front_pivot=&list[0];
+        rear_pivot= &list[0];
     }
 }
 
 void pop_back(){
-   
+    
     if(!isEmpty())
     {
         answer[flag++] = rear_pivot->value;
-        rear_pivot = rear_pivot->tail;
-
-        cout <<"test : "<< rear_pivot->value << endl;
+        
+        if(rear_pivot->head == nullptr)
+        {
+            rear_pivot = &list[0];
+            _index = 0;
+        }
+        else{
+            rear_pivot = rear_pivot->head;
+        }
+        
     }else
     {
         answer[flag++] =-1;
     }
     
-    if(length>0){
-        length--;
+    if(length>0){ length--; }
+    
+    if(length==0){
+        front_pivot=&list[0];
+        rear_pivot= &list[0];
     }
 }
 
@@ -194,7 +194,6 @@ int main(){
     for (int i = 0; i < N; i++)
     {
         char* c = readString();
-        cout << readString() << endl;
         if (c[0] == 102)
         {
             //f
@@ -235,9 +234,9 @@ int main(){
 
         }else if(c[0]==112)
         {   
-            cout << c[4];
+        
             if( c[4]== 'f') { pop_front(); }
-            else{ cout << "sdaf"; pop_back(); }
+            else{ pop_back(); }
         }
         
     }

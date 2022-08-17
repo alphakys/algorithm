@@ -16,10 +16,10 @@ typedef struct Node {
     int value;
 } Node;
 
-int answer[100];
+int answer[10000];
 int flag = 0;
 
-Node list[10];
+Node list[10000];
 Node* front_pivot=&list[0];
 Node* rear_pivot= &list[0];
 

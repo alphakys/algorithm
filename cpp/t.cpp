@@ -2,16 +2,34 @@
 #include <iostream>
 using namespace std;
 
-typedef struct Node {
-    Node* head;
-    Node* tail;
-    int value;
-} Node;
+class ClassG{
+    public:
+        static int get(){ return x;}
+        static int x;
+};
 
-int main(){
+int a(){
+    static int a = 0;
+    
+    return a++;
+}
 
-    Node  p1;
-    cout << sizeof(p1);
+int b(){
+    static int a = 0;
+    
+    return a++;
+}
+
+
+int main(void){
+    
+    cout << a()<< endl;
+    cout << a()<< endl;
+    cout << a()<< endl;
+    cout << b()<< endl;
+    cout << b()<< endl;
+    cout << b()<< endl;
+    
     return 0;
 
 }

@@ -7,55 +7,56 @@ typedef struct Node{
 }Node;
 
 class Queue{
-
     private:
-        int val;
         
-    public:    
-        Node n;
-
-    void valSetter(int);
-        //val = a;
-        
-
-    int valGetter();
-        //return val; 
+        int index = 0;
     
-
-    //Queue(){cout << &val << endl;}
+    public:   
+        Node n[100]; 
+        void push(int);
+        int pop();
+        
 };
 
-int Queue:: valGetter(){return val;}
-void Queue:: valSetter(int a){val = a;}
+void Queue:: push(int x)
+{
+    if(index ==0){ n[index++].value = x; }
+    else{ n[index].value = x; n[index-1].next = &n[index]; index++;}
+    
+}
 
+//Function to pop front element from the queue.
+int Queue :: pop()
+{
+    return 0;
+}
 
 
 int main(){
     
-    // int i=10;
-    // int j=20;
+    Queue *q = new Queue();
+    int Q;
+    cin >> Q;
 
-    // const int* ptr = &i;
-    // cout << *ptr << endl;
-    // ptr = &j;
-    // cout << *ptr << endl;
+    while(Q--){
+        int QueryType=0;
+        cin>>QueryType;
+        if(QueryType==1)
+        {
+            int a;
+            cin>>a;
+            q->push(a);
+        }else if(QueryType==2){
+            cout<<q->pop()<<" ";
 
-    const int i=10;
-    int j=20;
+        }
+    }
 
-    int constb *ptr = &i;
-    cout << *ptr << endl;
+    for (int i = 0; i < 5; i++)
+    {
+        cout << q->n[i].value;
+    }
     
-    //const int a;
-    //a = 2;
-    //const는 read-only variable이라서 처음에 할당된 값 말고 다른 값을 할당할 수 없다.
-
-    //Queue *q = new Queue();
-    Queue q;
-    //q.valSetter(2);
-    //cout << q.valGetter();
-    //cout << "1: " << &(q->n) << endl;
-    //cout << "2 : " << q << endl;
-
     return 0;
 }
+

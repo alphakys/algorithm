@@ -2,24 +2,24 @@
 #include <bits/stdc++.h> 
 using namespace std; 
 
-// struct Node
-// {
-//     int data;
-//     struct Node* next;
+struct Node
+{
+    int data;
+    struct Node* next;
     
-//     Node(int x){
-//         data = x;
-//         next = NULL;
-//     }
-// };
-// void printList(Node* node) 
-// { 
-//     while (node != NULL) { 
-//         cout << node->data <<" "; 
-//         node = node->next; 
-//   }  
-//   cout<<"\n";
-// } 
+    Node(int x){
+        data = x;
+        next = NULL;
+    }
+};
+void printList(Node* node) 
+{ 
+    while (node != NULL) { 
+        cout << node->data <<" "; 
+        node = node->next; 
+  }  
+  cout<<"\n";
+} 
 
 
 
@@ -34,35 +34,32 @@ struct Node {
   }
 }; */
 
-
-typedef struct Node{
-    int value;
-    Node* next;
-} Node;
-
-
-
-
-
-
-
-
-
-
-
 class Solution{
   public:
-    Node h;
     //Function to insert a node at the beginning of the linked list.
-    Node* insertAtBegining(Node *head, int x) {
-        h.value = x;
-        if( h.next == NULL ){ Node *curr; h.next = curr;}
+    Node *insertAtBegining(Node *head, int x) {
+       if( head ==NULL ) { head = new Node(x); }
+        else{
+            Node* node = new Node(x);
+            Node* tmp = head;
+            head = node;
+            head->next = tmp;
+
+        }
+        return head;
     }
     
     
     //Function to insert a node at the end of the linked list.
-    Node* insertAtEnd(Node *head, int x)  {
-       // Your code here
+    Node *insertAtEnd(Node *head, int x)  {
+       if( head ==NULL ) { head = new Node(x); }
+        else{
+            Node* node = head;
+            for(; node->next !=nullptr; node = node->next){}
+            node->next = new Node(x);
+            
+        }
+        return head;
     }
 };
 
@@ -83,13 +80,12 @@ int main()
             cin>>data;
             cin>>indicator;
             Solution obj;
-            
             if(indicator)
                 head = obj.insertAtEnd(head, data); 
             else
                 head = obj.insertAtBegining(head, data);
         }
-        //printList(head); 
+        printList(head); 
     }
     return 0; 
 } 

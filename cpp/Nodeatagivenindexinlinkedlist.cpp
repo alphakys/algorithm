@@ -54,7 +54,7 @@ int main()
             cin>>l;
             head = push(head, l);
         }
-   
+    
     printf("%d\n", GetNth(head, k));  
     getchar();
     }

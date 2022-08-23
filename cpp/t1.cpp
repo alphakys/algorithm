@@ -26,8 +26,7 @@ class Solution{
             Node* tmp = head;
             head = node;
             head->next = tmp;
-
-            //head->value = x;    
+ 
         }
     }
     

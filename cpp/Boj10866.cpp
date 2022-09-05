@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <iostream>
 using namespace std;
-
+ 
 void printInt(int *arr, int n) {
     int i;
     for (i = 0; i < n; i++) {

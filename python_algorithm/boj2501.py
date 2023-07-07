@@ -4,18 +4,18 @@ raw_str = input()
 N = int(raw_str.split()[0])
 K = int(raw_str.split()[1])
 
-sqrt_num = int(math.sqrt(N))
+# 약수 d1 d2 중에서 d1, d2가 가장 크게 나오는 수는 제곱근
 
-check_list = [1]
-
-for _ in range(2, sqrt_num + 1):
+sq_num = int(math.sqrt(N))
+answer = []
+for _ in range(1, sq_num+1):
     if N % _ == 0:
-        check_list.append(_)
-        check_list.append(N // _)
-check_list.append(N)
-check_list = sorted(set(check_list))
+        answer.append(_)
+        answer.append(int(N/_))
 
+answer = sorted(set(answer))
 try:
-    print(check_list[K-1])
+    print(answer[K-1])
 except:
     print(0)
+

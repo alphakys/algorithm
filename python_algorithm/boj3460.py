@@ -3,11 +3,10 @@ import sys
 T = int(sys.stdin.readline())
 
 for i in range(T):
-    n = int(sys.stdin.readline())
-    l = []
-    while n > 1:
-        l.append(n % 2)
-        n = int(n / 2)
+    example = int(sys.stdin.readline())
+    answer = []
+    while example / 2 > 0:
+        answer.append(example % 2)
+        example = int(example / 2)
 
-    l.append(1)
-    print(*[idx for idx, n in enumerate(l) if n > 0])
+    print(*[idx for idx, n in enumerate(answer) if n > 0])

@@ -1,21 +1,18 @@
+import sys
 import math
 
-raw_str = input()
-N = int(raw_str.split()[0])
-K = int(raw_str.split()[1])
+N, K = sys.stdin.readline().split()
+N = int(N)
+K = int(K)
+n = int(math.sqrt(N))
 
-# 약수 d1 d2 중에서 d1, d2가 가장 크게 나오는 수는 제곱근
-
-sq_num = int(math.sqrt(N))
-answer = []
-for _ in range(1, sq_num+1):
+divisor_list = []
+for _ in range(1, n + 1):
     if N % _ == 0:
-        answer.append(_)
-        answer.append(int(N/_))
+        divisor_list.append(_)
+        divisor_list.append(N // _)
 
-answer = sorted(set(answer))
 try:
-    print(answer[K-1])
-except:
-    print(0)
-
+    sys.stdout.write(f'{sorted(set(divisor_list))[K - 1]}')
+except Exception:
+    sys.stdout.write('0')

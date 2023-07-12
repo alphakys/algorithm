@@ -2,11 +2,11 @@ import sys
 
 T = int(sys.stdin.readline())
 
-for i in range(T):
-    example = int(sys.stdin.readline())
-    answer = []
-    while example / 2 > 0:
-        answer.append(example % 2)
-        example = int(example / 2)
+for _ in range(T):
+    n = int(sys.stdin.readline())
 
-    print(*[idx for idx, n in enumerate(answer) if n > 0])
+    reminder = []
+    while n > 0:
+        reminder.append(n % 2)
+        n = n // 2
+    print(*[i for i, r in enumerate(reminder) if r > 0])

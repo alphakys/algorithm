@@ -1,18 +1,27 @@
 import sys
+import math
+N = int(sys.stdin.readline())
 
-# N = sys.stdin.readline()
+example = [int(n) for n in sys.stdin.readline().split()]
 
-# arr = [int(n) for n in sys.stdin.readline().split()]
-
-
-raw_arr = [n for n in range(2,1001)]
-
-print(raw_arr)
-
-for i in range(2, 4):
+arr = [1]
+for i in range(2, 1000):
     j = 2
-    while i * j <= 1000:
-        raw_arr.remove(i*j)
-        # raw_arr.
-        j += 1
-print(raw_arr)
+    sq = int(math.sqrt(i))
+    is_prime = True
+    for _ in range(2, sq+1):
+        if i % _ == 0:
+            # 약수가 있음 즉 소수가 아님
+            is_prime = False
+
+    if is_prime:
+        while i * j <= 1000:
+            # print(i*j)
+            arr.append(i*j)
+            j += 1
+# print(arr)
+for e in example:
+    if arr.__contains__(e):
+        N -= 1
+
+print(N)

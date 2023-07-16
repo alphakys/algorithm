@@ -1,43 +1,32 @@
-import random
 import sys
+
+# arr = [int(n) for n in sys.stdin.readlines()]
+# sys.stdin.close()
+
 import numpy as np
+arr = [21,  9, 31, 11,  3,  4, 21] + [2, 10]
 
-k = 0
-while k < 2:
-    try:
-        a = np.random.randint(1, 100, 2)
+target_num = sum(arr) - 100
 
-        arr = [7, 8, 10, 13, 19, 20, 23]
+for idx, i in enumerate(arr):
+    if i >= target_num or idx + 1 > 8:
+        continue
 
-        if any([n in arr for n in a]):
-            continue
-        # for _ in range(9):
-        #     n = int(sys.stdin.readline())
-        #     arr.append(n)
+    for j in arr[idx+1:]:
+        if i + j == target_num:
+            arr.remove(i)
+            arr.remove(j)
 
-        arr = arr + a.tolist()
+            sys.stdout.write('\n'.join([str(n) for n in sorted(arr)]))
+            exit()
 
-        random.shuffle(arr)
-        print(arr)
 
-        sums = sum(arr)
-        j = 0
-        while j <= 7:
-            for i in range(j+1, 9):
-                # print(i)
-                tmp_sum = arr[j] + arr[i]
-                print(arr[j], ' ', arr[i])
-                if sums - tmp_sum == 100:
-                    first_remove = arr[j]
-                    second_remove = arr[i]
-                    # print(first_remove, second_remove)
-                    arr.remove(first_remove)
-                    arr.remove(second_remove)
-
-                    sys.stdout.write('\n'.join([str(n) for n in sorted(arr)]))
-                    exit()
-            j += 1
-        k += 1
-    except Exception as e:
-        print(e)
-
+# array([22, 41,  6, 16,  9,  1,  5]),
+# array([21,  9, 31, 11,  3,  4, 21]),
+# array([12, 13, 21,  1, 13, 31,  9]),
+# array([14, 27, 10,  9, 32,  2,  6]),
+# array([ 4, 27,  1, 10,  7,  2, 49]),
+# array([33,  2,  8,  3,  6,  5, 43]),
+# array([ 2,  1,  8, 35,  5, 11, 38]),
+# array([ 7,  6,  8, 10,  5, 60,  4]),
+# array([20,  2,  8,  1, 17,  4, 48])]

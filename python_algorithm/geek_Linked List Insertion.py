@@ -14,8 +14,7 @@ class Solution:
             n.next = head
             return n
         else:
-            head = n
-            return head
+            return n
 
     # Function to insert a node at the end of the linked list.
     def insertAtEnd(self, head, x):

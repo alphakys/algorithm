@@ -10,11 +10,11 @@ class MyStack:
     # Function to push an integer into the stack.
     def push(self, data):
         node = StackNode(data)
-        if self.head:
-            n = self.head
-            while n:
-                n = n.next
-            n = node
+        tmp = self.head
+        if tmp:
+            while tmp.next:
+                tmp = tmp.next
+            tmp.next = node
         else:
             self.head = node
 
@@ -26,9 +26,17 @@ class MyStack:
     def pop(self):
         if self.head:
             n = self.head
+
+            del n
+            print(self.head)
+            return
+            # curr = n
             while n.next:
                 n = n.next
-            return n.data
+            val = n.data
+            # print(id(n))
+            n = None
+            return val
         else:
             return -1
 
@@ -70,7 +78,8 @@ if __name__ == '__main__':
             elif (s.isEmpty()):
                 print(-1)
         print()
-
+    print("list print")
+    s.printList(s.head)
 
 # } Driver Code Ends
 

@@ -1,6 +1,5 @@
 # User function Template for python3
 
-
 '''
 # Node Class:
 class Node:
@@ -8,56 +7,28 @@ class Node:
         self.data = val
         self.left = None
         self.right = None
-'''
+        '''
 
 
-# Function to return a list containing the preorder traversal of the tree.
-def preorder(root, answer=[]):
-    # answer = []
-    if root:
-        answer.append(root.data)
+class Solution:
+    # Function to find the height of a binary tree.
+    def height(self, root):
+
         if root.left:
-            # answer += \
-            preorder(root.left, answer)
+            self.height(root.left)
 
         if root.right:
-            # answer += \
-            preorder(root.right, answer)
-
-    return answer
-
-# 다른 예제!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
+            self.height(root.right)
+        print(root.data)
 
 
-# def preorderUtil(root, res):
-#     # preorder traversal works on Root Left Right.
-#
-#     # if root is null then we simply return.
-#     if root is None:
-#         return
-#
-#     # first, we store the data at root in a list.
-#     res.append(root.data)
-#     # then we call the recursive function for left subtree.
-#     preorderUtil(root.left, res)
-#     # then we call the recursive function for right subtree.
-#     preorderUtil(root.right, res)
-#
-#
-# # Function to return a list containing the preorder traversal of the tree.
-# def preorder(root):
-#     res = []
-#     preorderUtil(root, res)
-#     # returning the list.
-#     return res
-
-
-
-
+# code here
 
 
 # {
 # Driver Code Starts
+# Initial Template for Python 3
+
 from collections import deque
 
 
@@ -130,9 +101,6 @@ if __name__ == "__main__":
     for _ in range(0, t):
         s = input()
         root = buildTree(s)
-        res = preorder(root)
-        for i in res:
-            print(i, end=" ")
-        print()
-
+        ob = Solution()
+        print(ob.height(root))
 # } Driver Code Ends

@@ -4,60 +4,35 @@
 '''
 # Node Class:
 class Node:
-    def _init_(self,val):
+    def __init__(self,val):
         self.data = val
         self.left = None
         self.right = None
 '''
 
 
-# Function to return a list containing the preorder traversal of the tree.
-def preorder(root, answer=[]):
-    # answer = []
+# Function to return a list containing the postorder traversal of the tree.
+def postOrder(root, answer=[]):
     if root:
-        answer.append(root.data)
+
         if root.left:
-            # answer += \
-            preorder(root.left, answer)
+            postOrder(root.left, answer)
 
         if root.right:
-            # answer += \
-            preorder(root.right, answer)
+            postOrder(root.right, answer)
 
+        answer.append(root.data)
     return answer
 
-# 다른 예제!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
 
-
-# def preorderUtil(root, res):
-#     # preorder traversal works on Root Left Right.
-#
-#     # if root is null then we simply return.
-#     if root is None:
-#         return
-#
-#     # first, we store the data at root in a list.
-#     res.append(root.data)
-#     # then we call the recursive function for left subtree.
-#     preorderUtil(root.left, res)
-#     # then we call the recursive function for right subtree.
-#     preorderUtil(root.right, res)
-#
-#
-# # Function to return a list containing the preorder traversal of the tree.
-# def preorder(root):
-#     res = []
-#     preorderUtil(root, res)
-#     # returning the list.
-#     return res
-
-
-
-
+# code here
 
 
 # {
 # Driver Code Starts
+# Initial Template for Python 3
+
+# Contributed by Sudarshan Sharma
 from collections import deque
 
 
@@ -130,9 +105,9 @@ if __name__ == "__main__":
     for _ in range(0, t):
         s = input()
         root = buildTree(s)
-        res = preorder(root)
-        for i in res:
-            print(i, end=" ")
+        res = postOrder(root)
+        for i in range(len(res)):
+            print(res[i], end=" ")
         print()
 
 # } Driver Code Ends

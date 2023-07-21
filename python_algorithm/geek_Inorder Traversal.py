@@ -14,20 +14,24 @@ class Node:
 # Function to return a list containing the inorder traversal of the tree.
 class Solution:
 
-    def InOrder(self, root, answer=[]):
+    def order_util(self, root, arr):
 
-        if root:
+        if root.left:
+            self.order_util(root.left, arr)
 
-            if root.left:
-                self.InOrder(root.left, answer)
+        arr.append(root.data)
 
-            answer.append(root.data)
+        if root.right:
+            self.order_util(root.right, arr)
 
-            if root.right:
-                self.InOrder(root.right, answer)
+        return arr
 
+    def InOrder(self, root):
+        arr = []
+        if not root:
+            return
 
-        return answer
+        return self.order_util(root, arr)
 
 # code here
 

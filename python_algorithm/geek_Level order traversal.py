@@ -1,5 +1,5 @@
 # User function Template for python3
-
+import time
 from queue import Queue
 
 
@@ -15,21 +15,24 @@ class Solution:
         if not root:
             return
 
-        self.answer.append(root.data)
-        self.order(root)
-        return self.answer
+        self.q.put(root)
 
-    def order(self, root):
-
-        if root.left:
-            self.q.put(root.left)
-        if root.right:
-            self.q.put(root.right)
+        answer = []
 
         while not self.q.empty():
             node = self.q.get()
-            self.answer.append(node.data)
-            self.order(node)
+
+            if node:
+                answer.append(node.data)
+                if node.left:
+                    self.q.put(node.left)
+
+                if node.right:
+                    self.q.put(node.right)
+            else:
+                break
+
+        return answer
 
 
 # {

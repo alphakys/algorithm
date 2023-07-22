@@ -34,9 +34,13 @@ class Solution:
         root = t.head
         q.put(value_queue.popleft())
 
+        while value_queue.__len__() > 0:
+
+
+
         while not q.empty():
 
-            #for val in value_queue:
+            # for val in value_queue:
             if not root.left:
                 root.left = Node(value_queue.popleft())
                 continue
@@ -46,7 +50,6 @@ class Solution:
 
         print()
         return
-
 
         root_l = [root]
         height = 0

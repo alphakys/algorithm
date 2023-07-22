@@ -8,24 +8,27 @@ class Node:
         self.left = None
 """
 
-def preorder_traversal(root, answer=[]):
-
-    if root:
-        answer.append(root.data)
-        if root.left:
-            preorder_traversal(root.left, answer)
-
-        if root.right:
-            preorder_traversal(root.right, answer)
-
-    return answer
 
 # Function to find the minimum element in the given BST.
+
+def order_util(root, min_val):
+    if root.left:
+        if min_val > root.left.data:
+            min_val = root.left.data
+        min_val = order_util(root.left, min_val)
+
+    if root.right:
+        if min_val > root.right.data:
+            min_val = root.right.data
+        min_val = order_util(root.right, min_val)
+
+    return min_val
+
 def minValue(root):
-    answer = preorder_traversal(root)
+    if not root:
+        return -1
 
-    return min(answer)
-
+    return order_util(root, root.data)
 
 
 ##Your code here

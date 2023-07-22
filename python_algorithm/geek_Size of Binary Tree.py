@@ -1,38 +1,23 @@
-# User function Template for python3
+# Your task to complete this function
+# function should return size of the binary tree as integer
 
-'''
-# Node Class:
-class Node:
-    def _init_(self,val):
-        self.data = val
-        self.left = None
-        self.right = None
-        '''
+def order_util(root, cnt):
+    if root.left:
+        cnt += 1
+        cnt = order_util(root.left, cnt)
+
+    if root.right:
+        cnt += 1
+        cnt = order_util(root.right, cnt)
+
+    return cnt
 
 
-class Solution:
-    # Function to find the height of a binary tree.
+def getSize(node):
+    if not node:
+        return
 
-    def height(self, root):
-
-        root_l = [root]
-        height = 0
-        leaves_l = []
-
-        while root_l:
-            for node in root_l:
-
-                if node.left:
-                    leaves_l.append(node.left)
-                if node.right:
-                    leaves_l.append(node.right)
-            height += 1
-
-            root_l = leaves_l
-            leaves_l = []
-
-        return height
-
+    return order_util(node, 1)
 
 # code here
 
@@ -41,6 +26,7 @@ class Solution:
 # Driver Code Starts
 # Initial Template for Python 3
 
+# Contributed by Sudarshan Sharma
 from collections import deque
 
 
@@ -113,8 +99,6 @@ if __name__ == "__main__":
     for _ in range(0, t):
         s = input()
         root = buildTree(s)
-        ob = Solution()
-        ob.level_order(root)
+        print(getSize(root))
 
-        # print(ob.height(root))
 # } Driver Code Ends

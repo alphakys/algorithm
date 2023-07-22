@@ -1,46 +1,47 @@
 # User function Template for python3
 
-'''
-# Node Class:
-class Node:
-    def _init_(self,val):
-        self.data = val
-        self.left = None
+
+# Structure of the node of the tree is as
+
+'''class Node:
+    def __init__(self, val):
         self.right = None
-        '''
+        self.data = val
+        self.left = None'''
 
 
+# function should return the count of total number of non leaf nodes in the tree
 class Solution:
-    # Function to find the height of a binary tree.
+    def order_util(self, root, leaves):
 
-    def height(self, root):
+        if root.left:
+            leaves = self.order_util(root.left, leaves)
 
-        root_l = [root]
-        height = 0
-        leaves_l = []
+        if root.right:
+            leaves = self.order_util(root.right, leaves)
 
-        while root_l:
-            for node in root_l:
+        if root.left or root.right:
+            leaves += 1
+        return leaves
 
-                if node.left:
-                    leaves_l.append(node.left)
-                if node.right:
-                    leaves_l.append(node.right)
-            height += 1
+    def countNonLeafNodes(self, root):
+        if not root:
+            return
 
-            root_l = leaves_l
-            leaves_l = []
-
-        return height
+        leaves = self.order_util(root, 0)
+        return leaves
 
 
-# code here
+# add code here
 
 
 # {
 # Driver Code Starts
 # Initial Template for Python 3
 
+import sys
+
+sys.setrecursionlimit(100000)
 from collections import deque
 
 
@@ -111,10 +112,8 @@ def buildTree(s):
 if __name__ == "__main__":
     t = int(input())
     for _ in range(0, t):
-        s = input()
-        root = buildTree(s)
+        root = buildTree(input())
         ob = Solution()
-        ob.level_order(root)
+        print(ob.countNonLeafNodes(root))
 
-        # print(ob.height(root))
 # } Driver Code Ends

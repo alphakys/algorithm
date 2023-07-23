@@ -14,42 +14,36 @@ class Tree:
         self.head = None
 
 
+
 class Solution:
 
-    def build_tree(self):
-        pass
+    def build_tree(self, arr):
 
-    def heapHeight(self, N, arr):
+        from collections import deque
 
         t = Tree()
         if not t.head:
             t.head = Node(arr[0])
 
-        from queue import Queue
-        from collections import deque
-
-        q = Queue()
-        value_queue = deque(arr)
-
+        value_queue = deque(arr[1:])
         root = t.head
-        q.put(value_queue.popleft())
+        node_queue = deque()
+        node_queue.append(root)
 
         while value_queue.__len__() > 0:
+            root = node_queue.popleft()
+            if root:
+                if not root.left and value_queue.__len__() > 0:
+                    root.left = Node(value_queue.popleft())
+                    node_queue.append(root.left)
+                if not root.right and value_queue.__len__() > 0:
+                    root.right = Node(value_queue.popleft())
+                    node_queue.append(root.right)
+        return t.head
 
+    def heapHeight(self, N, arr):
 
-
-        while not q.empty():
-
-            # for val in value_queue:
-            if not root.left:
-                root.left = Node(value_queue.popleft())
-                continue
-            if not root.right:
-                root.right = Node(value_queue.popleft())
-                continue
-
-        print()
-        return
+        root = self.build_tree(arr)
 
         root_l = [root]
         height = 0
@@ -67,7 +61,7 @@ class Solution:
             root_l = leaves_l
             leaves_l = []
 
-        return height
+        return height - 1
 
 
 # code here
@@ -86,6 +80,8 @@ if __name__ == '__main__':
             arr[itr] = int(arr[itr])
 
         ob = Solution()
+        # root = ob.build_tree(arr)
+        # print(ob.levelOrder(root))
         print(ob.heapHeight(N, arr))
 
 # } Driver Code Ends

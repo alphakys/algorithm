@@ -12,24 +12,48 @@
 
 # function should return the count of total number of non leaf nodes in the tree
 class Solution:
-    def order_util(self, root, leaves):
+
+    def order_util(self, root, cnt):
 
         if root.left:
-            leaves = self.order_util(root.left, leaves)
+            cnt = self.order_util(root.left, cnt)
 
         if root.right:
-            leaves = self.order_util(root.right, leaves)
+            cnt = self.order_util(root.right, cnt)
 
-        if root.left or root.right:
-            leaves += 1
-        return leaves
+        if root.right or root.left:
+            cnt += 1
+
+        return cnt
 
     def countNonLeafNodes(self, root):
-        if not root:
-            return
 
-        leaves = self.order_util(root, 0)
-        return leaves
+        if not any([root.left, root.right]):
+
+            return 0
+
+        return self.order_util(root, 0)
+
+
+# class Solution:
+#     def order_util(self, root, leaves):
+#
+#         if root.left:
+#             leaves = self.order_util(root.left, leaves)
+#
+#         if root.right:
+#             leaves = self.order_util(root.right, leaves)
+#
+#         if root.left or root.right:
+#             leaves += 1
+#         return leaves
+#
+#     def countNonLeafNodes(self, root):
+#         if not root:
+#             return
+#
+#         leaves = self.order_util(root, 0)
+#         return leaves
 
 
 # add code here

@@ -11,24 +11,28 @@ class Node:
 
 # Function to find the minimum element in the given BST.
 
-def order_util(root, min_val):
+def preorder_traversal(root, min_val):
+    min_val = root.data
+
     if root.left:
-        if min_val > root.left.data:
-            min_val = root.left.data
-        min_val = order_util(root.left, min_val)
+        val = preorder_traversal(root.left, min_val)
+        if min_val > val:
+            min_val = val
 
     if root.right:
-        if min_val > root.right.data:
-            min_val = root.right.data
-        min_val = order_util(root.right, min_val)
+        val = preorder_traversal(root.right, min_val)
+        if min_val > val:
+            min_val = val
 
     return min_val
 
+
+# Function to find the minimum element in the given BST.
 def minValue(root):
     if not root:
         return -1
 
-    return order_util(root, root.data)
+    return preorder_traversal(root, root.data)
 
 
 ##Your code here

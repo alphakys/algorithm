@@ -13,49 +13,26 @@ class Node:
 
 # Function to return a list containing the preorder traversal of the tree.
 
-def order_util(root, arr):
-
-    arr.append(root.data)
-    if root.left:
-        order_util(root.left, arr)
-
-    if root.right:
-        order_util(root.right, arr)
-
-    return arr
-
-def preorder(root):
-    arr = []
-    if not root:
-        return
-
-    return order_util(root, arr)
+# def order_util(root, arr):
+#
+#     arr.append(root.data)
+#     if root.left:
+#         order_util(root.left, arr)
+#
+#     if root.right:
+#         order_util(root.right, arr)
+#
+#     return arr
+#
+# def preorder(root):
+#     arr = []
+#     if not root:
+#         return
+#
+#     return order_util(root, arr)
 
 
 # 다른 예제!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
-
-
-# def preorderUtil(root, res):
-#     # preorder traversal works on Root Left Right.
-#
-#     # if root is null then we simply return.
-#     if root is None:
-#         return
-#
-#     # first, we store the data at root in a list.
-#     res.append(root.data)
-#     # then we call the recursive function for left subtree.
-#     preorderUtil(root.left, res)
-#     # then we call the recursive function for right subtree.
-#     preorderUtil(root.right, res)
-#
-#
-# # Function to return a list containing the preorder traversal of the tree.
-# def preorder(root):
-#     res = []
-#     preorderUtil(root, res)
-#     # returning the list.
-#     return res
 
 
 

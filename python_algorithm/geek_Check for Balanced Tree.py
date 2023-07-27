@@ -1,47 +1,64 @@
 # User function Template for python3
 
 
-'''
-# Node Class:
-class Node:
-    def _init_(self,val):
-        self.data = val
+'''class Node:
+    # Constructor to create a new Node
+    def __init__(self, data):
+        self.data = data
         self.left = None
-        self.right = None
-'''
+        self.right = None'''
 
 
-# Function to return a list containing elements of left view of the binary tree.
-def LeftView(root):
-    if not root:
-        return []
+# Function to check whether a binary tree is balanced or not.
+class Solution:
 
-    root_list = [root]
-    child_list = []
+    def check_height(self, root):
 
-    traversal_list = [[root.data]]
-    while root_list:
+        if not root:
+            return 0
 
-        for node in root_list:
-            if node.left:
-                child_list.append(node.left)
-
-            if node.right:
-                child_list.append(node.right)
-
-        root_list = child_list
-        traversal_list.append([node.data for node in child_list])
+        root_list = [root]
         child_list = []
+        traverse_list = []
+        height = 0
+        while root_list:
 
-    return [list_[0] for list_ in traversal_list if list_]
+            for node in root_list:
+                if node.left:
+                    child_list.append(node.left)
+                    # traverse_list.append(node.left.data)
+                if node.right:
+                    child_list.append(node.right)
+                    # traverse_list.append(node.right.data)
+
+            root_list = child_list
+            traverse_list.append([n.data for n in child_list])
+            child_list = []
+            height += 1
+
+        print(traverse_list)
+        return height
+
+    def isBalanced(self, root):
+
+        l = self.check_height(root.left)
+        r = self.check_height(root.right)
+
+        # print(l, r)
+        if abs(l - r) > 1:
+            return 0
+        else:
+            return 1
 
 
-# code here
+
+# add code here
 
 
 # {
 # Driver Code Starts
-# Contributed by Sudarshan Sharma
+# Initial Template for Python 3
+
 from collections import deque
 
 
@@ -114,9 +131,9 @@ if __name__ == "__main__":
     for _ in range(0, t):
         s = input()
         root = buildTree(s)
-        result = LeftView(root)
-        for value in result:
-            print(value, end=" ")
-        print()
-
+        ob = Solution()
+        if ob.isBalanced(root):
+            print(1)
+        else:
+            print(0)
 # } Driver Code Ends

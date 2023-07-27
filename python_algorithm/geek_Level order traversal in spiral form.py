@@ -1,46 +1,62 @@
 # User function Template for python3
 
+from collections import deque
 
-'''
-# Node Class:
-class Node:
-    def _init_(self,val):
-        self.data = val
-        self.left = None
-        self.right = None
-'''
+dq = deque()
 
 
-# Function to return a list containing elements of left view of the binary tree.
-def LeftView(root):
+# Function to return a list containing the level order traversal in spiral form.
+def findSpiral(root):
     if not root:
-        return []
+        return
 
+    dq.append(root.data)
+    height = 1
     root_list = [root]
     child_list = []
+    traverse_list = []
 
-    traversal_list = [[root.data]]
     while root_list:
 
         for node in root_list:
-            if node.left:
-                child_list.append(node.left)
-
-            if node.right:
-                child_list.append(node.right)
-
+            if height % 2 == 0:
+                if node.left:
+                    child_list.append(node.left)
+                    dq.appendleft(node.left.data)
+                if node.right:
+                    child_list.append(node.right)
+                    dq.appendleft(node.right.data)
+            else:
+                if node.left:
+                    child_list.append(node.left)
+                    dq.append(node.left.data)
+                if node.right:
+                    child_list.append(node.right)
+                    dq.append(node.right.data)
         root_list = child_list
-        traversal_list.append([node.data for node in child_list])
         child_list = []
+        traverse_list.extend(dq)
+        dq.clear()
+        height += 1
+    return traverse_list
 
-    return [list_[0] for list_ in traversal_list if list_]
+    #        10
+    #   3          15
+    # 0   7      11
+    #    4         14
+    #      6
 
 
-# code here
+# Code here
 
 
 # {
 # Driver Code Starts
+# Initial Template for Python 3
+
+# Initial Template for Python 3
+
+
 # Contributed by Sudarshan Sharma
 from collections import deque
 
@@ -114,7 +130,7 @@ if __name__ == "__main__":
     for _ in range(0, t):
         s = input()
         root = buildTree(s)
-        result = LeftView(root)
+        result = findSpiral(root)
         for value in result:
             print(value, end=" ")
         print()

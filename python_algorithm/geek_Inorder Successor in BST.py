@@ -14,7 +14,15 @@ class Solution:
     # returns the inorder successor of the Node x in BST (rooted at 'root')
     def inorderSuccessor(self, root, x):
         arr = self.inorder(root, [])
-        return arr[arr.index(x) + 1]
+
+        print(arr)
+        try:
+            answer = arr.index(x)
+        except Exception as e:
+            print(e)
+            return None
+
+        return arr[answer + 1]
 
     def inorder(self, root, arr):
         if root.left:
@@ -26,7 +34,6 @@ class Solution:
             arr = self.inorder(root.right, arr)
 
         return arr
-
 
 # Code here
 

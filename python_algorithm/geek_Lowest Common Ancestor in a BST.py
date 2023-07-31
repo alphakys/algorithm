@@ -1,66 +1,57 @@
 # User function Template for python3
 
-'''
-# Tree Node
-class Node:
-    def __init__(self, val):
-        self.right = None
-        self.data = val
-        self.left = None
+#         16
+#       /   \
+#     2       18
+#    /         \
+#   1   8    17  22
+#      6 10    21   20
 
-'''
+# Function to find the lowest common ancestor in a BST.
+def LCA(root, n1, n2):
+    # 둘 다 root 보다 커서 right subtree or # 둘 다 root 보다 작아서 left subtree
+    if all([root.data >= n1, root.data >= n2]) or all([root.data <= n1, root.data <= n2]):
+        if root.data == n1 or root.data == n2:
+            # print('return')
+            answer = root
+        elif all([root.data >= n1, root.data >= n2]):
+            # print('l')
+            answer = LCA(root.left, n1, n2)
+        else:
+            # print('r')
+            answer = LCA(root.right, n1, n2)
+    else:
+        return root
 
-
-class Solution:
-    heap = None
-
-    def order_util(self, val):
-        if not self.heap:
-            heap = Node(root.data)
-            return
-        heap = self.heap
-
-        if val > heap.data:
-            tmp = heap.data
-            heap.data = val
-            self.order_util(tmp)
-        elif val < heap.data:
-
-            tmp = heap.data
-            heap.data = val
-            self.order_util(tmp)
-
-    def convertToMaxHeapUtil(self, root):
-        if not root:
-            return
-        self.inorder(root)
-        return
-        self.order_util(root)
-
-    def inorder(self, root):
-        if root.left:
-            self.inorder(root.left)
-        print(root.data)
-        if root.right:
-            self.inorder(root.right)
+    return answer
 
 
-# code here
+# code here.
+
+
+#         16
+#       /   \
+#     2       18
+#    /         \
+#   1   8    17  22
+#      6 10    21   20
+
+
+#         2   3  4   8
 
 
 # {
 # Driver Code Starts
-# Initial Template for Python
-
+# Initial Template for Python 3
 from collections import deque
 
 
 # Tree Node
 class Node:
     def __init__(self, val):
+        self.right = None
         self.data = val
         self.left = None
-        self.right = None
 
 
 # Function to Build Tree
@@ -119,25 +110,12 @@ def buildTree(s):
     return root
 
 
-def postOrder(root):
-    if root == None:
-        return
-
-    postOrder(root.left)
-    postOrder(root.right)
-    print(root.data, end=" ")
-
-
 if __name__ == "__main__":
     t = int(input())
     for _ in range(0, t):
         s = input()
         root = buildTree(s)
-        ob = Solution()
-
-        ob.convertToMaxHeapUtil(root)
-        postOrder(root)
-
-        print()
+        n1, n2 = list(map(int, input().split()))
+        print(LCA(root, n1, n2).data)
 
 # } Driver Code Ends

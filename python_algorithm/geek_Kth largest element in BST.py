@@ -1,56 +1,35 @@
 # User function Template for python3
 
-'''
-# Tree Node
-class Node:
-    def __init__(self, val):
-        self.right = None
-        self.data = val
-        self.left = None
+# class Node:
+#     def __init__(self, val):
+#         self.data = val
+#         self.left = None
+#         self.right = None
 
-'''
-
-
+# return the Kth largest element in the given BST rooted at 'root'
 class Solution:
-    heap = None
+    def kthLargest(self, root, k):
 
-    def order_util(self, val):
-        if not self.heap:
-            heap = Node(root.data)
-            return
-        heap = self.heap
+        answer = self.inorder(root, [])
+        return answer[-1*k]
 
-        if val > heap.data:
-            tmp = heap.data
-            heap.data = val
-            self.order_util(tmp)
-        elif val < heap.data:
-
-            tmp = heap.data
-            heap.data = val
-            self.order_util(tmp)
-
-    def convertToMaxHeapUtil(self, root):
-        if not root:
-            return
-        self.inorder(root)
-        return
-        self.order_util(root)
-
-    def inorder(self, root):
+    def inorder(self, root, arr):
         if root.left:
-            self.inorder(root.left)
-        print(root.data)
+            arr = self.inorder(root.left, arr)
+
+        arr.append(root.data)
+
         if root.right:
-            self.inorder(root.right)
+            arr = self.inorder(root.right, arr)
 
+        return arr
 
-# code here
+# your code here
 
 
 # {
 # Driver Code Starts
-# Initial Template for Python
+# Initial Template for Python 3
 
 from collections import deque
 
@@ -58,9 +37,9 @@ from collections import deque
 # Tree Node
 class Node:
     def __init__(self, val):
+        self.right = None
         self.data = val
         self.left = None
-        self.right = None
 
 
 # Function to Build Tree
@@ -119,25 +98,11 @@ def buildTree(s):
     return root
 
 
-def postOrder(root):
-    if root == None:
-        return
-
-    postOrder(root.left)
-    postOrder(root.right)
-    print(root.data, end=" ")
-
-
 if __name__ == "__main__":
     t = int(input())
     for _ in range(0, t):
         s = input()
         root = buildTree(s)
-        ob = Solution()
-
-        ob.convertToMaxHeapUtil(root)
-        postOrder(root)
-
-        print()
-
+        k = int(input())
+        print(Solution().kthLargest(root, k))
 # } Driver Code Ends

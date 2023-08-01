@@ -3,15 +3,65 @@
 
 class Solution:
     # Function to check whether a Binary Tree is BST or not.
+    def inorder(self, root, arr, answer):
+        if root.left:
+            arr, answer = self.inorder(root.left, arr, answer)
+
+        if answer == 0:
+            return arr, answer
+
+        if arr != []:
+            if arr[-1] >= root.data:
+                return arr, 0
+
+        arr.append(root.data)
+
+        if root.right:
+            arr, answer = self.inorder(root.right, arr, answer)
+
+        return arr, answer
+
     def isBST(self, root):
-        root.head = None
-        root_list = [root]
-        child_list = []
+
+        arr, answer = self.inorder(root, [], 1)
+
+        return answer
+    # def order_util(self, root, answer, head):
+    #
+    #     if root.left and root.left.data <= root.data:
+    #         if root.data == root.left.data:
+    #             return 0
+    #         else:
+    #             answer = self.order_util(root.left, answer)
+    #     elif root.left and root.left.data > root.data:
+    #         return 0
+    #
+    #     if root.right and root.right.data >= root.data:
+    #         if root.data == root.right.data:
+    #             return 0
+    #         else:
+    #             answer = self.order_util(root.right, answer)
+    #     elif root.right and root.right.data < root.data:
+    #         return 0
+    #
+    #     return answer
+    # def isBST(self, root):
+    #
+    #     if not root:
+    #         return 0
+    #
+    #     return self.order_util(root, 1, root.data)
+
+
         #     #
         #     #         10
         #     #     5        18
         #     #   2   9    15 19
         #     #    4 8    1
+
+
+    # 틀림
+
 
         #     #
         #     #          3
@@ -27,44 +77,9 @@ class Solution:
         #     #    2   6
         #
 
-        is_bst = 1
 
-        while root_list:
 
-            for root in root_list:
 
-                if root.left:
-                    root.left.head = root
-                    if root.data <= root.left.data:
-                        is_bst = 0
-                        child_list = []
-                        break
-                    elif root.head is not None:
-                        if root.head.data >= root.left.data:
-                            is_bst = 0
-                            child_list = []
-                            break
-                    else:
-                        child_list.append(root.left)
-
-                if root.right:
-                    root.right.head = root
-                    if root.data >= root.right.data:
-                        is_bst = 0
-                        child_list = []
-                        break
-                    # elif root.head is not None:
-                    #     if root.head.data >= root.left.data:
-                    #         is_bst = 0
-                    #         child_list = []
-                    #         break
-                    else:
-                        child_list.append(root.right)
-
-            root_list = child_list
-            child_list = []
-
-        return is_bst
 
 # code here
 

@@ -1,52 +1,32 @@
 # User function Template for python3
 
-'''
-class Node:
-    def __init__(self, val, k):
-        self.right = None
-        self.data = val
-        self.left = None
-        self.key = k
-'''
+def order_util(root, arr):
+    if root.left:
+        arr = order_util(root.left, arr)
+
+    arr.append(root.data)
+    if root.right:
+        arr = order_util(root.right, arr)
+
+    return arr
 
 
-#      20
-#    /   \
-#   8     22
-#  / \
-# 4   12
-#    /  \
-#   10   14
-class Solution:
-    # returns the inorder successor of the Node x in BST (rooted at 'root')
-    def inorderSuccessor(self, root, x):
-        node_arr, is_target = self.inorder(root, [], False, x.data)
-
-        if node_arr:
-            return node_arr[0]
+def findMedian(root):
+    arr = order_util(root, [])
+    len_ = arr.__len__()
+    if len_ % 2 == 1:
+        return arr[len_ // 2]
+    else:
+        idx = len_ // 2
+        answer = (arr[idx] + arr[idx-1])
+        if answer % 2 == 1:
+            return answer/2
         else:
-            return Node(-1)
+            return answer//2
 
-    def inorder(self, root, arr, is_target, x):
-        if arr:
-            return arr, is_target
 
-        if root.left:
-            arr, is_target = self.inorder(root.left, arr, is_target, x)
-
-        if is_target and not arr:
-            arr.append(root)
-            return arr, is_target
-        else:
-            if root.data == x:
-                is_target = True
-
-        if root.right:
-            arr, is_target = self.inorder(root.right, arr, is_target, x)
-
-        return arr, is_target
-
-# Code here
+# code here
+# return the median
 
 
 # {
@@ -56,7 +36,6 @@ class Solution:
 from collections import deque
 
 
-# Tree Node
 class Node:
     def __init__(self, val):
         self.right = None
@@ -64,7 +43,6 @@ class Node:
         self.left = None
 
 
-# Function to Build Tree
 def buildTree(s):
     # Corner Case
     if (len(s) == 0 or s[0] == "N"):
@@ -122,13 +100,9 @@ def buildTree(s):
 
 if __name__ == "__main__":
     t = int(input())
-    for _ in range(0, t):
+    for _ in range(t):
         s = input()
         root = buildTree(s)
-        k = int(input())
-        ptr = Solution().inorderSuccessor(root, Node(k))
-        if ptr is None:
-            print(-1)
-        else:
-            print(ptr.data)
+        print(findMedian(root))
+
 # } Driver Code Ends

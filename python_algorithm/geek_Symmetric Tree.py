@@ -1,58 +1,50 @@
 # User function Template for python3
 
-'''
-class Node:
-    def __init__(self, val, k):
-        self.right = None
-        self.data = val
-        self.left = None
-        self.key = k
-'''
-
-
-#      20
-#    /   \
-#   8     22
-#  / \
-# 4   12
-#    /  \
-#   10   14
+#        5
+#    /      \
+#   10       10
+#  /  \     / \
+# 20  30   30  20
+# 1  1 2 2 1 1 2  2
 class Solution:
-    # returns the inorder successor of the Node x in BST (rooted at 'root')
-    def inorderSuccessor(self, root, x):
-        node_arr, is_target = self.inorder(root, [], False, x.data)
+    # return true/false denoting whether the tree is Symmetric or not
+    def isSymmetric(self, root):
+        pass
 
-        if node_arr:
-            return node_arr[0]
-        else:
-            return Node(-1)
+    def levelOrder(self, root):
 
-    def inorder(self, root, arr, is_target, x):
-        if arr:
-            return arr, is_target
+        if not root:
+            return
 
-        if root.left:
-            arr, is_target = self.inorder(root.left, arr, is_target, x)
+        traversal_list = deque()
+        q = deque()
+        q.
+        answer = []
 
-        if is_target and not arr:
-            arr.append(root)
-            return arr, is_target
-        else:
-            if root.data == x:
-                is_target = True
+        while not q.empty():
+            node = q.get()
 
-        if root.right:
-            arr, is_target = self.inorder(root.right, arr, is_target, x)
+            if node:
+                answer.append(node.data)
+                if node.left:
+                    q.put(node.left)
 
-        return arr, is_target
+                if node.right:
+                    q.put(node.right)
+            else:
+                break
 
-# Code here
+        return answer
+
+
+# Your Code Here
 
 
 # {
 # Driver Code Starts
 # Initial Template for Python 3
 
+# Contributed by Sudarshan Sharma
 from collections import deque
 
 
@@ -125,10 +117,10 @@ if __name__ == "__main__":
     for _ in range(0, t):
         s = input()
         root = buildTree(s)
-        k = int(input())
-        ptr = Solution().inorderSuccessor(root, Node(k))
-        if ptr is None:
-            print(-1)
+        ob = Solution()
+        if ob.isSymmetric(root):
+            print("True")
         else:
-            print(ptr.data)
+            print("False")
+
 # } Driver Code Ends

@@ -1,12 +1,12 @@
 # User function Template for python3
 
 '''
+# Node Class:
 class Node:
-    def __init__(self, val, k):
-        self.right = None
+    def init(self,val):
         self.data = val
         self.left = None
-        self.key = k
+        self.right = None
 '''
 
 
@@ -17,42 +17,59 @@ class Node:
 # 4   12
 #    /  \
 #   10   14
+
+      # 2
+      #    1
+      #      2
+      #        1
+      #          1
+      #            2
+      #              1
+
+
+# 2 N 2 N 2 N 2 N 2 N 2 N 2
+
 class Solution:
-    # returns the inorder successor of the Node x in BST (rooted at 'root')
-    def inorderSuccessor(self, root, x):
-        node_arr, is_target = self.inorder(root, [], False, x.data)
+    # Function to check whether all nodes of a tree have the value
+    # equal to the sum of their child nodes.
 
-        if node_arr:
-            return node_arr[0]
-        else:
-            return Node(-1)
+    def order_util(self, root, is_equal):
 
-    def inorder(self, root, arr, is_target, x):
-        if arr:
-            return arr, is_target
+        if not is_equal:
+            return is_equal
 
         if root.left:
-            arr, is_target = self.inorder(root.left, arr, is_target, x)
-
-        if is_target and not arr:
-            arr.append(root)
-            return arr, is_target
-        else:
-            if root.data == x:
-                is_target = True
+            is_equal = self.order_util(root.left, is_equal)
 
         if root.right:
-            arr, is_target = self.inorder(root.right, arr, is_target, x)
+            is_equal = self.order_util(root.right, is_equal)
 
-        return arr, is_target
+        if root.right or root.left:
+            child_sum = 0
+            if root.left:
+                child_sum += root.left.data
+            if root.right:
+                child_sum += root.right.data
 
-# Code here
+            if child_sum != root.data:
+                is_equal = 0
+
+        return is_equal
+
+    def isSumProperty(self, root):
+        return self.order_util(root, 1)
+
+
+# code here
 
 
 # {
 # Driver Code Starts
 # Initial Template for Python 3
 
+# Initial Template for Python 3
+
+# Contributed by Sudarshan Sharma
 from collections import deque
 
 
@@ -125,10 +142,7 @@ if __name__ == "__main__":
     for _ in range(0, t):
         s = input()
         root = buildTree(s)
-        k = int(input())
-        ptr = Solution().inorderSuccessor(root, Node(k))
-        if ptr is None:
-            print(-1)
-        else:
-            print(ptr.data)
+        ob = Solution()
+        print(ob.isSumProperty(root))
+
 # } Driver Code Ends

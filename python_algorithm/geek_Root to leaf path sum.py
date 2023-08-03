@@ -2,13 +2,11 @@
 
 '''
 class Node:
-    def __init__(self, val, k):
-        self.right = None
+    def __init__(self,val):
         self.data = val
         self.left = None
-        self.key = k
+        self.right = None
 '''
-
 
 #      20
 #    /   \
@@ -17,36 +15,43 @@ class Node:
 # 4   12
 #    /  \
 #   10   14
+
+
 class Solution:
-    # returns the inorder successor of the Node x in BST (rooted at 'root')
-    def inorderSuccessor(self, root, x):
-        node_arr, is_target = self.inorder(root, [], False, x.data)
 
-        if node_arr:
-            return node_arr[0]
-        else:
-            return Node(-1)
-
-    def inorder(self, root, arr, is_target, x):
-        if arr:
-            return arr, is_target
+    def order_util(self, root, sum, S, is_path):
 
         if root.left:
-            arr, is_target = self.inorder(root.left, arr, is_target, x)
-
-        if is_target and not arr:
-            arr.append(root)
-            return arr, is_target
-        else:
-            if root.data == x:
-                is_target = True
+            sum += root.left.data
+            sum, is_path = self.order_util(root.left, sum, S, is_path)
 
         if root.right:
-            arr, is_target = self.inorder(root.right, arr, is_target, x)
+            sum += root.right.data
+            sum, is_path = self.order_util(root.right, sum, S, is_path)
 
-        return arr, is_target
+        if not all([root.left, root.right]):
+            # print('root : ', root.data)
+            # print('sum : ', sum)
+            # print('S : ', S)
+            if sum == S:
+                # print('gotcha')
+                is_path = True
+            sum = sum - root.data
 
-# Code here
+        return sum, is_path
+
+    def hasPathSum(self, root, S):
+        '''
+        :param root: root of given tree.
+        :param sm: root to leaf sum
+        :return: true or false
+        '''
+
+        sum, left_is_path = self.order_util(root.left, root.data, S, False)
+
+        sum, right_is_path = self.order_util(root.right, root.data, S, False)
+        return left_is_path or right_is_path
+        # code here
 
 
 # {
@@ -120,15 +125,15 @@ def buildTree(s):
     return root
 
 
-if __name__ == "__main__":
-    t = int(input())
-    for _ in range(0, t):
+if __name__ == '__main__':
+    test_cases = int(input())
+    for cases in range(test_cases):
         s = input()
         root = buildTree(s)
-        k = int(input())
-        ptr = Solution().inorderSuccessor(root, Node(k))
-        if ptr is None:
-            print(-1)
+        sum = int(input())
+        if Solution().hasPathSum(root, sum) == True:
+            print(1)
         else:
-            print(ptr.data)
+            print(0)
+
 # } Driver Code Ends

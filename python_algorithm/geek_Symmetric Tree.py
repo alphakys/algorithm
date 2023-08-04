@@ -3,39 +3,64 @@
 #        5
 #    /      \
 #   10       10
-#  /  \     / \
-# 20  30   30  20
+#  /  \     /  \
+# 20  30   30   20
+
+#        5
+#    /      \
+#   10       20
+#  /  \     /  \
+# 30  40   50   60
+
+
 # 1  1 2 2 1 1 2  2
 class Solution:
     # return true/false denoting whether the tree is Symmetric or not
     def isSymmetric(self, root):
-        pass
-
-    def levelOrder(self, root):
 
         if not root:
-            return
+            return True
 
-        traversal_list = deque()
-        q = deque()
-        q.
-        answer = []
+        if (root.left and not root.right) or (not root.left and root.right):
+            return False
+        elif not root.left and not root.right:
+            return True
 
-        while not q.empty():
-            node = q.get()
+        left_subtree = self.levelOrder(root.left, 'l')
+        right_subtree = self.levelOrder(root.right, 'r')
 
-            if node:
-                answer.append(node.data)
+        # print(left_subtree)
+        # print(right_subtree)
+
+        if left_subtree == right_subtree:
+            return True
+        else:
+            return False
+
+    def levelOrder(self, root, subtree):
+
+        root_l = [root]
+        child_list = []
+        answer = deque()
+        traversal_list = []
+        while root_l:
+            for node in root_l:
+                if subtree == 'r':
+                    answer.appendleft(node.data)
+                else:
+                    answer.append(node.data)
+
                 if node.left:
-                    q.put(node.left)
-
+                    child_list.append(node.left)
                 if node.right:
-                    q.put(node.right)
-            else:
-                break
+                    child_list.append(node.right)
 
-        return answer
+            root_l = child_list
+            child_list = []
+            traversal_list.extend(answer)
+            answer.clear()
 
+        return traversal_list
 
 # Your Code Here
 

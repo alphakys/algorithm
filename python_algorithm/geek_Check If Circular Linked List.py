@@ -6,16 +6,43 @@
 
 # your task is to complete this function
 # function should return true/false or 1/0
+
 def isCircular(head):
-    # Code here
-    root = head
-    result = 0
-    while head:
-        head = head.next
-        if head is root:
-            result = 1
+    node = head
+    is_circular = 0
+    while node.next:
+        node = node.next
+        if node == head:
+            is_circular = 1
             break
-    return result
+    return is_circular
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# def isCircular(head):
+#     # Code here
+#     root = head
+#     result = 0
+#     while head:
+#         head = head.next
+#         if head is root:
+#             result = 1
+#             break
+#     return result
 
 
 

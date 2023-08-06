@@ -1,39 +1,45 @@
 # User function Template for python3
 
+
 '''
 class Node:
-    def _init_(self, val):
-        self.right = None
+    def _init_(self,val):
         self.data = val
         self.left = None
+        self.right = None
 '''
 
 
-# your task is to complete this function
-
-class Solution:
-    # Function to convert a binary tree into its mirror tree.
-    def order_util(self, root):
-        tmp_node = root.left
-        root.left = root.right
-        root.right = tmp_node
-
-    def mirror(self, root):
-        if root.left:
-            self.order_util(root.left)
-        if root.right:
-            self.order_util(root.right)
-
-        return self.order_util(root.left)
+def order_util(root, height, k, arr):
+    if root.left:
+        # print('left : ', root.left.data, height)
+        if height == k:
+            arr.append(root.left.data)
+        arr = order_util(root.left, height + 1, k, arr)
+    if root.right:
+        # print('right : ', root.right.data, height)
+        if height == k:
+            arr.append(root.right.data)
+        arr = order_util(root.right, height + 1, k, arr)
+    return arr
 
 
-# Code here
+def KDistance(root, k):
+    '''
+    :param root: root of given tree.
+    :param k: distance k from root
+    :return: list of all nodes that are at distance k from root.
+    '''
+    if k == 0:
+        return [root.data]
+    return order_util(root, 1, k, [])
+
+    # code here
 
 
 # {
 # Driver Code Starts
 # Initial Template for Python 3
-
 
 # Contributed by Sudarshan Sharma
 from collections import deque
@@ -45,21 +51,6 @@ class Node:
         self.right = None
         self.data = val
         self.left = None
-
-
-def inorderTraversalUtil(root):
-    # Code here
-    if root is None:
-        return
-    inorderTraversalUtil(root.left)
-    print(root.data, end=' ')
-    inorderTraversalUtil(root.right)
-
-
-def inorderTraversal(root):
-    # Code here
-    inorderTraversalUtil(root)
-    print()
 
 
 # Function to Build Tree
@@ -121,9 +112,11 @@ def buildTree(s):
 if __name__ == "__main__":
     t = int(input())
     for _ in range(0, t):
+        k = int(input())
         s = input()
         root = buildTree(s)
-        Solution().mirror(root)
-        inorderTraversal(root)
-
+        nodes = KDistance(root, k)
+        for node in nodes:
+            print(node, end=' ')
+        print()
 # } Driver Code Ends

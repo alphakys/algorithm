@@ -1,40 +1,26 @@
 # User function Template for python3
 
 '''
+# Node Class:
 class Node:
-    def _init_(self, val):
-        self.right = None
+    def __init__(self,val):
         self.data = val
         self.left = None
+        self.right = None
 '''
 
 
-# your task is to complete this function
-
 class Solution:
-    # Function to convert a binary tree into its mirror tree.
-    def order_util(self, root):
-        tmp_node = root.left
-        root.left = root.right
-        root.right = tmp_node
+    def areMirror(self, root1, root2):
+        '''
+        :param root1,root2: two root of the given trees.
+        :return: True False
 
-    def mirror(self, root):
-        if root.left:
-            self.order_util(root.left)
-        if root.right:
-            self.order_util(root.right)
-
-        return self.order_util(root.left)
-
-
-# Code here
+        '''
 
 
 # {
 # Driver Code Starts
-# Initial Template for Python 3
-
-
 # Contributed by Sudarshan Sharma
 from collections import deque
 
@@ -45,21 +31,6 @@ class Node:
         self.right = None
         self.data = val
         self.left = None
-
-
-def inorderTraversalUtil(root):
-    # Code here
-    if root is None:
-        return
-    inorderTraversalUtil(root.left)
-    print(root.data, end=' ')
-    inorderTraversalUtil(root.right)
-
-
-def inorderTraversal(root):
-    # Code here
-    inorderTraversalUtil(root)
-    print()
 
 
 # Function to Build Tree
@@ -118,12 +89,16 @@ def buildTree(s):
     return root
 
 
-if __name__ == "__main__":
-    t = int(input())
-    for _ in range(0, t):
-        s = input()
-        root = buildTree(s)
-        Solution().mirror(root)
-        inorderTraversal(root)
+if __name__ == '__main__':
+    test_cases = int(input())
+    for cases in range(test_cases):
+        str1 = input()
+        str2 = input()
+        root1 = buildTree(str1)
+        root2 = buildTree(str2)
+        if Solution().areMirror(root1, root2) == True:
+            print(1)
+        else:
+            print(0)
 
 # } Driver Code Ends

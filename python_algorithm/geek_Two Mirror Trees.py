@@ -17,6 +17,66 @@ class Solution:
         :return: True False
 
         '''
+        if root1.data != root2.data:
+            return False
+
+        return self.order_util(root1, []) == self.order_util2(root2, [])
+
+    def order_util(self, root, arr):
+
+        if root.left:
+            self.order_util(root.left, arr)
+
+        arr.append(root.data)
+
+        if root.right:
+            self.order_util(root.right, arr)
+
+        return arr
+
+    def order_util2(self, root, arr):
+
+        if root.right:
+            self.order_util2(root.right, arr)
+
+        arr.append(root.data)
+
+        if root.left:
+            self.order_util2(root.left, arr)
+
+        return arr
+
+    def is_same(self, root1, root2):
+
+        if root1.left and root2.right:
+            if root1.left.data != root2.right.data:
+                return False
+        else:
+            print(1)
+            return False
+
+        if root1.right and root2.left:
+            if root1.right.data != root2.left.data:
+                return False
+        else:
+            print(2)
+            return False
+
+        return True
+
+    def mirror(self, root1, root2):
+        if root1.left and root2.left:
+            self.mirror(root1.left, root2.left)
+
+        if root1.right and root2.right:
+            self.mirror(root1.right, root2.right)
+
+        if (root1.left and root2.left) or (root1.right and root2.right):
+            # print(
+            #     f'r1 left : {root1.left.data} r2 right : {root2.right.data} r1 right {root1.right.data} r2 left {root2.left.data}')
+            print(root1.data, '', root2.data)
+            if root1.data != root2.data:
+                return False
 
 
 # {

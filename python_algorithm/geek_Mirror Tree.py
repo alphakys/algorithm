@@ -13,18 +13,20 @@ class Node:
 
 class Solution:
     # Function to convert a binary tree into its mirror tree.
-    def order_util(self, root):
+    def change_util(self, root):
         tmp_node = root.left
         root.left = root.right
         root.right = tmp_node
 
     def mirror(self, root):
         if root.left:
-            self.order_util(root.left)
+            self.mirror(root.left)
         if root.right:
-            self.order_util(root.right)
+            self.mirror(root.right)
 
-        return self.order_util(root.left)
+        if root.left or root.right:
+            self.change_util(root)
+        return root
 
 
 # Code here

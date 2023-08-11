@@ -36,20 +36,29 @@ class Solution:
             child_list = []
             height += 1
 
-        print(traverse_list)
+        # print(traverse_list)
         return height
+
+    def height(self, root):
+
+        if not root:
+            return 0
+
+        return 1 + max(self.height(root.left), self.height(root.right))
 
     def isBalanced(self, root):
 
-        l = self.check_height(root.left)
-        r = self.check_height(root.right)
+        left_height = self.height(root.left)
+        right_height = self.height(root.right)
 
-        # print(l, r)
-        if abs(l - r) > 1:
-            return 0
-        else:
+        print(left_height, right_height)
+
+        print('l ', self.isBalanced(root.left))
+        print('r ', self.isBalanced(root.right))
+        if abs(left_height - right_height) <= 1:
             return 1
-
+        else:
+            return 0
 
 
 # add code here

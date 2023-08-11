@@ -15,27 +15,12 @@ class Solution:
 
     def height(self, root):
 
-        root_l = [root]
-        height = 0
-        leaves_l = []
+        if not root:
+            return 0
 
-        while root_l:
-            for node in root_l:
-
-                if node.left:
-                    leaves_l.append(node.left)
-                if node.right:
-                    leaves_l.append(node.right)
-            height += 1
-
-            root_l = leaves_l
-            leaves_l = []
-
-        return height
-
+        return 1 + max(self.height(root.left), self.height(root.right))
 
 # code here
-
 
 # {
 # Driver Code Starts

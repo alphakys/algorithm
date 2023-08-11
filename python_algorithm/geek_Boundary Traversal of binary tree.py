@@ -41,10 +41,29 @@ class Node:
 #      8     8     8
 #   11     3   4      1
 #  3     8 6     11 11
-# 5 8
+# 5  8
 
 
 class Solution:
+    def levelorder_util(self, root):
+        root_list = [root]
+        child_list = []
+        traversal_list = []
+
+        while root_list:
+
+            for root in root_list:
+                traversal_list.append(root.data)
+                if root.left:
+                    child_list.append(root.left)
+                if root.right:
+                    child_list.append(root.right)
+
+            print(child_list[0].data, child_list[-1].data)
+            root_list = child_list
+            child_list = []
+
+        return traversal_list
 
     def order_util(self, root, arr):
         if root.left:
@@ -58,37 +77,42 @@ class Solution:
         return arr
 
     def printBoundaryView(self, root):
-        origin_root = root
-        left_boundary_list = []
+
         if root.left:
+            root_list = [root.left]
+            child_list = []
+            traversal_list = []
 
-            while root.left:
-                if root.left or root.right:
-                    left_boundary_list.append(root)
-                root = root.left
+            while root_list:
 
-            left_boundary_list = [n.data for n in left_boundary_list]
-            # print(left_boundary_list)
-            left_leaves = self.order_util(origin_root.left, [])
-            # print(left_leaves)
-            left_boundary_list.extend(left_leaves)
+                for node in root_list:
+                    traversal_list.append(node.data)
+                    if node.left:
+                        child_list.append(node.left)
+                    if node.right:
+                        child_list.append(node.right)
 
-        if origin_root.right:
-            root = origin_root.right
-            right_boundary_list = []
-            while root.right:
-                if root.left or root.right:
-                    right_boundary_list.append(root)
-                root = root.right
+                print(child_list[0].data)
+                root_list = child_list
+                child_list = []
 
-            right_boundary_list = [n.data for n in right_boundary_list]
-            right_boundary_list.reverse()
-            right_leaves = self.order_util(origin_root.right, [])
+        if root.right:
+            root_list = [root.right]
+            child_list = []
+            traversal_list = []
 
-            left_boundary_list.extend(right_leaves)
-            left_boundary_list.extend(right_boundary_list)
+            while root_list:
 
-        return left_boundary_list
+                for node in root_list:
+                    traversal_list.append(node.data)
+                    if node.left:
+                        child_list.append(node.left)
+                    if node.right:
+                        child_list.append(node.right)
+
+                print(child_list[-1].data)
+                root_list = child_list
+                child_list = []
 
 
 # Code here

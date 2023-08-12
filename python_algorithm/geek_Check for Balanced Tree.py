@@ -12,33 +12,6 @@
 # Function to check whether a binary tree is balanced or not.
 class Solution:
 
-    def check_height(self, root):
-
-        if not root:
-            return 0
-
-        root_list = [root]
-        child_list = []
-        traverse_list = []
-        height = 0
-        while root_list:
-
-            for node in root_list:
-                if node.left:
-                    child_list.append(node.left)
-                    # traverse_list.append(node.left.data)
-                if node.right:
-                    child_list.append(node.right)
-                    # traverse_list.append(node.right.data)
-
-            root_list = child_list
-            traverse_list.append([n.data for n in child_list])
-            child_list = []
-            height += 1
-
-        # print(traverse_list)
-        return height
-
     def height(self, root):
 
         if not root:
@@ -48,14 +21,13 @@ class Solution:
 
     def isBalanced(self, root):
 
+        if root is None:
+            return 1
+
         left_height = self.height(root.left)
         right_height = self.height(root.right)
 
-        print(left_height, right_height)
-
-        print('l ', self.isBalanced(root.left))
-        print('r ', self.isBalanced(root.right))
-        if abs(left_height - right_height) <= 1:
+        if abs(left_height - right_height) <= 1 and self.isBalanced(root.left) and self.isBalanced(root.right):
             return 1
         else:
             return 0

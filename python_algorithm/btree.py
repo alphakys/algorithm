@@ -19,6 +19,8 @@ class Btree:
 
     def insert_key(self, val):
         if len == MAX_KEYS:
+            while val in self.root.key:
+
             self.split_child()
         else:
             index = self.root.len

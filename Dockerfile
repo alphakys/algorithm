@@ -16,7 +16,11 @@ RUN adduser ronfic-legacy
 5. sudo apt install software-properties-common
 6. sudo add-apt-repository ppa:deadsnakes/ppa
 7. sudo apt install python3.7
-8. sudo apt-get install -y python3-pip
+8. sudo apt-get install -y python3-pip \
+9-1. python3.7 pip 작동 안됨 \
+  ! 해결 sudo apt install python3.7-distutils \
+9-2. venv 작동 안됨
+  ! 해결 sudo apt-get install python3.7-dev python3.7-venv
 9. sudo apt install -y nginx
 10. sudo apt install ufw
 

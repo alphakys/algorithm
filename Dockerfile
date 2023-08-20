@@ -45,3 +45,8 @@ is gived access to all devices (see the documentation on cgroups devices).
 12. ctrl + p + q 컨테이너 종료 없이 나가기
 
 docker commit -m "nginx install completed"
+
+docker cp는 container에 있는 파일을 local machine(filesystem)에 복사 할 수 있다.
+docker cp container id:/home/app/app name /home/ubuntu/app
+# 응용 .을 써서 디렉토리가 통째로 복사되는게 아닌 디렉토리 하위의 파일들만 복사되는지 확인해보자
+docker cp container id:/home/app/app name/. /home/ubuntu/app

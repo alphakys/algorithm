@@ -50,3 +50,15 @@ docker cp는 container에 있는 파일을 local machine(filesystem)에 복사 �
 docker cp container id:/home/app/app name /home/ubuntu/app
 # 응용 .을 써서 디렉토리가 통째로 복사되는게 아닌 디렉토리 하위의 파일들만 복사되는지 확인해보자
 docker cp container id:/home/app/app name/. /home/ubuntu/app
+
+13. pip mysqlclient 설치 시 필요한 ubuntu packages
+sudo apt install python3-dev default-libmysqlclient-dev build-essential
+pip install mysqlclient
+
+14. docker image를 통해 설치한 운영체제에 기본 에디터가 설치되어 있지 않다.
+그래서 sudo apt-get install vim-gtk로 vim 설치
+
+15. 장고를 development server를 뛰우려면 collect static과 같은 곳곳에 퍼져있는 static 파일들을 상용서버로 띄우기 전에 장고 폴더로 모아주는 명령어를
+작성해줘야 상용 서버에서 static 파일들을 적절히 서빙 할 수 있다. 지금까지 나는 debug=True에서 test를 해보았기 때문에 디버그 모드에서는 static 파일들을 모아줄 필요가
+없었기 때문에 이런 착오를 일으키게 된거 같다.
+

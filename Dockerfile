@@ -65,3 +65,6 @@ pip install mysqlclient
 16. collect static 완료 그런데 admin에서 제대로 css가 안나옴
 이유는 장고 서버는 웹서버(아파치 nginx와 같은 정적파일을 주요! 기능으로 다루는)의 역할을 하지 않기 때문
 그럼 결론은 nginx를 연결해야 한다.!
+
+17. nginx django 연결 완료
+18. 쿠버네티스를 공부할 지 젠킨스까지 붙일지 고민됨

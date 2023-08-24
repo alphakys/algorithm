@@ -68,3 +68,4 @@ pip install mysqlclient
 
 17. nginx django 연결 완료
 18. 쿠버네티스를 공부할 지 젠킨스까지 붙일지 고민됨
+19. 쿠버네티스 대시보드 띄우기 및 echoserver image를 가지고 쿠버네티스 deployment까지 했음

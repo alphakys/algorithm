@@ -85,3 +85,48 @@ echo "xsBNBGKItdQBCADWmKTNZEYWgXy73FvKFY5fRro4tGNa4Be4TZW3wZpct9Cj8EjykU7S9EPoJ3
 19. sudo kubeadm init 실행 실패시 
 /etc/containerd/config.toml 설정 파일에서
 # disabled_plugins = ["cri"] 주석처리하기
+
+sudo mount --help
+cd /EFI
+cd /mnt
+ls
+ls -al
+ls
+ls dev
+ls /dev
+sudo mount -tvfat /dev/nvme0n1p4 /mnt
+ls
+ls -al
+sudo cp /EFI/boot/grubx64.efi /mnt/efi/ubuntu
+cd /
+ls
+cd cdrom/
+ls
+ls -al
+cd /mnt
+ls
+cd /mnt
+sudo cd /mnt
+ls
+cd ..
+ls
+cd mnt
+ls
+su - root
+ls
+sudo cd /mnt
+ls -al
+sudo passwd
+su - root
+umount /mnt
+sudo umount /mnt
+cd /mnt
+ls
+sudo apt update
+update grub
+sudo update grub
+update-grub
+sudo update-grub
+ls
+ssh alpha@211.220.27.44
+

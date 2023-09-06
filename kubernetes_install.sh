@@ -23,12 +23,29 @@ echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://apt.kubernete
 echo $pw | sudo -S apt-get update
 echo $pw | sudo -S apt-get install -y kubelet kubeadm kubectl
 
+# API is not implemented for endpoint \"unix:///var/run/containerd/containerd.sock\": rpc error: code = Unimplemented desc = unknown service runtime.v1.RuntimeService" 
+# 에러 대응 / 이유 : https://github.com/kubernetes-sigs/cri-tools/issues/1089 참고하기
+# 내가 이해한 바로는 물론 완벽하지 않음. CRI라는 것이 Container Runtime Interface인 듯한데 애초에 도커 컨테이너에 대해서는 dockershim이라는
+# 인터페이스를 통해서 도커 컨테이너가 돌아갔지만 쿠버네티스가 더이상 dockershim을 지원하지 않아서 다른 runtime 컨테이너를 설정해서 사용해야 했다고
+# 알고 있다. 그 설정 관련해서 문제가 생긴 것으로 보인다.
+echo $pw | sudo -S sed -i '/disabled_plugins/s/^/# /' /etc/containerd/config.toml
+
+echo $pw | sudo -S systemctl restart containerd
+echo $pw | sudo -S kubeadm join {join.sh에 나오는 내용을 입력해야 함}
+
 echo $pw | sudo -S kubeadm init --apiserver-advertise-address 192.168.56.30 --pod-network-cidr=20.96.0.0/12
 echo $pw | sudo -S kubeadm token create --print-join-command > ~/join.sh
 
+# master node에서 설정
 mkdir -p $HOME/.kube
 echo $pw | sudo -S cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 echo $pw | sudo -S chown $(id -u):$(id -g) $HOME/.kube/config
+
+# worker node에서 설정
+mkdir -p $HOME/.kube
+echo $pw | sudo -S cp -i /etc/kubernetes/kubelet.conf $HOME/.kube/config
+echo $pw | sudo -S chown $(id -u):$(id -g) $HOME/.kube/config
+
 
 # kubectl 자동완성 기능을 사용하기 위해선 bash-completion의 설치가 필요하다(이유는 의존성을 가지고 있기 때문에) 
 # 따라서 bash-completion을 먼저 설치한다.

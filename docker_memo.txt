@@ -102,3 +102,13 @@ EOF
   },
   "storage-driver": "overlay2"
 }
+
+22.taint : 노드마다 설정가능. 설정한 노드에는 pod이 스케줄되지 않음
+
+23.[에러상황] : E0906 05:10:00.212183   24695 memcache.go:265] couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp 127.0.0.1:8080: connect: connection refused
+[해결]
+mkdir -p $HOME/.kube
+# sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo cp -i /etc/kubernetes/kubelet.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+

@@ -71,3 +71,11 @@ kubectl create -f https://raw.githubusercontent.com/kubetm/kubetm.github.io/mast
 curl https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/calico.yaml -O
 kubectl apply -f calico.yaml
 
+sudo virt-install --name=k8s-master --vcpus=2 --memory=4096 --cdrom=/media/alpha/Ventoy/ubuntu-22.04.3-live-server-amd64.iso --disk size=30 --os-variant ubuntu22.04
+ 1760  systemctl
+ 1761  systemctl | grep virt
+ 1762  systemctl | grep qemu
+ 1763  sudo systemctl status qemu-kvm.service
+ 1764  sudo systemctl reload qemu-kvm.service
+ 1765  sudo virt-install --name=k8s-master --vcpus=2 --memory=4096 --cdrom=/media/alpha/Ventoy/ubuntu-22.04.3-live-server-amd64.iso --disk size=30 --os-variant ubuntu22.04
+

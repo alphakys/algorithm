@@ -1,0 +1,39 @@
+
+
+
+
+론픽 머신을 사용하는 유저들의 운동 성장을 유도할 수 있는 모바일 앱 개발 
+
+variable declaration
+Variable declaration in C tells the compiler about the existence of the variable with the given name and data type.
+No memory is allocated to a variable in the declaration
+variable definition
+In the definition of a C variable, the compiler allocates some memory and some value to it. A defined variable will contain some random garbage value till it is not initialized
+int var -> memory allocated but garbage value is inserted;
+char s1 -> memory allocated but garbage value is inserted;
+
+variable initialization
+
+int a;
+Here, the information such as the variable name; a, and data tyupe; int, is sent to the compiler which will be stored in the data structure known as the smbol table. Along with this, a memory of size 2 bytes will be allocated.
+
+extern int a;
+
+no memory allcation
+
+the stack is typically allocated in the program's memory space, which is typically much smaller and faster to access than
+the system's memory space where the heap is located.
+
+rbp and rsp
+
+rbp is the base pointer, which points to the base of the current stack frame, and rsp is the stack pointer, which points to the top of the current stack frame.
+
+rsp = memory address of the top of the stack
+rbp = memory address of the base of the current stack frame
+
+ - rbp = memory address of the base of the current stack frame
+- 0x 10
+- 0x 20 
+- 0x 30
+- 0x 40
+ - rsp memory address of the top of the stack

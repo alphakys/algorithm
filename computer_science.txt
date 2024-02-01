@@ -1,0 +1,91 @@
+
+
+
+
+론픽 머신을 사용하는 유저들의 운동 성장을 유도할 수 있는 모바일 앱 개발 
+
+variable declaration
+Variable declaration in C tells the compiler about the existence of the variable with the given name and data type.
+No memory is allocated to a variable in the declaration
+variable definition
+In the definition of a C variable, the compiler allocates some memory and some value to it. A defined variable will contain some random garbage value till it is not initialized
+int var -> memory allocated but garbage value is inserted;
+char s1 -> memory allocated but garbage value is inserted;
+
+variable initialization
+
+int a;
+Here, the information such as the variable name; a, and data tyupe; int, is sent to the compiler which will be stored in the data structure known as the smbol table. Along with this, a memory of size 2 bytes will be allocated.
+
+extern int a;
+
+no memory allcation
+
+the stack is typically allocated in the program's memory space, which is typically much smaller and faster to access than
+the system's memory space where the heap is located.
+
+rbp and rsp
+
+rbp is the base pointer, which points to the base of the current stack frame, and rsp is the stack pointer, which points to the top of the current stack frame.
+
+rsp = memory address of the top of the stack
+rbp = memory address of the base of the current stack frame
+
+ - rbp = memory address of the base of the current stack frame
+- 0x 10
+- 0x 20 
+- 0x 30
+- 0x 40
+ - rsp memory address of the top of the stack
+
+virtual memory isa memmory management technique that is implemented using both hardware and software. It maps memory addresses used by a program, called vbirtual addresses, into physical addresses in computer memory.\
+
+The primary benefits of virtual memory include freeing applications from having to manage a shared memory sapce
+
+use more memory than might be physically available, using the technique of paging.
+
+mem
+maps
+
+프로그램은 특정 작업을 수행하는 일련의 명령어들의 집합이다.
+
+정적의 상태의 파일이다.
+
+프로세스는 동적인 상태의 파일이다. 즉 명령어 모음이 실제 메모리 위에 올라가 작업을 수행하는 상태
+
+덧셈결과 : 499999500000
+스레드 작업 실행시간 : 0.02524149300006684
+코드 효율성 비교: 프로세스 실행식간 : 0.025285329999999995
+
+하나의 쓰레드가 cpu 작업을 마치고 io작업을 실행하는 동안에는 다른 쓰레드가 cpu 동작을 동시에 실행할 수 있습니다.
+
+cpu -> io // 다른 쓰레드 cpu start
+
+
+프로세스 작업 실행시간 : 0.00025763200028450228273868560791015625
+코드 효율성 비교: 프로세스 실행식간 : 0.00026592000000003057635922232293523848056793212890625
+
+
+
+
+여러 cpu를 사용해야 하는 상황이라면 multi thread가 아니라 multi processing을 사용하는 것이 좋은 방법이다.
+
+
+
+
+
+
+define => 변수 선언 / 값을 할당 x ==> bss segment에 할당 / grabage value
+
+initialize => 변수 선언하고 값을 할당하는 과정 ==> stack memory 
+
+
+
+main 함수
+ - sp = 0
+ - fp = 0
+ 
+f1 함수 호출됨
+ - sp = 8
+ - fp는 따라서 0이 들어감
+

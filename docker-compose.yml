@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  django:
+    container_name : django 
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: django:1.1.0
+    tty: true
+

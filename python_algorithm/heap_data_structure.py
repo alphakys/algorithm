@@ -79,12 +79,16 @@ for _ in range(count):
 
                 # 무조건 swap된 node를 parent로 하되 parent의 left or right child가
                 # length를 넘기면 break 된다.
+                arr[1] = arr[-1]
+                del arr[-1]
 
+                length -= 1
+                print(arr)
                 while length >= right_child:
-
-                    if (length - 1) == left_child:
-                        swap_num(arr, left_child, parent_idx)
-                        parent_idx = left_child
+                    if length == left_child:
+                        if arr[left_child] > arr[parent_idx]:
+                            swap_num(arr, left_child, parent_idx)
+                            break
                     else:
                         if arr[left_child] > arr[right_child]:
                             swap_num(arr, left_child, parent_idx)
@@ -95,10 +99,8 @@ for _ in range(count):
 
                     left_child = parent_idx * 2
                     right_child = parent_idx * 2 + 1
-
+                    print(arr)
                 print("max : ", max_num)
-                # print(max_num)
-                arr.pop(parent_idx)
 
             else:
                 print(arr.pop(1))
@@ -116,7 +118,7 @@ for _ in range(count):
             curr_index = parent_idx
             parent_idx = curr_index // 2
 
-    print(arr)
+    # print(arr)
 
 
   #      5

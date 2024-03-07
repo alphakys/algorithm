@@ -47,10 +47,12 @@ class Grid:
 
 board = []
 visited = []
+distance = []
 for i in range(N):
     row = [int(c) for c in sys.stdin.readline().rstrip()]
     board.append(row)
     visited.append([False] * M)
+    distance.append([0] * M)
 
 q = deque()
 
@@ -62,6 +64,11 @@ copy_q = deque()
 while len(q):
     curr: Grid = q.popleft()
 
+
+    if (curr.x+1, curr.y+1) == (N, M):
+        copy_q.append((curr.x + 1, curr.y + 1))
+        break
+
     for node in curr.fetch_dir_list():
 
         x = node[0]
@@ -71,13 +78,11 @@ while len(q):
 
             visited[x][y] = True
             q.append(Grid(x, y))
-
-            copy_q.append((x+1, y+1))
-
-pprint.pprint(copy_q)
+            curr_dis = distance[curr.x][curr.y]
+            distance[x][y] = curr_dis + 1
 
 
-
+sys.stdout.write(f"{distance[N-1][M-1]+1}")
 
 
 

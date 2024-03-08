@@ -1,5 +1,27 @@
 import numpy as np
 
+
+
+
+
+
+
+
+l = []
+
+for i in range(1000):
+    for j in range(1000):
+        print(1, end=' ')
+    print()
+
+
+
+
+
+
+
+
+exit()
 validation_array_list = [[1]]
 
 for _ in range(7):

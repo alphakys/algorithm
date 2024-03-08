@@ -73,7 +73,7 @@ while len(q):
 
         x = node[0]
         y = node[1]
-        if node and board[x][y] == 1 \
+        if board[x][y] == 1 \
                 and visited[x][y] is False:
 
             visited[x][y] = True
@@ -81,10 +81,17 @@ while len(q):
             curr_dis = distance[curr.x][curr.y]
             distance[x][y] = curr_dis + 1
 
-
+for d in distance:
+    print(d)
 sys.stdout.write(f"{distance[N-1][M-1]+1}")
 
 
 
-
+# 6 6
+# 111111
+# 111111
+# 111111
+# 111111
+# 111111
+# 111111
 

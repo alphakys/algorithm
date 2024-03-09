@@ -1,11 +1,82 @@
 import numpy as np
 
 
+class Category:
+
+    def __init__(self, val: str, child: list):
+        self.val = val
+        self.child_categories = child
 
 
+category = ["a", "b", "c", "d", "e"]
+
+relation = ["a b", "b c", "c d", "c e"]
+
+member = ["A a", "B b", "C c", "D d", "E e"]
+
+article = ["a", "a b", "c", "c d", "c e"]
+
+from collections import defaultdict
+
+relation_dict = defaultdict(lambda: [])
+member_dict = defaultdict(lambda: [])
+
+for r in relation:
+    parent, child = r.split(' ')
+    relation_dict[parent].append(child)
+
+print("relations : ", relation_dict)
+
+for m in member:
+    name, category = m.split(' ')
+    member_dict[name].append(category)
+
+print("members : ", member_dict)
+
+# article = [articles.extend(a.split(' ')) for a in article]
+
+print(article)
+print()
 
 
+def seek_parent(category, parents_categories=set()):
+    for k, v in relation_dict.items():
+        if category in v:
+            parents_categories.add(k)
+            seek_parent(k, parents_categories)
 
+    return parents_categories
+
+
+def seek_member(article):
+    for name, arti in member_dict.items():
+        if article in arti:
+            return name, arti
+
+
+publish_list = set()
+
+answer = []
+for _ in article:
+    split_article = _.split(' ')
+
+    cnt = 0
+    parents = []
+    for a in split_article:
+        name, arti = seek_member(a)
+        publish_list.add(name)
+
+        parent_cate = seek_parent(arti[0])
+
+        for p in parent_cate:
+            name, arti = seek_member(p)
+            publish_list.add(name)
+
+    answer.append(len(publish_list))
+
+print(answer)
+
+exit()
 
 l = []
 
@@ -13,13 +84,6 @@ for i in range(1000):
     for j in range(1000):
         print(1, end=' ')
     print()
-
-
-
-
-
-
-
 
 exit()
 validation_array_list = [[1]]
@@ -61,7 +125,6 @@ def split_matrix(left, right):
         split_matrix(left, mid)
         pass
 
-
     # print(li)
     #             print(check_arr)
     #             print("Wrong Let's split")
@@ -75,7 +138,6 @@ def split_matrix(left, right):
 
 
 def check_valid_list(start, end, arr):
-
     print(f"start : {start} end : {end}")
     check_arr = validation_array_list[(end - start) >> 1]
 
@@ -103,6 +165,7 @@ def check_valid_list(start, end, arr):
                 break
 
     return True
+
 
 N = 8
 

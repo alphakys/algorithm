@@ -1,27 +1,44 @@
 import sys
 
-sys.setrecursionlimit(100000)
+sys.setrecursionlimit(10000000)
 A, B, C = sys.stdin.readline().rstrip().split(' ')
 # CONST(read only) variable
 A = int(A)
 B = int(B)
 C = int(C)
 
+# 핵심 아이디어
+# A mod B -> C // A^2 mod B -> C^2
+
+# 2^90 mod C
+
+# 2^90 = 2^45 * 2^45 mod C
+# 2^90 = { (2^45 mod C) * (2^45 mod C) } mod C
+
+
+
+# 2^91 = (2^45 * 2^45 * 2) mod C
+# 2^91 = { (2^45 mod C) * (2^45 mod C) * (2 mod C) } mod C
+
+# half = B//2
+# print(f"{half} {half} {2 ** (B % 2)}")
+# modulo_statement = half * half * 2 ** (B % 2)
+
 # stack 생성 = 3 // 2**3 번!! (8번) 거듭제곱함
-def recurrsion_mod(a, b, c):
-    if b == 1:
-        return a
-    print("b : ", b)
-    b //= 2
-    result = recurrsion_mod(a, b, c)
-    print("re : ", result**2)
-    # result = (result ** 2) % c
-    # print("mod : ", result)
-    return (result ** 2)
+def recurrsion_mod(b):
+    half = b // 2
+    if half < 460:
+        half_modulo = (A ** half) % C
+        return ((half_modulo**2) * ((A ** (b % 2)) % C) ) % C
 
-answer = recurrsion_mod(A, B, C)
+    result = recurrsion_mod(half)
+    modulo = (result**2 * ((A ** (b % 2)) % C)) % C
+    return modulo
 
-print(answer)
+answer = recurrsion_mod(B)
+sys.stdout.write(f"{answer}")
+
+# 2 124 443
 
 # 3 12 41
 

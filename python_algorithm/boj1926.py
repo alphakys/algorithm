@@ -30,7 +30,7 @@ for i in range(N):
                 curr = q.popleft()
 
                 for d in dirs:
-                    if (d[0] == 0 and (0 <= curr[1]+d[1] < M)) or (d[1] == 0 and (0 <= curr[0]+d[0] < N)):
+                    if 0 <= curr[1]+d[1] < M and 0 <= curr[0]+d[0] < N:
                         x, y = curr[0] + d[0], curr[1] + d[1]
                     else:
                         continue

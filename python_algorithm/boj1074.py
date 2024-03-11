@@ -1,6 +1,8 @@
 import sys
 
-N, r, c = list(map(lambda x: int(x), sys.stdin.readline().rstrip().split(' ')))
+# N, r, c = list(map(lambda x: int(x), sys.stdin.readline().rstrip().split(' ')))
+
+N = 4
 
 delta = [(0, 0), (0, 1),
          (1, 0), (1, 1)]
@@ -11,55 +13,48 @@ row_col_cnt = 2 ** N
 for i in range(row_col_cnt):
     board.append([0] * row_col_cnt)
 
+increment = 0
 
-def recurrsion(starting_point, increment):
-    print("start ; ", starting_point)
+print("in : ", increment)
+
+
+def recurrsion(starting_point):
+    global increment
+    # print(increment)
     for d in delta:
-        starting_point = 2 + starting_point[0], 2 + starting_point[1]
-        for d in delta:
-            x, y = d[0] + starting_point[0], d[1] + starting_point[1]
-            print("recur1ssion : ", x, y)
-            board[x][y] = increment
-            increment += 1
+        x, y = d[0] + starting_point[0], d[1] + starting_point[1]
 
-    return increment
+        print(x, y, increment)
+        board[x][y] = increment
+        increment += 1
 
 
-# recurrsion((0,0), 0)
+def divide(n, starting_point):
+    if n == 0:
+        return
+
+    # (0, 8)
+    # (0,8) (0, 12) (12, 0) (12, 12)
+
+    # (0, 0)
+    # st: [(0, 0), (0, 4), (4, 0), (4, 4)]
+
+    positions = [(starting_point[0] + (d[0] * (2 ** n)), starting_point[1] + (d[1] * (2 ** n))) for d in delta]
+    print("st : ", positions, n)
+    for p in positions:
+        result = divide(n - 1, p)
+        recurrsion(p)
+
+    return
 
 
-def divide(starting_point, pow_num, increment):
-    for i, d in enumerate(delta):
-        x, y = (starting_point[0] + (2 ** pow_num * d[0]), starting_point[1] + (2 ** pow_num * d[1]))
-        print("divide : ", x, y)
-        increment = recurrsion((x, y), increment)
+n = N - 1
+positions = [(d[0] * (2 ** n), d[1] * (2 ** n)) for d in delta]
 
-    return increment
-
-
-print(2 ** (N - 1))
-
-pow_num = 2
-increment = divide((0, 0), pow_num, 0)
-increment = divide((0, 2 ** (N - 1)), pow_num, increment)
-increment = divide((2 ** (N - 1), 0), pow_num, increment)
-increment = divide((2 ** (N - 1), 2 ** (N - 1)), pow_num, increment)
+print(positions)
+for posi in positions:
+    print(posi)
+    divide(n - 1, posi)
 
 for b in board:
     print(b)
-
-#
-# def divide_board(n):
-#     if n == 0:
-#         return recurrsion((0, 0), 0)
-#     print(n)
-#     n -= 1
-#     for d in delta:
-#         x, y = (starting_point[0] + (2 ** pow_num * d[0]), starting_point[1] + (2 ** pow_num * d[1]))
-#         print(x, y)
-#     # divide_board(n)
-#     recurrsion(n, )
-#
-#
-# divide_board(N)
-# 3 3 3

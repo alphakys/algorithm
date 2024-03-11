@@ -1,38 +1,92 @@
-# 한정 조건!!!!
+import sys
 
-class Node:
-
-    def __init__(self, v: int):
-        self.child_node = []
-        self.val: int = v
+# N, M = list(map(lambda x: int(x), sys.stdin.readline().rstrip().split(' ')))
 
 
-li = [[1, 5, 3], [2, 4, 7], [9, 3, 5]]
+nums = [1, 2, 3, 4, 5]
+vis = [False] * 6
 
-# 재귀는 종결 조건을 잘 짜야한다.
+container = [0] * 5
+limit = 5
 
-min_val = min(li[0])
+def back_tracking(idx):
 
-print(min_val)
+    if idx == limit:
+        print(container)
+        return
 
-min_arr = []
+    for num in range(1, 6):
 
-visited = [1, 0, 0]
+        if not vis[num]:
+            vis[num] = True
+            container[idx] = num
+            print("num : ", num, " vis : ", vis)
+            back_tracking(idx + 1)
+            vis[num] = False
+            print(f"down num{num} /  vis : ", vis)
+
+back_tracking(0)
 
 
-def back_tracking(l: list):
-    i = 0
-    m = 0
-    while i < 3:
 
-        if visited[i]:
-            i += 1
-            continue
-
-        if m > l[i]:
-            m = l[i]
-
-        i += 1
 
 
 exit()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+N, M = 4, 4
+
+vis = [False] * (N + 1)
+container = [0] * N
+
+
+def back_track(idx):
+    if idx == M:
+        print(container)
+        return
+
+    print("idx ", idx)
+    for num in range(1, N + 1):
+
+        # print("multiverse : ", num)
+        # print(vis)
+        if not vis[num]:
+            vis[num] = True
+            container[idx] = num
+            back_track(idx + 1)
+            vis[num] = False
+
+        print(vis)
+
+
+back_track(0)

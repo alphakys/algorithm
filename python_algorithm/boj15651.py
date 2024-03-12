@@ -4,9 +4,9 @@ N, M = list(map(lambda x: int(x), sys.stdin.readline().rstrip().split(' ')))
 
 container = [0] * M
 vis = [False] * (N + 1)
+cnt = [0] * (N + 1)
 
-
-def back_track(idx):
+def duplicate_permutation(idx):
     if idx == M:
         str = ''
         for n in container:
@@ -17,11 +17,12 @@ def back_track(idx):
 
     for num in range(1, N + 1):
 
-        if not vis[num]:
-            vis[num] = True
+        if not vis[num] and cnt[num] < 3:
+            cnt[num] += 1
             container[idx] = num
-            back_track(idx + 1)
+            duplicate_permutation(idx + 1)
             vis[num] = False
+        else:
+            vis[num] = True
 
-
-back_track(0)
+duplicate_permutation(0)

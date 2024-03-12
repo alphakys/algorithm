@@ -15,14 +15,16 @@ def duplicate_permutation(idx):
         sys.stdout.write(f"{str}\n")
         return
 
-    for num in range(1, N + 1):
+    for _ in range(N):
 
-        if not vis[num] and cnt[num] < 3:
-            cnt[num] += 1
-            container[idx] = num
-            duplicate_permutation(idx + 1)
-            vis[num] = False
-        else:
-            vis[num] = True
+        for num in range(1, N + 1):
+
+            if not vis[num] and cnt[num] < 3:
+                cnt[num] += 1
+                container[idx] = num
+                duplicate_permutation(idx + 1)
+                vis[num] = False
+            else:
+                vis[num] = True
 
 duplicate_permutation(0)

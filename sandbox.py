@@ -1,5 +1,35 @@
 import numpy as np
 
+l = [6, -8, 1, 12, 8, 3, 7, -7]
+l = [6, -8, 1]
+
+pivot = 0
+
+limit = len(l) - 1
+
+l_pointer = 1
+r_pointer = limit
+
+stopper = 0
+while pivot < limit:
+
+    while l_pointer <= r_pointer and l[l_pointer] <= l[pivot]:
+        l_pointer += 1
+
+    while l_pointer <= r_pointer and l[r_pointer] >= l[pivot]:
+        r_pointer -= 1
+
+    if r_pointer < l_pointer:
+        l[pivot], l[r_pointer] = l[r_pointer], l[pivot]
+        break
+
+    l[l_pointer], l[r_pointer] = l[r_pointer], l[l_pointer]
+    l_pointer += 1
+    r_pointer -= 1
+
+print(l)
+exit()
+
 
 class Category:
 

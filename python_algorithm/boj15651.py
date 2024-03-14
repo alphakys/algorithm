@@ -6,6 +6,7 @@ container = [0] * M
 vis = [False] * (N + 1)
 cnt = [0] * (N + 1)
 
+
 def duplicate_permutation(idx):
     if idx == M:
         str = ''
@@ -15,16 +16,11 @@ def duplicate_permutation(idx):
         sys.stdout.write(f"{str}\n")
         return
 
-    for _ in range(N):
+    for num in range(1, N + 1):
 
-        for num in range(1, N + 1):
+        if not vis[num]:
+            container[idx] = num
+            duplicate_permutation(idx + 1)
 
-            if not vis[num] and cnt[num] < 3:
-                cnt[num] += 1
-                container[idx] = num
-                duplicate_permutation(idx + 1)
-                vis[num] = False
-            else:
-                vis[num] = True
 
 duplicate_permutation(0)

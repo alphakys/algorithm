@@ -1,5 +1,13 @@
 import sys
 
+from itertools import permutations, combinations
+
+p = permutations(range(1,4), 2)
+
+c = combinations(range(1,4), 2)
+print(list(c))
+
+exit()
 N, M = list(map(lambda x: int(x), sys.stdin.readline().rstrip().split(' ')))
 
 container = [0] * M
@@ -15,12 +23,10 @@ def combination(idx, start_num):
         sys.stdout.write(f"{str}\n")
         return
 
-    for num in range(1, N + 1):
+    for num in range(start_num, N + 1):
 
-        if not vis[num]:
-            vis[num] = True
-            container[idx] = num
-            combination(idx + 1, start_num)
+        container[idx] = num
+        combination(idx + 1, num + 1)
 
 
 

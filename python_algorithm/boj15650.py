@@ -2,35 +2,29 @@ import sys
 
 from itertools import permutations, combinations
 
-p = permutations(range(1,4), 2)
+N, M = 5, 5
 
-c = combinations(range(1,4), 2)
-print(list(c))
-
-exit()
-N, M = list(map(lambda x: int(x), sys.stdin.readline().rstrip().split(' ')))
-
+vis = [False] * N
 container = [0] * M
-vis = [False] * (N + 1)
 
-
-def combination(idx, start_num):
+arr = [list(range(5)), list(range(5,10))]
+print(arr)
+def combination(idx, start):
     if idx == M:
-        str = ''
-        for n in container:
-            str += f"{n} "
-
-        sys.stdout.write(f"{str}\n")
+        print(container)
+        print(arr[0][container[0]], arr[1][container[1]])
         return
 
-    for num in range(start_num, N + 1):
+    for num in range(start, N):
 
-        container[idx] = num
-        combination(idx + 1, num + 1)
+        if not vis[num]:
+            vis[num] = True
+            container[idx] = num
+            combination(idx + 1, num + 1)
+            vis[num] = False
 
 
-
-combination(0, 1)
+combination(0, 0)
 
 # 4C2 = 3P2// 2! factorial!
 # 순열 nPr -> 순서가 있는 배열.

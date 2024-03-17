@@ -1,126 +1,61 @@
 import sys
 from collections import deque
 
-M, N = sys.stdin.readline().rstrip().split(' ')
+M, N = map(int, sys.stdin.readline().rstrip().split(' '))
 
-M, N = int(M), int(N)
+green_tomato_checker = N * M
 
-grid = []
-days = []
-
-
-class Position:
-    limit_x = N
-    limit_y = M
-
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-
-    def fetch_right(self):
-        if self.y + 1 == Position.limit_y:
-            return False
-        return (self.x, self.y + 1)
-
-    def fetch_left(self):
-        if self.y - 1 < 0:
-            return False
-        return (self.x, self.y - 1)
-
-    def fetch_up(self):
-        if self.x - 1 < 0:
-            return False
-        return (self.x - 1, self.y)
-
-    def fetch_down(self):
-        if self.x + 1 == Position.limit_x:
-            return False
-        return (self.x + 1, self.y)
-
-    def fetch_dir_list(self):
-        dir_list = [self.fetch_down(), self.fetch_right(),
-                    self.fetch_up(), self.fetch_left()]
-
-        return [dir for dir in dir_list if dir]
-
-    def __repr__(self):
-        return f'x : {str(self.x + 1)}, y : {str(self.y + 1)}'
-
+board = []
 
 for _ in range(N):
-    row = [int(n) for n in sys.stdin.readline().rstrip().split(' ')]
-    # print(row)
-    grid.append(row)
-    days.append([-1] * M)
+    row = sys.stdin.readline().rstrip().split(' ')
+    board.append([int(chr) for chr in row])
 
-# grid = [[-1] * 1000 for _ in range(1000)]
-#
-# days = [[-1] * 1000 for _ in range(1000)]
+dx = (0, 1, 0, -1)
+dy = (1, 0, -1, 0)
 
-q = deque()
+visited = [[False] * M for _ in range(N)]
+distance = [[0] * M for _ in range(N)]
 
-memo = set()
+qu = deque()
 
 for i in range(N):
     for j in range(M):
 
-        if grid[i][j] == 1:
-            q.append(Position(i, j))
-            days[i][j] = 0
+        if board[i][j] == 1:
+            qu.append((i, j))
+            visited[i][j] = True
+            green_tomato_checker -= 1
+        elif board[i][j] == -1:
+            green_tomato_checker -= 1
 
-if len(q) == 0:
-    sys.stdout.write(f"-1")
-    exit()
+max_distance = 0
 
-last_day = 0
-while len(q):
-    curr: Position = q.popleft()
+while len(qu):
 
-    positions = curr.fetch_dir_list()
+    curr = qu.popleft()
 
-    for p in positions:
-        x = p[0]
-        y = p[1]
+    visited[curr[0]][curr[1]] = True
 
-        if days[x][y] < 0:
-            # print("curr : ", curr)
-            if grid[x][y] == 0:
-                # print("target pos : ", x+1, y+1)
-                days[x][y] = days[curr.x][curr.y] + 1
+    curr_dist = distance[curr[0]][curr[1]]
+    for k in range(4):
+        x = curr[0] + dx[k]
+        y = curr[1] + dy[k]
 
-                last_day = days[x][y]
-                # print("last : ", last_day)
-                # print()
-                q.append(Position(x, y))
+        if 0 <= x < N and 0 <= y < M and board[x][y] == 0 \
+                and not visited[x][y]:
+            green_tomato_checker -= 1
+            visited[x][y] = True
+            qu.append((x, y))
+            distance[x][y] = curr_dist + 1
+            max_distance = curr_dist + 1
 
-            elif grid[x][y] == -1:
-                days[x][y] = 0
-                [memo.add(p) for p in Position(x, y).fetch_dir_list()]
+for b in distance:
 
-# for d in days:
-#     print(d)
+    print(b)
 
-# grid가 0인데 방문이 안됨 / days가 -1
-# sys.stdout.write(f"{last_day}")
-
-
-for position in memo:
-    if days[position[0]][position[1]] == -1 and grid[position[0]][position[1]] == 0:
-        sys.stdout.write(f"{-1}")
-        break
+if green_tomato_checker != 0:
+    answer = -1
 else:
-    sys.stdout.write(f"{last_day}")
-
-
-# -1 -1 -1 -1
-# 0 0 0 -1
-# 0 0 0 -1
-# 0 0 0 -1
-# -1 -1 -1 -1
-
-# 4 4
-# -1 -1 -1 -1
-# 0 0 0 -1
-# 0 0 0 -1
-# 0 0 0 -1
-# -1 -1 -1 -1
+    answer = max_distance
+sys.stdout.write(f"{answer}")

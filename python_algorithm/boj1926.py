@@ -1,49 +1,46 @@
 import sys
-
-N, M = sys.stdin.readline().split(' ')
-N, M = int(N), int(M)
-
-grid = []
-vis = []
-for _ in range(N):
-    row = sys.stdin.readline().rstrip().split(' ')
-    grid.append([int(n) for n in row])
-    vis.append([False] * M)
-
 from collections import deque
 
-q = deque()
+N, M = map(int, sys.stdin.readline().rstrip().split(' '))
 
-dirs = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+board = []
 
-cnt_arr = []
+for _ in range(N):
+    row = sys.stdin.readline().rstrip().split(' ')
+    board.append([int(chr) for chr in row])
 
+dx = (0, 1, 0, -1)
+dy = (1, 0, -1, 0)
+
+visited = [[False] * M for _ in range(N)]
+
+qu = deque()
+
+max_val = 0
+length = 0
 for i in range(N):
     for j in range(M):
+        if not visited[i][j] and board[i][j] == 1:
 
-        if grid[i][j] == 1 and vis[i][j] is False:
-            vis[i][j] = True
-            q.append((i, j))
+            qu.append((i, j))
+            cnt = 0
+            while len(qu):
 
-            cnt = 1
-            while len(q):
-                curr = q.popleft()
+                curr = qu.popleft()
+                visited[curr[0]][curr[1]] = True
 
-                for d in dirs:
-                    if 0 <= curr[1]+d[1] < M and 0 <= curr[0]+d[0] < N:
-                        x, y = curr[0] + d[0], curr[1] + d[1]
-                    else:
-                        continue
+                cnt += 1
+                for k in range(4):
+                    x = curr[0] + dx[k]
+                    y = curr[1] + dy[k]
 
-                    if grid[x][y] == 1 and vis[x][y] is False:
+                    if 0 <= x < N and 0 <= y < M and board[x][y] == 1 \
+                            and not visited[x][y]:
+                        visited[x][y] = True
+                        qu.append((x, y))
 
-                        vis[x][y] = True
-                        q.append((x, y))
-                        cnt += 1
-            cnt_arr.append(cnt)
+            if max_val < cnt:
+                max_val = cnt
+            length += 1
 
-
-if cnt_arr == []:
-    sys.stdout.write(f"0\n0")
-else:
-    sys.stdout.write(f"{len(cnt_arr)}\n{max(cnt_arr)}")
+sys.stdout.write(f"{length}\n{max_val}")

@@ -1,102 +1,97 @@
+import copy
 import sys
 from collections import deque
 
-M, N = sys.stdin.readline().rstrip().split(' ')
+R, C = map(int, sys.stdin.readline().rstrip().split(' '))
 
-M, N = int(M), int(N)
+# if R == 1 and C == 1:
+#     sys.stdout.write(f"IMPOSSIBLE")
+#     exit()
 
-grid = []
-vis = []
-
-
-class Position:
-    limit_x = M
-    limit_y = N
-
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-
-    def fetch_right(self):
-        if self.y + 1 == Position.limit_y:
-            return False
-        return (self.x, self.y + 1)
-
-    def fetch_left(self):
-        if self.y - 1 < 0:
-            return False
-        return (self.x, self.y - 1)
-
-    def fetch_up(self):
-        if self.x - 1 < 0:
-            return False
-        return (self.x - 1, self.y)
-
-    def fetch_down(self):
-        if self.x + 1 == Position.limit_x:
-            return False
-        return (self.x + 1, self.y)
-
-    def fetch_dir_list(self):
-        dir_list = [self.fetch_down(), self.fetch_right(),
-                    self.fetch_up(), self.fetch_left()]
-
-        return [dir for dir in dir_list if dir]
-
-    def __repr__(self):
-        return f'x : {str(self.x + 1)}, y : {str(self.y + 1)}'
-
-
-for _ in range(M):
+maze = []
+visited = []
+dist = []
+for _ in range(R):
     row = sys.stdin.readline().rstrip()
-    grid.append(row)
-    vis.append([-1] * N)
+    maze.append(row)
+    visited.append([False] * C)
+    dist.append([0] * C)
 
-q = deque()
+fv = copy.deepcopy(visited)
+fd = copy.deepcopy(dist)
 
-for i in range(M):
-    for j in range(N):
+jinwoo_queue = deque()
+fire_list = deque()
 
-        if grid[i][j] == 'J' or 'F':
-            q.append(Position(i, j))
-            vis[i][j] = 0
-
-
-last_day = 0
-while len(q):
-    curr: Position = q.popleft()
-
-    positions = curr.fetch_dir_list()
-
-    for p in positions:
-        x = p[0]
-        y = p[1]
-
-        if vis[x][y] < 0:
-            # print("curr : ", curr)
-            if grid[x][y] == 0:
-                # print("target pos : ", x+1, y+1)
-                vis[x][y] = vis[curr.x][curr.y] + 1
-
-                last_day = vis[x][y]
-                # print("last : ", last_day)
-                # print()
-                q.append(Position(x, y))
-
-            elif grid[x][y] == -1:
-                vis[x][y] = 0
-                [memo.add(p) for p in Position(x, y).fetch_dir_list()]
-
-# for d in vis:
-#     print(d)
-
-# grid가 0인데 방문이 안됨 / vis가 -1
-# sys.stdout.write(f"{last_day}")
+for i in range(R):
+    for j in range(C):
+        if maze[i][j] == 'F':
+            fire_list.append((i, j))
+            fv[i][j] = True
+            fd[i][j] = 1
+        elif maze[i][j] == 'J':
+            visited[i][j] = True
+            jinwoo_queue.append((i, j))
+            dist[i][j] = 1
+delta = [(0, 1), (1, 0), (0, -1), (-1, 0)]
 
 
-for position in memo:
-    if vis[position[0]][position[1]] == -1 and grid[position[0]][position[1]] == 0:
-        sys.stdout.write(f"{-1}")
-        break
+def bfs(q, distance, vis):
+    while len(q):
+        curr = q.popleft()
+        curr_distance = distance[curr[0]][curr[1]]
+
+        for dx, dy in delta:
+
+            x = curr[0] + dx
+            y = curr[1] + dy
+
+            if 0 <= x < R and 0 <= y < C and maze[x][y] == '.' \
+                    and not vis[x][y]:
+                vis[x][y] = True
+                distance[x][y] = curr_distance + 1
+                q.append((x, y))
+
+
+bfs(fire_list, fd, fv)
+bfs(jinwoo_queue, dist, visited)
+
+f_edge = []
+j_edge = []
+
+f_min = 1000000
+j_min = 1000000
+
+# 같은 좌표를 비교할 때
+# 1. j dis >= 1 and f dis == 0:
+# j dis <- min 먹어
+# 2. j dis >= 1 and f dis >= 1:
+# 비교해야함. if j dis < f dis: min 먹어
+# 3.
+
+for r in range(R):
+    for c in range(C):
+        x, y = -1, -1
+        if maze[r][c] not in ['#', 'F']:
+
+            if r == 0 or r == R - 1:
+                x = r
+                y = c
+            else:
+                if c == 0 or c == C - 1:
+                    x = r
+                    y = c
+        if x >= 0:
+            if maze[x][y] == 'J':
+                j_min = 1
+                break
+            if dist[x][y] >= 1:
+                if (fd[x][y] >= 1 and dist[x][y] < fd[x][y]) and j_min > dist[x][y]:
+                    j_min = dist[x][y]
+                elif fd[x][y] == 0 and j_min > dist[x][y]:
+                    j_min = dist[x][y]
+
+if j_min == 1000000:
+    sys.stdout.write(f"IMPOSSIBLE")
 else:
-    sys.stdout.write(f"{last_day}")
+    sys.stdout.write(f"{j_min}")

@@ -1,16 +1,58 @@
 import sys
 
 # 초기값을 정하기 중요!!
+N = 4
 
-table = [0] * 11
+vis = [False] * 4
+container = [0] * N
 
-table[1] = 1  # 1
-table[2] = 2  # 1+1, 2
-table[3] = 4  # 1+1+1, (2+1, 1+2), 3
-table[4] = 8  # 1+1+1+1, (2+1+1, 1+2+1, 1+1+2), 2+2, (3+1, 1+3), 4
+def back_track(idx):
+
+    if sum(container) == 4:
+        print("result : ", container)
+        return
+
+    for num in range(0, 4):
+
+        if not vis[num] and idx < N:
+            container[idx] = num
+            # print("n : ", num)
+            # print("container : ", container)
+            # print()
+            back_track(idx + 1)
+
+back_track(0)
+
+
+
+
+
+# table = [0] * 11
+# dp = [0] * 11
+#
+# table[1] = 1  # 1
+# dp[1] = [[1], [0], [0], [0]]
+#
+# table[2] = 2  # 1+1,
+#               # 2
+# dp[2] = [[1], [1], [0], [0]]
+#
+# table[3] = 4  # 1+1+1, (2+1,
+#               # 1+2), 3
+# dp[3] = [[1], [2], [1], [0]]
+#
+# table[4] = 7  # 1+1+1+1, (2+1+1, 1+2+1, (3+1
+#                # 1+1+2), 2+2,
+# #               1+3
+# dp[4] = [[1], [3], [1], [2]]
+#
+# table[5] = 13  # 1+1+1+1+1, 2+1+1+1, 1+2+1+1, 1+1+2+1, 2+2+1, 3+1+1, 1+3+1
+#                # 1+1+1+2, 2+1+2, 1+2+2, 3+2
+#                # 1+1+3, 2+3
+#
+
 
 # then D[5] =
-
 
 
 # read = sys.stdin.readline
@@ -24,5 +66,3 @@ table[4] = 8  # 1+1+1+1, (2+1+1, 1+2+1, 1+1+2), 2+2, (3+1, 1+3), 4
 # for _ in range(T):
 #
 #     N = int(read().rstrip())
-
-

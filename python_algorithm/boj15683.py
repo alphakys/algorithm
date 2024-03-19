@@ -5,9 +5,104 @@ N, M = list(map(lambda x: int(x), sys.stdin.readline().rstrip().split(' ')))
 # N, M = 4, 6
 
 office = []
+vis = [[False] * M for _ in range(N)]
+
 for _ in range(N):
     row = list(map(lambda x: int(x), sys.stdin.readline().rstrip().split(' ')))
     office.append(row)
+
+total_num = N * M
+cctvs = []
+for i in range(N):
+    for j in range(M):
+        if 1 <= office[i][j] <= 5:
+            cctvs.append([(i, j), office[i][j]])
+            total_num -= 1
+        elif office[i][j] == 6:
+            total_num -= 1
+
+
+# 4 6
+# 0 0 0 0 0 0
+# 0 0 0 0 0 0
+# 0 0 1 0 5 0
+# 0 0 0 0 0 0
+def tracking(cctv_pos, available_dirs):
+    directions = [(-1, 0), (0, 1), (1, 0), (0, -1)]
+
+    cnt = 0
+    for d in available_dirs:
+        cx, cy = cctv_pos
+        while True:
+            cx += directions[d][0]
+            cy += directions[d][1]
+
+            if 0 <= cx < N and 0 <= cy < M:
+
+                if office[cx][cy] == 0 and vis[cx][cy] is False:
+                    vis[cx][cy] = True
+                    cnt += 1
+                elif office[cx][cy] == 6:
+
+                    break
+            else:
+                break
+
+    return cnt
+
+
+def reset_mark():
+    for i in range(N):
+        for j in range(M):
+            vis[i][j] = False
+
+
+def watch_dirs(cctvs):
+    directions = [(-1, 0), (0, 1), (1, 0), (0, -1)]
+    # 0 북 / 1 동 / 2 남 / 3 서
+    cctv_available_dirs = [
+        [[0], [1], [2], [3]],
+        [[0, 2], [1, 3], [0, 2], [1, 3]],
+        [[0, 1], [1, 2], [2, 3], [3, 0]],
+        [[1, 0, 3], [1, 2, 3], [0, 1, 2], [0, 3, 2]],
+        [[0, 1, 2, 3], [0, 1, 2, 3], [0, 2, 3, 1], [2, 3, 0, 1]],
+    ]
+    min_cnt = 65
+
+    for n in range(4 ** len(cctvs)):
+
+        s = [0] * len(cctvs)
+        i = 0
+        while True:
+            if n == 0:
+                break
+
+            s[i] = n % 4
+            i += 1
+            n = n // 4
+
+        result = 0
+        for idx, j in enumerate(s):
+            # 2차원 배열에서 0-index => cctv num
+            # 2차원 배열에서 1-index => cctv가 감시할 수있는 방향의 경우의 수
+            cctv_num = cctvs[idx][1]
+            xy_tuple = cctvs[idx][0]
+
+            directions = cctv_available_dirs[cctv_num - 1][j]
+            result += tracking(xy_tuple, directions)
+
+        result = total_num - result
+        if min_cnt > result:
+            min_cnt = result
+
+        reset_mark()
+    return min_cnt
+
+
+answer = watch_dirs(cctvs)
+
+print(answer)
+exit()
 
 cctv_list = []
 for i in range(N):
@@ -25,7 +120,6 @@ for i in range(N):
             cctv_list.append((5, i, j))
         # elif office[i][j] == 6:
         #     blocks += 1
-
 
 # 1번 cctv부터 5번 cctv 까지 각 cctv가 바로볼 수 있는 방향이 다르지만 최대 경우의 수인 4 방향을 모두 볼수 있다고 가정하고.
 # cctv 개수 만큼을 row 로 잡고 4개의 경우의 수를 4진법으로 경우의 수를 순열을 돌리고 그에 대한 계산으로 나오는 값을

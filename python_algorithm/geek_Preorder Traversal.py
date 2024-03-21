@@ -13,30 +13,28 @@ class Node:
 
 # Function to return a list containing the preorder traversal of the tree.
 
-# def order_util(root, arr):
-#
-#     arr.append(root.data)
-#     if root.left:
-#         order_util(root.left, arr)
-#
-#     if root.right:
-#         order_util(root.right, arr)
-#
-#     return arr
-#
-# def preorder(root):
-#     arr = []
-#     if not root:
-#         return
-#
-#     return order_util(root, arr)
+# 5
+# 1 4 N 4 2
 
+# 16
+# 2 2 13 7 10 1 10 5 2 N 14 5 11 5 5 13
 
-# 다른 예제!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
+def order_util(root, answer):
+    if root is None:
+        return answer
+    else:
+        answer.append(root.data)
 
+    answer = order_util(root.left, answer)
+    answer = order_util(root.right, answer)
+    return answer
 
+def preorder(root):
+    answer = []
+    answer = order_util(root, answer)
 
-
+    # code here
+    return answer
 
 
 # {

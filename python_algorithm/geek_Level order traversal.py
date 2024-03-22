@@ -4,35 +4,22 @@ from queue import Queue
 
 
 class Solution:
-    # Function to return the level order traversal of a tree.
-
-    def __init__(self):
-        self.q = Queue()
-        self.answer = []
-
+    #Function to return the level order traversal of a tree.
     def levelOrder(self, root):
-
-        if not root:
-            return
-
-        self.q.put(root)
-
+        from collections import deque
         answer = []
+        q = deque()
+        q.append(root)
 
-        while not self.q.empty():
-            node = self.q.get()
+        while len(q):
+            curr = q.popleft()
+            answer.append(curr.data)
 
-            if node:
-                answer.append(node.data)
-                if node.left:
-                    self.q.put(node.left)
-
-                if node.right:
-                    self.q.put(node.right)
-            else:
-                break
+            q.append(curr.left)
+            q.append(curr.right)
 
         return answer
+        # Code here
 
 
 # {

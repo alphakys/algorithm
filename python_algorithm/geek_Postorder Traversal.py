@@ -13,21 +13,21 @@ class Node:
 
 # Function to return a list containing the postorder traversal of the tree.
 def order_util(self, root, arr):
-    if root.left:
-        self.order_util(root.left, arr)
 
-    if root.right:
-        self.order_util(root.right, arr)
+    if root is None:
+        return arr
+
+    arr = order_util(root.left, arr)
+    arr = order_util(root.right, arr)
+
     arr.append(root.data)
     return arr
-
-
 def postOrder(self, root):
     arr = []
     if not root:
         return
 
-    return self.order_util(root, arr)
+    return order_util(root, arr)
 
 
 # code here

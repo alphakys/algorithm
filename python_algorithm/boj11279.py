@@ -13,7 +13,6 @@ def heap_insert(l, num):
     # parent index
     parent_idx = curr_idx // 2
     while parent_idx > 0 and l[parent_idx] < num:
-
         l[parent_idx], l[curr_idx] = l[curr_idx], l[parent_idx]
         curr_idx = parent_idx
         parent_idx = curr_idx // 2
@@ -37,6 +36,7 @@ def heap_delete(l):
     left_idx = parent * 2
     right_idx = parent * 2 + 1
 
+    # left child의 index가 사이즈 보다 크면 leaf node
     while length >= left_idx:
 
         if length == left_idx or l[left_idx] > l[right_idx]:
@@ -54,29 +54,25 @@ def heap_delete(l):
 
         else:
             break
-    print(l)
 
     return max_val
 
 
 def main() -> None:
+    N = int(sys.stdin.readline().rstrip())
+    l = [None]
 
     io = StringIO()
-    l = [None]
-    for n in range(10, 0, -1):
-        # if n == 6:
-        #     break
-        heap_insert(l, n)
+    for _ in range(N):
+        n = int(sys.stdin.readline().rstrip())
 
-    print(l)
-    for _ in range(1, 10):
-        print(heap_delete(l))
+        if n == 0:
+            # str += heap_delete(l)
+            io.write(f'{heap_delete(l)}\n')
+        else:
+            heap_insert(l, n)
+
+    print(io.getvalue())
 
 if __name__ == '__main__':
     main()
-
-
-   #          8
-   #      7          5
-   #   3     6     2   4
-   # 1

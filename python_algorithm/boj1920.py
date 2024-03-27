@@ -1,41 +1,25 @@
-import sys
-from io import StringIO
+class A:
+    def __init__(self, name, parent=None):
+        self.name = name
+        self.parent = parent
+        self.children = None
+
+    def __del__(self):
+        print("delete", self.name)
 
 
-def binary_search(n, arr):
-    start = 0
-    end = len(arr) - 1
-    mid_ptr = (start + end) // 2
+def main():
+    a = A(name=1)
+    b = A(name=2)
 
-    # start mid를 고려한다.
-    # break point
-    while start <= mid_ptr:
-
-        if arr[mid_ptr] == n:
-            return 1
-        elif arr[mid_ptr] > n:
-            end = mid_ptr - 1
-        else:
-            start = mid_ptr + 1
-
-        mid_ptr = (start + end) // 2
-
-    return 0
+    a.children = b
+    b.parent = a
 
 
-def main() -> None:
-    N = int(sys.stdin.readline().rstrip())
-    arr = sorted(list(map(lambda x: int(x), sys.stdin.readline().rstrip().split(' '))))
-    M = int(sys.stdin.readline().rstrip())
-    target_nums = list(map(lambda x: int(x), sys.stdin.readline().rstrip().split(' ')))
+    a = []
+    a.append(a)
+    print("end")
 
-    io = StringIO()
-
-    for n in target_nums:
-        io.write(f"{binary_search(n, arr)}\n")
-
-    print(io.getvalue())
-
-
-if __name__ == '__main__':
+if __name__ == "__main__":
+    # 출력이 어떻게 될까요?
     main()

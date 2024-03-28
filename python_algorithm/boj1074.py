@@ -2,7 +2,37 @@ import sys
 
 # N, r, c = list(map(lambda x: int(x), sys.stdin.readline().rstrip().split(' ')))
 
-N = 4
+N = 8
+
+
+def divide(N, xy):
+    while True:
+        if N == 1:
+            break
+
+        l = [(0 + xy[0], 0 + xy[1]), (0 + xy[0], N // 2 + xy[1]),
+            (N // 2 + xy[0], 0 + xy[1]), (N // 2 + xy[0], N // 2 + xy[1])]
+
+        print(l, N, xy)
+        N //= 2
+        for p in l:
+            divide(N, p)
+
+divide(N, (0, 0))
+
+exit()
+
+
+
+
+
+
+
+
+
+
+
+
 
 delta = [(0, 0), (0, 1),
          (1, 0), (1, 1)]

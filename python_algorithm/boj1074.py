@@ -7,8 +7,13 @@ N = 8
 
 def divide(N, xy):
     while True:
-        if N == 1:
+        if N == 2:
             break
+
+        d1 = (N % N, N % N)
+        d2 = (N % N, N//2)
+        d3 = (N//2, N % N)
+        d4 = (N//2, N//2)
 
         l = [(0 + xy[0], 0 + xy[1]), (0 + xy[0], N // 2 + xy[1]),
             (N // 2 + xy[0], 0 + xy[1]), (N // 2 + xy[0], N // 2 + xy[1])]

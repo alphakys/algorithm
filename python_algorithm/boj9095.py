@@ -23,6 +23,72 @@ def back_track(idx):
 
 back_track(0)
 
+n = 5
+
+dp = [0] * (n + 1)
+
+dp[1] = 1
+dp[2] = 2
+dp[3] = 4
+
+
+dp_start_num = 4
+
+while dp_start_num <= n:
+    dp[dp_start_num] = dp[dp_start_num - 1] + dp[dp_start_num - 2] + dp[dp_start_num - 3]
+
+
+
+
+#  1
+
+#  1 1
+
+#  2
+
+#  1 1 1
+#  2 1
+#
+#  1 2
+#
+#  3
+
+"""
+1 1 1 1
+1 2 1
+2 1 1
+3 1
+
+1 1 2
+2 2
+
+1 3
+
+"""
+
+"""
+1 1 1 1 1
+1 2 1 1 
+2 1 1 1
+1 1 2 1
+3 1 1
+
+1 1 1 2
+3 2
+1 2 2
+2 1 2
+ 
+3 1 1
+1 3 
+
+
+2 2
+
+1 3
+
+"""
+
+
 
 
 

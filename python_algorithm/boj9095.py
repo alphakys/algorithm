@@ -1,134 +1,41 @@
 import sys
+from io import StringIO
 
-# 초기값을 정하기 중요!!
-N = 4
+t = int(sys.stdin.readline())
 
-vis = [False] * 4
-container = [0] * N
+test_cases = [0] * t
+max_val = 0
+for _ in range(t):
+    n = int(sys.stdin.readline())
+    if n > max_val:
+        max_val = n
+    test_cases[_] = n
 
-def back_track(idx):
+if max_val == 1:
+    print(1)
+    exit()
+elif max_val == 2:
+    print(2)
+    exit()
+elif max_val == 3:
+    print(4)
+    exit()
 
-    if sum(container) == 4:
-        print("result : ", container)
-        return
-
-    for num in range(0, 4):
-
-        if not vis[num] and idx < N:
-            container[idx] = num
-            # print("n : ", num)
-            # print("container : ", container)
-            # print()
-            back_track(idx + 1)
-
-back_track(0)
-
-n = 5
-
-dp = [0] * (n + 1)
+dp = [0] * (max_val + 1)
 
 dp[1] = 1
 dp[2] = 2
 dp[3] = 4
 
-
 dp_start_num = 4
 
-while dp_start_num <= n:
+while dp_start_num <= max_val:
     dp[dp_start_num] = dp[dp_start_num - 1] + dp[dp_start_num - 2] + dp[dp_start_num - 3]
 
+    dp_start_num += 1
 
+out = StringIO()
+for i in test_cases:
+    out.write(f'{dp[i]}\n')
 
-
-#  1
-
-#  1 1
-
-#  2
-
-#  1 1 1
-#  2 1
-#
-#  1 2
-#
-#  3
-
-"""
-1 1 1 1
-1 2 1
-2 1 1
-3 1
-
-1 1 2
-2 2
-
-1 3
-
-"""
-
-"""
-1 1 1 1 1
-1 2 1 1 
-2 1 1 1
-1 1 2 1
-3 1 1
-
-1 1 1 2
-3 2
-1 2 2
-2 1 2
- 
-3 1 1
-1 3 
-
-
-2 2
-
-1 3
-
-"""
-
-
-
-
-
-
-# table = [0] * 11
-# dp = [0] * 11
-#
-# table[1] = 1  # 1
-# dp[1] = [[1], [0], [0], [0]]
-#
-# table[2] = 2  # 1+1,
-#               # 2
-# dp[2] = [[1], [1], [0], [0]]
-#
-# table[3] = 4  # 1+1+1, (2+1,
-#               # 1+2), 3
-# dp[3] = [[1], [2], [1], [0]]
-#
-# table[4] = 7  # 1+1+1+1, (2+1+1, 1+2+1, (3+1
-#                # 1+1+2), 2+2,
-# #               1+3
-# dp[4] = [[1], [3], [1], [2]]
-#
-# table[5] = 13  # 1+1+1+1+1, 2+1+1+1, 1+2+1+1, 1+1+2+1, 2+2+1, 3+1+1, 1+3+1
-#                # 1+1+1+2, 2+1+2, 1+2+2, 3+2
-#                # 1+1+3, 2+3
-#
-
-
-# then D[5] =
-
-
-# read = sys.stdin.readline
-#
-# T = int(read().rstrip())
-#
-# table = [0] * 11
-#
-# print(table[10])
-#
-# for _ in range(T):
-#
-#     N = int(read().rstrip())
+print(out.getvalue())

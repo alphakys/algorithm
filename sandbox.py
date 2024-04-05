@@ -1,5 +1,11 @@
 import numpy as np
 
+from collections import deque
+
+
+
+
+exit()
 l = [6, -8, 1, 12, 8, 3, 7, -7]
 l = [6, -8, 1]
 

@@ -2,38 +2,18 @@ import sys
 
 N, M = list(map(lambda x: int(x), sys.stdin.readline().rstrip().split(' ')))
 
-container = [0] * M
 vis = [False] * (N + 1)
+container = [0] * M
 
-isused = [False] * (N + 1)
 
-
-def back_track(idx):
+def permutation(idx, depth):
     if idx == M:
-        str = ''
-        for n in container:
-            str += f"{n} "
-
-        sys.stdout.write(f"{str}\n")
+        print(*container)
         return
 
-    for _ in range(1, N+1):
-
-        for num in range(1, N + 1):
-            print(num)
-            if not vis[num] and not isused[num]:
-                print(vis)
-                print(isused)
-                vis[num] = True
-                container[idx] = num
-                back_track(idx + 1)
-                vis[num] = False
-
-        # print(_)
-        isused[_] = True
-        # print(isused)
-        # print()
-        # print("start : ", start_num)
+    for i in range(depth, N + 1):
+        container[idx] = i
+        permutation(idx + 1, i)
 
 
-back_track(0)
+permutation(0, 1)

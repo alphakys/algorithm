@@ -1,8 +1,5 @@
 import sys
-
-from itertools import permutations, combinations
-
-N, M = 4, 2
+N, M = list(map(lambda x: int(x), sys.stdin.readline().rstrip().split(' ')))
 
 vis = [False] * (N + 1)
 container = [0] * M
@@ -13,14 +10,14 @@ def permutation(idx, depth):
         print(*container)
         return
 
-    for i in range(1, N + 1):
+    for i in range(depth, N + 1):
         if not vis[i]:
             container[idx] = i
-
+            vis[i] = True
             permutation(idx + 1, i)
+            vis[i] = False
 
-
-permutation(0, 0)
+permutation(0, 1)
 
 
 

@@ -1,36 +1,32 @@
 import bisect
+import heapq
 
-K = 7
+K = 1000
 
-scovile = [1, 2, 12313, 4, 5, 10, 12]
+# scoville = [1, 2, 4, 5, 10, 12, 12313]
+scoville = [1, 1000]
 
-i = bisect.bisect_left(scovile, K)
+i = bisect.bisect_left(scoville, K)
+arr = scoville[:i]
 
-arr = scovile[:i]
+answer = []
+mix_cnt = 0
+while len(arr) > 1:
 
-# print(arr, len(arr))
-stop = len(arr)
+    n1 = heapq.heappop(arr)
+    n2 = heapq.heappop(arr)
 
-lp = 0
-rp = 1
-cnt = 0
-while rp < stop:
-    print("check : ", lp, rp, stop)
-    print(arr)
-    mix = arr[lp] + (arr[rp]*2)
-    cnt += 1
+    mix = n1 + (n2 * 2)
+    mix_cnt += 1
     if mix < K:
-
-        # print(mix)
-        # print(bisect.bisect_left(arr, mix))
-        bisect.insort(arr, mix)
-        stop += 1
+        arr.append(mix)
     else:
-        pass
-    lp += 2
-    rp += 2
+        answer.append(mix)
+    # print(n1, n2, mix)
+    # print(arr)
+    # print()
 
-    # break
-
-print(cnt)
-
+if answer:
+    print(mix_cnt)
+else:
+    print(-1)

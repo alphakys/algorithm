@@ -12,6 +12,7 @@ class Solution:
         node.next = head
 
         return node
+
     # code here
 
     # Function to insert a node at the end of the linked list.
@@ -28,10 +29,11 @@ class Solution:
         n.next = Node(x)
         return head
 
+
 # code here s
 
 def main() -> None:
-
+    pass
 
 if __name__ == '__main__':
     main()

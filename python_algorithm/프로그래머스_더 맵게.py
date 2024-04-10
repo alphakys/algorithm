@@ -1,41 +1,42 @@
 import bisect
-import heapq
+import heapq as hq
 
-K = 5
 
-scoville = [1, 2, 3, 9, 10, 12]
-scoville = [1, 2, 3]
 # scoville = [1,1,1,1,1,1,100,100,100,100,0,0,0,0,0]
 
-# i = bisect.bisect_left(scoville, K)
-# scoville = scoville[:i]
 
-heapq.heapify(scoville)
+def solution(scoville, K):
+    answer = 0
+    hq.heapify(scoville)
 
-answer = 0
-arr = []
-while len(scoville) > 1:
+    while len(scoville) > 1:
+        if scoville[0] >= K:
+            break
 
-    n1 = heapq.heappop(scoville)
-    n2 = heapq.heappop(scoville)
+        answer += 1
+        first = hq.heappop(scoville)
+        secondary = hq.heappop(scoville)
 
-    if n1 >= K and n2 >= K:
-        arr.append(n1)
-        break
+        mix = first + secondary*2
+        # print(mix)
+        hq.heappush(scoville, mix)
 
-    mix = n1 + (n2 * 2)
-    answer += 1
-    if mix < K:
-        print("mix : ", mix)
-        heapq.heappush(scoville, mix)
-        print(scoville)
-    else:
-        arr.append(mix)
-        heapq.heappush(scoville, mix)
+    # print(scoville, answer)
+    if scoville[0] < K:
+        answer = -1
+    # print(answer)
+    return answer
 
-print(arr)
-if len(arr) == 0:
-    answer = -1
 
-print(answer)
-# 11
+def main() -> None:
+    K = 7
+
+    scoville = [1, 2, 3, 9, 10, 12]
+    # scoville = [11, 1, 2, 3]
+    # scoville = [1, 2]
+
+    solution(scoville, K)
+
+
+if __name__ == '__main__':
+    main()

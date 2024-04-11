@@ -1,32 +1,29 @@
 import itertools
+import pprint
 from itertools import combinations
+
+
 
 def solution(ability):
     answer = 0
 
-    sports_category = len(ability[0])
-    student_cnt = len(ability)
+    sports_category = len(ability[0])  # M
+    student_cnt = len(ability)  # N
 
-    combination = list(combinations(range(student_cnt), sports_category))
+    com = list(combinations(ability, sports_category))
 
-    for _ in combination:
-        print(_)
-        permutation = list(itertools.permutations(range(student_cnt), sports_category))
-        for idx, p in enumerate(permutation):
-            print(ability[_[idx]], p)
-    m = [map(lambda x: max(ability[x]), c) for c in combination]
+    per = list(itertools.permutations(range(sports_category), sports_category))
 
-    max_val = 0
-    for _ in m:
-        print(list(_))
-    # for _ in m:
-    #     v = sum(list(_))
-    #
-    #     if v > max_val:
-    #         max_val = v
-    #
-    # print(max_val)
+    for c in com:
+        for p in per:
+            score = 0
+            for i in range(len(p)):
+                score += c[i][p[i]]
+
+            if score > answer:
+                answer = score
+
     return answer
 
-ability = [[40, 10, 10], [20, 5, 0], [30, 30, 30], [70, 0, 70], [100, 100, 100]]
+ability = [[20, 30], [30, 20], [20, 30]]
 solution(ability)

@@ -3,33 +3,36 @@ import itertools
 from collections import deque
 
 
+# 00010111
+
 def solution(queries):
-    gens = [[] for _ in range(16)]
+    answer = []
+    for g, p in queries:
+        gen = 4 ** (g - 1)
 
-    gens[0] = ["Rr"]
-    max_generation = max([q[0] for q in queries])
-    q = deque(["Rr"])
-    gen = 1
-    depth_checker = deque()
-    while True:
-        if gen == max_generation:
-            break
+        while True:
+            print(gen, p)
+            if gen == 1:
+                answer.append("Rr")
+                break
 
-        while len(q) > 0:
-            depth_checker.append(q.popleft())
-
-        while len(depth_checker) > 0:
-            prod = [sorted(list(l)) for l in list(itertools.product(depth_checker.popleft(), repeat=2))]
-            for polli in prod:
-                q.append(polli)
-                gens[gen].append(polli)
-        gen += 1
-
-    answer = list(map(lambda x: ''.join(gens[x[0] - 1][x[1] - 1]), queries))
+            if 1 <= p <= gen // 4:
+                answer.append("RR")
+                break
+            elif gen // 4 < p <= gen // 4 * 3:
+                print("sdf")
+                gen //= 4
+                p = p // 4
+            else:
+                answer.append("rr")
+                break
+        print("-------")
+    print(answer)
     return answer
 
 
 queries = [[4, 26]]
-queries = [[16, 1], [16, 3], [16, 29]]
-# queries = [[3, 5]]
+# queries = [[3, 1], [2, 3], [3, 9]]
+# queries = [[3, 7]]
+# queries = [[3, 8], [2, 2]]
 solution(queries)

@@ -1,24 +1,31 @@
 # input_string = "edeaaabbccd"
+from collections import defaultdict
+
 input_string = "string"
-input_string = "zbzbz"
+input_string = "ab"
+
 
 def solution(input_string):
-    counter = [[] for _ in range(26)]
+    dict = defaultdict()
+    s = set()
     for i, c in enumerate(input_string):
-        counter[int(ord(c)) - 97].append(i)
+        index = dict.get(c, -1)
+        if index >= 0:
+            if index == i - 1:
+                dict[c] = i
+            else:
+                s.add(c)
+        else:
+            dict[c] = i
 
-    answer = []
-    for idx, cnt in enumerate(counter):
-        if len(cnt) <= 1:
-            continue
-        i = 0
-        while i < len(cnt) - 1:
-            if cnt[i + 1] - cnt[i] > 1:
-                answer.append(chr(idx+97))
-                break
-            i += 1
-    # print('N' if not answer else ''.join(answer))
-    return 'N' if not answer else ''.join(answer)
+    s = list(s)
+    s = sorted(s)
+    answer = ''
+    for c in s:
+        answer += c
+
+    print("N" if answer == '' else answer)
+    return "N" if answer == '' else answer
 
 
 solution(input_string)

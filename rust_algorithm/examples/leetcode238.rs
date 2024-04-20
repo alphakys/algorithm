@@ -1,52 +1,41 @@
 #![allow(unused)]
 fn main() {
 
+    let mut nums = [-1,1,0,-3,3];
 
-    let mut nums = [1,2,3,4];
-    // 22 12                1 2 6 24 48
+    let mut dp: Vec<i32> = vec![0; nums.len()];
+    dp[0] = 1;
 
-    let length = nums.len();
-
-    let mut dp:Vec<i32> = vec![0; length];
-
-
-
-    let mut i = 1;
-    dp[0] = nums[0];
-    while i < length {
-        dp[i] = dp[i - 1] * nums[i];
-        i += 1;
+    for (i, &n) in nums[1..].iter().enumerate() {
+        println!("{} {}", n * dp[i], i);
+        dp[i] = dp[i] * n;
     }
-
-    let mut i = 1;
-    while i < length -1 {
-        println!("{}", dp[i - 1] * nums[i + 1]);
-        i += 1;
-    }
-
-    // [1,2,6,24]
-    // [24,6,2,1]
 
     println!("{:?}", dp);
-    // let sum = nums.iter().fold(1, |acc , &n|
-    //     {
-    //         match n {
-    //             0 => { acc * 1 },
-    //             _ => {acc * n}
-    //         }
-    //     }
-    // );
-    //
-    // let mut_ptr = nums.as_mut_ptr();
-    //
-    // for i in 0.. nums.len() {
-    //     unsafe {
-    //         match *mut_ptr.add(i) {
-    //             0 => { *mut_ptr.add(i) = sum }
-    //             _ => { *mut_ptr.add(i) = 0 }
-    //         }
-    //     }
-    // }
 
-    // println!("{:?}", nums);
+    //
+    // let mut product = nums.iter().fold(1, |acc, &n| {
+    //     if n != 0 { acc * n } else { acc }
+    // });
+    //
+    // let tmp_product = product;
+    // // println!("{product}", );
+    // // let mut product: i32 = nums.iter().product();
+    // let mut answer: Vec<i32> = vec![0; nums.len()];
+    // let mut left_product = 1;
+    // for i in 0..nums.len() {
+    //
+    //     if nums[i] == 0 {
+    //         answer[i] = tmp_product;
+    //         continue
+    //     }
+    //
+    //     product /= nums[i];
+    //
+    //     answer[i] = left_product * product;
+    //     left_product *= nums[i];
+    //
+    // }
+    //
+    // println!("{:?}", answer);
 }

@@ -18,6 +18,7 @@
 // }
 
 
+use std::mem::size_of_val;
 use std::ops::Range;
 
 #[derive(Debug, Clone, Copy)]
@@ -29,26 +30,10 @@ fn movee(x: [u8; 3]) {
 
 
 fn main() {
-    let b = Box::new(1);
-    let c = Box::new(2);
+    let s = String::from("ㄱ");
 
-    let cl = b.clone();
-    // 내 생각이 맞았다.
-    // 결국 Rc -> Reference Counting memory allocation가 일종의 shallow copy이다.
+    println!("{}", size_of_val(&s));
 
-    assert_eq!(&b, &cl);
-
-
-    println!("b : {:p}", b);
-    println!("cl {:p}", cl);
-    println!("b ref : {:p}", &b);
-    println!("c : {:p}", c);
-
-
-    let x = Foo;
-    let y = x;
-
-    println!("{:?}", x);
     // What Copy trait??
     // It is bicopy trait of value!
 

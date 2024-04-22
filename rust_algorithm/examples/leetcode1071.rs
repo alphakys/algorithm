@@ -1,66 +1,47 @@
 #![allow(unused)]
 
-fn split_func(){
-    // while window < str1.len() {
-    //
-    //     let mut pivot: i32 = window as i32;
-    //     println!("pivot : {pivot}", );
-    //     while pivot > -1 {
-    //
-    //         if str1_bytes[pivot as usize] == str2_bytes[pivot as usize] { pivot -= 1; }
-    //         else { break }
-    //
-    //     }
-    //
-    //     if pivot == 0 {
-    //         println!("contain", );
-    //     }
-    //     window += 1;
-    // }
+use std::process::exit;
 
-}
 fn main() {
-    let mut str1 = String::from("ABABAB");
-    let mut str2 = String::from("l");
+    let binding1 = String::from("ABABAB");
+    let mut str1 = binding1.as_str();
+    let binding2 = String::from("c");
+    let mut str2 = binding2.as_str();
 
-    let mut stop = 1;
+    let mut answer = "";
+
+    // str1 = nGCD str2 = mGCD
+    // str1 + str2 = (n+m)GCD
+    // str2 + str1 = (n+m)GCD;
+
     loop {
-        let mut greater_str = &str1;
-        if str1.len() < str2.len() {
-            greater_str = &str2;
 
-            let split_str = greater_str.split(&str1).fold(String::from(""), |acc, s| {
-                match s {
-                    "" => { format!("") },
-                    _ => { format!("{}{}", acc, s) }
+        if str1.len() > str2.len() {
+
+            match str1.starts_with(str2) {
+                true => {
+                    str1 = &str1[str2.len()..];
+                    if str1 == "" { answer = str2; break }
+                },
+                false => {
+                    break
                 }
-            });
-
-            str2 = split_str;
-
+            }
         }
         else {
-            greater_str = &str1;
 
-            let split_str = greater_str.split(&str2).fold(String::from(""), |acc, s| {
-                match s {
-                    "" => { format!("") },
-                    _ => { format!("{}{}", acc, s) }
+            match &str2.starts_with(&*str1) {
+                true => {
+                    str2 = &&str2[str1.len()..];
+                    if str2 == "" { answer = str1; break }
+                },
+                false => {
+                    break
                 }
-            });
-            str1 = split_str;
+            }
         }
-
-        println!("str1 : {} str2 : {}", str1, str2);
-        if str1 == "" || str2 == "" { break }
-
-        if stop == 4 { break }
-        stop +=1;
-
     }
 
-
-
-
+    println!("{}", answer.to_string());
 
 }

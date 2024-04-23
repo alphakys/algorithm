@@ -1,41 +1,42 @@
 #![allow(unused)]
 fn main() {
 
-    let mut nums = [-1,1,0,-3,3];
+    let mut nums = [1,2,3,4];
+    let mut suffix_dp: Vec<i32> = Vec::new();
 
-    let mut dp: Vec<i32> = vec![0; nums.len()];
-    dp[0] = 1;
+    nums.iter().rfold(1, |acc, n| {
+        suffix_dp.push(acc * n);
+        acc * n
+    });
+    suffix_dp.reverse();
 
-    for (i, &n) in nums[1..].iter().enumerate() {
-        println!("{} {}", n * dp[i], i);
-        dp[i] = dp[i] * n;
+    let mut prefix_dp: Vec<i32> = vec![0; nums.len()];
+    prefix_dp[0] = nums[0];
+
+    let mut answer: Vec<i32> = Vec::new();
+
+    let mut i = 1;
+    answer.push(suffix_dp[1]);
+    while i < nums.len() -1 {
+        prefix_dp[i] = prefix_dp[i - 1] * nums[i];
+
+        answer.push(prefix_dp[i-1] * suffix_dp[i + 1]);
+
+        i += 1;
     }
+    answer.push(prefix_dp[i-1]);
 
-    println!("{:?}", dp);
+    println!("{:?}", answer);
 
+
+    // let mut dp: Vec<i32> = vec![0; nums.len()];
+    // dp[0] = 1;
     //
-    // let mut product = nums.iter().fold(1, |acc, &n| {
-    //     if n != 0 { acc * n } else { acc }
-    // });
-    //
-    // let tmp_product = product;
-    // // println!("{product}", );
-    // // let mut product: i32 = nums.iter().product();
-    // let mut answer: Vec<i32> = vec![0; nums.len()];
-    // let mut left_product = 1;
-    // for i in 0..nums.len() {
-    //
-    //     if nums[i] == 0 {
-    //         answer[i] = tmp_product;
-    //         continue
-    //     }
-    //
-    //     product /= nums[i];
-    //
-    //     answer[i] = left_product * product;
-    //     left_product *= nums[i];
-    //
+    // for (i, &n) in nums[1..].iter().enumerate() {
+    //     println!("{} {}", n * dp[i], i);
+    //     dp[i] = dp[i] * n;
     // }
     //
-    // println!("{:?}", answer);
+    // println!("{:?}", dp);
+
 }

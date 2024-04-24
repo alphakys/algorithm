@@ -5,39 +5,52 @@ use log::debug;
 fn main() {
     let nums: Vec<i32> = vec![1,5,0,4,1,3];
 
-    let mut pivot_idx = 0;
-    let mut left = pivot_idx + 1;
-    let end = (nums.len() as i32 - 2) as i32;
-    let mut right = end + 1;
+    let mut pivot = 0;
+    let mut left = 1;
+    let mut dp = nums[0];
 
-    let mut answer = false;
-    'main_loop: while pivot_idx < end {
-        let mut stop = 1;
-        left = pivot_idx + 1;
-        right = end + 1;
+    let mut answer = [None::<usize>; 3];
+    answer[0] = Some(pivot);
+    let mut result = false;
 
-        loop {
-            if stop == 10 { break; }
-            stop += 1;
-
-            while left <= right && nums[pivot_idx as usize] >= nums[left as usize] {
-                left += 1;
+    while pivot < nums.len() {
+        if nums[left] > dp {
+            dp = nums[left];
+            match answer[1] {
+                Some(n) => {
+                    answer[2] = Some(left);
+                    result = true;
+                    break;
+                }
+                None => { answer[1] = Some(left); }
             }
-
-            while left <= right && nums[left as usize] >= nums[right as usize] {
-                right -= 1;
-            }
-
-            println!("p : {pivot_idx} l : {left} r : {right}\n", );
-            if left >= right { break; }
-
-            // println!("got cha {} {} {}", nums[pivot_idx ], nums[left], nums[right]);
-            println!("got cha {} {} {}", pivot_idx, left, right);
-            answer = true;
-            break 'main_loop
         }
-        pivot_idx += 1;
-    }
 
-    println!("{answer}", );
+        left += 1;
+        if left == nums.len() {
+            match answer[1] {
+                Some(n) => {
+                    println!("{pivot}", );
+                    println!("{:?} n : {} left : {} dp : {}", answer.map(|opt| match opt {
+                                Some(t) => {nums[t]},
+                        None => {100},
+                    } ), n, nums[left - 1], dp);
+                    pivot = n + 1;
+                    answer[0] = Some(pivot);
+                    left = pivot + 1;
+                    dp = nums[pivot];
+                    answer[1] = None;
+                }
+                None => { break; }
+            }
+        }
+    }
+    //
+    // if result {
+    //     println!("{:?}", answer.map(|opt| nums[opt.unwrap()]));
+    //     println!("{:?}", dp);
+    //
+    // }
+
+    println!("{result}", );
 }

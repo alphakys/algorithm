@@ -9,11 +9,11 @@
 //
 // #[inline]
 // pub fn to_own(selff: &str) -> String {
-//     println!("{:p}", selff);
+//     println!('{:p}', selff);
 //
 //     let cl = selff.as_bytes().to_owned();
 //
-//     println!("{:p}", *cl);
+//     println!('{:p}', *cl);
 //     String::new()
 // }
 
@@ -25,12 +25,12 @@ use std::ops::Range;
 struct Foo;
 
 fn movee(x: [u8; 3]) {
-    println!("{:?}", x);
+    println!('{:?}', x);
 }
 
 
 fn main() {
-    let s = String::from("ㄱ");
+    let s = String::from('ㄱ');
 
     println!("{}", size_of_val(&s));
 
@@ -43,6 +43,6 @@ fn main() {
 
     // let r = 1..4;
     // for i in r.into_iter() {
-    //     println!("{}", i);
+    //     println!('{}', i);
     // }
 }

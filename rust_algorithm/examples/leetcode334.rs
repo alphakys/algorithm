@@ -3,54 +3,28 @@
 use log::debug;
 
 fn main() {
-    let nums: Vec<i32> = vec![1,5,0,4,1,3];
+    let nums: Vec<i32> = vec![1,5,0,4,5,1];
 
-    let mut pivot = 0;
-    let mut left = 1;
-    let mut dp = nums[0];
+    let mut small = i32::MAX;
+    let mut big = i32::MAX;
 
-    let mut answer = [None::<usize>; 3];
-    answer[0] = Some(pivot);
-    let mut result = false;
-
-    while pivot < nums.len() {
-        if nums[left] > dp {
-            dp = nums[left];
-            match answer[1] {
-                Some(n) => {
-                    answer[2] = Some(left);
-                    result = true;
-                    break;
-                }
-                None => { answer[1] = Some(left); }
-            }
+    let mut answer = false;
+    nums.iter().for_each(|&n| {
+        // small이 먼저 조건문에 걸림으로 인해 더 작은 값이 small에 assign 된다.
+        if n <= small { small = n; }
+        // 두 번째 조건문에 if가 걸림으로 두번째로 작은 값이 big에 할당된다.
+        else if n <= big { big = n; }
+        else {
+            answer  = true;
         }
+    });
 
-        left += 1;
-        if left == nums.len() {
-            match answer[1] {
-                Some(n) => {
-                    println!("{pivot}", );
-                    println!("{:?} n : {} left : {} dp : {}", answer.map(|opt| match opt {
-                                Some(t) => {nums[t]},
-                        None => {100},
-                    } ), n, nums[left - 1], dp);
-                    pivot = n + 1;
-                    answer[0] = Some(pivot);
-                    left = pivot + 1;
-                    dp = nums[pivot];
-                    answer[1] = None;
-                }
-                None => { break; }
-            }
-        }
-    }
-    //
+    println!("{}", answer);
+        //
     // if result {
     //     println!("{:?}", answer.map(|opt| nums[opt.unwrap()]));
     //     println!("{:?}", dp);
     //
     // }
 
-    println!("{result}", );
 }

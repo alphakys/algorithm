@@ -1,23 +1,43 @@
 #![allow(unused)]
+
 fn main() {
-    let nums = vec![10,9,2,5,3,7,101,18];
-    let mut lis = vec![i32::MAX; nums.len()];
+    let nums = vec![0,1,0,3,2,3];
+    let mut buckets: Vec<Vec<i32>> = vec![vec![nums[0]]];
 
-    for x in nums {
+    for &n in &nums[1..] {
 
-        for y in lis.iter_mut() {
-            if *y >= x {
-                *y = x;
-                break
+        for mut b in &mut buckets {
+
+            // If the current number is greater than the last element of the answer
+            // vector, it means we have found a longer increasing subsequence.
+            // Hence, we append the current number to the answer vector.
+            if *b.last().unwrap() < n { b.push(n); }
+            else{
+                // If the current number is not greater than the last element of the answer vector.
+                // we perform a binary search to find the smallest element in the answer vector that
+                // is greater than or equal to the current number.
             }
+
         }
+
     }
 
-    let mut answer: i32 = 0;
 
-    lis.iter().for_each(|&n|{
-        if n != i32::MAX { answer += 1; }
-    });
-
-    println!("{answer}", );
+    // for x in nums {
+    //
+    //     for y in lis.iter_mut() {
+    //         if *y >= x {
+    //             *y = x;
+    //             break
+    //         }
+    //     }
+    // }
+    //
+    // let mut answer: i32 = 0;
+    //
+    // lis.iter().for_each(|&n|{
+    //     if n != i32::MAX { answer += 1; }
+    // });
+    //
+    // println!("{answer}", );
 }

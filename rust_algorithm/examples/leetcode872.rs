@@ -22,56 +22,56 @@ impl TreeNode {
     }
 }
 
-pub fn leaf_similar(root: Option<Rc<RefCell<TreeNode>>>) {
+type Node = Option<Rc<RefCell<TreeNode>>>;
 
+pub fn leaf_similar(root: Node, v: &mut Vec<i32>) {
     if root.is_none() {
-        return
+        return;
     }
-    let mut head = Rc::clone(&root.unwrap());
+
+    let mut head = root.unwrap();
+
+    match &head.borrow().left {
+        Some(l) => {
+            println!("{:?}", l);
+            let ln = l;
+            leaf_similar(*l);
+        }
+        None => {
+            println!("break : {:?}", &tmp);
+        }
+    }
+
+    match &tmp.right {
+        Some(r) => {
+            println!("{:?}", r);
+        }
+        None => {
+            println!("break : {:?}", &tmp);
+        }
+    }
+
+    println!("{:?}", tmp);
+
+    // drop(tmp);
+    // drop(head);
+    // let r = Rc::strong_count(root.as_ref().unwrap());
+
+    println!("{r}", );
 
 
-    // match root.unwrap() {
-    //     Some(r) => { r. },
-    //     None =>,
-    // }
 }
 
+
 fn main() {
-
-
-    let root1: Option<Rc<RefCell<TreeNode>>> = Some(Rc::new(RefCell::new(TreeNode::new(3))));
-    let root2: Option<Rc<RefCell<TreeNode>>> = Some(Rc::new(RefCell::new(TreeNode::new(3))));
+    let root1: Node = Some(Rc::new(RefCell::new(TreeNode::new(3))));
+    let root2: Node = Some(Rc::new(RefCell::new(TreeNode::new(3))));
 
     // let t =root1.as_ref().unwrap().borrow_mut().left;
     root1.as_ref().unwrap().borrow_mut().left = Some(Rc::new(RefCell::new(TreeNode::new(5))));
 
-    // println!("{:?}", root1);
-
-    let mut head = Rc::clone(&root1.as_ref().unwrap());
-
-    println!("up head pointer : {:p}", &head);
-    let r = Rc::strong_count(&root1.unwrap());
-
-    let mut i = 0;
-    loop {
-
-        // let t = Rc::clone(&head);
-        // let tt = *head.borrow();
-        // let tt = &head.borrow().left;
-        let tmp = head.borrow().left.to_owned();
-        match &tmp {
-            Some(t) => {
-                println!("{:?}", &t);
-                head = Rc::clone(t);
-            },
-            None => { println!("break : {:?}", &tmp); break },
-        }
-
-
-        if i ==5 { break }
-        i += 1;
-    }
-
+    let mut v: Vec<i32> = Vec::new();
+    leaf_similar(root1, &mut v);
 
 
 }

@@ -3,28 +3,31 @@ fn main() {
     let word1: String = String::from("abc");
     let word2: String = String::from("word2");
 
-    let words1 = word1.as_bytes();
-    let words2 = word2.as_bytes();
+    let mut answer = String::new();
 
+    let mut itr1 = word1.chars();
+    let mut itr2 = word2.chars();
     let mut i = 0;
+    loop {
 
-    let limit = words1.len().max(words2.len());
-
-    let mut answer: Vec<u8> = Vec::new();
-
-    while i < limit {
-
-        if words1.get(i).is_some() { answer.push(words1[i]); }
-        if words2.get(i).is_some() { answer.push(words2[i]); }
-        i+= 1;
-
+        match (itr1.next(), itr2.next()) {
+            (Some(c1), Some(c2)) => {
+                answer.push(c1);
+                answer.push(c2);
+            },
+            (Some(c1), None) => {
+                answer.push(c1);
+            },
+            (None, Some(c2)) => {
+                answer.push(c2);
+            },
+            _ => {
+                break
+            }
+        }
     }
-    println!("{:?}", String::from_utf8(answer).unwrap());
-    // while litr.next() {
-    //
-    //     // break 조건문 추가
-    //     // i += 1;
-    //
-    // }
+
+    println!("{answer}", );
+
 
 }

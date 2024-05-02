@@ -5,35 +5,44 @@ use std::mem;
 
 fn main() {
 
-    let mut valid_word = VecDeque::from([97, 98, 99]);
-    // abc
+    let mut valid_word = [97, 98, 99];
+
     let mut word = "abc";
+    let mut st: Vec<u8> = word.chars().map(|c| c as u8).collect();
 
     let mut cnt = 0;
-    for w in word.as_bytes() {
+    let mut i = 0;
+    let mut j = 0;
 
-        while valid_word.len() > 0 {
+    let mut stop = 0;
+    let mut target = st[j];
 
-            if valid_word.pop_front().unwrap() == *w { continue }
+    loop {
+        if stop == 20 { break }
+        stop += 1;
+
+        while i < 3 {
+
+            if *(&valid_word[i]) == target {
+                i += 1;
+                j += 1;
+                target = match st.get(j){
+                    Some(t) => *t,
+                    None => { target },
+                };
+                continue
+            }
             else {
                 cnt += 1;
+                i += 1;
             }
-            println!("{:?}", valid_word);
         }
-
-        valid_word = VecDeque::from([97, 98, 99]);
+        if j >= st.len()  { break }
+        i = 0;
 
     }
 
     println!("{cnt}", );
-    // let mut i = 0;
-    // let mut valid_ptr = 0;
-    // while i < word.len() {
-    //
-    //
-    //
-    //     i += 1;
-    // }
 
 
 }

@@ -5,22 +5,23 @@ use log::debug;
 fn main() {
     let nums: Vec<i32> = vec![0, 11, 5, 1, 4, 5, 1];
 
-    let mut answer: Vec<&mut Vec<i32>> = vec![];
-    for n in &nums {
+    let a = [0, 11];
 
-        for v in &mut answer {
-            println!("{:?}", v);
-            if v[v.len()] < *n {
-                v.push(*n);
-            }
+    let re = a.binary_search(&5);
 
+    println!("{:?}", re);
+
+    let mut answer: Vec<i32> = vec![];
+    for n in &nums[1..] {
+
+        if *n > *answer.last().unwrap() {
+            /// If the current number is greater than the last element
+            /// of the answer vector, it means we have found a longer increasing
+            /// subsequence. Hence, we append the current number to the answer vector
+            answer.push(*n);
         }
+        else {
 
-        match &nums.binary_search(n){
-            Ok(t) => {
-
-            },
-            Err(e) => {}
         }
     }
 

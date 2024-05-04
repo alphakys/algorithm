@@ -24,16 +24,15 @@ use std::ops::Range;
 #[derive(Debug, Clone, Copy)]
 struct Foo;
 
-fn movee(x: [u8; 3]) {
-    println!('{:?}', x);
-}
 
 
 fn main() {
-    let s = String::from('ㄱ');
+    let s: String = String::from("asljlj");
 
-    println!("{}", size_of_val(&s));
+    let result = s.as_bytes().iter().position(|x| *x == 108);
 
+    println!("{}", b'l');
+    println!("{:?}", result);
     // What Copy trait??
     // It is bicopy trait of value!
 

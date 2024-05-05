@@ -4,44 +4,37 @@
 use std::collections::VecDeque;
 
 fn main() {
-
+    // Imp` substring is a contiguous sequence of characters within a larger string.
     let s = String::from("abbazezalphaduethoohbookkoob");
-    // let s = String::from("babad");
+    // abbazezalphaduethoohbookkoob
 
-    let s = String::from("baaaaaaaab");
-    let s = s.as_bytes();
-
-    let mut q: VecDeque<char> = VecDeque::new();
-
-    let mut mid: usize = 0;
-    q.push_back(s[mid] as char);
-    let mut left: i32 = mid as i32;
-    let mut right: usize = mid;
-
-    let mut stopper = 1;
+    let mut left = 0;
+    let mut right = s.len() - 1;
 
     let mut answer = String::new();
+    while left < right {
+        println!("left! : {} {}", &s[left..left + 1], left);
 
-    let mut pivot = 0;
-    let mut advancer = 0;
+        while left < right {
+            println!("{} {}", &s[right - 1..right], s.starts_with(&s[right - 1..right]));
+            println!("right : {}", right);
 
-    fn palidrome() {
+            if s[left..].starts_with(&s[right - 1..right]) {
 
-    }
+                println!("gotcha! : {:?}", &s[left..right]);
+                if *&s[left..right].ends_with(&s[left..right]) {
+                    if answer.len() < *&s[left..right].len(){
+                        answer.clear();
+                        answer.push_str(&s[left..right]);
+                    }
+                }
 
-    while mid < s.len() {
-
-        while advancer < s.len() && s[pivot] == s[advancer] { advancer += 1; }
-
-        while  s[advancer] == s[pivot - 1] {
-
-            advancer += 1;
-            pivot -= 1;
+            }
+            right -= 1;
         }
-
-
-        if stopper == 12 { break; }
-        stopper += 1;
+        right = s.len() - 1;
+        left += 1;
+        println!("\n", );
     }
 
     println!("{answer}", );

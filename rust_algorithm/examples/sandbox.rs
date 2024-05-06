@@ -27,10 +27,9 @@ struct Foo;
 
 
 fn main() {
+    println!("{} {}", i32::MIN, i32::MAX);
 
-    let s = String::from("mwwmmwwmbbkbbsbpdjyabcfkgprtxpwvhglddhmvaprcvrnux");
 
-    println!("{} {}", &s[0..=0], &s[1..=1]);
     // What Copy trait??
     // It is bicopy trait of value!
 

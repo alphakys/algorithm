@@ -1,37 +1,33 @@
 #![allow(unused)]
 
-use std::mem::swap;
-
-fn quick_sort(v: &mut Vec<i32>, start: i32, end: i32) {
-    if start + 1 > end { return; }
-
+fn quick_sort(v: &mut Vec<i32>, start: i32, end: usize) {
     let mut left = start + 1;
     let mut right = end;
+
+    if left > end as i32 { return; }
+
     let pivot = v[start as usize];
 
     loop {
-        while left <= right && pivot >= v[left as usize] { left += 1; }
-        while left <= right && pivot <= v[right as usize] { right -= 1; }
+        while left <= right as i32 && v[left as usize] <= pivot { left += 1; }
+        while left <= right as i32 && v[right] >= pivot { right -= 1; }
 
-        if left > right {
-            v.swap(start as usize, right as usize);
+        if left > right as i32 {
+            v.swap(start as usize, right);
             break;
         }
-
-        v.swap(left as usize, right as usize);
-
+        v.swap(left as usize, right);
     }
 
     quick_sort(v, start, right - 1);
-    quick_sort(v, right + 1, end);
-
+    quick_sort(v, (right + 1) as i32, end);
 }
 
 fn main() {
-    let mut v = vec![43, 23, 33];
+    let mut v = vec![43, 23, 333, 5, 78, 45, 3, 4, 78, 9, 5, 3, 1, 11];
 
-    let len = (v.len() - 1) as i32;
-    quick_sort(&mut v, 0 as i32, len);
+    let end = v.len() - 1;
+    quick_sort(&mut v, 0, end);
 
     println!("{:?}", v);
 }

@@ -27,12 +27,10 @@ struct Foo;
 
 
 fn main() {
-    let s: String = String::from("asljlj");
 
-    let result = s.as_bytes().iter().position(|x| *x == 108);
+    let s = String::from("mwwmmwwmbbkbbsbpdjyabcfkgprtxpwvhglddhmvaprcvrnux");
 
-    println!("{}", b'l');
-    println!("{:?}", result);
+    println!("{} {}", &s[0..=0], &s[1..=1]);
     // What Copy trait??
     // It is bicopy trait of value!
 

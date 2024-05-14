@@ -1,5 +1,11 @@
 #![allow(unused)]
 
+fn ddf(){
+    fn dsfsf(){
+
+    }
+}
+
 fn main() {
 
     let s = String::from("-2147483648");

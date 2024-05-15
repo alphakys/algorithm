@@ -27,8 +27,10 @@ struct Foo;
 
 
 fn main() {
-    println!("{} {}", i32::MIN, i32::MAX);
 
+    let a = 11;
+
+    println!("{}", 9/10);
 
     // git push
 

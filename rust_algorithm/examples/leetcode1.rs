@@ -6,22 +6,6 @@ fn main() {
     let nums = vec![2,7,11,15];
     let target = 9;
 
-    let mut map = HashMap::new();
-    let mut answer = vec![];
-    for (i, n) in nums.iter().enumerate() {
-        let complement = target - n;
-        match map.get(&complement) {
-            Some(t) => {
-                answer.append(&mut vec![i, *t]);
-            }
-            None => { map.insert(n, i); }
-        }
-
-    }
-
-    println!("{:?}", answer);
-
-
 
     // let mut tu: Vec::<(usize, i32)> = vec![];
     // for (idx, &j) in nums.iter().enumerate() {

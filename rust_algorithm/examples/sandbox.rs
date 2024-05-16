@@ -28,9 +28,9 @@ struct Foo;
 
 fn main() {
 
-    let a = 11;
-
-    println!("{}", 9/10);
+    let s = String::from("pwwkewvnqqdczor[e");
+    let z = s.as_bytes().get(1);
+    println!("{:?}", z);
 
     // git push
 

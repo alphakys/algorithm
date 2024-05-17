@@ -3,10 +3,26 @@
 use std::collections::{BTreeMap, HashMap};
 
 fn main() {
-    let nums = vec![2,7,11,15];
-    let target = 9;
+    let nums = vec![3,3];
+    let target = 6;
 
+    let mut map: HashMap<i32, usize> = HashMap::new();
+    let mut answer: Vec<i32> = Vec::new();
+    for (i, n) in nums.iter().enumerate() {
 
+        let complement = target - n;
+        match map.get(&complement){
+            Some(t) => {
+                answer.append(&mut vec![i as i32, *t as i32]);
+            },
+            _ => {
+                map.insert(*n, i);
+            }
+
+        }
+    }
+
+    println!("{:?}", answer);
     // let mut tu: Vec::<(usize, i32)> = vec![];
     // for (idx, &j) in nums.iter().enumerate() {
     //     tu.push((idx, j));

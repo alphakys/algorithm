@@ -2,74 +2,89 @@
 #![allow(non_snake_case)]
 
 use std::io;
-use rand::{random, Rng, thread_rng};
+use std::path::Component::ParentDir;
 
-fn quick_sort(mut v: &mut Vec<i32>, start: usize, end: usize) {
 
-    if start + 1 > end { return; }
+fn find_lengest1(nums1: &mut Vec<i32> , nums2: &mut Vec<i32>){
+    nums1.sort();
+    nums2.sort();
+    let cnt = nums1.len() + nums2.len();
+    let mut tmp_arr = vec![];
 
-    let mut pivot = v[start];
-
-    let mut left = start + 1;
-    let mut right = end;
-
-    let mut stopper = 1;
+    let mut i = 0;
+    let mut j = 0;
+    let mut idx = 0;
+    let mut answer:f64 = 0.0;
     loop {
-        println!("{start} {end} {left} {right}", );
-        if stopper == 10 { break; }
 
-        stopper += 1;
-        while left <= right && v[left] < pivot { left += 1; }
-        while left <= right && v[right] > pivot { right -= 1; }
+        if i == nums1.len() && j == nums2.len() { break }
 
-        if left > right { v.swap(right, start); break; }
+        if i == nums1.len() { tmp_arr.push(nums2[j]); j += 1; }
+        else if j == nums2.len() { tmp_arr.push(nums1[i]); i += 1; }
+        else if nums1[i] > nums2[j] { tmp_arr.push(nums2[j]); j += 1;}
+        else{ tmp_arr.push(nums1[i]); i += 1;}
 
-        v.swap(left, right);
-        println!("swap : {:?}", v);
+        if idx == cnt / 2{
+
+            if cnt %2==0{ answer = (tmp_arr[idx] as f64 + tmp_arr[idx-1] as f64) / 2 as f64; }
+            else { answer = tmp_arr[idx] as f64}
+
+            break
+        }
+        idx += 1;
     }
-    println!("{:?}", v);
-    println!("{right}", );
-    quick_sort(&mut v, start, right - 1);
-    quick_sort(&mut v, left, end);
-}
 
+    println!("{answer}", );
+}
 fn main() {
 
-    // let mut buf = String::new();
+    let mut nums1: Vec<i32> = vec![1,2,4,5,23,6,7,8,102];
+    let mut nums2: Vec<i32> = vec![3,4,113,4,23,12,23,3,2313,5,43];
+    ///                             [1,2,3,4,4,5,11,23]
+
+    nums1.sort();
+    nums2.sort();
+
+    println!("{:?}", nums1);
+    println!("{:?}", nums2);
+
+    let mut left = 0;
+    let mut right = nums1.len();
+    let mut mid = (left + right) / 2;
+
+
+    find_lengest1(&mut nums1, &mut nums2);
+
+
+    // nums1.sort();
+    // nums2.sort();
+    // let cnt = nums1.len() + nums2.len();
+    // let mut tmp_arr = vec![];
     //
-    // io::stdin().read_line(&mut buf);
+    // let mut i = 0;
+    // let mut j = 0;
+    // let mut idx = 0;
+    // let mut answer:f64 = 0.0;
+    // loop {
     //
-    // let N: usize = buf.trim().parse().unwrap();
-    // let mut v = vec![0;N];
+    //     if i == nums1.len() && j == nums2.len() { break }
     //
-    // buf.clear();
+    //     if i == nums1.len() { tmp_arr.push(nums2[j]); j += 1; }
+    //     else if j == nums2.len() { tmp_arr.push(nums1[i]); i += 1; }
+    //     else if nums1[i] > nums2[j] { tmp_arr.push(nums2[j]); j += 1;}
+    //     else{ tmp_arr.push(nums1[i]); i += 1;}
     //
-    // let lines = io::stdin().lines();
+    //     if idx == cnt / 2{
     //
-    // for (idx, line) in lines.enumerate() {
-    //     // print!("{}", line.unwrap().parse::<i32>().unwrap());
-    //     v[idx] = line.unwrap().parse::<i32>().unwrap();
+    //         if cnt %2==0{ answer = (tmp_arr[idx] as f64 + tmp_arr[idx-1] as f64) / 2 as f64; }
+    //         else { answer = tmp_arr[idx] as f64}
+    //
+    //         break
+    //     }
+    //     idx += 1;
     // }
-
-    let mut v = [0; 5];
-
-    let r = thread_rng().gen_range(0..100);
-
-    let mut v = v.iter().map(|x| *x + thread_rng().gen_range(0..100)).collect::<Vec<_>>();
-
-    let mut v = vec![53, 93, 21, 52, 73];
-
-    let cnt = v.len();
-    println!("original v : {:?}", v);
-    quick_sort(&mut v, 0, cnt - 1);
-
-    println!("v1 \n{:?}", v);
-
-    v.sort();
-    println!("v2 \n{:?}", v);
-    // let cnt = v.len();
-    // quick_sort(&mut v, 0, cnt);
-
+    //
+    // println!("{answer}", );
 
     // println!("{:?}", v.iter().map(|x| x.to_string()).collect::<Vec<_>>().join("\n"));
 

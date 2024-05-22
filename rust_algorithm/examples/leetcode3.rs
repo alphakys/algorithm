@@ -1,56 +1,38 @@
 #![allow(unused)]
 
-
-use std::cell::RefCell;
-use std::collections::HashSet;
-
 fn main() {
-
     let s = String::from("pwwkew");
+
     let bytes = s.as_bytes();
 
-    let mut pivot = 0;
-    // not mutable and just reading variable
-    let mut set = HashSet::new();
-    let mut answer = 0;
-    while pivot < bytes.len() {
+    bytes.iter().position()
 
-        set.insert(bytes[pivot]);
-        let mut left: i32 = pivot as i32 - 1;
-        let mut right = pivot + 1;
 
-        loop {
-            match (bytes.get(left as usize), bytes.get(right)) {
-                (Some(&l), Some(&r))=> {
-                    if set.insert(l) && set.insert(r) == false{
-                        break
-                    }
-                },
-                (Some(&l), None)=> {
-                    if set.insert(l) == false { break };
-                },
-                (None, Some(&r))=> {
-                    if set.insert(r) == false { break };
-                },
-                _ => { break },
+    let mut set = [0; 127];
 
+    let mut idx = 0;
+    let mut max = 0;
+
+    let mut left = 0;
+    let mut right = left ;
+    while left < bytes.len() {
+        let mut pivot = 0;
+        while right < bytes.len() {
+            pivot = bytes[right] as usize;
+            if set[pivot] == 1 {
+                break;
+            } else {
+                set[pivot] = 1;
             }
-            left -= 1;
             right += 1;
         }
-        left = if left < 0 {0} else {left};
-        println!("{left} {right}", );
-        pivot += 1;
+        set[bytes[left] as usize] = 0;
+        if max < right - left { max = right - left; }
+        idx += 1;
+        left += 1;
     }
 
-
-
-
-
-
-
-
-
+    println!("{max}", );
 
 
     // let inner = if data.borrow().is_none() {
@@ -95,7 +77,6 @@ fn main() {
     // }
 
 
-
     // let mut answer = vec![];
     //
     // let mut i = 0;
@@ -119,5 +100,4 @@ fn main() {
     //
     // if answer.len() > max_length { max_length = answer.len(); }
     // println!("{max_length}", );
-
 }

@@ -19,7 +19,7 @@
 
 
 use std::mem::size_of_val;
-use std::ops::Range;
+use std::ops::{Range, Sub};
 
 #[derive(Debug, Clone, Copy)]
 struct Foo;
@@ -31,6 +31,9 @@ fn main() {
     let s = String::from("pwwkewvnqqdczor[e");
     let z = s.as_bytes().get(1);
     println!("{:?}", z);
+
+    let aa: usize = 1;
+    aa.sub(3);
 
     // git push
 

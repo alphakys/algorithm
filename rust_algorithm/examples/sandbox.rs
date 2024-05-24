@@ -29,7 +29,7 @@ struct Foo;
 fn main() {
 
     let s = String::from("pwwkewvnqqdczor[e");
-    let z = s.as_bytes().get(1);
+    let z = &s[1..=1];
     println!("{:?}", z);
 
     let aa: usize = 1;

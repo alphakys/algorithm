@@ -5,9 +5,12 @@ fn main() {
     // Imp` substring is a contiguous sequence of characters within a larger string.
     // Imp` palindrome에 양 끝단에 새로운 substring을 append 하면 그것은 새로운 palindrome이 된다.
 
-    let s = String::from("ac");
+    let s = String::from("bb");
 
-    if s.len() ==1 { println!("{s}", ); }
+    if s.len() <=2 {
+        println!("{s}");
+    }
+
     let cnt: usize = s.len();
 
     let mut mid: usize = 1;

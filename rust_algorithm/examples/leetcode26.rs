@@ -1,16 +1,9 @@
 #![allow(unused)]
 
 use std::cmp::Ordering;
-use std::mem::size_of_val;
-use std::ops::{Range, Sub};
-
-#[derive(Debug, Clone, Copy)]
-struct Foo;
-
 
 fn main() {
-
-    let nums: &mut Vec<i32> = &mut vec![0,0,1];
+    let nums: &mut Vec<i32> = &mut vec![98, 99, 99, 100, 100, 100, 100, 101];
 
     let mut i = 0;
     let mut upper_bound = 0;
@@ -35,15 +28,4 @@ fn main() {
     }
     println!("{k}", );
     println!("{:?}", nums);
-    // What Copy trait??
-    // It is bicopy trait of value!
-
-    // What Clone trait?
-    // I think it is associated with object copy so clone is different with
-    // copy trait that is copy of variable's value!
-
-    // let r = 1..4;
-    // for i in r.into_iter() {
-    //     println!('{}', i);
-    // }
 }

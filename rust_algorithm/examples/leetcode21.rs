@@ -45,7 +45,6 @@ fn main() {
         r = &mut r.as_mut()?.next;
     }
 
-    println!("{:?}", answer.unwrap().next);
     // let mut head1 = &mut list1;
     // let mut head2 = &mut list2;
     // let mut answer: Option<Box<ListNode>> = Some(Box::new(ListNode::new(0)));

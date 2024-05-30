@@ -1,36 +1,24 @@
 #![allow(unused)]
 
 fn main() {
-    let mut digits = vec![9];
+    let mut digits = vec![1];
 
     let mut i: i32 = digits.len() as i32 - 1;
     let mut carry = 0;
 
     let mut sum = carry + digits[i as usize] + 1;
     carry = i32::from(sum == 10);
+    digits[i as usize] = sum % 10;
 
-    while i >= 0 {
-
-        if i == 0 {
-            match carry {
-                1 => {
-                    digits.insert(0,1);
-                },
-                _ => break
-            }
-        }
-
-        if carry ==0 {
+    while i >= 0 && carry == 1 {
+        if i ==0 {
+            digits.insert(0, 1);
             break
         }
-        else{
-            digits[i as usize] = 0;
-        }
-        i -= 1;
-
+        i -=1;
         sum = carry + digits[i as usize];
-        carry = i32::from(sum ==10);
-
+        digits[i as usize] = sum % 10;
+        carry = i32::from(sum == 10);
     }
 
     println!("{:?}", digits);

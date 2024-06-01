@@ -6,23 +6,26 @@ fn main() {
     let nums = vec![3,3];
     let target = 6;
 
-    let mut map: HashMap<i32, usize> = HashMap::new();
-    let mut answer: Vec<i32> = Vec::new();
-    for (i, n) in nums.iter().enumerate() {
+    let mut map = HashMap::new();
 
-        let complement = target - n;
-        match map.get(&complement){
-            Some(t) => {
-                answer.append(&mut vec![i as i32, *t as i32]);
-            },
-            _ => {
-                map.insert(*n, i);
-            }
+    let mut remainder = 0;
+    let mut answer: Vec<i32> = vec![];
+    for (i, &n) in nums.iter().enumerate() {
 
+        remainder = target - n;
+        if let Some(&t) = map.get(&remainder) {
+            answer.push(i as i32);
+            answer.push(t);
+            break
         }
+        map.insert(n, i as i32);
     }
 
     println!("{:?}", answer);
+
+
+
+
     // let mut tu: Vec::<(usize, i32)> = vec![];
     // for (idx, &j) in nums.iter().enumerate() {
     //     tu.push((idx, j));

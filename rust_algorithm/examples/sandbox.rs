@@ -1,6 +1,7 @@
 #![allow(unused)]
 
 use std::cmp::Ordering;
+use std::collections::VecDeque;
 use std::ffi::c_char;
 use std::mem::size_of_val;
 use std::ops::{Range, Sub};
@@ -39,11 +40,14 @@ fn main() {
     /// 즉 ptr와 len으로 이루어진 object이기 때문에 str index 사이의 비교라는 것은 결국 memory address의
     /// 비교이기 때문에 그 본질적인 값의 비교가 될 수 없다. 따라서 as_bytes를 통해서 byte 값으로 비교를
     /// 해라고 compiler가 말해주는 것이다.
-    let mut v = vec![String::from("reflower"), String::from("flow"), String::from("flight")];
 
-    let sorted = v.sort();
+    let mut s = VecDeque::new();
 
-    println!("{:?}", v);
+    s.push_back(1);
+    s.push_back(2);
+    s.push_back(3);
+    println!("{:?}", s);
 
+    println!("{}", s.pop_front().unwrap());
 
 }

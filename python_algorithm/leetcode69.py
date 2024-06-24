@@ -1,23 +1,53 @@
+def binary_search(arr, target):
+    left = 0
+    right = len(arr)
+    mid = (left + right) // 2
+
+    while left < right:
+        if arr[mid] == target:
+            break
+        elif arr[mid] > target:
+            right = mid
+        else:
+            left = mid + 1
+
+        mid = (left + right) // 2
+
+    return mid
+
+
 class Solution:
     def mySqrt(self, x: int) -> int:
-        i = 0
-        while True:
-            if i ** 2 == x:
-                return i
-            elif i ** 2 < x < (i + 1) ** 2:
-                return i
-            i += 1
+        if x <=1:
+            return x
+
+        left = 0
+        right = x // 2
+        mid = (left + right) // 2
+
+        while left < right:
+            pow_num = mid * mid
+            next_pow = (mid + 1) * (mid + 1)
+            if pow_num == x:
+                break
+            if pow_num < x < next_pow:
+                break
+            elif pow_num > x:
+                right = mid
+            else:
+                left = mid + 1
+
+            mid = (left + right) // 2
+
+        return mid
 
 
 if __name__ == '__main__':
-    x = 1
-    """
-    어떤 값에 제곱을 해야 x가 나오니??
-    a ** 2 = x
-    """
+    x = 2
+    import math
+    print(math.sqrt(x))
     answer = Solution().mySqrt(x)
     print(answer)
-
 
 """
 18의 약수

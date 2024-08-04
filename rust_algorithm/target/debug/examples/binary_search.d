@@ -1,0 +1,1 @@
+/Users/alpha/workspace/algorithm/rust_algorithm/target/debug/examples/binary_search: /Users/alpha/workspace/algorithm/rust_algorithm/examples/binary_search.rs /Users/alpha/workspace/algorithm/rust_algorithm/src/lib.rs

@@ -1,0 +1,1 @@
+/Users/alpha/workspace/algorithm/rust_algorithm/target/debug/examples/leetcode20: /Users/alpha/workspace/algorithm/rust_algorithm/examples/leetcode20.rs /Users/alpha/workspace/algorithm/rust_algorithm/src/lib.rs
